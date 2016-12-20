@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import jQuery from 'jquery';
 
 export default class HelloWorld extends React.Component {
   static propTypes = {
@@ -13,7 +12,6 @@ export default class HelloWorld extends React.Component {
    */
   constructor(props, _railsContext) {
     super(props);
-    debugger;
     // How to set initial state in ES6 class syntax
     // https://facebook.github.io/react/docs/reusable-components.html#es6-classes
     this.state = { name: this.props.name };
@@ -45,7 +43,3 @@ export default class HelloWorld extends React.Component {
     );
   }
 }
-
-jQuery.ready(function () {
-  ReactDom.render(<HelloWorld />, document.getElementById('app'));
-});

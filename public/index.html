@@ -2,19 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title></title>
-  <!-- <link rel="stylesheet" href="assets/"> -->
+  <title>New React Web Site</title>
+  <script typt="text/javascript">
+    // console.time('app');
+  </script>
 </head>
 <body>
   <div id="app">
-    
+    <div id='' ></div>
   </div>
   <script type="text/javascript"  src="/assets/application.js"></script>
   <script type="text/javascript">
-    ReactDOM.render(
-      React.createElement('HelloWorld', {}, null),
-      document.getElementById('app')
-    );
+    ReactOnRails.render('HelloWorld', {name: 'Olko'}, 'app');
+    // console.timeEnd('app');
   </script>
 </body>
 </html>
