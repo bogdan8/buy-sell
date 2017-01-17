@@ -37,5 +37,7 @@
     "redux-auth": "0.0.5-beta5",
     "webpack": "^1.12.14"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "redux-devtools": "^3.3.2"
+  }
 }
