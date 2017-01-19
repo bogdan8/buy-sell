@@ -1,8 +1,8 @@
-import { addProduct } from '../actions/product';
+import { addProduct } from '../actions/products';
 
-export default products = (products = [], action) => {
+export default function products(products=[], action) {
   switch (action.type) {
-    'ADD_PRODUCT': 
+    case 'ADD_PRODUCT': 
       return addProduct(products, action.product);
     default: 
       return state;

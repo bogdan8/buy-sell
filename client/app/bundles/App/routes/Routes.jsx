@@ -1,9 +1,9 @@
 import React from 'react'
 import { Router, Route, hashHistory, browserHistory } from 'react-router';
 
-import Login from './Login';
-import Admin from './Admin'
-import Register from './Register'
+import Login from '../components/Login';
+import Admin from '../components/Admin';
+import Register from '../components/Register';
 
 export default function Routes() {
   return (

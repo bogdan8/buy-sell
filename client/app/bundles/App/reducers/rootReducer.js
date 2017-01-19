@@ -1,9 +1,12 @@
 import { combineReducers } from 'redux';
-import { configure, authStateReducer } from 'redux-auth';
+import { authStateReducer } from 'redux-auth';
+import { configure } from 'redux-auth';
 import products from './products'
 
-export default rootReducer = combineReducers({
+
+const rootReducer = combineReducers({
   products,
   authStateReducer: authStateReducer
 })
 
+export default rootReducer; 
