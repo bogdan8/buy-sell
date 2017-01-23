@@ -1,6 +1,6 @@
-import 
-const addProduct = (product) => {
-
-}
+const addProduct = (product) => ({
+  type: 'ADD_PRODUCT', 
+  product
+})
 
 export { addProduct }

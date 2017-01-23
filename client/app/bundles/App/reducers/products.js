@@ -1,4 +1,6 @@
-import { addProduct } from '../actions/products';
+const addProduct = (products, product) =>  {
+  return [product];
+}
 
 export default function products(products=[], action) {
   switch (action.type) {
