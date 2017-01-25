@@ -1,0 +1,93 @@
+.body-auth
+  width: 100%
+  display: flex
+  justify-content: center
+  align-items: center
+  flex-direction: column
+  div
+    margin: 0
+
+.auth-link
+  min-width: 280px
+  height: 50px
+  display: flex
+  justify-content: space-between
+
+  p
+    font-size: 22px
+    color: black
+
+  a
+    font-size: 22px
+    color: grey
+    text-decoration: none
+
+.form-input
+  border-bottom: 1px solid black
+
+.form-label
+  color: black
+
+.form-sign-in
+  display: flex
+  align-items: center
+  justify-content: center
+  flex-direction: column
+
+.form-image
+  display: flex
+  flex-direction: column
+  align-items: center
+
+.fileContainer
+  overflow: hidden
+  position: relative
+  [type=file]
+    cursor: inherit
+    display: block
+    font-size: 999px
+    filter: alpha(opacity=0)
+    min-height: 100%
+    min-width: 100%
+    opacity: 0
+    position: absolute
+    right: 0
+    text-align: right
+    top: 0
+  &-block
+    border-radius: 0
+
+
+.fileContainer
+  background-color: grey
+  height: 150px
+  width: 150px
+  border-radius: 50%
+  border: none
+  display: flex
+  justify-content: center
+  align-items: center
+  color: white
+  [type=file]
+    cursor: pointer
+  i
+    font-size: 25px
+
+.fileContainer-block
+  @extend .fileContainer
+  border-radius: 0
+  margin-top: 20px
+  i
+    font-size: 25px
+
+.auth-image-block
+  background-color: grey
+  height: 150px
+  width: 150px
+  border-radius: 50%
+  border: none
+  label
+    text-transform: none
+
+.auth-block-grid
+  width: 100%

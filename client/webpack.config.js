@@ -1,6 +1,6 @@
 /* eslint comma-dangle: ["error",
-  {"functions": "never", "arrays": "only-multiline", "objects":
-"only-multiline"} ] */
+ {"functions": "never", "arrays": "only-multiline", "objects":
+ "only-multiline"} ] */
 
 const webpack = require('webpack');
 const path = require('path');
@@ -40,6 +40,14 @@ const config = {
       {
         test: require.resolve('react'),
         loader: 'imports?shim=es5-shim/es5-shim&sham=es5-shim/es5-sham',
+      }, {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader!autoprefixer-loader',
+        exclude: [/node_modules/, /public/]
+      }, {
+        test: /\.sass/,
+        loader: "style-loader!css-loader!autoprefixer-loader!sass",
+        exclude: [/node_modules/, /public/]
       },
       {
         test: /\.jsx?$/,
@@ -57,7 +65,7 @@ if (devBuild) {
   module.exports.devtool = 'eval-source-map';
 } else {
   config.plugins.push(
-    new webpack.optimize.DedupePlugin()
+      new webpack.optimize.DedupePlugin()
   );
   console.log('Webpack production build for Rails'); // eslint-disable-line no-console
 }

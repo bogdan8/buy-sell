@@ -1,12 +1,16 @@
 import React from 'react';
 
+import Menu from './Menu';
+
+import './style/Auth.sass';
+
 export default class Login extends React.Component {
   render() {
     return (
-      <div>
-        <h3>Here comes login</h3>
-        {this.props.children}
-      </div>
+        <bodu>
+          <Menu/>
+          {this.props.children}
+        </bodu>
     );
   }
 }

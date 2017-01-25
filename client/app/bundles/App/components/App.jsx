@@ -6,6 +6,8 @@ import configureStore from '../containers/configureStore';
 
 import Routes from '../routes/Routes';
 
+import './style/App.sass'
+
 export default class App extends Component {
   render() {
     return (
