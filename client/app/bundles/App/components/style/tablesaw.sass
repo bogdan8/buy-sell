@@ -1,0 +1,84 @@
+.tablesaw
+  width: 100%
+  max-width: 100%
+  empty-cells: show
+  border-collapse: collapse
+  border: 0
+  padding: 0
+  *
+    box-sizing: border-box
+  th, td
+    padding: .5em .7em
+  thead tr:first-child th
+    padding-top: .9em
+    padding-bottom: .7em
+
+@media only all
+  .tablesaw-stack
+    td, th
+      text-align: left
+      display: block
+    tr
+      clear: both
+      display: table-row
+    td .tablesaw-cell-label
+      display: block
+      padding: 0 .6em 0 0
+      width: 30%
+      display: inline-block
+    th
+      .tablesaw-cell-label
+        display: block
+        padding: 0 .6em 0 0
+        width: 30%
+        display: inline-block
+      .tablesaw-cell-label-top
+        display: block
+        padding: .4em 0
+        margin: .4em 0
+    td .tablesaw-cell-label-top
+      display: block
+      padding: .4em 0
+      margin: .4em 0
+  .tablesaw-cell-label
+    display: block
+  .tablesaw-stack
+    tbody th.group
+      margin-top: -1px
+    th.group b.tablesaw-cell-label
+      display: none !important
+
+@media (max-width: 39.9375em)
+  .tablesaw-stack
+    tbody tr
+      border-bottom: 1px solid #dfdfdf
+    thead
+      td, th
+        display: none
+    tbody
+      td, th
+        clear: left
+        float: left
+        width: 100%
+  .tablesaw-cell-label
+    vertical-align: top
+  .tablesaw-cell-content
+    max-width: 67%
+    display: inline-block
+  .tablesaw-stack
+    td:empty, th:empty
+      display: none
+
+@media (min-width: 40em)
+  .tablesaw-stack
+    tr
+      display: table-row
+    td, th
+      display: table-cell
+      margin: 0
+    thead
+      td, th
+        display: table-cell
+        margin: 0
+    td .tablesaw-cell-label, th .tablesaw-cell-label
+      display: none !important
