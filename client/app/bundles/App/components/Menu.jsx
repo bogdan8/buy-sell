@@ -15,7 +15,7 @@ export default function Menu() {
         </div>
         <div className="header-nav">
           <button id="demo-menu-lower-right" className="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
-            <i className="material-icons"><i className="fa fa-user" aria-hidden="true"/></i>
+            <i className="fa fa-user" aria-hidden="true"/>
           </button>
 
           <ul className="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"

@@ -7,10 +7,10 @@ import './style/Auth.sass';
 export default class Login extends React.Component {
   render() {
     return (
-        <bodu>
+        <div className="body">
           <Menu/>
           {this.props.children}
-        </bodu>
+        </div>
     );
   }
 }
