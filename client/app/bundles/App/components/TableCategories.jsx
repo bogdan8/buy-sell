@@ -3,21 +3,15 @@ import {Link} from 'react-router';
 
 export default class TableCategories extends React.Component {
   componentDidMount() {
-    let modal = document.getElementById('modal-category');
-    let btn = document.getElementById("add-category");
-    let span = document.getElementsByClassName("modal-button-close")[0];
-    btn.onclick = function () {
-      modal.style.display = "block";
-    };
-    span.onclick = function () {
-      modal.style.display = "none";
-    };
-    window.onclick = function (event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    };
     componentHandler.upgradeDom();
+  };
+
+  handleClickShowModalWindow() {
+    document.getElementById('modal-category').style.display = "block";
+  };
+
+  handleClickHideModalWindow() {
+    document.getElementById('modal-category').style.display = "none";
   }
 
   render() {
@@ -90,7 +84,7 @@ export default class TableCategories extends React.Component {
                 </table>
               </div>
               <div className="mdl-cell mdl-cell--12-col flex-center">
-                <button id="add-category" data-modal="#modal"
+                <button data-modal="#modal" onClick={this.handleClickShowModalWindow}
                         className="modal__trigger mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
                   <i className="fa fa-plus-circle" aria-hidden="true"/> Додати Рубрику
                 </button>
@@ -112,7 +106,7 @@ export default class TableCategories extends React.Component {
                           </button>
                         </div>
                       </form>
-                      <span className="modal__close modal-button-close">
+                      <span className="modal__close modal-button-close" onClick={this.handleClickHideModalWindow}>
                           <i className="fa fa-times" aria-hidden="true"/>
                         </span>
                     </div>

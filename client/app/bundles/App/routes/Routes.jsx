@@ -12,7 +12,7 @@ import NewAdvertisement from '../components/NewAdvertisement';
 
 export default function Routes() {
   return (
-    <Router history = {hashHistory} >
+    <Router history = {browserHistory} >
       <Route path="/" component={ Login } >
         <Route path="/admin" component={ Admin } />
         <Route path="/sign_in" component={ SignIn } />
