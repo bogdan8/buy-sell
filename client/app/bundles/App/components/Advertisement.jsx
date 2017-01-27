@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 import Pagination from './Pagination';
 import AdvertisementBody from './AdvertisementBody';
@@ -24,68 +25,15 @@ const CATEGORIES = [
   }
 ];
 
-var data = [
-  {
-    id: 1,
-    photo: 'https://iso.500px.com/wp-content/uploads/2016/06/stock-photo-142869191-1-1500x1000.jpg',
-    description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.",
-    contact: 'John Lennon',
-    category: 'Кіно',
-    price: '4568$'
-  }, {
-    id: 2,
-    photo: 'https://iso.500px.com/wp-content/uploads/2016/06/stock-photo-142869191-1-1500x1000.jpg',
-    description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.",
-    contact: 'John Lennon',
-    category: 'Музика',
-    price: '4568$'
-  }, {
-    id: 3,
-    photo: 'https://iso.500px.com/wp-content/uploads/2016/06/stock-photo-142869191-1-1500x1000.jpg',
-    description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.",
-    contact: 'John Lennon',
-    category: 'Кіно',
-    price: '4568$'
-  }, {
-    id: 4,
-    photo: 'https://iso.500px.com/wp-content/uploads/2016/06/stock-photo-142869191-1-1500x1000.jpg',
-    description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.",
-    contact: 'Paul McCartney',
-    category: 'Ігри',
-    price: '4568$'
-  }, {
-    id: 5,
-    photo: 'https://iso.500px.com/wp-content/uploads/2016/06/stock-photo-142869191-1-1500x1000.jpg',
-    description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.",
-    contact: 'John Lennon',
-    category: 'Кіно',
-    price: '4568$'
-  }, {
-    id: 6,
-    photo: 'https://iso.500px.com/wp-content/uploads/2016/06/stock-photo-142869191-1-1500x1000.jpg',
-    description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.",
-    contact: 'George Harrison',
-    category: 'Ігри',
-    price: '4568$'
-  }, {
-    id: 7,
-    photo: 'https://iso.500px.com/wp-content/uploads/2016/06/stock-photo-142869191-1-1500x1000.jpg',
-    description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.",
-    contact: 'John Lennon',
-    category: 'Музика',
-    price: '4568$'
-  }
-];
-
-export default class Advertisement extends React.Component {
+class Advertisement extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       selectName: 'Всі',
       selectNameModal: 'Всі',
-      displayedData: data
+      displayedData: this.props.advertisements
     }
-  }
+  };
 
   componentDidMount() {
     componentHandler.upgradeDom();
@@ -96,12 +44,12 @@ export default class Advertisement extends React.Component {
     if (select === 'Всі') {
       this.setState({
         selectName: select,
-        displayedData: data
+        displayedData: this.props.advertisements
       });
     } else {
       this.setState({
         selectName: select,
-        displayedData: data.filter(data => data.category.includes(e.target.innerHTML))
+        displayedData: this.props.advertisements.filter(data => data.category.includes(e.target.innerHTML))
       });
     }
   };
@@ -122,19 +70,20 @@ export default class Advertisement extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    data.push({
+    var newAdvertisement = {
       id: Date.now(),
       photo: 'http://www.cruzo.net/user/images/k/ecc3ecf42c75db1ffce5d06cbe95b1e6_644.jpg',
       description: document.getElementById('description').value,
       contact: 'Bobo bobo',
       category: document.getElementById('select-category').value,
       price: document.getElementById('price').value
-    });
+    };
+    this.props.onAddAdvertisement(newAdvertisement);
     document.getElementById('modal-advertisement').style.display = "none";
-    if (this.state.selectName === 'Всі' ) {
-      this.setState({displayedData: data});
+    if (this.state.selectName === 'Всі') {
+      this.setState({displayedData: this.props.advertisements});
     } else {
-      this.setState({displayedData: data.filter(data => data.category.includes(this.state.selectName))});
+      this.setState({displayedData: this.props.advertisements.filter(data => data.category.includes(this.state.selectName))});
     }
 
     alert('Успішно дадано');
@@ -239,3 +188,17 @@ export default class Advertisement extends React.Component {
     )
   }
 }
+
+export default connect(
+    state => ({
+      advertisements: state
+    }),
+    dispatch => ({
+      onAddAdvertisement: (items) => {
+        dispatch({
+          type: 'ADD_ADVERTISEMENT',
+          payload: items
+        });
+      }
+    })
+)(Advertisement);
