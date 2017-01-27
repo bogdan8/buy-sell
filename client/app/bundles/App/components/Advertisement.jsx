@@ -118,7 +118,14 @@ export default class Advertisement extends React.Component {
       category: document.getElementById('select-category').value,
       price: document.getElementById('price').value
     });
-    alert('Ура');
+    document.getElementById('modal-advertisement').style.display = "none";
+    if (this.state.selectName === 'Рубрика') {
+      this.setState({displayedData: data});
+    } else {
+      this.setState({displayedData: data.filter(data => data.category.includes(this.state.selectName))});
+    }
+
+    alert('Успішно дадано');
   };
 
   render() {
