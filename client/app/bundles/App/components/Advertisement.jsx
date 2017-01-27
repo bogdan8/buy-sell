@@ -8,14 +8,18 @@ import './style/Advertisement.sass';
 const CATEGORIES = [
   {
     id: 1,
-    name: 'Кіно'
+    name: 'Всі'
   },
   {
     id: 2,
-    name: 'Музика'
+    name: 'Кіно'
   },
   {
     id: 3,
+    name: 'Музика'
+  },
+  {
+    id: 4,
     name: 'Ігри'
   }
 ];
@@ -77,8 +81,8 @@ export default class Advertisement extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectName: 'Рубрика',
-      selectNameModal: 'Рубрика',
+      selectName: 'Всі',
+      selectNameModal: 'Всі',
       displayedData: data
     }
   }
@@ -88,10 +92,18 @@ export default class Advertisement extends React.Component {
   };
 
   handleClickSelect(e) {
-    this.setState({
-      selectName: e.target.innerHTML,
-      displayedData: data.filter(data => data.category.includes(e.target.innerHTML))
-    });
+    var select = e.target.innerHTML;
+    if (select === 'Всі') {
+      this.setState({
+        selectName: select,
+        displayedData: data
+      });
+    } else {
+      this.setState({
+        selectName: select,
+        displayedData: data.filter(data => data.category.includes(e.target.innerHTML))
+      });
+    }
   };
 
   handleClickSelectModal(e) {
@@ -119,7 +131,7 @@ export default class Advertisement extends React.Component {
       price: document.getElementById('price').value
     });
     document.getElementById('modal-advertisement').style.display = "none";
-    if (this.state.selectName === 'Рубрика') {
+    if (this.state.selectName === 'Всі' ) {
       this.setState({displayedData: data});
     } else {
       this.setState({displayedData: data.filter(data => data.category.includes(this.state.selectName))});
