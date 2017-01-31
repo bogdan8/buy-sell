@@ -24,11 +24,10 @@ export default function categories(state = data, action) {
         ...state,
         action.data
       ];
-    case 'SHOW_CATEGORIES':
+    case 'EDIT_CATEGORY':
       return [
-        ...state,
-        action.data
-      ];
+        ...state
+      ]
     default:
       return state;
   }
