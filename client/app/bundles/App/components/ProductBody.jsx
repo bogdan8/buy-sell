@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-import './style/Advertisement.sass';
+import './style/Product.sass';
 
-export default class AdvertisementBody extends React.Component {
+export default class ProductBody extends Component {
   render() {
     const {items}= this.props;
     return (
@@ -22,7 +22,7 @@ export default class AdvertisementBody extends React.Component {
                 <tr key={items.id} className={(index % 2) ? "active-tr" : ""}>
                   <td className="mdl-data-table__cell--non-numeric td-block-height-auto">
                     <p className="td-thead-title">Фото</p>
-                    <div className="advertisement-image">
+                    <div className="product-image">
                       <img src={items.photo}/>
                     </div>
                   </td>

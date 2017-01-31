@@ -27,16 +27,16 @@ export default function Menu() {
               <Link to="/register" className="mdl-menu__item mdl-js-ripple-effect">Зареєструватись</Link>
             </li>
             <li className="mdl-menu__item">
-              <Link to="/user_table" className="mdl-menu__item mdl-js-ripple-effect">Таблиця користувачів</Link>
+              <Link to="/admin/user" className="mdl-menu__item mdl-js-ripple-effect">Таблиця користувачів</Link>
             </li>
             <li className="mdl-menu__item">
-              <Link to="/table_categories" className="mdl-menu__item mdl-js-ripple-effect">Таблиця рубрик</Link>
+              <Link to="/admin/categories" className="mdl-menu__item mdl-js-ripple-effect">Таблиця рубрик</Link>
             </li>
             <li className="mdl-menu__item">
-              <Link to="/advertisement" className="mdl-menu__item mdl-js-ripple-effect">Оголошення</Link>
+              <Link to="/products" className="mdl-menu__item mdl-js-ripple-effect">Оголошення</Link>
             </li>
             <li className="mdl-menu__item">
-              <Link to="/new_advertisement" className="mdl-menu__item mdl-js-ripple-effect">Нові оголошення</Link>
+              <Link to="/admin/new_products" className="mdl-menu__item mdl-js-ripple-effect">Нові оголошення</Link>
             </li>
           </ul>
         </div>

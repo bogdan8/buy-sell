@@ -1,7 +1,7 @@
 import React from 'react';
-import {Link} from 'react-router';
+import Pagination from '../Pagination';
 
-export default function UserTable() {
+export default function User() {
   return (
       <div className="mdl-grid">
         <div
@@ -28,7 +28,7 @@ export default function UserTable() {
                 <tbody>
                 <tr>
                   <td className="mdl-data-table__cell--non-numeric table-right-columns">
-                    <p className="td-thead-title">Назва рубрики</p>
+                    <p className="td-thead-title">Електронна Адреса</p>
                     <p>John Lennon</p>
                   </td>
                   <td className="mdl-data-table__cell--non-numeric table-right-columns">
@@ -44,7 +44,7 @@ export default function UserTable() {
                 </tr>
                 <tr className="active-tr">
                   <td className="mdl-data-table__cell--non-numeric table-right-columns">
-                    <p className="td-thead-title">Назва рубрики</p>
+                    <p className="td-thead-title">Електронна Адреса</p>
                     <p>John Lennon</p>
                   </td>
                   <td className="mdl-data-table__cell--non-numeric table-right-columns">
@@ -60,7 +60,7 @@ export default function UserTable() {
                 </tr>
                 <tr>
                   <td className="mdl-data-table__cell--non-numeric table-right-columns">
-                    <p className="td-thead-title">Назва рубрики</p>
+                    <p className="td-thead-title">Електронна Адреса</p>
                     <p>John Lennon</p>
                   </td>
                   <td className="mdl-data-table__cell--non-numeric table-right-columns">
@@ -76,7 +76,7 @@ export default function UserTable() {
                 </tr>
                 <tr className="active-tr">
                   <td className="mdl-data-table__cell--non-numeric table-right-columns">
-                    <p className="td-thead-title">Назва рубрики</p>
+                    <p className="td-thead-title">Електронна Адреса</p>
                     <p>John Lennon</p>
                   </td>
                   <td className="mdl-data-table__cell--non-numeric table-right-columns">
@@ -93,40 +93,7 @@ export default function UserTable() {
                 </tbody>
               </table>
             </div>
-            <div className="mdl-cell mdl-cell--12-col flex-center">
-              <ul className="pagination flex-center">
-                <li className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                  <a href="#">Перша</a>
-                </li>
-                <li className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                  <a href="#">&lt;&lt;</a>
-                </li>
-                <li className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                  <a href="#">1</a>
-                </li>
-                <li className="active mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                  <a href="#">2</a>
-                </li>
-                <li className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                  <a href="#">3</a>
-                </li>
-                <li className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                  <a href="#">4</a>
-                </li>
-                <li className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                  <a href="#">5</a>
-                </li>
-                <li className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                  <a href="#">6</a>
-                </li>
-                <li className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                  <a href="#">&gt;&gt;</a>
-                </li>
-                <li className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                  <a href="#">Остання</a>
-                </li>
-              </ul>
-            </div>
+            <Pagination/>
           </div>
         </div>
       </div>

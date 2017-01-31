@@ -5,10 +5,10 @@ import Login from '../components/Login';
 import Admin from '../components/Admin';
 import SignIn from '../components/SignIn';
 import Register from '../components/Register';
-import UserTable from '../components/UserTable';
-import TableCategories from '../components/TableCategories';
-import Advertisement from '../components/Advertisement';
-import NewAdvertisement from '../components/NewAdvertisement';
+import User from '../components/admins/User';
+import Categories from '../components/admins/Categories';
+import Products from '../components/Products';
+import NewProducts from '../components/admins/NewProducts';
 
 export default function Routes() {
   return (
@@ -17,10 +17,10 @@ export default function Routes() {
         <Route path="/admin" component={ Admin } />
         <Route path="/sign_in" component={ SignIn } />
         <Route path="/register" component={ Register } />
-        <Route path="/user_table" component={ UserTable } />
-        <Route path="/table_categories" component={ TableCategories } />
-        <Route path="/advertisement" component={ Advertisement } />
-        <Route path="/new_advertisement" component={ NewAdvertisement } />
+        <Route path="/admin/user" component={ User } />
+        <Route path="/admin/categories" component={ Categories } />
+        <Route path="/products" component={ Products } />
+        <Route path="/admin/new_products" component={ NewProducts } />
       </Route>
     </Router>
   );
