@@ -30,6 +30,11 @@ export default function products(state = data, action) {
         ...state,
         action.valueProduct
       ];
+    case 'REMOVE_PRODUCT':
+      return [
+        ...state.slice(0, action.indexProduct),
+        ...state.slice(action.indexProduct + 1)
+      ];
     default:
       return state;
   }

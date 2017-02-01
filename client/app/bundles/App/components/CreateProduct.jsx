@@ -1,5 +1,6 @@
 import React, {Component}from 'react';
 import {connect} from 'react-redux';
+import { v4 } from 'node-uuid';
 
 class CreateProduct extends Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class CreateProduct extends Component {
   handleSubmit(e) {
     e.preventDefault();
     var paramsProduct = {
-      id: Date.now(),
+      id: v4(),
       photo: 'http://www.cruzo.net/user/images/k/ecc3ecf42c75db1ffce5d06cbe95b1e6_644.jpg',
       description: document.getElementById('description').value,
       contact: 'Bobo bobo',

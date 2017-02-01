@@ -1,5 +1,6 @@
 import React, {Component}from 'react';
 import {connect} from 'react-redux';
+import { v4 } from 'node-uuid';
 
 class CreateCategories extends Component {
   handleClickShowModalWindow() {
@@ -13,7 +14,7 @@ class CreateCategories extends Component {
   handleSubmit(e) {
     e.preventDefault();
     var paramsCategory = {
-      id: Date.now(),
+      id: v4(),
       name: document.getElementById('category').value
     };
 

@@ -4,6 +4,16 @@ import {connect} from 'react-redux';
 import '../style/Product.sass';
 
 class NewProduct extends Component {
+
+  handleClickRemoveProduct(index) {
+    if (confirm("Ви дійсно хочите видалити?")) {
+      this.props.removeProduct(index);
+      alert("Видалено!")
+    } else {
+      alert("Відмінено")
+    }
+  }
+
   render() {
     return (
         <div className="mdl-grid">
@@ -52,7 +62,11 @@ class NewProduct extends Component {
                           <p className="td-thead-title">Дія</p>
                           <a href=""><i className="fa fa-thumbs-o-up" aria-hidden="true"/></a>
                           <a href=""><i className="fa fa-thumbs-o-down" aria-hidden="true"/></a>
-                          <a href=""><i className="fa fa-trash" aria-hidden="true"/></a>
+                          <a onClick={() => {
+                            this.handleClickRemoveProduct(index)
+                          }}>
+                            <i className="fa fa-trash" aria-hidden="true"/>
+                          </a>
                         </td>
                       </tr>
                   )}
@@ -68,5 +82,13 @@ class NewProduct extends Component {
 export default connect(
     state => ({
       products: state.products,
+    }),
+    dispatch => ({
+      removeProduct: (indexProduct) => {
+        dispatch({
+          type: 'REMOVE_PRODUCT',
+          indexProduct: indexProduct
+        });
+      }
     })
 )(NewProduct)

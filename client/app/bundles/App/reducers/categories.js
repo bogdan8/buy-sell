@@ -26,8 +26,15 @@ export default function categories(state = data, action) {
       ];
     case 'EDIT_CATEGORY':
       return [
-        ...state
-      ]
+        ...state.slice(0, action.valueCategory.key),
+        action.valueCategory,
+        ...state.slice(action.valueCategory.key)
+      ];
+    case 'REMOVE_CATEGORY':
+      return [
+        ...state.slice(0, action.indexCategory),
+        ...state.slice(action.indexCategory + 1)
+      ];
     default:
       return state;
   }
