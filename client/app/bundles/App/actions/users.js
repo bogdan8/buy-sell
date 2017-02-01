@@ -4,5 +4,10 @@ const removeUser = (indexUser) => dispatch => {
     indexUser: indexUser
   })
 };
-
-export {removeUser};
+const changeRole = (valueUser) => dispatch => {
+  dispatch({
+    type: 'CHANGE_ROLE_IN_USER',
+    valueUser: valueUser
+  })
+};
+export {removeUser, changeRole};

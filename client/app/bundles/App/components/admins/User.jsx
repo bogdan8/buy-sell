@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-import {removeUser} from '../../actions/users.js';
+import {removeUser, changeRole} from '../../actions/users.js';
 import Pagination from '../Pagination';
 
 class User extends Component {
@@ -10,6 +10,19 @@ class User extends Component {
     if (confirm("Ви дійсно хочите видалити?")) {
       this.props._removeUser(index);
       alert("Видалено!")
+    } else {
+      alert("Відмінено")
+    }
+  }
+
+  handleClickChangeRole(index, role) {
+    var paramsUser = {
+      index: index,
+      role: role
+    };
+    if (confirm(`Зробити адміном? ${role}`)) {
+      this.props._changeRole(paramsUser);
+      alert(`Зроблено ${role}!`)
     } else {
       alert("Відмінено")
     }
@@ -53,8 +66,18 @@ class User extends Component {
                         </td>
                         <td className="mdl-data-table__cell--non-numeric admin-user-action">
                           <p className="td-thead-title">Дія</p>
-                          <a href=""><i className="fa fa-user-secret" aria-hidden="true"/></a>
-                          <a href=""><i className="fa fa-user" aria-hidden="true"/></a>
+                          <a onClick={() => {
+                            this.handleClickChangeRole(index, 'admin')
+                          }}>
+                            <i className={ user.role === 'admin' ? "fa fa-user-secret active-role" : "fa fa-user-secret"}
+                               aria-hidden="true"/>
+                          </a>
+                          <a onClick={() => {
+                            this.handleClickChangeRole(index, 'user')
+                          }}>
+                            <i className={ user.role === 'user' ? "fa fa-user active-role" : "fa fa-user"}
+                               aria-hidden="true"/>
+                          </a>
                           <a onClick={() => {
                             this.handleClickRemoveUser(index)
                           }}>
@@ -80,6 +103,9 @@ export default connect(
     dispatch => ({
       _removeUser: (indexUser) => {
         dispatch(removeUser(indexUser))
+      },
+      _changeRole: (valueUser) => {
+        dispatch(changeRole(valueUser));
       }
     })
 )(User)

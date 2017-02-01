@@ -4,10 +4,10 @@ import {editCategory, removeCategory} from '../../actions/categories.js';
 
 class EditCategories extends Component {
 
-  handleClickShowModalWindow(id, name, key) {
+  handleClickShowModalWindow(id, name, index) {
     document.getElementById('modal-category-edit').style.display = "block";
     document.getElementById('category-id').value = id;
-    document.getElementById('category-key').value = key;
+    document.getElementById('category-index').value = index;
     document.getElementById('category-edit').value = name;
   };
 
@@ -18,13 +18,13 @@ class EditCategories extends Component {
   handleSubmitEdit(e) {
     e.preventDefault();
     var id = document.getElementById('category-id').value;
-    var key = document.getElementById('category-key').value;
+    var index = document.getElementById('category-index').value;
     var name = document.getElementById('category-edit').value;
 
     var paramsCategory = {
       id: id,
       name: name,
-      key: key
+      index: index
     };
 
     this.props._editCategory(paramsCategory);
@@ -34,9 +34,9 @@ class EditCategories extends Component {
     alert('Успішно відредаговано');
   };
 
-  handleClickRemoveCategory(key) {
+  handleClickRemoveCategory(index) {
     if (confirm("Ви дійсно хочите видалити?")) {
-      this.props._removeCategory(key);
+      this.props._removeCategory(index);
       alert("Видалено!")
     } else {
       alert("Відмінено")
@@ -88,7 +88,7 @@ class EditCategories extends Component {
                   <h4>Редагувати рубрику:</h4>
                   <form onSubmit={this.handleSubmitEdit.bind(this)}>
                     <input type="text" hidden="hidden" value='' id="category-id"/>
-                    <input type="text" hidden="hidden" value='' id="category-key"/>
+                    <input type="text" hidden="hidden" value='' id="category-index"/>
                     <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                       <input className="mdl-textfield__input" type="text" id="category-edit" placeholder=""/>
                       <label className="mdl-textfield__label" htmlFor="sample3">Назва рубрики:</label>

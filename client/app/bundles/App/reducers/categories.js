@@ -26,7 +26,7 @@ export default function categories(state = data, action) {
       ];
     case 'EDIT_CATEGORY':
       return state.map((item, index) => {
-        if (index != action.valueCategory.key) {
+        if (index != action.valueCategory.index) {
           return item;
         }
         return {
