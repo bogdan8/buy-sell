@@ -28,14 +28,8 @@ export default function products(state = data, action) {
     case 'ADD_PRODUCT':
       return [
         ...state,
-        action.data
+        action.valueProduct
       ];
-   /* case 'FILTER_PRODUCTS':
-      if (action.data === 'Всі') {
-        return state;
-      } else {
-        return state.filter(data => data.category.includes(action.data));
-      }*/
     default:
       return state;
   }

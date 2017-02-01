@@ -22,7 +22,7 @@ export default function categories(state = data, action) {
     case 'ADD_CATEGORY':
       return [
         ...state,
-        action.data
+        action.valueCategory
       ];
     case 'EDIT_CATEGORY':
       return [

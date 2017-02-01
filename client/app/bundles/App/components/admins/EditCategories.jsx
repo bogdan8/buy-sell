@@ -49,17 +49,17 @@ class EditCategories extends Component {
             </tr>
             </thead>
             <tbody>
-            { this.props.categories.map((items, index) => {
+            { this.props.categories.map((category, index) => {
               return (
-                  <tr key={items.id} className={(index % 2) ? "active-tr" : ""}>
+                  <tr key={category.id} className={(index % 2) ? "active-tr" : ""}>
                     <td className="mdl-data-table__cell--non-numeric">
                       <p className="td-thead-title">Назва рубрики</p>
-                      <p>{items.name}</p>
+                      <p>{category.name}</p>
                     </td>
                     <td className="mdl-data-table__cell--non-numeric admin-user-action">
                       <p className="td-thead-title">Дія</p>
                       <a data-modal="#modal" onClick={() => {
-                        this.handleClickShowModalWindow(items.id, items.name)
+                        this.handleClickShowModalWindow(category.id, category.name)
                       }}>
                         <i className="fa fa-pencil" aria-hidden="true"/>
                       </a>
@@ -108,10 +108,10 @@ export default connect(
       categories: state.categories
     }),
     dispatch => ({
-      editCategory: (items) => {
+      editCategory: (paramsCategory) => {
         dispatch({
           type: 'EDIT_CATEGORY',
-          data: items
+          valueCategory: paramsCategory
         });
       }
     })

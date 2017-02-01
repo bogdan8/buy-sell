@@ -65,10 +65,10 @@ export default connect(
       categories: state.categories
     }),
     dispatch => ({
-      onAddCategory: (items) => {
+      onAddCategory: (paramsCategory) => {
         dispatch({
           type: 'ADD_CATEGORY',
-          data: items
+          valueCategory: paramsCategory
         });
       }
     })

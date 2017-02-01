@@ -37,15 +37,15 @@ class Products extends Component {
                     <label htmlFor="sample1" className="mdl-textfield__label">Виберіть рубрику</label>
                     <ul id="select" htmlFor="sample1" className="mdl-menu mdl-js-menu full-width"
                         onClick={this.handleClickSelect.bind(this)}>
-                      { this.props.categories.map((items, index) =>
-                          <li key={items.id} value={items.id} className="mdl-menu__item full-width">{items.name}</li>
+                      { this.props.categories.map((category, index) =>
+                          <li key={category.id} value={category.id} className="mdl-menu__item full-width">{category.name}</li>
                       )}
                     </ul>
                   </div>
                 </div>
               </div>
               <ProductBody
-                  items={this.props.setCategory === 'Всі' ? this.props.products : this.props.filterProducts}
+                  products={this.props.setCategory === 'Всі' ? this.props.products : this.props.filterProducts}
               />
               <Pagination />
               <CreateProduct />
@@ -61,13 +61,13 @@ export default connect(
       products: state.products,
       categories: state.categories,
       setCategory: state.setCategory,
-      filterProducts: state.products.filter(data => data.category.includes(state.setCategory))
+      filterProducts: state.products.filter(product => product.category.includes(state.setCategory))
     }),
     dispatch => ({
-      choseCategory: (items) => {
+      choseCategory: (category) => {
         dispatch({
           type: 'CHOSE_CATEGORY',
-          data: items
+          choseCategory: category
         });
       }
     })

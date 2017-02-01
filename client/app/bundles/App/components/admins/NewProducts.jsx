@@ -28,25 +28,25 @@ class NewProduct extends Component {
                   </tr>
                   </thead>
                   <tbody>
-                  { this.props.products.map((items, index) =>
-                      <tr key={items.id} className={(index % 2) ? "active-tr" : ""}>
+                  { this.props.products.map((product, index) =>
+                      <tr key={product.id} className={(index % 2) ? "active-tr" : ""}>
                         <td className="mdl-data-table__cell--non-numeric td-block-height-auto">
                           <p className="td-thead-title">Фото</p>
                           <div className="product-image">
-                            <img src={items.photo}/>
+                            <img src={product.photo}/>
                           </div>
                         </td>
                         <td className="mdl-data-table__cell--non-numeric table-right-columns td-block-height-auto">
                           <p className="td-thead-title">Оголошення</p>
-                          <p>{items.description}</p>
+                          <p>{product.description}</p>
                         </td>
                         <td className="mdl-data-table__cell--non-numeric">
                           <p className="td-thead-title">Контакти</p>
-                          <p>{items.contact}</p>
+                          <p>{product.contact}</p>
                         </td>
                         <td className="mdl-data-table__cell--non-numeric">
                           <p className="td-thead-title">Ціна</p>
-                          <p>{items.price}</p>
+                          <p>{product.price}</p>
                         </td>
                         <td className="mdl-data-table__cell--non-numeric admin-user-action">
                           <p className="td-thead-title">Дія</p>

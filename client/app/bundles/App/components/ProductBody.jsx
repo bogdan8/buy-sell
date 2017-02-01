@@ -4,7 +4,7 @@ import './style/Product.sass';
 
 export default class ProductBody extends Component {
   render() {
-    const {items}= this.props;
+    const {products}= this.props;
     return (
         <div className="mdl-cell mdl-cell--12-col">
           <table className="tablesaw tablesaw-stack mdl-data-table mdl-js-data-table admin-table"
@@ -18,25 +18,25 @@ export default class ProductBody extends Component {
             </tr>
             </thead>
             <tbody>
-            { items.map((items, index) =>
-                <tr key={items.id} className={(index % 2) ? "active-tr" : ""}>
+            { products.map((product, index) =>
+                <tr key={product.id} className={(index % 2) ? "active-tr" : ""}>
                   <td className="mdl-data-table__cell--non-numeric td-block-height-auto">
                     <p className="td-thead-title">Фото</p>
                     <div className="product-image">
-                      <img src={items.photo}/>
+                      <img src={product.photo}/>
                     </div>
                   </td>
                   <td className="mdl-data-table__cell--non-numeric td-block-height-auto">
                     <p className="td-thead-title">Оголошення</p>
-                    <p>{items.description}</p>
+                    <p>{product.description}</p>
                   </td>
                   <td className="mdl-data-table__cell--non-numeric">
                     <p className="td-thead-title">Контакти</p>
-                    <p>{items.contact}</p>
+                    <p>{product.contact}</p>
                   </td>
                   <td className="mdl-data-table__cell--non-numeric">
                     <p className="td-thead-title">Ціна</p>
-                    <p>{items.price}</p>
+                    <p>{product.price}</p>
                   </td>
                 </tr>
             )}

@@ -73,9 +73,9 @@ class CreateProduct extends Component {
                           <label htmlFor="select-category" className="mdl-textfield__label">Виберіть рубрику</label>
                           <ul id="selectModal" htmlFor="select-category" className="mdl-menu mdl-js-menu full-width"
                               onClick={this.handleClickSelectModal.bind(this)}>
-                            { this.props.categories.map((items, index) =>
-                                <li key={items.id} value={items.id}
-                                    className="mdl-menu__item full-width">{items.name}</li>
+                            { this.props.categories.map((category, index) =>
+                                <li key={category.id} value={category.id}
+                                    className="mdl-menu__item full-width">{category.name}</li>
                             )}
                           </ul>
                         </div>
@@ -119,16 +119,16 @@ export default connect(
       setCategoryInModal: state.setCategoryInModal
     }),
     dispatch => ({
-      onAddProduct: (items) => {
+      onAddProduct: (paramsProduct) => {
         dispatch({
           type: 'ADD_PRODUCT',
-          data: items
+          valueProduct: paramsProduct
         });
       },
-      choseCategoryInModal: (items) => {
+      choseCategoryInModal: (category) => {
         dispatch({
           type: 'CHOSE_CATEGORY_IN_MODAL',
-          data: items
+          choseCategory: category
         });
       }
     })
