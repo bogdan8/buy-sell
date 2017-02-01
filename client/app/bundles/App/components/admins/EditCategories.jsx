@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {editCategory, removeCategory} from '../../actions/categories.js';
 
 class EditCategories extends Component {
 
@@ -26,16 +27,16 @@ class EditCategories extends Component {
       key: key
     };
 
-    this.props.editCategory(paramsCategory);
+    this.props._editCategory(paramsCategory);
 
     document.getElementById('modal-category-edit').style.display = "none";
 
     alert('Успішно відредаговано');
   };
 
-  handleClickRemoveCategory(key){
+  handleClickRemoveCategory(key) {
     if (confirm("Ви дійсно хочите видалити?")) {
-      this.props.removeCategory(key);
+      this.props._removeCategory(key);
       alert("Видалено!")
     } else {
       alert("Відмінено")
@@ -117,17 +118,11 @@ export default connect(
       categories: state.categories
     }),
     dispatch => ({
-      editCategory: (paramsCategory) => {
-        dispatch({
-          type: 'EDIT_CATEGORY',
-          valueCategory: paramsCategory
-        });
+      _editCategory: (paramsCategory) => {
+        dispatch(editCategory(paramsCategory))
       },
-      removeCategory: (indexCategory) => {
-        dispatch({
-          type: 'REMOVE_CATEGORY',
-          indexCategory: indexCategory
-        });
+      _removeCategory: (indexCategory) => {
+        dispatch(removeCategory(indexCategory))
       }
     })
 )(EditCategories);

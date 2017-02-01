@@ -1,6 +1,9 @@
 import React, {Component}from 'react';
 import {connect} from 'react-redux';
-import { v4 } from 'node-uuid';
+import {v4} from 'node-uuid';
+
+import {addProduct} from '../actions/products.js';
+import {choseCategoryInModal} from '../actions/categories.js';
 
 class CreateProduct extends Component {
   constructor(props) {
@@ -8,7 +11,7 @@ class CreateProduct extends Component {
   };
 
   handleClickSelectModal(e) {
-    this.props.choseCategoryInModal(e.target.innerHTML);
+    this.props._choseCategoryInModal(e.target.innerHTML);
   };
 
   handleClickShowModalWindow() {
@@ -30,9 +33,9 @@ class CreateProduct extends Component {
       price: document.getElementById('price').value
     };
 
-    this.props.choseCategoryInModal(document.getElementById('select-category').value);
+    this.props._choseCategoryInModal(document.getElementById('select-category').value);
 
-    this.props.onAddProduct(paramsProduct);
+    this.props._addProduct(paramsProduct);
     document.getElementById('modal-product').style.display = "none";
 
     alert('Успішно дадано');
@@ -120,17 +123,11 @@ export default connect(
       setCategoryInModal: state.setCategoryInModal
     }),
     dispatch => ({
-      onAddProduct: (paramsProduct) => {
-        dispatch({
-          type: 'ADD_PRODUCT',
-          valueProduct: paramsProduct
-        });
+      _addProduct: (paramsProduct) => {
+        dispatch(addProduct(paramsProduct))
       },
-      choseCategoryInModal: (category) => {
-        dispatch({
-          type: 'CHOSE_CATEGORY_IN_MODAL',
-          choseCategory: category
-        });
+      _choseCategoryInModal: (category) => {
+        dispatch(choseCategoryInModal(category))
       }
     })
 )(CreateProduct);

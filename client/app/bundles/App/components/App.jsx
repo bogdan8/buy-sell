@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
-import Routes from '../routes/Routes';
-
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
+
+import Routes from '../routes/Routes';
+import reducer from '../reducers/rootReducer';
 
 import './style/App.sass'
 
-import reducer from '../reducers/rootReducer';
-
-const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const store = createStore(reducer, applyMiddleware(thunk));
 
 export default class App extends Component {
   render() {

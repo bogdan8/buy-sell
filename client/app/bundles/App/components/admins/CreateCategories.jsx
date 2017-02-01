@@ -2,6 +2,8 @@ import React, {Component}from 'react';
 import {connect} from 'react-redux';
 import { v4 } from 'node-uuid';
 
+import {addCategory} from '../../actions/categories.js';
+
 class CreateCategories extends Component {
   handleClickShowModalWindow() {
     document.getElementById('modal-category').style.display = "block";
@@ -18,7 +20,7 @@ class CreateCategories extends Component {
       name: document.getElementById('category').value
     };
 
-    this.props.onAddCategory(paramsCategory);
+    this.props._addCategory(paramsCategory);
     document.getElementById('modal-category').style.display = "none";
 
     alert('Успішно дадано');
@@ -66,11 +68,8 @@ export default connect(
       categories: state.categories
     }),
     dispatch => ({
-      onAddCategory: (paramsCategory) => {
-        dispatch({
-          type: 'ADD_CATEGORY',
-          valueCategory: paramsCategory
-        });
+      _addCategory: (paramsCategory) => {
+        dispatch(addCategory(paramsCategory))
       }
     })
 )(CreateCategories);

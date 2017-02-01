@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
+import {removeProduct} from '../../actions/products.js';
+
 import '../style/Product.sass';
 
 class NewProduct extends Component {
 
   handleClickRemoveProduct(index) {
     if (confirm("Ви дійсно хочите видалити?")) {
-      this.props.removeProduct(index);
+      this.props._removeProduct(index);
       alert("Видалено!")
     } else {
       alert("Відмінено")
@@ -84,11 +86,8 @@ export default connect(
       products: state.products,
     }),
     dispatch => ({
-      removeProduct: (indexProduct) => {
-        dispatch({
-          type: 'REMOVE_PRODUCT',
-          indexProduct: indexProduct
-        });
+      _removeProduct: (indexProduct) => {
+        dispatch(removeProduct(indexProduct))
       }
     })
 )(NewProduct)

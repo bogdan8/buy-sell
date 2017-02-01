@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
-import Pagination from '../Pagination';
-
 import {connect} from 'react-redux';
+
+import {removeUser} from '../../actions/users.js';
+import Pagination from '../Pagination';
 
 class User extends Component {
 
   handleClickRemoveUser(index) {
     if (confirm("Ви дійсно хочите видалити?")) {
-      this.props.removeUser(index);
+      this.props._removeUser(index);
       alert("Видалено!")
     } else {
       alert("Відмінено")
@@ -77,11 +78,8 @@ export default connect(
       users: state.users,
     }),
     dispatch => ({
-      removeUser: (indexUser) => {
-        dispatch({
-          type: 'REMOVE_USER',
-          indexUser: indexUser
-        });
+      _removeUser: (indexUser) => {
+        dispatch(removeUser(indexUser))
       }
     })
 )(User)
