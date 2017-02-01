@@ -25,11 +25,15 @@ export default function categories(state = data, action) {
         action.valueCategory
       ];
     case 'EDIT_CATEGORY':
-      return [
-        ...state.slice(0, action.valueCategory.key),
-        action.valueCategory,
-        ...state.slice(action.valueCategory.key)
-      ];
+      return state.map((item, index) => {
+        if (index != action.valueCategory.key) {
+          return item;
+        }
+        return {
+          ...item,
+          ...action.valueCategory
+        };
+      });
     case 'REMOVE_CATEGORY':
       return [
         ...state.slice(0, action.indexCategory),
