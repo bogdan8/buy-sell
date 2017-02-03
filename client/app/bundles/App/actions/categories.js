@@ -17,18 +17,18 @@ const removeCategory = (indexCategory) => dispatch => {
   });
 };
 
-const choseCategory = (category) => dispatch => {
+const currentCategory = (categoryName) => dispatch => {
   dispatch({
-    type: 'CHOSE_CATEGORY',
-    choseCategory: category
+    type: 'CURRENT_CATEGORY',
+    currentCategory: categoryName
   });
 };
 
-const choseCategoryInModal = (category) => dispatch => {
+const currentCategoryInModal = (categoryName) => dispatch => {
   dispatch({
-    type: 'CHOSE_CATEGORY_IN_MODAL',
-    choseCategory: category
+    type: 'CURRENT_CATEGORY_IN_MODAL',
+    currentCategory: categoryName
   });
 };
 
-export {addCategory, editCategory, removeCategory, choseCategory, choseCategoryInModal};
+export {addCategory, editCategory, removeCategory, currentCategory, currentCategoryInModal};
