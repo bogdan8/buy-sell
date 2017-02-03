@@ -4,7 +4,7 @@ import Menu from './Menu';
 
 import './style/Auth.sass';
 
-export default class Login extends React.Component {
+export default class Main extends React.Component {
   render() {
     return (
         <div className="body">

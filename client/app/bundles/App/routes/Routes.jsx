@@ -1,7 +1,7 @@
 import React from 'react'
 import { Router, Route, hashHistory, browserHistory } from 'react-router';
 
-import Login from '../components/Login';
+import Main from '../components/Main';
 import Admin from '../components/Admin';
 import SignIn from '../components/SignIn';
 import Register from '../components/Register';
@@ -13,7 +13,7 @@ import NewProducts from '../components/admins/NewProducts';
 export default function Routes() {
   return (
     <Router history = {browserHistory} >
-      <Route path="/" component={ Login } >
+      <Route path="/" component={ Main } >
         <Route path="/admin" component={ Admin } />
         <Route path="/sign_in" component={ SignIn } />
         <Route path="/register" component={ Register } />

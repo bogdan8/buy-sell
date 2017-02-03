@@ -1,11 +1,10 @@
 import {combineReducers} from 'redux';
-import {authStateReducer} from 'redux-auth';
-import {configure} from 'redux-auth';
 import products from './products';
 import categories from './categories';
 import currentCategory from './currentCategory';
 import currentCategoryInModal from './currentCategoryInModal';
 import users from './users';
+import session from './session';
 
 const rootReducer = combineReducers({
   products,
@@ -13,7 +12,7 @@ const rootReducer = combineReducers({
   currentCategory,
   currentCategoryInModal,
   users,
-  authStateReducer: authStateReducer
+  session
 });
 
 export default rootReducer;
