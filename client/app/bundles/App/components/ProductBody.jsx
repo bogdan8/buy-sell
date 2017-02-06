@@ -46,11 +46,11 @@ class ProductBody extends Component {
                 )
               }
             })}
-            { products.map((product, index) => {
+            { products.map((product) => {
               if (!prepaidProducts.includes(product.id)) {
                 return (
                     <tr key={product.id}
-                        className={(index % 2) ? "active-tr hover-tr" : "hover-tr"}>
+                        className={(product.id % 2) ? "active-tr hover-tr" : "hover-tr"}>
                       <td className="mdl-data-table__cell--non-numeric td-block-height-auto">
                         <p className="td-thead-title">Фото</p>
                         <div className="product-image">
