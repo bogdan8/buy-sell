@@ -60,10 +60,11 @@ class Products extends Component {
 
 export default connect(
     state => ({
-      products: state.products,
+      products: state.products.filter(product => product.state === 'approved'),
       categories: state.categories,
       currentCategory: state.currentCategory,
-      filterProducts: state.products.filter(product => product.category.includes(state.currentCategory))
+      filterProducts: state.products.filter(product => product.category.includes(state.currentCategory) && product.state === 'approved'),
+      prepaidProducts: state.prepaidProducts
     }),
     dispatch => ({
       _getCategory: (categoryName) => {

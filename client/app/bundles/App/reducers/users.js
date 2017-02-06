@@ -27,8 +27,8 @@ export default function users(state = data, action) {
         ...state.slice(action.indexUser + 1)
       ];
     case 'CHANGE_ROLE_IN_USER':
-      return state.map((item, index) => {
-        if (index != action.valueUser.index) {
+      return state.map((item) => {
+        if (item.id != action.valueUser.id) {
           return item;
         }
         return {
