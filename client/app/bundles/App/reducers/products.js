@@ -6,7 +6,8 @@ const data = [
     contact: 'John Lennon Кіно',
     category: 'Кіно',
     price: '4568$',
-    state: 'deflected'
+    approved: true
+
   }, {
     id: 2,
     photo: 'https://iso.500px.com/wp-content/uploads/2016/06/stock-photo-142869191-1-1500x1000.jpg',
@@ -14,7 +15,7 @@ const data = [
     contact: 'John Lennon Музика',
     category: 'Музика',
     price: '4568$',
-    state: 'deflected'
+    approved: false
   }, {
     id: 3,
     photo: 'https://iso.500px.com/wp-content/uploads/2016/06/stock-photo-142869191-1-1500x1000.jpg',
@@ -22,7 +23,7 @@ const data = [
     contact: 'John Lennon Ігри',
     category: 'Ігри',
     price: '4568$',
-    state: 'deflected'
+    approved: false
   }
 ];
 

@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
+import getVisibleProducts from '../../selectors/getVisibleProducts';
+
 import {removeProduct, payProduct, stateProduct} from '../../actions/products.js';
 
 class NewProductBody extends Component {
@@ -23,11 +25,11 @@ class NewProductBody extends Component {
     }
   }
 
-  handleClickChangeState(id, state) {
+  handleClickChangeState(id, boolean) {
     if (confirm("Затвердити продукт?")) {
       var paramsProduct = {
         id: id,
-        state: state
+        approved: boolean
       };
       this.props._stateProduct(paramsProduct);
       alert("Затвердити!")
@@ -66,22 +68,20 @@ class NewProductBody extends Component {
                   <td className="mdl-data-table__cell--non-numeric admin-user-action">
                     <p className="td-thead-title">Дія</p>
                     <a onClick={() => {
-                      this.handleClickChangeState(product.id, 'approved')
+                      this.handleClickChangeState(product.id, true)
                     }}>
-                      <i className={ product.state == 'approved' ? "fa fa-thumbs-o-up active-i" : "fa fa-thumbs-o-up"}
+                      <i className={ product.approved ? "fa fa-thumbs-o-up active-i" : "fa fa-thumbs-o-up"}
                          aria-hidden="true"
                       />
                     </a>
                     <a onClick={() => {
-                      this.handleClickChangeState(product.id, 'deflected')
+                      this.handleClickChangeState(product.id, false)
                     }}>
-                      <i className={ product.state == 'deflected' ? "fa fa-thumbs-o-down active-i" : "fa fa-thumbs-o-down"}
+                      <i className={ product.approved == false ? "fa fa-thumbs-o-down active-i" : "fa fa-thumbs-o-down"}
                          aria-hidden="true"/>
                     </a>
-                    <a onClick={() => {
-                      this.handleClickPayProduct(product.id)
-                    }}>
-                      <i className={ prepaidProducts.includes(product.id) ? "fa fa-money active-i" : "fa fa-money"}
+                    <a>
+                      <i className="fa fa-money active-i"
                          aria-hidden="true"/>
                     </a>
                     <a onClick={() => {
@@ -120,22 +120,22 @@ class NewProductBody extends Component {
                   <td className="mdl-data-table__cell--non-numeric admin-user-action">
                     <p className="td-thead-title">Дія</p>
                     <a onClick={() => {
-                      this.handleClickChangeState(product.id, 'approved')
+                      this.handleClickChangeState(product.id, true)
                     }}>
-                      <i className={ product.state == 'approved' ? "fa fa-thumbs-o-up active-i" : "fa fa-thumbs-o-up"}
+                      <i className={ product.approved ? "fa fa-thumbs-o-up active-i" : "fa fa-thumbs-o-up"}
                          aria-hidden="true"
                       />
                     </a>
                     <a onClick={() => {
-                      this.handleClickChangeState(product.id, 'deflected')
+                      this.handleClickChangeState(product.id, false)
                     }}>
-                      <i className={ product.state == 'deflected' ? "fa fa-thumbs-o-down active-i" : "fa fa-thumbs-o-down"}
+                      <i className={ product.approved == false ? "fa fa-thumbs-o-down active-i" : "fa fa-thumbs-o-down"}
                          aria-hidden="true"/>
                     </a>
                     <a onClick={() => {
-                      this.handleClickPayProduct(product.id)
+                      product.approved ? this.handleClickPayProduct(product.id) : ''
                     }}>
-                      <i className={ prepaidProducts.includes(product.id) ? "fa fa-money active-i" : "fa fa-money"}
+                      <i className="fa fa-money"
                          aria-hidden="true"/>
                     </a>
                     <a onClick={() => {
@@ -155,7 +155,7 @@ class NewProductBody extends Component {
 }
 export default connect(
     state => ({
-      products: state.products,
+      products: getVisibleProducts(state),
       prepaidProducts: state.prepaidProducts
     }),
     dispatch => ({

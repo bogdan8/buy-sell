@@ -30,7 +30,7 @@ class CreateProduct extends Component {
       contact: 'Bobo bobo',
       category: document.getElementById('select-category').value,
       price: document.getElementById('price').value,
-      state: 'deflected'
+      approved: false
     };
 
     this.props._addProduct(paramsProduct);
