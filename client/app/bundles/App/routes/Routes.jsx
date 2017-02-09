@@ -1,27 +1,40 @@
 import React from 'react'
-import { Router, Route, hashHistory, browserHistory } from 'react-router';
+import {Router, Route, hashHistory, browserHistory} from 'react-router';
+import {connect} from 'react-redux';
 
-import Main from '../components/Main';
-import Admin from '../components/Admin';
-import SignIn from '../components/SignIn';
-import Register from '../components/Register';
-import User from '../components/admins/User';
-import Categories from '../components/admins/Categories';
-import Products from '../components/Products';
-import NewProducts from '../components/admins/NewProducts';
+import {Main, Admin, SignIn, Register, Products, User, Categories, NewProducts} from '../components/common'
 
-export default function Routes() {
-  return (
-    <Router history = {browserHistory} >
-      <Route path="/" component={ Main } >
-        <Route path="/admin" component={ Admin } />
-        <Route path="/sign_in" component={ SignIn } />
-        <Route path="/register" component={ Register } />
-        <Route path="/admin/user" component={ User } />
-        <Route path="/admin/categories" component={ Categories } />
-        <Route path="/products" component={ Products } />
-        <Route path="/admin/new_products" component={ NewProducts } />
-      </Route>
-    </Router>
-  );
+function Routes(props) {
+  if (props.user.role === 'admin') {
+    return (
+        <Router history={browserHistory}>
+          <Route path="/" component={ Main }>
+            <Route path="/admin" component={ Admin }/>
+            <Route path="/sign_in" component={ SignIn }/>
+            <Route path="/logout" component={ SignIn }/>
+            <Route path="/register" component={ Register }/>
+            <Route path="/products" component={ Products }/>
+            <Route path="/admin/user" component={ User }/>
+            <Route path="/admin/categories" component={ Categories }/>
+            <Route path="/admin/new_products" component={ NewProducts }/>
+          </Route>
+        </Router>
+    )
+  } else {
+    return (
+        <Router history={browserHistory}>
+          <Route path="/" component={ Main }>
+            <Route path="/sign_in" component={ SignIn }/>
+            <Route path="/register" component={ Register }/>
+            <Route path="/products" component={ Products }/>
+          </Route>
+        </Router>
+    )
+  }
 }
+export default connect(
+    state => ({
+      user: state.users[0],
+      logged_in: state.session
+    })
+)(Routes);

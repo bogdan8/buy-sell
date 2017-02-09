@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import {CreateCategories, EditCategories} from './adminComponents';
+import {CreateCategories, EditCategories} from '../common';
 
 export default class Categories extends Component {
   componentDidMount() {

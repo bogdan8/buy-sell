@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-import {NewProductBody} from './adminComponents';
+import {NewProductBody} from '../common';
 
 import {setAdminFilterOption} from '../../actions/adminFilterOption.js';
 

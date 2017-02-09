@@ -1,7 +1,7 @@
 import React, {Component}from 'react';
 import {connect} from 'react-redux';
 
-import {Pagination, ProductBody, CreateProduct} from './components'
+import {Pagination, ProductBody, CreateProduct} from './common'
 import {currentCategory} from '../actions/categories.js';
 
 import './style/Product.sass';
