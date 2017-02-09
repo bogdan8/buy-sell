@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-import NewProductBody from './NewProductBody';
+import {NewProductBody} from './adminComponents';
 
 import {setAdminFilterOption} from '../../actions/adminFilterOption.js';
 
@@ -77,16 +77,11 @@ class NewProduct extends Component {
           </div>
         </div>
     )
-        ;
   }
 }
 
 export default connect(
-    state => ({
-      products: state.products,
-      prepaidProducts: state.prepaidProducts,
-      currentAdminFilterOption: state.currentAdminFilterOption,
-    }),
+    state => ({}),
     dispatch => ({
       _setAdminFilterOption: (name, isChecked) => {
         dispatch(setAdminFilterOption(name, isChecked))

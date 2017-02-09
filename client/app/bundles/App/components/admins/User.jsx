@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import {removeUser, changeRole} from '../../actions/users.js';
-import Pagination from '../Pagination';
+import {Pagination} from '../components';
 
 class User extends Component {
 

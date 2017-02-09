@@ -41,6 +41,7 @@ class EditCategories extends Component {
   }
 
   render() {
+    const {categories} = this.props;
     return (
         <div className="mdl-cell mdl-cell--12-col">
           <table className="tablesaw tablesaw-stack mdl-data-table mdl-js-data-table admin-table"
@@ -53,7 +54,7 @@ class EditCategories extends Component {
             </tr>
             </thead>
             <tbody>
-            { this.props.categories.map((category, index) => {
+            { categories.map((category, index) => {
               return (
                   <tr key={category.id} className={(index % 2) ? "active-tr" : ""}>
                     <td className="mdl-data-table__cell--non-numeric">

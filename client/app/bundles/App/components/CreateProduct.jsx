@@ -40,6 +40,7 @@ class CreateProduct extends Component {
   };
 
   render() {
+    const {categories} = this.props;
     return (
         <div className="mdl-cell mdl-cell--12-col flex-center">
           <div className="mdl-cell mdl-cell--12-col flex-center">
@@ -75,7 +76,7 @@ class CreateProduct extends Component {
                           <label htmlFor="select-category" className="mdl-textfield__label">Виберіть рубрику</label>
                           <ul id="selectModal" htmlFor="select-category" className="mdl-menu mdl-js-menu full-width"
                               onClick={this.handleClickSelectModal.bind(this)}>
-                            { this.props.categories.map((category, index) =>
+                            { categories.map((category, index) =>
                                 <li key={category.id} value={category.id}
                                     className="mdl-menu__item full-width">{category.name}</li>
                             )}
@@ -116,7 +117,6 @@ class CreateProduct extends Component {
 }
 export default connect(
     state => ({
-      products: state.products,
       categories: state.categories,
     }),
     dispatch => ({
