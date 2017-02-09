@@ -1,6 +1,7 @@
 import React, {Component}from 'react';
 import {connect} from 'react-redux';
 import {v4} from 'node-uuid';
+import {Grid, Cell} from 'react-mdl';
 
 import {addProduct} from '../actions/products.js';
 
@@ -42,31 +43,27 @@ class CreateProduct extends Component {
   render() {
     const {categories} = this.props;
     return (
-        <div className="mdl-cell mdl-cell--12-col flex-center">
-          <div className="mdl-cell mdl-cell--12-col flex-center">
-            <button id="add-product" data-modal="#modal" onClick={this.handleClickShowModalWindow}
-                    className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-              <i className="fa fa-plus-circle" aria-hidden="true"/> Додати Власне оголошення
-            </button>
-          </div>
+        <Cell col={12} className="flex-center">
+          <button id="add-product" data-modal="#modal" onClick={this.handleClickShowModalWindow}
+                  className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+            <i className="fa fa-plus-circle" aria-hidden="true"/> Додати Власне оголошення
+          </button>
           <div id="modal-product" className="modal-block">
             <div className="modal modal__bg" role="dialog" aria-hidden="true">
               <div className="modal__dialog">
                 <div className="modal__content">
                   <h4>Створити нове оголошення:</h4>
                   <form onSubmit={this.handleSubmit.bind(this)} className="auth-block-grid">
-                    <div className="mdl-grid">
-                      <div
-                          className="mdl-cell mdl-cell--5-col-desktop mdl-cell--1-offset-desktop mdl-cell--4-col-tablet mdl-cell--6-col-phone">
+                    <Grid>
+                      <Cell col={5} offsetDesktop={1} tablet={4} phone={6}>
                         <div className="form-image">
                           <label className="fileContainer-block">
                             <i className="fa fa-download" aria-hidden="true"/>
                             <input name="[file]" type="file"/>
                           </label>
                         </div>
-                      </div>
-                      <div
-                          className="mdl-cell mdl-cell--6-col-desktop mdl-cell--4-col-tablet mdl-cell--6-col-phone">
+                      </Cell>
+                      <Cell col={6} tablet={4} phone={6}>
                         <div
                             className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth select-input">
                           <input className="mdl-textfield__input" type="text" id="select-category"
@@ -93,16 +90,16 @@ class CreateProduct extends Component {
                                  type="number" id="price"/>
                           <label className="mdl-textfield__label form-label" htmlFor="sample3">Вартість</label>
                         </div>
-                      </div>
-                    </div>
-                    <div className="mdl-grid">
-                      <div className="mdl-cell mdl-cell--12-col flex-center">
+                      </Cell>
+                    </Grid>
+                    <Grid>
+                      <Cell col={12} className="flex-center">
                         <button type="submit"
                                 className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
                           <i className="fa fa-paper-plane-o" aria-hidden="true"/> Надіслати на підтвердження
                         </button>
-                      </div>
-                    </div>
+                      </Cell>
+                    </Grid>
                   </form>
                   <span className="modal__close modal-button-close" onClick={this.handleClickHideModalWindow}>
                           <i className="fa fa-times" aria-hidden="true"/>
@@ -111,7 +108,7 @@ class CreateProduct extends Component {
               </div>
             </div>
           </div>
-        </div>
+        </Cell>
     )
   }
 }

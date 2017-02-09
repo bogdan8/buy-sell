@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
+import {Grid, Cell} from 'react-mdl';
 
 import './style/Auth.sass';
 
@@ -10,31 +11,29 @@ export default class Register extends React.Component {
 
   render() {
     return (
-        <div className="mdl-grid">
-          <div
-              className="mdl-cell mdl-cell--6-col-desktop mdl-cell--3-offset-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+        <Grid>
+          <Cell col={6} offsetDesktop={3} tablet={12} phone={12}>
             <div className="body-auth">
-              <div className="mdl-grid">
-                <div className="mdl-cell mdl-cell--12-col">
+              <Grid>
+                <Cell col={12}>
                   <div className="auth-link">
                     <Link to="/sign_in">Ввійти</Link>
                     <p>|</p>
                     <p>Зареєструватись</p>
                   </div>
-                </div>
-              </div>
+                </Cell>
+              </Grid>
               <form action="#" className="auth-block-grid">
-                <div className="mdl-grid">
-                  <div
-                      className="mdl-cell mdl-cell--5-col-desktop mdl-cell--1-offset-desktop mdl-cell--4-col-tablet mdl-cell--6-col-phone">
+                <Grid>
+                  <Cell col={5} offsetDesktop={1} tablet={4} phone={6}>
                     <div className="form-image">
                       <label className="fileContainer">
                         <i className="fa fa-download" aria-hidden="true"/>
                         <input type="file"/>
                       </label>
                     </div>
-                  </div>
-                  <div className="mdl-cell mdl-cell--6-col-desktop mdl-cell--4-col-tablet mdl-cell--6-col-phone">
+                  </Cell>
+                  <Cell col={6} tablet={4} phone={6}>
                     <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                       <input className="mdl-textfield__input form-input" type="text" id="sample3"/>
                       <label className="mdl-textfield__label form-label" htmlFor="sample3">
@@ -73,20 +72,20 @@ export default class Register extends React.Component {
                       <label className="mdl-textfield__label form-label" htmlFor="sample3">
                         Адреса</label>
                     </div>
-                  </div>
-                </div>
-                <div className="mdl-grid">
-                  <div className="mdl-cell mdl-cell--12-col flex-center">
+                  </Cell>
+                </Grid>
+                <Grid>
+                  <Cell col={12} className="flex-center">
                     <button type="submit"
                             className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
                       Зареєструватись
                     </button>
-                  </div>
-                </div>
+                  </Cell>
+                </Grid>
               </form>
             </div>
-          </div>
-        </div>
-    );
+          </Cell>
+        </Grid>
+    )
   }
 }

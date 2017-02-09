@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Cell} from 'react-mdl';
+
 import {editCategory, removeCategory} from '../../actions/categories.js';
 
 class EditCategories extends Component {
@@ -43,7 +45,7 @@ class EditCategories extends Component {
   render() {
     const {categories} = this.props;
     return (
-        <div className="mdl-cell mdl-cell--12-col">
+        <Cell col={12}>
           <table className="tablesaw tablesaw-stack mdl-data-table mdl-js-data-table admin-table"
                  data-tablesaw-mode="stack">
             <thead className="table-thead">
@@ -105,7 +107,7 @@ class EditCategories extends Component {
               </div>
             </div>
           </div>
-        </div>
+        </Cell>
     )
   }
 }

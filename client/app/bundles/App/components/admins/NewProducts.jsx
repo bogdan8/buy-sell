@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Grid, Cell} from 'react-mdl';
 
 import {NewProductBody} from '../common';
 
@@ -18,18 +19,16 @@ class NewProduct extends Component {
 
   render() {
     return (
-        <div className="mdl-grid">
-          <div
-              className="mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
-            <div className="mdl-grid">
-              <div className="mdl-cell mdl-cell--12-col">
-                <div className="mdl-cell mdl-cell--12-col body-header-title new-products">
-                  <div className="mdl-grid">
-                    <div className="mdl-cell--5-col-desktop mdl-cell mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+        <Grid>
+          <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
+            <Grid>
+              <Cell col={12}>
+                <Cell col={12} className="body-header-title new-products">
+                  <Grid>
+                    <Cell col={5} tablet={12} phone={12}>
                       <p>Нові Оголошення:</p>
-                    </div>
-                    <div
-                        className="mdl-cell--7-col-desktop mdl-cell mdl-cell--12-col-tablet mdl-cell--12-col-phone checkbox-block">
+                    </Cell>
+                    <Cell col={7} tablet={12} phone={12} className="checkbox-block">
                       <div>
                         <p>Затверджені</p>
                         <label className="mdl-switch mdl-js-switch mdl-js-ripple-effect " htmlFor="approved">
@@ -54,11 +53,11 @@ class NewProduct extends Component {
                           <span className="mdl-switch__label"/>
                         </label>
                       </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="mdl-cell mdl-cell--12-col">
+                    </Cell>
+                  </Grid>
+                </Cell>
+              </Cell>
+              <Cell col={12}>
                 <table className="tablesaw tablesaw-stack mdl-js-data-table admin-table"
                        data-tablesaw-mode="stack">
                   <thead className="table-thead">
@@ -72,10 +71,10 @@ class NewProduct extends Component {
                   </thead>
                   <NewProductBody/>
                 </table>
-              </div>
-            </div>
-          </div>
-        </div>
+              </Cell>
+            </Grid>
+          </Cell>
+        </Grid>
     )
   }
 }

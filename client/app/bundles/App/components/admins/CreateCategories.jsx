@@ -1,6 +1,7 @@
 import React, {Component}from 'react';
 import {connect} from 'react-redux';
-import { v4 } from 'node-uuid';
+import {v4} from 'node-uuid';
+import {Cell} from 'react-mdl';
 
 import {addCategory} from '../../actions/categories.js';
 
@@ -28,13 +29,13 @@ class CreateCategories extends Component {
 
   render() {
     return (
-        <div className="mdl-cell mdl-cell--12-col flex-center">
-          <div className="mdl-cell mdl-cell--12-col flex-center">
+        <Cell col={12} className="flex-center">
+          <Cell col={12} className="flex-center">
             <button data-modal="#modal" onClick={this.handleClickShowModalWindow}
                     className="modal__trigger mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
               <i className="fa fa-plus-circle" aria-hidden="true"/> Додати Рубрику
             </button>
-          </div>
+          </Cell>
           <div id="modal-category" className="modal-block">
             <div className="modal modal__bg" role="dialog" aria-hidden="true">
               <div className="modal__dialog">
@@ -59,7 +60,7 @@ class CreateCategories extends Component {
               </div>
             </div>
           </div>
-        </div>
+        </Cell>
     )
   }
 }

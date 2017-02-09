@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Cell} from 'react-mdl';
 
 import './style/Product.sass';
 
@@ -7,7 +8,7 @@ class ProductBody extends Component {
   render() {
     const {products, prepaidProducts}= this.props;
     return (
-        <div className="mdl-cell mdl-cell--12-col">
+        <Cell col={12}>
           <table className="tablesaw tablesaw-stack mdl-js-data-table admin-table"
                  data-tablesaw-mode="stack">
             <thead className="table-thead">
@@ -75,7 +76,7 @@ class ProductBody extends Component {
             })}
             </tbody>
           </table>
-        </div>
+        </Cell>
     )
   }
 }
