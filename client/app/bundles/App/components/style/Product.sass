@@ -31,10 +31,16 @@
           display: block
           font-size: 16px
           color: grey
+    .hover-tr
+      &:hover
+        background-color: rgba(218, 228, 255, 0.39)
 
 .tablesaw
   tbody
     tr
+      .admin-user-action
+        a
+          margin-left: 5px
       .td-block-height-auto
         height: auto
 
@@ -44,6 +50,27 @@
         img
           width: 100%
           height: 100%
+    .hover-tr
+      &:hover
+        background-color: rgba(218, 228, 255, 0.39)
+
+.active-prepaid
+  background-color: rgba(255, 153, 130, 0.74)
 
 .mdl-menu
   padding: 0
+
+.new-products
+  .checkbox-block
+    display: flex
+    flex-wrap: wrap
+    justify-content: flex-end
+    .mdl-switch
+      width: auto
+    p
+      font-size: 17px
+      margin-right: 10px
+    label
+      margin-right: 10px
+    div
+      display: flex

@@ -1,14 +1,8 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
 
-import CreateCategories from './CreateCategories';
-import EditCategories from './EditCategories';
+import {CreateCategories, EditCategories} from './adminComponents';
 
-class Categories extends Component {
-  constructor(props) {
-    super(props);
-  };
-
+export default class Categories extends Component {
   componentDidMount() {
     componentHandler.upgradeDom();
   };
@@ -32,8 +26,3 @@ class Categories extends Component {
     )
   }
 }
-export default connect(
-    state => ({
-      categories: state.categories
-    })
-)(Categories);

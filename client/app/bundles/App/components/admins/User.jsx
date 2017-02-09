@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import {removeUser, changeRole} from '../../actions/users.js';
-import Pagination from '../Pagination';
+import {Pagination} from '../components';
 
 class User extends Component {
 
@@ -15,9 +15,9 @@ class User extends Component {
     }
   }
 
-  handleClickChangeRole(index, role) {
+  handleClickChangeRole(id, role) {
     var paramsUser = {
-      index: index,
+      id: id,
       role: role
     };
     if (confirm(`Зробити адміном? ${role}`)) {
@@ -67,15 +67,15 @@ class User extends Component {
                         <td className="mdl-data-table__cell--non-numeric admin-user-action">
                           <p className="td-thead-title">Дія</p>
                           <a onClick={() => {
-                            this.handleClickChangeRole(index, 'admin')
+                            this.handleClickChangeRole(user.id, 'admin')
                           }}>
-                            <i className={ user.role === 'admin' ? "fa fa-user-secret active-role" : "fa fa-user-secret"}
+                            <i className={ user.role === 'admin' ? "fa fa-user-secret active-i" : "fa fa-user-secret"}
                                aria-hidden="true"/>
                           </a>
                           <a onClick={() => {
-                            this.handleClickChangeRole(index, 'user')
+                            this.handleClickChangeRole(user.id, 'user')
                           }}>
-                            <i className={ user.role === 'user' ? "fa fa-user active-role" : "fa fa-user"}
+                            <i className={ user.role === 'user' ? "fa fa-user active-i" : "fa fa-user"}
                                aria-hidden="true"/>
                           </a>
                           <a onClick={() => {

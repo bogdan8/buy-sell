@@ -5,6 +5,13 @@ const addProduct = (paramsProduct) => dispatch => {
   });
 };
 
+const payProduct = (indexProduct) => dispatch => {
+  dispatch({
+    type: 'PREPAID_PRODUCT',
+    idProduct: indexProduct
+  });
+};
+
 const removeProduct = (indexProduct) => dispatch => {
   dispatch({
     type: 'REMOVE_PRODUCT',
@@ -12,4 +19,11 @@ const removeProduct = (indexProduct) => dispatch => {
   });
 };
 
-export {addProduct, removeProduct};
+const stateProduct = (paramsProduct) => dispatch => {
+  dispatch({
+    type: 'STATE_PRODUCT',
+    valueProduct: paramsProduct
+  });
+};
+
+export {addProduct, payProduct, removeProduct, stateProduct};

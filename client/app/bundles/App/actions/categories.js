@@ -24,11 +24,4 @@ const currentCategory = (categoryName) => dispatch => {
   });
 };
 
-const currentCategoryInModal = (categoryName) => dispatch => {
-  dispatch({
-    type: 'CURRENT_CATEGORY_IN_MODAL',
-    currentCategory: categoryName
-  });
-};
-
-export {addCategory, editCategory, removeCategory, currentCategory, currentCategoryInModal};
+export {addCategory, editCategory, removeCategory, currentCategory};

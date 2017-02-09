@@ -64,9 +64,7 @@ class CreateCategories extends Component {
   }
 }
 export default connect(
-    state => ({
-      categories: state.categories
-    }),
+    state => ({}),
     dispatch => ({
       _addCategory: (paramsCategory) => {
         dispatch(addCategory(paramsCategory))

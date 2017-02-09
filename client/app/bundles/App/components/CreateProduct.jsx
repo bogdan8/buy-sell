@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {v4} from 'node-uuid';
 
 import {addProduct} from '../actions/products.js';
-import {currentCategoryInModal} from '../actions/categories.js';
 
 class CreateProduct extends Component {
   constructor(props) {
@@ -11,7 +10,7 @@ class CreateProduct extends Component {
   };
 
   handleClickSelectModal(e) {
-    this.props._getCategoryInModal(e.target.innerHTML);
+    document.getElementById('select-category').value = e.target.innerHTML;
   };
 
   handleClickShowModalWindow() {
@@ -30,10 +29,9 @@ class CreateProduct extends Component {
       description: document.getElementById('description').value,
       contact: 'Bobo bobo',
       category: document.getElementById('select-category').value,
-      price: document.getElementById('price').value
+      price: document.getElementById('price').value,
+      approved: false
     };
-
-    this.props._getCategoryInModal(document.getElementById('select-category').value);
 
     this.props._addProduct(paramsProduct);
     document.getElementById('modal-product').style.display = "none";
@@ -42,6 +40,7 @@ class CreateProduct extends Component {
   };
 
   render() {
+    const {categories} = this.props;
     return (
         <div className="mdl-cell mdl-cell--12-col flex-center">
           <div className="mdl-cell mdl-cell--12-col flex-center">
@@ -71,13 +70,13 @@ class CreateProduct extends Component {
                         <div
                             className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth select-input">
                           <input className="mdl-textfield__input" type="text" id="select-category"
-                                 value={this.props.currentCategoryInModal === '' ? 'Всі' : this.props.currentCategoryInModal}
+                                 value={'Всі'}
                                  readOnly
                                  tabIndex="-1"/>
                           <label htmlFor="select-category" className="mdl-textfield__label">Виберіть рубрику</label>
                           <ul id="selectModal" htmlFor="select-category" className="mdl-menu mdl-js-menu full-width"
                               onClick={this.handleClickSelectModal.bind(this)}>
-                            { this.props.categories.map((category, index) =>
+                            { categories.map((category, index) =>
                                 <li key={category.id} value={category.id}
                                     className="mdl-menu__item full-width">{category.name}</li>
                             )}
@@ -118,16 +117,11 @@ class CreateProduct extends Component {
 }
 export default connect(
     state => ({
-      products: state.products,
       categories: state.categories,
-      currentCategoryInModal: state.currentCategoryInModal
     }),
     dispatch => ({
       _addProduct: (paramsProduct) => {
         dispatch(addProduct(paramsProduct))
-      },
-      _getCategoryInModal: (categoryName) => {
-        dispatch(currentCategoryInModal(categoryName))
       }
     })
 )(CreateProduct);

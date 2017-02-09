@@ -4,10 +4,9 @@ import {editCategory, removeCategory} from '../../actions/categories.js';
 
 class EditCategories extends Component {
 
-  handleClickShowModalWindow(id, name, index) {
+  handleClickShowModalWindow(id, name) {
     document.getElementById('modal-category-edit').style.display = "block";
     document.getElementById('category-id').value = id;
-    document.getElementById('category-index').value = index;
     document.getElementById('category-edit').value = name;
   };
 
@@ -18,13 +17,11 @@ class EditCategories extends Component {
   handleSubmitEdit(e) {
     e.preventDefault();
     var id = document.getElementById('category-id').value;
-    var index = document.getElementById('category-index').value;
     var name = document.getElementById('category-edit').value;
 
     var paramsCategory = {
       id: id,
-      name: name,
-      index: index
+      name: name
     };
 
     this.props._editCategory(paramsCategory);
@@ -44,6 +41,7 @@ class EditCategories extends Component {
   }
 
   render() {
+    const {categories} = this.props;
     return (
         <div className="mdl-cell mdl-cell--12-col">
           <table className="tablesaw tablesaw-stack mdl-data-table mdl-js-data-table admin-table"
@@ -56,7 +54,7 @@ class EditCategories extends Component {
             </tr>
             </thead>
             <tbody>
-            { this.props.categories.map((category, index) => {
+            { categories.map((category, index) => {
               return (
                   <tr key={category.id} className={(index % 2) ? "active-tr" : ""}>
                     <td className="mdl-data-table__cell--non-numeric">
@@ -66,7 +64,7 @@ class EditCategories extends Component {
                     <td className="mdl-data-table__cell--non-numeric admin-user-action">
                       <p className="td-thead-title">Дія</p>
                       <a data-modal="#modal" onClick={() => {
-                        this.handleClickShowModalWindow(category.id, category.name, index)
+                        this.handleClickShowModalWindow(category.id, category.name)
                       }}>
                         <i className="fa fa-pencil" aria-hidden="true"/>
                       </a>
@@ -88,7 +86,6 @@ class EditCategories extends Component {
                   <h4>Редагувати рубрику:</h4>
                   <form onSubmit={this.handleSubmitEdit.bind(this)}>
                     <input type="text" hidden="hidden" value='' id="category-id"/>
-                    <input type="text" hidden="hidden" value='' id="category-index"/>
                     <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                       <input className="mdl-textfield__input" type="text" id="category-edit" placeholder=""/>
                       <label className="mdl-textfield__label" htmlFor="sample3">Назва рубрики:</label>
@@ -111,7 +108,6 @@ class EditCategories extends Component {
         </div>
     )
   }
-
 }
 export default connect(
     state => ({

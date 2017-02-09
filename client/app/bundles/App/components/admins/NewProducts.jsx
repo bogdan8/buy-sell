@@ -1,20 +1,20 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-import {removeProduct} from '../../actions/products.js';
+import {NewProductBody} from './adminComponents';
+
+import {setAdminFilterOption} from '../../actions/adminFilterOption.js';
 
 import '../style/Product.sass';
 
 class NewProduct extends Component {
+  componentDidMount() {
+    componentHandler.upgradeDom();
+  };
 
-  handleClickRemoveProduct(index) {
-    if (confirm("Ви дійсно хочите видалити?")) {
-      this.props._removeProduct(index);
-      alert("Видалено!")
-    } else {
-      alert("Відмінено")
-    }
-  }
+  handleClickSelect(e) {
+    this.props._setAdminFilterOption(e.target.id, e.target.checked);
+  };
 
   render() {
     return (
@@ -23,71 +23,68 @@ class NewProduct extends Component {
               className="mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
             <div className="mdl-grid">
               <div className="mdl-cell mdl-cell--12-col">
-                <div className="body-header-title">
-                  <p>Нові Оголошення:</p>
+                <div className="mdl-cell mdl-cell--12-col body-header-title new-products">
+                  <div className="mdl-grid">
+                    <div className="mdl-cell--5-col-desktop mdl-cell mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                      <p>Нові Оголошення:</p>
+                    </div>
+                    <div
+                        className="mdl-cell--7-col-desktop mdl-cell mdl-cell--12-col-tablet mdl-cell--12-col-phone checkbox-block">
+                      <div>
+                        <p>Затверджені</p>
+                        <label className="mdl-switch mdl-js-switch mdl-js-ripple-effect " htmlFor="approved">
+                          <input type="checkbox" id="approved" className="mdl-switch__input"
+                                 onChange={this.handleClickSelect.bind(this)}/>
+                          <span className="mdl-switch__label"/>
+                        </label>
+                      </div>
+                      <div>
+                        <p>Відхилені</p>
+                        <label className="mdl-switch mdl-js-switch mdl-js-ripple-effect" htmlFor="deflected">
+                          <input type="checkbox" id="deflected" className="mdl-switch__input"
+                                 onChange={this.handleClickSelect.bind(this)}/>
+                          <span className="mdl-switch__label"/>
+                        </label>
+                      </div>
+                      <div>
+                        <p>Оплачені</p>
+                        <label className="mdl-switch mdl-js-switch mdl-js-ripple-effect" htmlFor="prepaid">
+                          <input type="checkbox" id="prepaid" className="mdl-switch__input"
+                                 onChange={this.handleClickSelect.bind(this)}/>
+                          <span className="mdl-switch__label"/>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="mdl-cell mdl-cell--12-col">
-                <table className="tablesaw tablesaw-stack mdl-data-table mdl-js-data-table admin-table"
+                <table className="tablesaw tablesaw-stack mdl-js-data-table admin-table"
                        data-tablesaw-mode="stack">
                   <thead className="table-thead">
                   <tr>
                     <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="1" width="15%">Фото</th>
-                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2" width="55%">Оголошення</th>
+                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2" width="50%">Оголошення</th>
                     <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="3" width="15%">Контакти</th>
                     <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4" width="5%">Ціна</th>
-                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="5" width="10%">Дії</th>
+                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="5" width="15%">Дії</th>
                   </tr>
                   </thead>
-                  <tbody>
-                  { this.props.products.map((product, index) =>
-                      <tr key={product.id} className={(index % 2) ? "active-tr" : ""}>
-                        <td className="mdl-data-table__cell--non-numeric td-block-height-auto">
-                          <p className="td-thead-title">Фото</p>
-                          <div className="product-image">
-                            <img src={product.photo}/>
-                          </div>
-                        </td>
-                        <td className="mdl-data-table__cell--non-numeric table-right-columns td-block-height-auto">
-                          <p className="td-thead-title">Оголошення</p>
-                          <p>{product.description}</p>
-                        </td>
-                        <td className="mdl-data-table__cell--non-numeric">
-                          <p className="td-thead-title">Контакти</p>
-                          <p>{product.contact}</p>
-                        </td>
-                        <td className="mdl-data-table__cell--non-numeric">
-                          <p className="td-thead-title">Ціна</p>
-                          <p>{product.price}</p>
-                        </td>
-                        <td className="mdl-data-table__cell--non-numeric admin-user-action">
-                          <p className="td-thead-title">Дія</p>
-                          <a href=""><i className="fa fa-thumbs-o-up" aria-hidden="true"/></a>
-                          <a href=""><i className="fa fa-thumbs-o-down" aria-hidden="true"/></a>
-                          <a onClick={() => {
-                            this.handleClickRemoveProduct(index)
-                          }}>
-                            <i className="fa fa-trash" aria-hidden="true"/>
-                          </a>
-                        </td>
-                      </tr>
-                  )}
-                  </tbody>
+                  <NewProductBody/>
                 </table>
               </div>
             </div>
           </div>
         </div>
-    );
+    )
   }
 }
+
 export default connect(
-    state => ({
-      products: state.products,
-    }),
+    state => ({}),
     dispatch => ({
-      _removeProduct: (indexProduct) => {
-        dispatch(removeProduct(indexProduct))
+      _setAdminFilterOption: (name, isChecked) => {
+        dispatch(setAdminFilterOption(name, isChecked))
       }
     })
 )(NewProduct)
