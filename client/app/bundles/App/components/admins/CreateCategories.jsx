@@ -1,6 +1,7 @@
 import React, {Component}from 'react';
 import {connect} from 'react-redux';
-import { v4 } from 'node-uuid';
+import {v4} from 'node-uuid';
+import {Cell, Button, Textfield} from 'react-mdl';
 
 import {addCategory} from '../../actions/categories.js';
 
@@ -28,28 +29,34 @@ class CreateCategories extends Component {
 
   render() {
     return (
-        <div className="mdl-cell mdl-cell--12-col flex-center">
-          <div className="mdl-cell mdl-cell--12-col flex-center">
-            <button data-modal="#modal" onClick={this.handleClickShowModalWindow}
-                    className="modal__trigger mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+        <Cell col={12} className="flex-center">
+          <Cell col={12} className="flex-center">
+            <Button raised ripple
+                    data-modal="#modal"
+                    onClick={this.handleClickShowModalWindow}
+            >
               <i className="fa fa-plus-circle" aria-hidden="true"/> Додати Рубрику
-            </button>
-          </div>
+            </Button>
+          </Cell>
           <div id="modal-category" className="modal-block">
             <div className="modal modal__bg" role="dialog" aria-hidden="true">
               <div className="modal__dialog">
                 <div className="modal__content">
                   <h4>Додати нову рубрику:</h4>
                   <form onSubmit={this.handleSubmit.bind(this)}>
-                    <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                      <input className="mdl-textfield__input" type="text" id="category"/>
-                      <label className="mdl-textfield__label" htmlFor="sample3">Назва нової рубрики:</label>
-                    </div>
+                    <Textfield
+                        type="text"
+                        name="category"
+                        label="Назва нової рубрики:"
+                        floatingLabel
+                        id="category"
+                    />
                     <div className="flex-center">
-                      <button type="submit"
-                              className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                      <Button raised ripple
+                              type="submit"
+                      >
                         <i className="fa fa-plus-circle" aria-hidden="true"/> Додати
-                      </button>
+                      </Button>
                     </div>
                   </form>
                   <span className="modal__close modal-button-close" onClick={this.handleClickHideModalWindow}>
@@ -59,7 +66,7 @@ class CreateCategories extends Component {
               </div>
             </div>
           </div>
-        </div>
+        </Cell>
     )
   }
 }

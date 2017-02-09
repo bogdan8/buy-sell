@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
+import {Grid, Cell, Button, Textfield} from 'react-mdl';
 
 import './style/Auth.sass';
 
@@ -10,83 +11,86 @@ export default class Register extends React.Component {
 
   render() {
     return (
-        <div className="mdl-grid">
-          <div
-              className="mdl-cell mdl-cell--6-col-desktop mdl-cell--3-offset-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+        <Grid>
+          <Cell col={6} offsetDesktop={3} tablet={12} phone={12}>
             <div className="body-auth">
-              <div className="mdl-grid">
-                <div className="mdl-cell mdl-cell--12-col">
+              <Grid>
+                <Cell col={12}>
                   <div className="auth-link">
                     <Link to="/sign_in">Ввійти</Link>
                     <p>|</p>
                     <p>Зареєструватись</p>
                   </div>
-                </div>
-              </div>
+                </Cell>
+              </Grid>
               <form action="#" className="auth-block-grid">
-                <div className="mdl-grid">
-                  <div
-                      className="mdl-cell mdl-cell--5-col-desktop mdl-cell--1-offset-desktop mdl-cell--4-col-tablet mdl-cell--6-col-phone">
+                <Grid>
+                  <Cell col={5} offsetDesktop={1} tablet={4} phone={6}>
                     <div className="form-image">
                       <label className="fileContainer">
                         <i className="fa fa-download" aria-hidden="true"/>
                         <input type="file"/>
                       </label>
                     </div>
-                  </div>
-                  <div className="mdl-cell mdl-cell--6-col-desktop mdl-cell--4-col-tablet mdl-cell--6-col-phone">
-                    <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                      <input className="mdl-textfield__input form-input" type="text" id="sample3"/>
-                      <label className="mdl-textfield__label form-label" htmlFor="sample3">
-                        Ім'я в системі</label>
-                    </div>
-
-                    <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                      <input className="mdl-textfield__input form-input" required="required" type="text"
-                             id="sample3"/>
-                      <label className="mdl-textfield__label form-label" htmlFor="sample3">
-                        Електронна адреса</label>
-                    </div>
-
-                    <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                      <input className="mdl-textfield__input form-input" required="required" type="text"
-                             id="sample3"/>
-                      <label className="mdl-textfield__label form-label" htmlFor="sample3">
-                        Пароль</label>
-                    </div>
-                    <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                      <input className="mdl-textfield__input form-input" required="required" type="text"
-                             id="sample3"/>
-                      <label className="mdl-textfield__label form-label" htmlFor="sample3">
-                        Повторіть пароль</label>
-                    </div>
-                    <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                      <input className="mdl-textfield__input form-input" required="required" type="text"
-                             id="sample3"/>
-                      <label className="mdl-textfield__label form-label" htmlFor="sample3">
-                        Номер телефону</label>
-                    </div>
-
-                    <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                      <textarea className="mdl-textfield__input form-input" type="text" rows={5} id="sample5"
-                                defaultValue={""}/>
-                      <label className="mdl-textfield__label form-label" htmlFor="sample3">
-                        Адреса</label>
-                    </div>
-                  </div>
-                </div>
-                <div className="mdl-grid">
-                  <div className="mdl-cell mdl-cell--12-col flex-center">
-                    <button type="submit"
-                            className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                  </Cell>
+                  <Cell col={6} tablet={4} phone={6} className="form-with-border">
+                    <Textfield
+                        type="text"
+                        name="name"
+                        label="Ім'я в системі"
+                        floatingLabel
+                        id="name"
+                    />
+                    <Textfield
+                        type="email"
+                        name="email"
+                        label="Електронна адреса"
+                        floatingLabel
+                        id="email"
+                    />
+                    <Textfield
+                        type="password"
+                        name="password"
+                        label="Пароль"
+                        floatingLabel
+                        id="password"
+                    />
+                    <Textfield
+                        type="password"
+                        name="repeat_password"
+                        label="Повторіть пароль"
+                        floatingLabel
+                        id="repeat_password"
+                    />
+                    <Textfield
+                        type="number"
+                        name="phone"
+                        label="Номер Телефону"
+                        floatingLabel
+                        id="phone"
+                    />
+                    <Textfield
+                        name="address"
+                        label="Адреса"
+                        floatingLabel
+                        id="address"
+                        rows={5}
+                    />
+                  </Cell>
+                </Grid>
+                <Grid>
+                  <Cell col={12} className="flex-center">
+                    <Button raised ripple
+                            type="submit"
+                    >
                       Зареєструватись
-                    </button>
-                  </div>
-                </div>
+                    </Button>
+                  </Cell>
+                </Grid>
               </form>
             </div>
-          </div>
-        </div>
-    );
+          </Cell>
+        </Grid>
+    )
   }
 }

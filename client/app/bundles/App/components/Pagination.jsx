@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
+import {Cell} from 'react-mdl';
 
 export default class Pagination extends Component {
   render() {
     return (
-        <div className="mdl-cell mdl-cell--12-col flex-center">
+        <Cell col={12} className="flex-center">
           <ul className="pagination flex-center">
             <li className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
               <a href="#">Перша</a>
@@ -36,7 +37,7 @@ export default class Pagination extends Component {
               <a href="#">Остання</a>
             </li>
           </ul>
-        </div>
+        </Cell>
     )
   }
 }

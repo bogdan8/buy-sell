@@ -1,5 +1,6 @@
 import React, {Component}from 'react';
 import {connect} from 'react-redux';
+import {Grid, Cell} from 'react-mdl';
 
 import {Pagination, ProductBody, CreateProduct} from './common'
 import {currentCategory} from '../actions/categories.js';
@@ -22,11 +23,10 @@ class Products extends Component {
   render() {
     const {currentCategory, categories, products, filterProducts} = this.props;
     return (
-        <div className="mdl-grid">
-          <div
-              className="mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
-            <div className="mdl-grid">
-              <div className="mdl-cell mdl-cell--12-col">
+        <Grid>
+          <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
+            <Grid>
+              <Cell col={12}>
                 <div className="body-header-title flex-center">
                   <div
                       className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth select-input">
@@ -44,15 +44,15 @@ class Products extends Component {
                     </ul>
                   </div>
                 </div>
-              </div>
+              </Cell>
               <ProductBody
                   products={currentCategory === 'Всі' ? products : filterProducts}
               />
               <Pagination />
               <CreateProduct />
-            </div>
-          </div>
-        </div>
+            </Grid>
+          </Cell>
+        </Grid>
     )
   }
 }

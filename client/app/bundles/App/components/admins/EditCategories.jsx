@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Cell, Button, Textfield} from 'react-mdl';
+
 import {editCategory, removeCategory} from '../../actions/categories.js';
 
 class EditCategories extends Component {
@@ -43,7 +45,7 @@ class EditCategories extends Component {
   render() {
     const {categories} = this.props;
     return (
-        <div className="mdl-cell mdl-cell--12-col">
+        <Cell col={12}>
           <table className="tablesaw tablesaw-stack mdl-data-table mdl-js-data-table admin-table"
                  data-tablesaw-mode="stack">
             <thead className="table-thead">
@@ -86,15 +88,19 @@ class EditCategories extends Component {
                   <h4>Редагувати рубрику:</h4>
                   <form onSubmit={this.handleSubmitEdit.bind(this)}>
                     <input type="text" hidden="hidden" value='' id="category-id"/>
-                    <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                      <input className="mdl-textfield__input" type="text" id="category-edit" placeholder=""/>
-                      <label className="mdl-textfield__label" htmlFor="sample3">Назва рубрики:</label>
-                    </div>
+                    <Textfield
+                        type="text"
+                        name="category-edit"
+                        label="Назва рубрики:"
+                        floatingLabel
+                        id="category-edit"
+                    />
                     <div className="flex-center">
-                      <button type="submit"
-                              className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                      <Button raised ripple
+                              type="submit"
+                      >
                         <i className="fa fa-plus-pencil" aria-hidden="true"/> Редагувати
-                      </button>
+                      </Button>
                     </div>
                   </form>
                   <span className="modal__close modal-button-close"
@@ -105,7 +111,7 @@ class EditCategories extends Component {
               </div>
             </div>
           </div>
-        </div>
+        </Cell>
     )
   }
 }

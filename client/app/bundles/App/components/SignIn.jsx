@@ -2,10 +2,12 @@ import React from 'react';
 import {Link} from 'react-router';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import {Grid, Cell, Button, Textfield} from 'react-mdl';
+
 import * as sessionActions from '../actions/sessionActions';
 
 class SignIn extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {credentials: {email: '', password: ''}}
     this.onChange = this.onChange.bind(this);
@@ -30,45 +32,53 @@ class SignIn extends React.Component {
 
   render() {
     return (
-        <div className="mdl-grid">
-          <div
-              className="mdl-cell mdl-cell--6-col-desktop mdl-cell--3-offset-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+        <Grid>
+          <Cell col={6} offsetDesktop={3} tablet={12} phone={12}>
             <div className="body-auth">
-              <div className="mdl-grid">
-                <div className="mdl-cell mdl-cell--12-col">
+              <Grid>
+                <Cell col={12}>
                   <div className="auth-link">
                     <p>Ввійти</p>
                     <p>|</p>
                     <Link to="/register">Зареєструватись</Link>
                   </div>
-                </div>
-              </div>
-              <div className="mdl-grid auth-block-grid">
-                <div className="mdl-cell mdl-cell--12-col">
-                  <form action="#" className="form-sign-in">
-                    <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                      <input className="mdl-textfield__input form-input" required="required" type="text" name="email"
-                             id="email" value={this.state.credentials.email} onChange={this.onChange} />
-                      <label className="mdl-textfield__label form-label" htmlFor="email">Електрона
-                        Почта</label>
-                    </div>
-                    <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                      <input className="mdl-textfield__input form-input" required="required" type="password" name="password"
-                             id="password" value={this.state.credentials.password} onChange={this.onChange} />
-                      <label className="mdl-textfield__label form-label" htmlFor="password">Пароль</label>
-                    </div>
+                </Cell>
+              </Grid>
+              <Grid className="auth-block-grid">
+                <Cell col={12}>
+                  <form action="#" className="form-sign-in form-with-border">
+                    <Textfield
+                        type="email"
+                        name="email"
+                        label="Електрона Почта"
+                        floatingLabel
+                        id="email"
+                        value={this.state.credentials.email}
+                        onChange={this.onChange}
+                    />
+                    <Textfield
+                        type="password"
+                        name="password"
+                        label="Пароль"
+                        floatingLabel
+                        id="password"
+                        value={this.state.credentials.password}
+                        onChange={this.onChange}
+                    />
                     <div className="flex-center">
-                      <button type="submit" //was button
-                              className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onClick={this.onSave}>
+                      <Button raised ripple
+                              type="submit"
+                              onClick={this.onSave}
+                      >
                         Ввійти
-                      </button>
+                      </Button>
                     </div>
                   </form>
-                </div>
-              </div>
+                </Cell>
+              </Grid>
             </div>
-          </div>
-        </div>
+          </Cell>
+        </Grid>
     )
   }
 }

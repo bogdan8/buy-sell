@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Grid, Cell} from 'react-mdl';
 
 import {removeUser, changeRole} from '../../actions/users.js';
 import {Pagination} from '../common';
@@ -31,16 +32,15 @@ class User extends Component {
   render() {
     const {users} = this.props;
     return (
-        <div className="mdl-grid">
-          <div
-              className="mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
-            <div className="mdl-grid">
-              <div className="mdl-cell mdl-cell--12-col">
+        <Grid>
+          <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
+            <Grid>
+              <Cell col={12}>
                 <div className="body-header-title">
                   <p>Таблиця користувачів:</p>
                 </div>
-              </div>
-              <div className="mdl-cell mdl-cell--12-col">
+              </Cell>
+              <Cell col={12}>
                 <table className="tablesaw tablesaw-stack mdl-data-table mdl-js-data-table admin-table"
                        data-tablesaw-mode="stack">
                   <thead className="table-thead">
@@ -88,11 +88,11 @@ class User extends Component {
                   )}
                   </tbody>
                 </table>
-              </div>
+              </Cell>
               <Pagination/>
-            </div>
-          </div>
-        </div>
+            </Grid>
+          </Cell>
+        </Grid>
     );
   }
 }
