@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
-import {Grid, Cell, Button} from 'react-mdl';
+import {Grid, Cell, Button, Textfield} from 'react-mdl';
 
 import './style/Auth.sass';
 
@@ -33,45 +33,49 @@ export default class Register extends React.Component {
                       </label>
                     </div>
                   </Cell>
-                  <Cell col={6} tablet={4} phone={6}>
-                    <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                      <input className="mdl-textfield__input form-input" type="text" id="sample3"/>
-                      <label className="mdl-textfield__label form-label" htmlFor="sample3">
-                        Ім'я в системі</label>
-                    </div>
-
-                    <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                      <input className="mdl-textfield__input form-input" required="required" type="text"
-                             id="sample3"/>
-                      <label className="mdl-textfield__label form-label" htmlFor="sample3">
-                        Електронна адреса</label>
-                    </div>
-
-                    <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                      <input className="mdl-textfield__input form-input" required="required" type="text"
-                             id="sample3"/>
-                      <label className="mdl-textfield__label form-label" htmlFor="sample3">
-                        Пароль</label>
-                    </div>
-                    <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                      <input className="mdl-textfield__input form-input" required="required" type="text"
-                             id="sample3"/>
-                      <label className="mdl-textfield__label form-label" htmlFor="sample3">
-                        Повторіть пароль</label>
-                    </div>
-                    <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                      <input className="mdl-textfield__input form-input" required="required" type="text"
-                             id="sample3"/>
-                      <label className="mdl-textfield__label form-label" htmlFor="sample3">
-                        Номер телефону</label>
-                    </div>
-
-                    <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                      <textarea className="mdl-textfield__input form-input" type="text" rows={5} id="sample5"
-                                defaultValue={""}/>
-                      <label className="mdl-textfield__label form-label" htmlFor="sample3">
-                        Адреса</label>
-                    </div>
+                  <Cell col={6} tablet={4} phone={6} className="form-with-border">
+                    <Textfield
+                        type="text"
+                        name="name"
+                        label="Ім'я в системі"
+                        floatingLabel
+                        id="name"
+                    />
+                    <Textfield
+                        type="email"
+                        name="email"
+                        label="Електронна адреса"
+                        floatingLabel
+                        id="email"
+                    />
+                    <Textfield
+                        type="password"
+                        name="password"
+                        label="Пароль"
+                        floatingLabel
+                        id="password"
+                    />
+                    <Textfield
+                        type="password"
+                        name="repeat_password"
+                        label="Повторіть пароль"
+                        floatingLabel
+                        id="repeat_password"
+                    />
+                    <Textfield
+                        type="number"
+                        name="phone"
+                        label="Номер Телефону"
+                        floatingLabel
+                        id="phone"
+                    />
+                    <Textfield
+                        name="address"
+                        label="Адреса"
+                        floatingLabel
+                        id="address"
+                        rows={5}
+                    />
                   </Cell>
                 </Grid>
                 <Grid>

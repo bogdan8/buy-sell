@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {Grid, Cell, Button} from 'react-mdl';
+import {Grid, Cell, Button, Textfield} from 'react-mdl';
 
 import * as sessionActions from '../actions/sessionActions';
 
@@ -46,19 +46,25 @@ class SignIn extends React.Component {
               </Grid>
               <Grid className="auth-block-grid">
                 <Cell col={12}>
-                  <form action="#" className="form-sign-in">
-                    <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                      <input className="mdl-textfield__input form-input" required="required" type="text" name="email"
-                             id="email" value={this.state.credentials.email} onChange={this.onChange}/>
-                      <label className="mdl-textfield__label form-label" htmlFor="email">Електрона
-                        Почта</label>
-                    </div>
-                    <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                      <input className="mdl-textfield__input form-input" required="required" type="password"
-                             name="password"
-                             id="password" value={this.state.credentials.password} onChange={this.onChange}/>
-                      <label className="mdl-textfield__label form-label" htmlFor="password">Пароль</label>
-                    </div>
+                  <form action="#" className="form-sign-in form-with-border">
+                    <Textfield
+                        type="email"
+                        name="email"
+                        label="Електрона Почта"
+                        floatingLabel
+                        id="email"
+                        value={this.state.credentials.email}
+                        onChange={this.onChange}
+                    />
+                    <Textfield
+                        type="password"
+                        name="password"
+                        label="Пароль"
+                        floatingLabel
+                        id="password"
+                        value={this.state.credentials.password}
+                        onChange={this.onChange}
+                    />
                     <div className="flex-center">
                       <Button raised ripple
                               type="submit"

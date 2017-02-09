@@ -1,7 +1,7 @@
 import React, {Component}from 'react';
 import {connect} from 'react-redux';
 import {v4} from 'node-uuid';
-import {Grid, Cell, Button} from 'react-mdl';
+import {Grid, Cell, Button, Textfield} from 'react-mdl';
 
 import {addProduct} from '../actions/products.js';
 
@@ -56,7 +56,7 @@ class CreateProduct extends Component {
               <div className="modal__dialog">
                 <div className="modal__content">
                   <h4>Створити нове оголошення:</h4>
-                  <form onSubmit={this.handleSubmit.bind(this)} className="auth-block-grid">
+                  <form onSubmit={this.handleSubmit.bind(this)} className="auth-block-grid form-with-border">
                     <Grid>
                       <Cell col={5} offsetDesktop={1} tablet={4} phone={6}>
                         <div className="form-image">
@@ -82,17 +82,20 @@ class CreateProduct extends Component {
                             )}
                           </ul>
                         </div>
-                        <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <textarea className="mdl-textfield__input form-input" name="[product]" type="text"
-                                          rows={5} id="description" defaultValue={""}/>
-                          <label className="mdl-textfield__label form-label" htmlFor="sample3">Текст
-                            оголошення</label>
-                        </div>
-                        <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                          <input className="mdl-textfield__input form-input" required="required" name="[number]"
-                                 type="number" id="price"/>
-                          <label className="mdl-textfield__label form-label" htmlFor="sample3">Вартість</label>
-                        </div>
+                        <Textfield
+                            name="description"
+                            label="Текст оголошення"
+                            floatingLabel
+                            id="description"
+                            rows={5}
+                        />
+                        <Textfield
+                            type="number"
+                            name="price"
+                            label="Вартість"
+                            floatingLabel
+                            id="price"
+                        />
                       </Cell>
                     </Grid>
                     <Grid>
