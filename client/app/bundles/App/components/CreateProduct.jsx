@@ -1,7 +1,7 @@
 import React, {Component}from 'react';
 import {connect} from 'react-redux';
 import {v4} from 'node-uuid';
-import {Grid, Cell} from 'react-mdl';
+import {Grid, Cell, Button} from 'react-mdl';
 
 import {addProduct} from '../actions/products.js';
 
@@ -44,10 +44,13 @@ class CreateProduct extends Component {
     const {categories} = this.props;
     return (
         <Cell col={12} className="flex-center">
-          <button id="add-product" data-modal="#modal" onClick={this.handleClickShowModalWindow}
-                  className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+          <Button raised ripple
+                  id="add-product"
+                  data-modal="#modal"
+                  onClick={this.handleClickShowModalWindow}
+          >
             <i className="fa fa-plus-circle" aria-hidden="true"/> Додати Власне оголошення
-          </button>
+          </Button>
           <div id="modal-product" className="modal-block">
             <div className="modal modal__bg" role="dialog" aria-hidden="true">
               <div className="modal__dialog">
@@ -94,16 +97,17 @@ class CreateProduct extends Component {
                     </Grid>
                     <Grid>
                       <Cell col={12} className="flex-center">
-                        <button type="submit"
-                                className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                        <Button raised ripple
+                                type="submit"
+                        >
                           <i className="fa fa-paper-plane-o" aria-hidden="true"/> Надіслати на підтвердження
-                        </button>
+                        </Button>
                       </Cell>
                     </Grid>
                   </form>
-                  <span className="modal__close modal-button-close" onClick={this.handleClickHideModalWindow}>
-                          <i className="fa fa-times" aria-hidden="true"/>
-                        </span>
+                <span className="modal__close modal-button-close" onClick={this.handleClickHideModalWindow}>
+                        <i className="fa fa-times" aria-hidden="true"/>
+                      </span>
                 </div>
               </div>
             </div>

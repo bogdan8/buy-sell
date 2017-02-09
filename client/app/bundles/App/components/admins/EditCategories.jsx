@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Cell} from 'react-mdl';
+import {Cell, Button} from 'react-mdl';
 
 import {editCategory, removeCategory} from '../../actions/categories.js';
 
@@ -93,10 +93,11 @@ class EditCategories extends Component {
                       <label className="mdl-textfield__label" htmlFor="sample3">Назва рубрики:</label>
                     </div>
                     <div className="flex-center">
-                      <button type="submit"
-                              className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                      <Button raised ripple
+                              type="submit"
+                      >
                         <i className="fa fa-plus-pencil" aria-hidden="true"/> Редагувати
-                      </button>
+                      </Button>
                     </div>
                   </form>
                   <span className="modal__close modal-button-close"

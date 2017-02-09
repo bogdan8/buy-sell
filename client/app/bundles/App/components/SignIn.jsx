@@ -2,9 +2,9 @@ import React from 'react';
 import {Link} from 'react-router';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import * as sessionActions from '../actions/sessionActions';
+import {Grid, Cell, Button} from 'react-mdl';
 
-import {Grid, Cell} from 'react-mdl';
+import * as sessionActions from '../actions/sessionActions';
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -60,11 +60,12 @@ class SignIn extends React.Component {
                       <label className="mdl-textfield__label form-label" htmlFor="password">Пароль</label>
                     </div>
                     <div className="flex-center">
-                      <button type="submit" //was button
-                              className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                              onClick={this.onSave}>
+                      <Button raised ripple
+                              type="submit"
+                              onClick={this.onSave}
+                      >
                         Ввійти
-                      </button>
+                      </Button>
                     </div>
                   </form>
                 </Cell>

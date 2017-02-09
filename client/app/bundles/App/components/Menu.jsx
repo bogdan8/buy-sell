@@ -1,6 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
+import {FABButton} from 'react-mdl';
+
 import {AdminMenu, UserMenu} from './common';
 
 import Register from './Register';
@@ -16,9 +18,11 @@ function Menu(props) {
           </div>
         </div>
         <div className="header-nav">
-          <button id="demo-menu-lower-right" className="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+          <FABButton ripple
+                     id="demo-menu-lower-right"
+          >
             <i className="fa fa-user" aria-hidden="true"/>
-          </button>
+          </FABButton>
           {props.user.role === 'admin' ? <AdminMenu /> : <UserMenu />}
         </div>
       </div>

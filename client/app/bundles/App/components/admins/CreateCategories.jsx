@@ -1,7 +1,7 @@
 import React, {Component}from 'react';
 import {connect} from 'react-redux';
 import {v4} from 'node-uuid';
-import {Cell} from 'react-mdl';
+import {Cell, Button} from 'react-mdl';
 
 import {addCategory} from '../../actions/categories.js';
 
@@ -31,10 +31,12 @@ class CreateCategories extends Component {
     return (
         <Cell col={12} className="flex-center">
           <Cell col={12} className="flex-center">
-            <button data-modal="#modal" onClick={this.handleClickShowModalWindow}
-                    className="modal__trigger mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+            <Button raised ripple
+                    data-modal="#modal"
+                    onClick={this.handleClickShowModalWindow}
+            >
               <i className="fa fa-plus-circle" aria-hidden="true"/> Додати Рубрику
-            </button>
+            </Button>
           </Cell>
           <div id="modal-category" className="modal-block">
             <div className="modal modal__bg" role="dialog" aria-hidden="true">
@@ -47,10 +49,11 @@ class CreateCategories extends Component {
                       <label className="mdl-textfield__label" htmlFor="sample3">Назва нової рубрики:</label>
                     </div>
                     <div className="flex-center">
-                      <button type="submit"
-                              className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                      <Button raised ripple
+                              type="submit"
+                      >
                         <i className="fa fa-plus-circle" aria-hidden="true"/> Додати
-                      </button>
+                      </Button>
                     </div>
                   </form>
                   <span className="modal__close modal-button-close" onClick={this.handleClickHideModalWindow}>

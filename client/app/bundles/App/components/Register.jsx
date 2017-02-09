@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
-import {Grid, Cell} from 'react-mdl';
+import {Grid, Cell, Button} from 'react-mdl';
 
 import './style/Auth.sass';
 
@@ -76,10 +76,11 @@ export default class Register extends React.Component {
                 </Grid>
                 <Grid>
                   <Cell col={12} className="flex-center">
-                    <button type="submit"
-                            className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                    <Button raised ripple
+                            type="submit"
+                    >
                       Зареєструватись
-                    </button>
+                    </Button>
                   </Cell>
                 </Grid>
               </form>
