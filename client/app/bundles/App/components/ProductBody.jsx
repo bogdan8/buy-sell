@@ -1,81 +1,112 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Cell} from 'react-mdl';
+import {Cell, DataTable, TableHeader} from 'react-mdl';
 
 import './style/Product.sass';
 
 class ProductBody extends Component {
   render() {
     const {products, prepaidProducts}= this.props;
+    const mappedProducts = products.map((product, index) => {
+      if (prepaidProducts.includes(product.id)) {
+        var active = 'active-prepaid';
+      } else {
+        var active = ((index % 2) ? "active-tr hover-tr" : "hover-tr");
+      }
+      let photoBlock = (product) => {
+        return (
+            <div className="td-block-height-auto">
+              <p className="td-thead-title">Фото</p>
+              <div className="product-image">
+                <img src={product.photo}/>
+              </div>
+            </div>
+        )
+      };
+      let descriptionBlock = (product) => {
+        return (
+            <div className="td-block-height-auto">
+              <p className="td-thead-title">Оголошення</p>
+              <p>{product.description}</p>
+            </div>
+        )
+      };
+      let contactBlock = (product) => {
+        return (
+            <div>
+              <p className="td-thead-title">Контакти</p>
+              <p>{product.contact}</p>
+            </div>
+        )
+      };
+      let priceBlock = (product) => {
+        return (
+            <div>
+              <p className="td-thead-title">Ціна</p>
+              <p>{product.price}</p>
+            </div>
+        )
+      };
+      return {
+        photo: photoBlock(product),
+        description: descriptionBlock(product),
+        contact: contactBlock(product),
+        price: priceBlock(product),
+        className: active,
+      }
+    });
     return (
         <Cell col={12}>
-          <table className="tablesaw tablesaw-stack mdl-js-data-table admin-table"
-                 data-tablesaw-mode="stack">
-            <thead className="table-thead">
-            <tr>
-              <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="1" width="15%">Фото</th>
-              <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2" width="60%">Оголошення</th>
-              <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="3" width="15%">Контакти</th>
-              <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4" width="10%">Ціна</th>
-            </tr>
-            </thead>
-            <tbody>
-            { products.map((product) => {
-              if (prepaidProducts.includes(product.id)) {
-                return (
-                    <tr key={product.id}
-                        className={"active-prepaid"}>
-                      <td className="mdl-data-table__cell--non-numeric td-block-height-auto">
-                        <p className="td-thead-title">Фото</p>
-                        <div className="product-image">
-                          <img src={product.photo}/>
-                        </div>
-                      </td>
-                      <td className="mdl-data-table__cell--non-numeric td-block-height-auto">
-                        <p className="td-thead-title">Оголошення</p>
-                        <p>{product.description}</p>
-                      </td>
-                      <td className="mdl-data-table__cell--non-numeric">
-                        <p className="td-thead-title">Контакти</p>
-                        <p>{product.contact}</p>
-                      </td>
-                      <td className="mdl-data-table__cell--non-numeric">
-                        <p className="td-thead-title">Ціна</p>
-                        <p>{product.price}</p>
-                      </td>
-                    </tr>
-                )
-              }
-            })}
-            { products.map((product) => {
-              if (!prepaidProducts.includes(product.id)) {
-                return (
-                    <tr key={product.id}
-                        className={(product.id % 2) ? "active-tr hover-tr" : "hover-tr"}>
-                      <td className="mdl-data-table__cell--non-numeric td-block-height-auto">
-                        <p className="td-thead-title">Фото</p>
-                        <div className="product-image">
-                          <img src={product.photo}/>
-                        </div>
-                      </td>
-                      <td className="mdl-data-table__cell--non-numeric td-block-height-auto">
-                        <p className="td-thead-title">Оголошення</p>
-                        <p>{product.description}</p>
-                      </td>
-                      <td className="mdl-data-table__cell--non-numeric">
-                        <p className="td-thead-title">Контакти</p>
-                        <p>{product.contact}</p>
-                      </td>
-                      <td className="mdl-data-table__cell--non-numeric">
-                        <p className="td-thead-title">Ціна</p>
-                        <p>{product.price}</p>
-                      </td>
-                    </tr>
-                )
-              }
-            })}
-            </tbody>
-          </table>
+          <DataTable
+              className="tablesaw tablesaw-stack mdl-js-data-table admin-table"
+              data-tablesaw-mode="stack"
+              rows={mappedProducts}
+          >
+            <TableHeader
+                name="photo"
+                tooltip="Фото"
+                scope="col"
+                data-tablesaw-priority="1"
+                data-tablesaw-sortable-col
+                width="15%"
+                className="table-thead"
+            >
+              Фото
+            </TableHeader>
+            <TableHeader
+                name="description"
+                tooltip="Оголошення"
+                scope="col"
+                data-tablesaw-priority="2"
+                data-tablesaw-sortable-col
+                width="60%"
+                className="table-thead"
+            >
+              Оголошення
+            </TableHeader>
+            <TableHeader
+                name="contact"
+                tooltip="Контакти"
+                scope="col"
+                data-tablesaw-priority="3"
+                data-tablesaw-sortable-col
+                width="15%"
+                className="table-thead"
+            >
+              Контакти
+            </TableHeader>
+            <TableHeader
+                name="price"
+                tooltip="Ціна"
+                scope="col"
+                data-tablesaw-priority="4"
+                data-tablesaw-sortable-col
+                width="10%"
+                className="table-thead"
+            >
+              Ціна
+            </TableHeader>
+          </DataTable>
         </Cell>
     )
   }

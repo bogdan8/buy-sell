@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Grid, Cell} from 'react-mdl';
+import {Grid, Cell, DataTable, TableHeader} from 'react-mdl';
 
 import {removeUser, changeRole} from '../../actions/users.js';
 import {Pagination} from '../common';
@@ -31,6 +31,54 @@ class User extends Component {
 
   render() {
     const {users} = this.props;
+    const userAction = (user, index) => {
+      return (
+          <div>
+            <a onClick={() => {
+              this.handleClickChangeRole(user.id, 'admin')
+            }}>
+              <i className={ user.role === 'admin' ? "fa fa-user-secret active-i" : "fa fa-user-secret"}
+                 aria-hidden="true"/>
+            </a>
+            <a onClick={() => {
+              this.handleClickChangeRole(user.id, 'user')
+            }}>
+              <i className={ user.role === 'user' ? "fa fa-user active-i" : "fa fa-user"}
+                 aria-hidden="true"/>
+            </a>
+            <a onClick={() => {
+              this.handleClickRemoveUser(index)
+            }}>
+              <i className="fa fa-trash" aria-hidden="true"/>
+            </a>
+          </div>
+      )
+    };
+    const mappedUsers = users.map((user, index) => {
+      let active = ((index % 2) ? "active-tr" : "");
+      let emailBlock = (user) => {
+        return (
+            <div>
+              <p className="td-thead-title">Електронна Адреса</p>
+              <p>{user.email}</p>
+            </div>
+        )
+      };
+      let contactBlock = (user) => {
+        return (
+            <div>
+              <p className="td-thead-title">Контактні дані</p>
+              <p>{user.contacts}</p>
+            </div>
+        )
+      };
+      return {
+        email: emailBlock(user),
+        contact: contactBlock(user),
+        action: userAction(user, index),
+        className: active,
+      }
+    });
     return (
         <Grid>
           <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
@@ -41,53 +89,45 @@ class User extends Component {
                 </div>
               </Cell>
               <Cell col={12}>
-                <table className="tablesaw tablesaw-stack mdl-data-table mdl-js-data-table admin-table"
-                       data-tablesaw-mode="stack">
-                  <thead className="table-thead">
-                  <tr>
-                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority={1} width="45%">Електронна
-                      Адреса
-                    </th>
-                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority={2} width="40%">Контактні дані
-                    </th>
-                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority={3} width="200px">Дії</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  { users.map((user, index) =>
-                      <tr key={user.id} className={(index % 2) ? "active-tr" : ""}>
-                        <td className="mdl-data-table__cell--non-numeric table-right-columns">
-                          <p className="td-thead-title">Електронна Адреса</p>
-                          <p>{user.email}</p>
-                        </td>
-                        <td className="mdl-data-table__cell--non-numeric table-right-columns">
-                          <p className="td-thead-title">Контактні дані</p>
-                          <p>{user.contacts}</p>
-                        </td>
-                        <td className="mdl-data-table__cell--non-numeric admin-user-action">
-                          <p className="td-thead-title">Дія</p>
-                          <a onClick={() => {
-                            this.handleClickChangeRole(user.id, 'admin')
-                          }}>
-                            <i className={ user.role === 'admin' ? "fa fa-user-secret active-i" : "fa fa-user-secret"}
-                               aria-hidden="true"/>
-                          </a>
-                          <a onClick={() => {
-                            this.handleClickChangeRole(user.id, 'user')
-                          }}>
-                            <i className={ user.role === 'user' ? "fa fa-user active-i" : "fa fa-user"}
-                               aria-hidden="true"/>
-                          </a>
-                          <a onClick={() => {
-                            this.handleClickRemoveUser(index)
-                          }}>
-                            <i className="fa fa-trash" aria-hidden="true"/>
-                          </a>
-                        </td>
-                      </tr>
-                  )}
-                  </tbody>
-                </table>
+                <DataTable
+                    className="tablesaw tablesaw-stack mdl-js-data-table admin-table"
+                    data-tablesaw-mode="stack"
+                    rows={mappedUsers}
+                >
+                  <TableHeader
+                      name="email"
+                      tooltip="Електронна Адреса"
+                      scope="col"
+                      data-tablesaw-priority="1"
+                      data-tablesaw-sortable-col
+                      width="45%"
+                      className="table-thead"
+                  >
+                    Електронна Адреса
+                  </TableHeader>
+                  <TableHeader
+                      name="contact"
+                      tooltip="Контактні дані"
+                      scope="col"
+                      data-tablesaw-priority="2"
+                      data-tablesaw-sortable-col
+                      width="40%"
+                      className="table-thead"
+                  >
+                    Контактні дані
+                  </TableHeader>
+                  <TableHeader
+                      name="action"
+                      tooltip="Дії"
+                      scope="col"
+                      data-tablesaw-priority="3"
+                      data-tablesaw-sortable-col
+                      width="200px"
+                      className="table-thead"
+                  >
+                    Дії
+                  </TableHeader>
+                </DataTable>
               </Cell>
               <Pagination/>
             </Grid>

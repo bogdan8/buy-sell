@@ -1,5 +1,8 @@
 .table-thead
   background-color: rgba(223, 224, 208, 0.5)
+  span
+    color: black
+    font-size: 14px
 
 .active-tr
   background-color: rgba(255, 212, 175, 0.59)
@@ -14,7 +17,7 @@
 .full-width
   width: 100%
 
-@media screen and (max-width: 560px)
+@media screen and (max-width: 640px)
   .tablesaw
     tbody
       tr
@@ -23,14 +26,17 @@
           justify-content: center
           align-items: center
           flex-direction: column
-        .admin-user-action
-          display: block
-          text-align: center
-          height: auto
-        .td-thead-title
-          display: block
-          font-size: 16px
-          color: grey
+          div
+            .td-thead-title
+              text-align: center
+              display: block
+              font-size: 16px
+              color: grey
+        td:last-child
+          div
+            display: block
+            text-align: center
+            height: auto
     .hover-tr
       &:hover
         background-color: rgba(218, 228, 255, 0.39)
@@ -38,10 +44,21 @@
 .tablesaw
   tbody
     tr
-      .admin-user-action
-        a
-          margin-left: 5px
-      .td-block-height-auto
+      td:last-child
+        div
+          font-size: 20px
+          white-space: nowrap
+          a
+            color: black
+            margin-left: 5px
+          span
+            text-align: center
+            width: 100%
+            a
+              padding:
+                left: 3px
+                right: 3px
+      td
         height: auto
 
       .product-image
@@ -56,6 +73,8 @@
 
 .active-prepaid
   background-color: rgba(255, 153, 130, 0.74)
+  &:hover
+    background-color: rgba(255, 153, 130, 0.74)
 
 .mdl-menu
   padding: 0

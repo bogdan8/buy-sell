@@ -58,19 +58,7 @@ class NewProduct extends Component {
                 </Cell>
               </Cell>
               <Cell col={12}>
-                <table className="tablesaw tablesaw-stack mdl-js-data-table admin-table"
-                       data-tablesaw-mode="stack">
-                  <thead className="table-thead">
-                  <tr>
-                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="1" width="15%">Фото</th>
-                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2" width="50%">Оголошення</th>
-                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="3" width="15%">Контакти</th>
-                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4" width="5%">Ціна</th>
-                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="5" width="15%">Дії</th>
-                  </tr>
-                  </thead>
-                  <NewProductBody/>
-                </table>
+                <NewProductBody/>
               </Cell>
             </Grid>
           </Cell>

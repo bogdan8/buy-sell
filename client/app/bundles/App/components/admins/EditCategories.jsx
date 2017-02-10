@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Cell, Button, Textfield} from 'react-mdl';
+import createFragment from 'react-addons-create-fragment';
+import {Cell, Button, Textfield, DataTable, TableHeader} from 'react-mdl';
 
 import {editCategory, removeCategory} from '../../actions/categories.js';
 
@@ -44,43 +45,69 @@ class EditCategories extends Component {
 
   render() {
     const {categories} = this.props;
+    const categoryAction = (category, index) => {
+      return (
+          <div>
+            <a data-modal="#modal" onClick={() => {
+              this.handleClickShowModalWindow(category.id, category.name)
+            }}>
+              <i className="fa fa-pencil" aria-hidden="true"/>
+            </a>
+            <a onClick={() => {
+              this.handleClickRemoveCategory(index)
+            }}>
+              <i className="fa fa-trash" aria-hidden="true"/>
+            </a>
+          </div>
+      )
+    };
+    const mappedCategories = categories.map((category, index) => {
+      let active = ((index % 2) ? "active-tr" : "");
+      let nameBlock = (category) => {
+        return (
+            <div>
+              <p className="td-thead-title">Назва</p>
+              <p>{category.name}</p>
+            </div>
+        )
+      };
+      return {
+        name: nameBlock(category),
+        action: categoryAction(category, index),
+        className: active,
+      }
+    });
     return (
         <Cell col={12}>
-          <table className="tablesaw tablesaw-stack mdl-data-table mdl-js-data-table admin-table"
-                 data-tablesaw-mode="stack">
-            <thead className="table-thead">
-            <tr>
-              <th scope="col" data-tablesaw-priority="1" data-tablesaw-sortable-col width="90%">Назва рубрики
-              </th>
-              <th scope="col" data-tablesaw-priority="2" data-tablesaw-sortable-col width="10%">Дії</th>
-            </tr>
-            </thead>
-            <tbody>
-            { categories.map((category, index) => {
-              return (
-                  <tr key={category.id} className={(index % 2) ? "active-tr" : ""}>
-                    <td className="mdl-data-table__cell--non-numeric">
-                      <p className="td-thead-title">Назва рубрики</p>
-                      <p>{category.name}</p>
-                    </td>
-                    <td className="mdl-data-table__cell--non-numeric admin-user-action">
-                      <p className="td-thead-title">Дія</p>
-                      <a data-modal="#modal" onClick={() => {
-                        this.handleClickShowModalWindow(category.id, category.name)
-                      }}>
-                        <i className="fa fa-pencil" aria-hidden="true"/>
-                      </a>
-                      <a onClick={() => {
-                        this.handleClickRemoveCategory(index)
-                      }}>
-                        <i className="fa fa-trash" aria-hidden="true"/>
-                      </a>
-                    </td>
-                  </tr>
-              )
-            })}
-            </tbody>
-          </table>
+          <DataTable
+              className="tablesaw tablesaw-stack mdl-js-data-table admin-table"
+              data-tablesaw-mode="stack"
+              rows={mappedCategories}
+          >
+            <TableHeader
+                name="name"
+                tooltip="Назва рубрики"
+                scope="col"
+                data-tablesaw-priority="1"
+                data-tablesaw-sortable-col
+                width="90%"
+                className="table-thead"
+            >
+              Назва
+            </TableHeader>
+            <TableHeader
+                name="action"
+                tooltip="Дії над рубрикою"
+                scope="col"
+                data-tablesaw-priority="2"
+                data-tablesaw-sortable-col
+                width="10%"
+                className="table-thead"
+            >
+              Дії
+            </TableHeader>
+          </DataTable>
+
           <div id="modal-category-edit" className="modal-block">
             <div className="modal modal__bg" role="dialog" aria-hidden="true">
               <div className="modal__dialog">
@@ -94,6 +121,7 @@ class EditCategories extends Component {
                         label="Назва рубрики:"
                         floatingLabel
                         id="category-edit"
+                        placeholder=" "
                     />
                     <div className="flex-center">
                       <Button raised ripple
