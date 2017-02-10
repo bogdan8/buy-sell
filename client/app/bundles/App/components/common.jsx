@@ -1,4 +1,5 @@
 export {default as User}from './admins/User'
+export {default as UserList}from './admins/UserList'
 export {default as Categories}from './admins/Categories'
 export {default as NewProducts}from './admins/NewProducts'
 export {default as CreateCategories}from './admins/CreateCategories'
