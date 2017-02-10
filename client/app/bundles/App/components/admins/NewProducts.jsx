@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Grid, Cell} from 'react-mdl';
+import {Grid, Cell, Switch} from 'react-mdl';
 
 import {NewProductList} from '../common';
 import getVisibleProducts from '../../selectors/getVisibleProducts';
@@ -143,28 +143,13 @@ class NewProduct extends Component {
                     </Cell>
                     <Cell col={7} tablet={12} phone={12} className="checkbox-block">
                       <div>
-                        <p>Затверджені</p>
-                        <label className="mdl-switch mdl-js-switch mdl-js-ripple-effect " htmlFor="approved">
-                          <input type="checkbox" id="approved" className="mdl-switch__input"
-                                 onChange={this.handleClickSelect.bind(this)}/>
-                          <span className="mdl-switch__label"/>
-                        </label>
+                        <Switch onChange={this.handleClickSelect.bind(this)} id="approved">Затверджені</Switch>
                       </div>
                       <div>
-                        <p>Відхилені</p>
-                        <label className="mdl-switch mdl-js-switch mdl-js-ripple-effect" htmlFor="deflected">
-                          <input type="checkbox" id="deflected" className="mdl-switch__input"
-                                 onChange={this.handleClickSelect.bind(this)}/>
-                          <span className="mdl-switch__label"/>
-                        </label>
+                        <Switch onChange={this.handleClickSelect.bind(this)} id="deflected">Відхилені</Switch>
                       </div>
                       <div>
-                        <p>Оплачені</p>
-                        <label className="mdl-switch mdl-js-switch mdl-js-ripple-effect" htmlFor="prepaid">
-                          <input type="checkbox" id="prepaid" className="mdl-switch__input"
-                                 onChange={this.handleClickSelect.bind(this)}/>
-                          <span className="mdl-switch__label"/>
-                        </label>
+                        <Switch onChange={this.handleClickSelect.bind(this)} id="prepaid">Оплачені</Switch>
                       </div>
                     </Cell>
                   </Grid>
