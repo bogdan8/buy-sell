@@ -2,7 +2,7 @@ import React, {Component}from 'react';
 import {connect} from 'react-redux';
 import {Grid, Cell} from 'react-mdl';
 
-import {Pagination, ProductBody, CreateProduct} from './common'
+import {Pagination, ProductList, CreateProduct} from './common'
 import {currentCategory} from '../actions/categories.js';
 
 import './style/Product.sass';
@@ -21,7 +21,58 @@ class Products extends Component {
   };
 
   render() {
-    const {currentCategory, categories, products, filterProducts} = this.props;
+    const {prepaidProducts, currentCategory, categories, filterProducts} = this.props;
+
+    let products = (currentCategory === 'Всі' ? this.props.products : filterProducts);
+
+    const mappedProducts = products.map((product, index) => {
+      if (prepaidProducts.includes(product.id)) {
+        var active = 'active-prepaid';
+      } else {
+        var active = ((index % 2) ? "active-tr hover-tr" : "hover-tr");
+      }
+      let photoBlock = (product) => {
+        return (
+            <div className="td-block-height-auto">
+              <p className="td-thead-title">Фото</p>
+              <div className="product-image">
+                <img src={product.photo}/>
+              </div>
+            </div>
+        )
+      };
+      let descriptionBlock = (product) => {
+        return (
+            <div className="td-block-height-auto">
+              <p className="td-thead-title">Оголошення</p>
+              <p>{product.description}</p>
+            </div>
+        )
+      };
+      let contactBlock = (product) => {
+        return (
+            <div>
+              <p className="td-thead-title">Контакти</p>
+              <p>{product.contact}</p>
+            </div>
+        )
+      };
+      let priceBlock = (product) => {
+        return (
+            <div>
+              <p className="td-thead-title">Ціна</p>
+              <p>{product.price}</p>
+            </div>
+        )
+      };
+      return {
+        photo: photoBlock(product),
+        description: descriptionBlock(product),
+        contact: contactBlock(product),
+        price: priceBlock(product),
+        className: active,
+      }
+    });
     return (
         <Grid>
           <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
@@ -45,9 +96,7 @@ class Products extends Component {
                   </div>
                 </div>
               </Cell>
-              <ProductBody
-                  products={currentCategory === 'Всі' ? products : filterProducts}
-              />
+              <ProductList mappedProducts={mappedProducts}/>
               <Pagination />
               <CreateProduct />
             </Grid>

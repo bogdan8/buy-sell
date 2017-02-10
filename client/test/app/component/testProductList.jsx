@@ -6,9 +6,9 @@ const doc = jsdom.jsdom('<!doctype html><html><body></body></html>');
 global.document = doc;
 global.window = doc.defaultView;
 
-import ProductBody from '../../../app/bundles/App/components/ProductBody';
+import ProductList from '../../../app/bundles/App/components/ProductList';
 
-describe('<ProductBody />', () => {
+describe('<ProductList />', () => {
   it('allows us to set props', () => {
     let data = [
       {
@@ -34,7 +34,7 @@ describe('<ProductBody />', () => {
         price: '4568$'
       }
     ];
-    const wrapper = mount(<ProductBody products={data} />);
+    const wrapper = mount(<ProductList products={data} />);
     expect(wrapper.props().products).toBe(data);
   });
 });
