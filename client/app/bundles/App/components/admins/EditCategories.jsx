@@ -1,15 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Cell, Button, Textfield, DataTable, TableHeader} from 'react-mdl';
-import {editCategory, removeCategory} from '../../actions/categories.js';
+import {Cell, Button, Textfield} from 'react-mdl';
+import {editCategory} from '../../actions/categories.js';
 
 class EditCategories extends Component {
-
-  handleClickShowModalWindow(id, name) {
-    document.getElementById('modal-category-edit').style.display = "block";
-    document.getElementById('category-id').value = id;
-    document.getElementById('category-edit').value = name;
-  };
 
   handleClickHideModalWindow() {
     document.getElementById('modal-category-edit').style.display = "none";
@@ -32,80 +26,9 @@ class EditCategories extends Component {
     alert('Успішно відредаговано');
   };
 
-  handleClickRemoveCategory(index) {
-    if (confirm("Ви дійсно хочите видалити?")) {
-      this.props._removeCategory(index);
-      alert("Видалено!")
-    } else {
-      alert("Відмінено")
-    }
-  }
-
   render() {
-    const {categories} = this.props;
-    const categoryAction = (category, index) => {
-      return (
-          <div>
-            <a data-modal="#modal" onClick={() => {
-              this.handleClickShowModalWindow(category.id, category.name)
-            }}>
-              <i className="fa fa-pencil" aria-hidden="true"/>
-            </a>
-            <a onClick={() => {
-              this.handleClickRemoveCategory(index)
-            }}>
-              <i className="fa fa-trash" aria-hidden="true"/>
-            </a>
-          </div>
-      )
-    };
-    const mappedCategories = categories.map((category, index) => {
-      let active = ((index % 2) ? "active-tr" : "");
-      let nameBlock = (category) => {
-        return (
-            <div>
-              <p className="td-thead-title">Назва</p>
-              <p>{category.name}</p>
-            </div>
-        )
-      };
-      return {
-        name: nameBlock(category),
-        action: categoryAction(category, index),
-        className: active,
-      }
-    });
     return (
         <Cell col={12}>
-          <DataTable
-              className="tablesaw tablesaw-stack mdl-js-data-table admin-table"
-              data-tablesaw-mode="stack"
-              rows={mappedCategories}
-          >
-            <TableHeader
-                name="name"
-                tooltip="Назва рубрики"
-                scope="col"
-                data-tablesaw-priority="1"
-                data-tablesaw-sortable-col
-                width="90%"
-                className="table-thead"
-            >
-              Назва
-            </TableHeader>
-            <TableHeader
-                name="action"
-                tooltip="Дії над рубрикою"
-                scope="col"
-                data-tablesaw-priority="2"
-                data-tablesaw-sortable-col
-                width="10%"
-                className="table-thead"
-            >
-              Дії
-            </TableHeader>
-          </DataTable>
-
           <div id="modal-category-edit" className="modal-block">
             <div className="modal modal__bg" role="dialog" aria-hidden="true">
               <div className="modal__dialog">
@@ -142,15 +65,10 @@ class EditCategories extends Component {
   }
 }
 export default connect(
-    state => ({
-      categories: state.categories
-    }),
+    state => ({}),
     dispatch => ({
       _editCategory: (paramsCategory) => {
         dispatch(editCategory(paramsCategory))
-      },
-      _removeCategory: (indexCategory) => {
-        dispatch(removeCategory(indexCategory))
       }
     })
 )(EditCategories);
