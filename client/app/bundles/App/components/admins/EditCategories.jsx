@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import createFragment from 'react-addons-create-fragment';
 import {Cell, Button, Textfield, DataTable, TableHeader} from 'react-mdl';
-
 import {editCategory, removeCategory} from '../../actions/categories.js';
 
 class EditCategories extends Component {
