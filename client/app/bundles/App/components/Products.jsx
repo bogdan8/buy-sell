@@ -81,15 +81,17 @@ class Products extends Component {
                 <div className="body-header-title flex-center">
                   <div
                       className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth select-input">
-                    <input className="mdl-textfield__input" type="text" id="sample1"
+                    <input className="mdl-textfield__input" type="text" id="list_category"
                            value={currentCategory === '' ? 'Всі' : currentCategory}
                            readOnly
-                           tabIndex="-1"/>
-                    <label htmlFor="sample1" className="mdl-textfield__label">Виберіть рубрику</label>
-                    <ul id="select" htmlFor="sample1" className="mdl-menu mdl-js-menu full-width"
+                           tabIndex="-1"
+                           name="list_category"
+                    />
+                    <label htmlFor="list_category" className="mdl-textfield__label">Виберіть рубрику</label>
+                    <ul id="select" htmlFor="list_category" className="mdl-menu mdl-js-menu full-width"
                         onClick={this.handleClickSelect.bind(this)}>
                       { categories.map((category, index) =>
-                          <li key={category.id} value={category.id}
+                          <li id="list_category_li" key={category.id} value={category.id}
                               className="mdl-menu__item full-width">{category.name}</li>
                       )}
                     </ul>

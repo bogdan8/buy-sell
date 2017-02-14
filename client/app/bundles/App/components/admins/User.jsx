@@ -33,19 +33,19 @@ class User extends Component {
     const userAction = (user, index) => {
       return (
           <div>
-            <a onClick={() => {
+            <a id="to_admin" onClick={() => {
               this.handleClickChangeRole(user.id, 'admin')
             }}>
               <i className={ user.role === 'admin' ? "fa fa-user-secret active-i" : "fa fa-user-secret"}
                  aria-hidden="true"/>
             </a>
-            <a onClick={() => {
+            <a id="to_user" onClick={() => {
               this.handleClickChangeRole(user.id, 'user')
             }}>
               <i className={ user.role === 'user' ? "fa fa-user active-i" : "fa fa-user"}
                  aria-hidden="true"/>
             </a>
-            <a onClick={() => {
+            <a id="remove_user" onClick={() => {
               this.handleClickRemoveUser(index)
             }}>
               <i className="fa fa-trash" aria-hidden="true"/>
