@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Grid, Cell, Switch} from 'react-mdl';
 
-import {NewProductList} from '../common';
+import {NewProductList} from '../../components/admin';
 import getVisibleProducts from '../../selectors/getVisibleProducts';
 import {removeProduct, payProduct, stateProduct} from '../../actions/products.js';
 import {setAdminFilterOption} from '../../actions/adminFilterOption.js';
 
-import '../style/Product.sass';
+import '../../components/style/Product.sass';
 
 class NewProduct extends Component {
   componentDidMount() {
@@ -51,7 +51,14 @@ class NewProduct extends Component {
 
   render() {
     const {products, prepaidProducts} = this.props;
-    const mappedProducts = products.map((product, index) => {
+    const with_prepaid = products.filter(product =>
+        prepaidProducts.includes(product.id) ? prepaidProducts.includes(product.id) : false
+    );
+    const no_prepaid = products.filter(product =>
+        !prepaidProducts.includes(product.id)
+    );
+    const all_product = with_prepaid.concat(no_prepaid);
+    const mappedProducts = all_product.map((product, index) => {
       if (prepaidProducts.includes(product.id)) {
         var active = 'active-prepaid';
       } else {

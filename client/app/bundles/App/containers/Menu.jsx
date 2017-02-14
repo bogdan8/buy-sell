@@ -1,13 +1,10 @@
 import React from 'react';
-import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {FABButton} from 'react-mdl';
 
-import {AdminMenu, UserMenu} from './common';
+import {AdminMenu, UserMenu} from '../components';
 
-import Register from './Register';
-
-import './style/Header.sass'
+import '../components/style/Header.sass'
 
 function Menu(props) {
   return (

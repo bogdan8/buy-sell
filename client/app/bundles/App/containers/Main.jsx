@@ -1,8 +1,8 @@
 import React from 'react';
 
-import {Menu} from './common';
+import {Menu} from '../components';
 
-import './style/Auth.sass';
+import '../components/style/Auth.sass';
 
 export default class Main extends React.Component {
   render() {
