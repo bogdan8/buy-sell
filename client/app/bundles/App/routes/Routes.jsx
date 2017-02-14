@@ -2,7 +2,8 @@ import React from 'react'
 import {Router, Route, hashHistory, browserHistory} from 'react-router';
 import {connect} from 'react-redux';
 
-import {Main, Admin, SignIn, Register, Products, User, Categories, NewProducts} from '../components/common'
+import {Main, Admin, SignIn, Register, Products} from '../components'
+import {User, Categories, NewProducts} from '../components/admin'
 
 function Routes(props) {
   if (props.user.role === 'admin') {

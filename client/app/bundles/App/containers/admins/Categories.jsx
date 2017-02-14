@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Grid, Cell} from 'react-mdl';
 import {removeCategory} from '../../actions/categories.js';
 
-import {CreateCategories, EditCategories, CategoriesList} from '../common';
+import {CreateCategories, EditCategories, CategoriesList} from '../../components/admin';
 
 class Categories extends Component {
   componentDidMount() {

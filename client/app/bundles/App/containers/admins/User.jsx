@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import {removeUser, changeRole} from '../../actions/users.js';
-import {UserList} from '../common';
+import {UserList} from '../../components/admin';
 
 class User extends Component {
 

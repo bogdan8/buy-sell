@@ -1,7 +1,7 @@
 import React from 'react';
 import {Grid, Cell, DataTable, TableHeader} from 'react-mdl';
 
-import {Pagination} from '../common';
+import {Pagination} from '../';
 
 export default function UserList(props) {
   return (

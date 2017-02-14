@@ -12,7 +12,7 @@ import {createStore, applyMiddleware} from 'redux';
 import reducer from '../../../app/bundles/App/reducers/rootReducer';
 const store = createStore(reducer, applyMiddleware(thunk));
 
-import User from '../../../app/bundles/App/components/admins/User';
+import User from '../../../app/bundles/App/components/admin/User';
 var data = [
   {
     id: 1,

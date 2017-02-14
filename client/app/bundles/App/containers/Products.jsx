@@ -2,10 +2,10 @@ import React, {Component}from 'react';
 import {connect} from 'react-redux';
 import {Grid, Cell} from 'react-mdl';
 
-import {Pagination, ProductList, CreateProduct} from './common'
+import {Pagination, ProductList, CreateProduct} from '../components'
 import {currentCategory} from '../actions/categories.js';
 
-import './style/Product.sass';
+import '../components/style/Product.sass';
 
 class Products extends Component {
   constructor(props) {
@@ -24,8 +24,14 @@ class Products extends Component {
     const {prepaidProducts, currentCategory, categories, filterProducts} = this.props;
 
     let products = (currentCategory === 'Всі' ? this.props.products : filterProducts);
-
-    const mappedProducts = products.map((product, index) => {
+    const with_prepaid = products.filter(product =>
+        prepaidProducts.includes(product.id) ? prepaidProducts.includes(product.id) : false
+    );
+    const no_prepaid = products.filter(product =>
+        !prepaidProducts.includes(product.id)
+    );
+    const all_product = with_prepaid.concat(no_prepaid);
+    const mappedProducts = all_product.map((product, index) => {
       if (prepaidProducts.includes(product.id)) {
         var active = 'active-prepaid';
       } else {

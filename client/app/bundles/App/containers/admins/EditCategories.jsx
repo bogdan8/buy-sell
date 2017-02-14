@@ -43,6 +43,7 @@ class EditCategories extends Component {
                         floatingLabel
                         id="category-edit"
                         placeholder=" "
+                        required
                     />
                     <div className="flex-center">
                       <Button raised ripple

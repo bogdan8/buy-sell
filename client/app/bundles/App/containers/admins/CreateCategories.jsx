@@ -8,6 +8,7 @@ import {addCategory} from '../../actions/categories.js';
 class CreateCategories extends Component {
   handleClickShowModalWindow() {
     document.getElementById('modal-category').style.display = "block";
+    document.getElementById("form_create_category").reset();
   };
 
   handleClickHideModalWindow() {
@@ -50,6 +51,7 @@ class CreateCategories extends Component {
                         label="Назва нової рубрики:"
                         floatingLabel
                         id="category"
+                        required
                     />
                     <div className="flex-center">
                       <Button raised ripple
