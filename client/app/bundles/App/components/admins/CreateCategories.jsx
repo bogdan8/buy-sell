@@ -31,7 +31,7 @@ class CreateCategories extends Component {
     return (
         <Cell col={12} className="flex-center">
           <Cell col={12} className="flex-center">
-            <Button raised ripple
+            <Button id="create_category_btn" raised ripple
                     data-modal="#modal"
                     onClick={this.handleClickShowModalWindow}
             >
@@ -43,7 +43,7 @@ class CreateCategories extends Component {
               <div className="modal__dialog">
                 <div className="modal__content">
                   <h4>Додати нову рубрику:</h4>
-                  <form onSubmit={this.handleSubmit.bind(this)}>
+                  <form id="form_create_category" onSubmit={this.handleSubmit.bind(this)}>
                     <Textfield
                         type="text"
                         name="category"

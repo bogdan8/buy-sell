@@ -95,26 +95,26 @@ class NewProduct extends Component {
         return (
             <div>
               <p className="td-thead-title">Дія</p>
-              <a onClick={() => {
+              <a id="is_approved" onClick={() => {
                 this.handleClickChangeState(product.id, true)
               }}>
                 <i className={ product.approved ? "fa fa-thumbs-o-up active-i" : "fa fa-thumbs-o-up"}
                    aria-hidden="true"
                 />
               </a>
-              <a onClick={() => {
+              <a id="no_approved" onClick={() => {
                 this.handleClickChangeState(product.id, false)
               }}>
                 <i className={ product.approved == false ? "fa fa-thumbs-o-down active-i" : "fa fa-thumbs-o-down"}
                    aria-hidden="true"/>
               </a>
-              <a onClick={() => {
+              <a id="prepaid_product" onClick={() => {
                 product.approved ? this.handleClickPayProduct(product.id) : ''
               }}>
                 <i className={ prepaidProducts.includes(product.id) ? "fa fa-money active-i" : "fa fa-money" }
                    aria-hidden="true"/>
               </a>
-              <a onClick={() => {
+              <a id="remove_product" onClick={() => {
                 this.handleClickRemoveProduct(index)
               }}>
                 <i className="fa fa-trash" aria-hidden="true"/>

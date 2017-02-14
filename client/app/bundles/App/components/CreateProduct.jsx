@@ -37,7 +37,7 @@ class CreateProduct extends Component {
     this.props._addProduct(paramsProduct);
     document.getElementById('modal-product').style.display = "none";
 
-    alert('Успішно дадано');
+    alert('Успішно додано');
   };
 
   render() {
@@ -56,7 +56,7 @@ class CreateProduct extends Component {
               <div className="modal__dialog">
                 <div className="modal__content">
                   <h4>Створити нове оголошення:</h4>
-                  <form onSubmit={this.handleSubmit.bind(this)} className="auth-block-grid form-with-border">
+                  <form id="form_create_product" onSubmit={this.handleSubmit.bind(this)} className="auth-block-grid form-with-border">
                     <Grid>
                       <Cell col={5} offsetDesktop={1} tablet={4} phone={6}>
                         <div className="form-image">
@@ -77,7 +77,7 @@ class CreateProduct extends Component {
                           <ul id="selectModal" htmlFor="select-category" className="mdl-menu mdl-js-menu full-width"
                               onClick={this.handleClickSelectModal.bind(this)}>
                             { categories.map((category, index) =>
-                                <li key={category.id} value={category.id}
+                                <li id="category_li" key={category.id} value={category.id}
                                     className="mdl-menu__item full-width">{category.name}</li>
                             )}
                           </ul>

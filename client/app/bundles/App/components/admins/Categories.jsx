@@ -30,12 +30,12 @@ class Categories extends Component {
     const categoryAction = (category, index) => {
       return (
           <div>
-            <a data-modal="#modal" onClick={() => {
+            <a id="edit_category_input" data-modal="#modal" onClick={() => {
               this.handleClickShowModalWindow(category.id, category.name)
             }}>
               <i className="fa fa-pencil" aria-hidden="true"/>
             </a>
-            <a onClick={() => {
+            <a id="remove_category" onClick={() => {
               this.handleClickRemoveCategory(index)
             }}>
               <i className="fa fa-trash" aria-hidden="true"/>
@@ -49,7 +49,7 @@ class Categories extends Component {
         return (
             <div>
               <p className="td-thead-title">Назва</p>
-              <p>{category.name}</p>
+              <p id="name_category">{category.name}</p>
             </div>
         )
       };
