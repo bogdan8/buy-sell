@@ -16,6 +16,7 @@ class CreateProduct extends Component {
 
   handleClickShowModalWindow() {
     document.getElementById('modal-product').style.display = "block";
+    document.getElementById("form_create_product").reset();
   };
 
   handleClickHideModalWindow() {
@@ -88,6 +89,7 @@ class CreateProduct extends Component {
                             floatingLabel
                             id="description"
                             rows={5}
+                            required
                         />
                         <Textfield
                             type="number"
@@ -95,6 +97,7 @@ class CreateProduct extends Component {
                             label="Вартість"
                             floatingLabel
                             id="price"
+                            required
                         />
                       </Cell>
                     </Grid>

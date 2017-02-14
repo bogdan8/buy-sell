@@ -55,6 +55,7 @@ class SignIn extends React.Component {
                         id="email"
                         value={this.state.credentials.email}
                         onChange={this.onChange}
+                        required
                     />
                     <Textfield
                         type="password"
@@ -64,6 +65,7 @@ class SignIn extends React.Component {
                         id="password"
                         value={this.state.credentials.password}
                         onChange={this.onChange}
+                        required
                     />
                     <div className="flex-center">
                       <Button raised ripple

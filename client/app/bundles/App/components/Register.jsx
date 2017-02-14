@@ -47,6 +47,7 @@ export default class Register extends React.Component {
                         label="Електронна адреса"
                         floatingLabel
                         id="email"
+                        required
                     />
                     <Textfield
                         type="password"
@@ -54,6 +55,7 @@ export default class Register extends React.Component {
                         label="Пароль"
                         floatingLabel
                         id="password"
+                        required
                     />
                     <Textfield
                         type="password"
@@ -61,6 +63,7 @@ export default class Register extends React.Component {
                         label="Повторіть пароль"
                         floatingLabel
                         id="repeat_password"
+                        required
                     />
                     <Textfield
                         type="number"
