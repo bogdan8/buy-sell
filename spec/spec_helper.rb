@@ -23,6 +23,7 @@ abort('The Rails environment is running in production mode!') if Rails.env.produ
 require 'rspec/rails'
 require 'capybara/rspec'
 require 'capybara/rails'
+require 'support/factory_girl'
 require 'phantomjs'
 require 'capybara/poltergeist'
 
