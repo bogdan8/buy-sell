@@ -32,6 +32,7 @@ group :development, :test do
   gem 'pry-byebug', platform: :mri
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'factory_girl_rails'
   gem 'poltergeist'
   gem 'phantomjs', :require => 'phantomjs/poltergeist'
 end
