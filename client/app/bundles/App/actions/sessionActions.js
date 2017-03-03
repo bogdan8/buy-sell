@@ -6,7 +6,7 @@ export function loginSuccess() {
 }
 
 export function logInUser(credentials) {
-  return function(dispatch) {
+  return function (dispatch) {
     return sessionApi.login(credentials).then(response => {
       sessionStorage.setItem('jwt', response.jwt);
       dispatch(loginSuccess());
@@ -14,4 +14,8 @@ export function logInUser(credentials) {
       throw(error);
     });
   };
+}
+export function logOutUser() {
+  sessionStorage.removeItem('jwt');
+  return {type: types.LOG_OUT}
 }
