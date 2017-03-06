@@ -1,3 +1,5 @@
+import { ADD_CATEGORY, EDIT_CATEGORY, REMOVE_CATEGORY } from '../actions/actionTypes';
+
 var data = [
   {
     id: 1,
@@ -19,12 +21,12 @@ var data = [
 
 export default function categories(state = data, action) {
   switch (action.type) {
-    case 'ADD_CATEGORY':
+    case ADD_CATEGORY:
       return [
         ...state,
         action.valueCategory
       ];
-    case 'EDIT_CATEGORY':
+    case EDIT_CATEGORY:
       return state.map((item) => {
         if (item.id != action.valueCategory.id) {
           return item;
@@ -34,7 +36,7 @@ export default function categories(state = data, action) {
           ...action.valueCategory
         };
       });
-    case 'REMOVE_CATEGORY':
+    case REMOVE_CATEGORY:
       return [
         ...state.slice(0, action.indexCategory),
         ...state.slice(action.indexCategory + 1)

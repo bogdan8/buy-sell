@@ -2,7 +2,7 @@ import {combineReducers} from 'redux';
 import products from './products';
 import prepaidProducts from './prepaidProducts';
 import categories from './categories';
-import currentAdminFilterOption from './currentAdminFilterOption';
+import currentAdminFilterOptionProducts from './currentAdminFilterOptionProducts';
 import currentCategory from './currentCategory';
 import users from './users';
 import session from './session';
@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
   products,
   prepaidProducts,
   categories,
-  currentAdminFilterOption,
+  currentAdminFilterOptionProducts,
   currentCategory,
   users,
   session

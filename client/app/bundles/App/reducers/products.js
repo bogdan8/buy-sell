@@ -1,3 +1,5 @@
+import {ADD_PRODUCT, REMOVE_PRODUCT, STATE_PRODUCT} from '../actions/actionTypes';
+
 const data = [
   {
     id: 1,
@@ -29,17 +31,17 @@ const data = [
 
 export default function products(state = data, action) {
   switch (action.type) {
-    case 'ADD_PRODUCT':
+    case ADD_PRODUCT:
       return [
         ...state,
         action.valueProduct
       ];
-    case 'REMOVE_PRODUCT':
+    case REMOVE_PRODUCT:
       return [
         ...state.slice(0, action.indexProduct),
         ...state.slice(action.indexProduct + 1)
       ];
-    case 'STATE_PRODUCT':
+    case STATE_PRODUCT:
       return state.map((item) => {
         if (item.id != action.valueProduct.id) {
           return item;

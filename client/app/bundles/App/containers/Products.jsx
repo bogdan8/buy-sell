@@ -1,9 +1,12 @@
 import React, {Component}from 'react';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import {Grid, Cell} from 'react-mdl';
 
 import {Pagination, ProductList, CreateProduct} from '../components'
-import {currentCategory} from '../actions/categories.js';
+
+import * as productActions from '../actions/productActions';
+import * as categoryActions from '../actions/categoryActions';
 
 import '../components/style/Product.sass';
 
@@ -17,7 +20,7 @@ class Products extends Component {
   };
 
   handleClickSelect(e) {
-    this.props._getCategory(e.target.innerHTML);
+    this.props.actions.currentCategory(e.target.innerHTML);
   };
 
   render() {
@@ -25,10 +28,10 @@ class Products extends Component {
 
     let products = (currentCategory === 'Всі' ? this.props.products : filterProducts);
     const with_prepaid = products.filter(product =>
-        prepaidProducts.includes(product.id) ? prepaidProducts.includes(product.id) : false
+      prepaidProducts.includes(product.id) ? prepaidProducts.includes(product.id) : false
     );
     const no_prepaid = products.filter(product =>
-        !prepaidProducts.includes(product.id)
+      !prepaidProducts.includes(product.id)
     );
     const all_product = with_prepaid.concat(no_prepaid);
     const mappedProducts = all_product.map((product, index) => {
@@ -39,36 +42,36 @@ class Products extends Component {
       }
       let photoBlock = (product) => {
         return (
-            <div className="td-block-height-auto">
-              <p className="td-thead-title">Фото</p>
-              <div className="product-image">
-                <img src={product.photo}/>
-              </div>
+          <div className="td-block-height-auto">
+            <p className="td-thead-title">Фото</p>
+            <div className="product-image">
+              <img src={product.photo}/>
             </div>
+          </div>
         )
       };
       let descriptionBlock = (product) => {
         return (
-            <div className="td-block-height-auto">
-              <p className="td-thead-title">Оголошення</p>
-              <p>{product.description}</p>
-            </div>
+          <div className="td-block-height-auto">
+            <p className="td-thead-title">Оголошення</p>
+            <p>{product.description}</p>
+          </div>
         )
       };
       let contactBlock = (product) => {
         return (
-            <div>
-              <p className="td-thead-title">Контакти</p>
-              <p>{product.contact}</p>
-            </div>
+          <div>
+            <p className="td-thead-title">Контакти</p>
+            <p>{product.contact}</p>
+          </div>
         )
       };
       let priceBlock = (product) => {
         return (
-            <div>
-              <p className="td-thead-title">Ціна</p>
-              <p>{product.price}</p>
-            </div>
+          <div>
+            <p className="td-thead-title">Ціна</p>
+            <p>{product.price}</p>
+          </div>
         )
       };
       return {
@@ -80,51 +83,54 @@ class Products extends Component {
       }
     });
     return (
-        <Grid>
-          <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
-            <Grid>
-              <Cell col={12}>
-                <div className="body-header-title flex-center">
-                  <div
-                      className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth select-input">
-                    <input className="mdl-textfield__input" type="text" id="list_category"
-                           value={currentCategory === '' ? 'Всі' : currentCategory}
-                           readOnly
-                           tabIndex="-1"
-                           name="list_category"
-                    />
-                    <label htmlFor="list_category" className="mdl-textfield__label">Виберіть рубрику</label>
-                    <ul id="select" htmlFor="list_category" className="mdl-menu mdl-js-menu full-width"
-                        onClick={this.handleClickSelect.bind(this)}>
-                      { categories.map((category, index) =>
-                          <li id="list_category_li" key={category.id} value={category.id}
-                              className="mdl-menu__item full-width">{category.name}</li>
-                      )}
-                    </ul>
-                  </div>
+      <Grid>
+        <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
+          <Grid>
+            <Cell col={12}>
+              <div className="body-header-title flex-center">
+                <div
+                  className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth select-input">
+                  <input className="mdl-textfield__input" type="text" id="list_category"
+                         value={currentCategory === '' ? 'Всі' : currentCategory}
+                         readOnly
+                         tabIndex="-1"
+                         name="list_category"
+                  />
+                  <label htmlFor="list_category" className="mdl-textfield__label">Виберіть рубрику</label>
+                  <ul id="select" htmlFor="list_category" className="mdl-menu mdl-js-menu full-width"
+                      onClick={this.handleClickSelect.bind(this)}>
+                    { categories.map((category, index) =>
+                      <li id="list_category_li" key={category.id} value={category.id}
+                          className="mdl-menu__item full-width">{category.name}</li>
+                    )}
+                  </ul>
                 </div>
-              </Cell>
-              <ProductList mappedProducts={mappedProducts}/>
-              <Pagination />
-              <CreateProduct />
-            </Grid>
-          </Cell>
-        </Grid>
+              </div>
+            </Cell>
+            <ProductList mappedProducts={mappedProducts}/>
+            <Pagination />
+            <CreateProduct />
+          </Grid>
+        </Cell>
+      </Grid>
     )
   }
 }
 
-export default connect(
-    state => ({
-      products: state.products.filter(product => product.approved),
-      categories: state.categories,
-      currentCategory: state.currentCategory,
-      filterProducts: state.products.filter(product => product.category.includes(state.currentCategory) && product.approved),
-      prepaidProducts: state.prepaidProducts
-    }),
-    dispatch => ({
-      _getCategory: (categoryName) => {
-        dispatch(currentCategory(categoryName))
-      }
-    })
-)(Products);
+function mapStateToProps(state) {
+  return {
+    products: state.products.filter(product => product.approved),
+    categories: state.categories,
+    currentCategory: state.currentCategory,
+    filterProducts: state.products.filter(product => product.category.includes(state.currentCategory) && product.approved),
+    prepaidProducts: state.prepaidProducts
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators({...productActions, ...categoryActions}, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Products);
