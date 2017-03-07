@@ -1,10 +1,17 @@
 import * as types from './actionTypes';
+import productApi from '../api/ProductApi';
 
 export function addProduct(paramsProduct) {
-  return {
-    type: types.ADD_PRODUCT,
-    valueProduct: paramsProduct
-  }
+  return function (dispatch) {
+    return productApi.createProducts(paramsProduct).then(() => {
+      dispatch({
+        type: types.ADD_PRODUCT,
+        // valueProduct: paramsProduct
+      });
+    }).catch(error => {
+      throw(error);
+    });
+  };
 }
 
 export function payProduct(indexProduct) {

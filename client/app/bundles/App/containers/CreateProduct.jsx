@@ -4,13 +4,15 @@ import {bindActionCreators} from 'redux';
 import {v4} from 'node-uuid';
 import {Grid, Cell, Button, Textfield} from 'react-mdl';
 import Dropzone from 'react-dropzone';
-import request from 'superagent';
 
 import * as productActions from '../actions/productActions';
 
 class CreateProduct extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      image: new Image()
+    };
   };
 
   handleClickSelectModal(e) {
@@ -28,29 +30,28 @@ class CreateProduct extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    var paramsProduct = {
-      id: v4(),
-      photo: 'http://www.cruzo.net/user/images/k/ecc3ecf42c75db1ffce5d06cbe95b1e6_644.jpg',
-      description: document.getElementById('description').value,
-      contact: 'Bobo bobo',
-      category: document.getElementById('select-category').value,
-      price: document.getElementById('price').value,
-      approved: false
+    let description = document.getElementById('description').value;
+    let price = document.getElementById('price').value;
+    let category_val = document.getElementById('select-category').value;
+    let choseCategory = this.props.categories.filter(category => category.name === category_val);
+
+    let paramsProduct = {
+      image: this.state.image,
+      text: description,
+      user_id: v4(),
+      category_id: choseCategory[0].id,
+      price: price
     };
 
     this.props.actions.addProduct(paramsProduct);
     document.getElementById('modal-product').style.display = "none";
-
-    alert('Успішно додано');
   };
 
-  onDrop(image) {
-    var req = request.post('/upload');
-     req.attach('product[image]', image[0]);
-     req.end(
-     console.log('ura')
-     );
-    document.getElementById("upload-img").innerHTML = `<img height="100%" width="100%" src=${image[0].preview} />`
+  onDrop(images) {
+    this.setState({
+      image: images[0]
+    });
+    document.getElementById("upload-img").innerHTML = `<img height="100%" width="100%" src=${images[0].preview} />`
   }
 
   render() {
@@ -92,7 +93,7 @@ class CreateProduct extends Component {
                           <label htmlFor="select-category" className="mdl-textfield__label">Виберіть рубрику</label>
                           <ul id="selectModal" htmlFor="select-category" className="mdl-menu mdl-js-menu full-width"
                               onClick={this.handleClickSelectModal.bind(this)}>
-                            { categories.map((category, index) =>
+                            { categories.filter(category => category.name != 'Всі').map((category, index) =>
                                 <li id="category_li" key={category.id} value={category.id}
                                     className="mdl-menu__item full-width">{category.name}</li>
                             )}
