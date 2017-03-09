@@ -25,8 +25,6 @@ class CreateCategories extends Component {
 
     this.props.actions.addCategory(paramsCategory);
     document.getElementById('modal-category').style.display = "none";
-
-    alert('Успішно дадано');
   };
 
   render() {

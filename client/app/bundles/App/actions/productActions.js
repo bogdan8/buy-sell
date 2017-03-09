@@ -2,11 +2,8 @@ import * as types from './actionTypes';
 import productApi from '../api/ProductApi';
 
 export function addProduct(paramsProduct) {
-  return function (dispatch) {
+  return () => {
     return productApi.createProduct(paramsProduct).then(() => {
-      dispatch({
-        type: types.ADD_PRODUCT,
-      });
     }).catch(error => {
       throw(error);
     });

@@ -1,9 +1,11 @@
-import { EDIT_CATEGORY, REMOVE_CATEGORY } from '../actions/actionTypes';
+import {EDIT_CATEGORY, REMOVE_CATEGORY, GET_ALL_CATEGORIES} from '../actions/actionTypes';
 
 var data = [];
 
 export default function categories(state = data, action) {
   switch (action.type) {
+    case GET_ALL_CATEGORIES:
+      return action.categories;
     case EDIT_CATEGORY:
       return state.map((item) => {
         if (item.id != action.valueCategory.id) {

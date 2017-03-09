@@ -10,6 +10,7 @@ import {CreateCategories, EditCategories, CategoriesList} from '../../components
 class Categories extends Component {
   componentDidMount() {
     componentHandler.upgradeDom();
+    this.props.actions.allCategories();
   };
 
   handleClickShowModalWindow(id, name) {
