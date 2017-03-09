@@ -17,6 +17,7 @@ class Products extends Component {
 
   componentDidMount() {
     componentHandler.upgradeDom();
+    this.props.actions.allApprovedProducts();
   };
 
   handleClickSelect(e) {
@@ -45,7 +46,7 @@ class Products extends Component {
           <div className="td-block-height-auto">
             <p className="td-thead-title">Фото</p>
             <div className="product-image">
-              <img src={product.photo}/>
+              <img src={`/${product.id}/original/${product.image_file_name}`}/>
             </div>
           </div>
         )
@@ -54,7 +55,7 @@ class Products extends Component {
         return (
           <div className="td-block-height-auto">
             <p className="td-thead-title">Оголошення</p>
-            <p>{product.description}</p>
+            <p>{product.text}</p>
           </div>
         )
       };
@@ -62,7 +63,7 @@ class Products extends Component {
         return (
           <div>
             <p className="td-thead-title">Контакти</p>
-            <p>{product.contact}</p>
+            <p>{product.user_id}</p>
           </div>
         )
       };
@@ -122,7 +123,7 @@ function mapStateToProps(state) {
     products: state.products.filter(product => product.approved),
     categories: state.categories,
     currentCategory: state.currentCategory,
-    filterProducts: state.products.filter(product => product.category.includes(state.currentCategory) && product.approved),
+    filterProducts: state.products.filter(product => /*product.category.includes(state.currentCategory) &&*/ product.approved),
     prepaidProducts: state.prepaidProducts
   }
 }

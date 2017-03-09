@@ -6,7 +6,31 @@ export function addProduct(paramsProduct) {
     return productApi.createProducts(paramsProduct).then(() => {
       dispatch({
         type: types.ADD_PRODUCT,
-        // valueProduct: paramsProduct
+      });
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
+export function allApprovedProducts() {
+  return function (dispatch) {
+    return productApi.getApprovedProducts().then(response => {
+      dispatch({
+        type: types.GET_APPROVED_PRODUCTS,
+        products: response.body
+      });
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
+export function getNoApprovedProduct() {
+  return function (dispatch) {
+    return productApi.createProducts().then(() => {
+      dispatch({
+        type: types.ADD_PRODUCT,
       });
     }).catch(error => {
       throw(error);

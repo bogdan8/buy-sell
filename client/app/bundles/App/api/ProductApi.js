@@ -1,9 +1,24 @@
 import request from 'superagent';
 
 class ProductApi {
-  /*  static requestHeaders() {
-   return {'AUTHORIZATION': `Bearer ${sessionStorage.jwt}`}
-   }*/
+  static getApprovedProducts() {
+    let req = request.get('/product')
+        .query('approved=true');
+    return req.then(response => {
+      return response;
+    }, error => {
+      return error;
+    });
+  }
+
+  static getAllNotApprovedProducts() {
+    let req = request.get('/product');
+    return req.then(response => {
+      return response;
+    }, error => {
+      return error;
+    });
+  }
 
   static createProducts(paramsProduct) {
     let req = request.post('/product');
