@@ -1,4 +1,10 @@
-import {ADD_PRODUCT, REMOVE_PRODUCT, STATE_PRODUCT, GET_APPROVED_PRODUCTS} from '../actions/actionTypes';
+import {
+  ADD_PRODUCT,
+  REMOVE_PRODUCT,
+  STATE_PRODUCT,
+  GET_APPROVED_PRODUCTS,
+  GET_ALL_PRODUCTS
+} from '../actions/actionTypes';
 
 const data = [];
 
@@ -10,10 +16,9 @@ export default function products(state = data, action) {
         action.valueProduct
       ];
     case GET_APPROVED_PRODUCTS:
-      return [
-        ...state,
-        ...action.products
-      ];
+      return action.products;
+    case GET_ALL_PRODUCTS:
+      return action.products;
     case REMOVE_PRODUCT:
       return [
         ...state.slice(0, action.indexProduct),

@@ -1,7 +1,7 @@
 class ProductController < ActionController::API
 
   def index
-    @products = Product.all.where(approved: params[:approved])
+    @products = params[:approved] ? Product.all.where(approved: params[:approved]) : Product.all
     render json: @products
   end
 

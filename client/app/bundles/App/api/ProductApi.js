@@ -11,7 +11,7 @@ class ProductApi {
     });
   }
 
-  static getAllNotApprovedProducts() {
+  static getAllProducts() {
     let req = request.get('/product');
     return req.then(response => {
       return response;

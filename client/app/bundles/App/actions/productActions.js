@@ -26,11 +26,12 @@ export function allApprovedProducts() {
   };
 }
 
-export function getNoApprovedProduct() {
+export function allProducts() {
   return function (dispatch) {
-    return productApi.createProducts().then(() => {
+    return productApi.getAllProducts().then(response => {
       dispatch({
-        type: types.ADD_PRODUCT,
+        type: types.GET_ALL_PRODUCTS,
+        products: response.body
       });
     }).catch(error => {
       throw(error);

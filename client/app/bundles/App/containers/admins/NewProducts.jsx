@@ -13,6 +13,7 @@ import '../../components/style/Product.sass';
 class NewProduct extends Component {
   componentDidMount() {
     componentHandler.upgradeDom();
+    this.props.actions.allProducts();
   };
 
   handleClickSelect(e) {
@@ -70,7 +71,7 @@ class NewProduct extends Component {
           <div className="td-block-height-auto">
             <p className="td-thead-title">Фото</p>
             <div className="product-image">
-              <img src={product.photo}/>
+              <img src={`/${product.id}/original/${product.image_file_name}`}/>
             </div>
           </div>
         )
@@ -79,7 +80,7 @@ class NewProduct extends Component {
         return (
           <div className="td-block-height-auto">
             <p className="td-thead-title">Оголошення</p>
-            <p>{product.description}</p>
+            <p>{product.text}</p>
           </div>
         )
       };
@@ -87,7 +88,7 @@ class NewProduct extends Component {
         return (
           <div>
             <p className="td-thead-title">Контакти</p>
-            <p>{product.contact}</p>
+            <p>{product.user_id}</p>
           </div>
         )
       };
