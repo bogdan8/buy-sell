@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   post 'user_token' => 'user_token#create'
 
   resources :product
+  resources :category
 
   get '*path' => 'static#index', constraints: lambda { |req| req.format != 'json' }
 

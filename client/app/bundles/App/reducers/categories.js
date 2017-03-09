@@ -1,31 +1,9 @@
-import { ADD_CATEGORY, EDIT_CATEGORY, REMOVE_CATEGORY } from '../actions/actionTypes';
+import { EDIT_CATEGORY, REMOVE_CATEGORY } from '../actions/actionTypes';
 
-var data = [
-  {
-    id: 1,
-    name: 'Всі'
-  },
-  {
-    id: 2,
-    name: 'Кіно'
-  },
-  {
-    id: 3,
-    name: 'Музика'
-  },
-  {
-    id: 4,
-    name: 'Ігри'
-  }
-];
+var data = [];
 
 export default function categories(state = data, action) {
   switch (action.type) {
-    case ADD_CATEGORY:
-      return [
-        ...state,
-        action.valueCategory
-      ];
     case EDIT_CATEGORY:
       return state.map((item) => {
         if (item.id != action.valueCategory.id) {
