@@ -3,7 +3,7 @@ import productApi from '../api/ProductApi';
 
 export function addProduct(paramsProduct) {
   return function (dispatch) {
-    return productApi.createProducts(paramsProduct).then(() => {
+    return productApi.createProduct(paramsProduct).then(() => {
       dispatch({
         type: types.ADD_PRODUCT,
       });

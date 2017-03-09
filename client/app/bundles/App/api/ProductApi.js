@@ -20,7 +20,7 @@ class ProductApi {
     });
   }
 
-  static createProducts(paramsProduct) {
+  static createProduct(paramsProduct) {
     let req = request.post('/product');
     req.field('product[text]', paramsProduct.text)
         .field('product[price]', paramsProduct.price)
