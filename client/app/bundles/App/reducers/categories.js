@@ -10,7 +10,6 @@ var data = [];
 export default function categories(state = data, action) {
   switch (action.type) {
     case ADD_CATEGORY:
-      console.log(action);
       return [
         ...state,
         action.categories

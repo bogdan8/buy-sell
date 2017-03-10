@@ -1,4 +1,4 @@
-class CategoryController < ActionController::API
+class CategoriesController < ActionController::API
 
   def index
     @categories = Category.all

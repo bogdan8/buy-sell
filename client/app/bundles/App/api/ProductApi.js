@@ -2,7 +2,7 @@ import request from 'superagent';
 
 class ProductApi {
   static getApprovedProducts() {
-    let req = request.get('/product')
+    let req = request.get('/products')
         .query('approved=true');
     return req.then(response => {
       return response;
@@ -12,7 +12,7 @@ class ProductApi {
   }
 
   static getAllProducts() {
-    let req = request.get('/product');
+    let req = request.get('/products');
     return req.then(response => {
       return response;
     }, error => {
@@ -21,7 +21,7 @@ class ProductApi {
   }
 
   static createProduct(paramsProduct) {
-    let req = request.post('/product');
+    let req = request.post('/products');
     req.field('product[text]', paramsProduct.text)
         .field('product[price]', paramsProduct.price)
         .field('product[user_id]', paramsProduct.user_id)

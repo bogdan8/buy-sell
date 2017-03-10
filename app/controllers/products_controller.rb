@@ -1,4 +1,4 @@
-class ProductController < ActionController::API
+class ProductsController < ActionController::API
 
   def index
     @products = params[:approved] ? Product.all.where(approved: params[:approved]) : Product.all
