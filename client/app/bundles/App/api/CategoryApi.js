@@ -19,6 +19,15 @@ class CategoryApi {
       return error;
     });
   }
+
+  static destroyCategory(id) {
+    let req = request.delete(`/categories/${id}.json`);
+    return req.then(response => {
+      return response;
+    }, error => {
+      return error;
+    });
+  }
 }
 
 export default CategoryApi

@@ -9,6 +9,10 @@ class CategoriesController < ActionController::API
     Category.create(category_params)
   end
 
+  def destroy
+    Category.find(params[:id]).destroy!
+  end
+
   private
 
   def category_params

@@ -34,11 +34,17 @@ export function editCategory(paramsCategory) {
   }
 }
 
-export function removeCategory(indexCategory) {
-  return {
-    type: types.REMOVE_CATEGORY,
-    indexCategory: indexCategory
-  }
+export function removeCategory(indexCategory, id) {
+  return function (dispatch) {
+    return categoryApi.destroyCategory(id).then(() => {
+      dispatch({
+        type: types.REMOVE_CATEGORY,
+        indexCategory: indexCategory
+      });
+    }).catch(error => {
+      throw(error);
+    });
+  };
 }
 
 export function currentCategory(currentCategoryParams) {

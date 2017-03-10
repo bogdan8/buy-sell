@@ -21,7 +21,7 @@ class ProductApi {
   }
 
   static changeApproved(paramsProduct) {
-    let req = request.post(`/products/${paramsProduct.id}/approved`);
+    let req = request.post(`/products/${paramsProduct.id}/approved.json`);
     req.field('product[approved]', paramsProduct.approved);
     return req.then(response => {
       return response;
@@ -31,7 +31,7 @@ class ProductApi {
   }
 
   static destroyProduct(id) {
-    let req = request.delete(`/products/${id}`);
+    let req = request.delete(`/products/${id}.json`);
     return req.then(response => {
       return response;
     }, error => {
@@ -40,7 +40,7 @@ class ProductApi {
   }
 
   static createProduct(paramsProduct) {
-    let req = request.post('/products');
+    let req = request.post('/products.json');
     req.field('product[text]', paramsProduct.text)
         .field('product[price]', paramsProduct.price)
         .field('product[user_id]', paramsProduct.user_id)

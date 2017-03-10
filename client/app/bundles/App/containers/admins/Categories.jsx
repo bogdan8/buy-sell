@@ -10,7 +10,6 @@ import {CreateCategories, EditCategories, CategoriesList} from '../../components
 class Categories extends Component {
   componentDidMount() {
     componentHandler.upgradeDom();
-    this.props.actions.allCategories();
   };
 
   handleClickShowModalWindow(id, name) {
@@ -19,9 +18,9 @@ class Categories extends Component {
     document.getElementById('category-edit').value = name;
   };
 
-  handleClickRemoveCategory(index) {
+  handleClickRemoveCategory(indexCategory, id) {
     if (confirm("Ви дійсно хочите видалити?")) {
-      this.props.actions.removeCategory(index);
+      this.props.actions.removeCategory(indexCategory, id);
       alert("Видалено!")
     } else {
       alert("Відмінено")
@@ -39,7 +38,7 @@ class Categories extends Component {
             <i className="fa fa-pencil" aria-hidden="true"/>
           </a>
           <a id="remove_category" onClick={() => {
-            this.handleClickRemoveCategory(index)
+            this.handleClickRemoveCategory(index, category.id)
           }}>
             <i className="fa fa-trash" aria-hidden="true"/>
           </a>
