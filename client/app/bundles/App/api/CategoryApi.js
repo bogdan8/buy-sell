@@ -2,7 +2,7 @@ import request from 'superagent';
 
 class CategoryApi {
   static getAllCategories() {
-    let req = request.get('/categories');
+    let req = request.get('/categories.json');
     return req.then(response => {
       return response;
     }, error => {
@@ -11,7 +11,7 @@ class CategoryApi {
   }
 
   static createCategory(paramsCategory) {
-    let req = request.post('/categories');
+    let req = request.post('/categories.json');
     req.field('category[name]', paramsCategory.name);
     return req.then(response => {
       return response;
