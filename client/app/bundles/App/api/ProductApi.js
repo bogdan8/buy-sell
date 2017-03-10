@@ -30,6 +30,15 @@ class ProductApi {
     });
   }
 
+  static destroyProduct(id) {
+    let req = request.delete(`/products/${id}`);
+    return req.then(response => {
+      return response;
+    }, error => {
+      return error;
+    });
+  }
+
   static createProduct(paramsProduct) {
     let req = request.post('/products');
     req.field('product[text]', paramsProduct.text)

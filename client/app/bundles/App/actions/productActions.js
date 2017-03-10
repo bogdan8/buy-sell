@@ -47,16 +47,22 @@ export function payProduct(indexProduct) {
   }
 }
 
-export function removeProduct(indexProduct) {
-  return {
-    type: types.REMOVE_PRODUCT,
-    indexProduct: indexProduct
-  }
+export function removeProduct(indexProduct, id) {
+  return function (dispatch) {
+    return productApi.destroyProduct(id).then(() => {
+      dispatch({
+        type: types.REMOVE_PRODUCT,
+        indexProduct: indexProduct
+      });
+    }).catch(error => {
+      throw(error);
+    });
+  };
 }
 
 export function stateProduct(paramsProduct) {
   return function (dispatch) {
-    return productApi.changeApproved(paramsProduct).then(response => {
+    return productApi.changeApproved(paramsProduct).then(() => {
       dispatch({
         type: types.STATE_PRODUCT,
         valueProduct: paramsProduct

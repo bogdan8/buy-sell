@@ -9,6 +9,10 @@ class ProductsController < ActionController::API
     Product.create(product_params)
   end
 
+  def destroy
+    Product.find(params[:id]).destroy!
+  end
+
   def approved
     @product = Product.find(params[:id]).update(approved: params[:product][:approved])
   end

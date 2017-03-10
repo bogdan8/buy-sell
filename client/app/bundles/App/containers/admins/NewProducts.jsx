@@ -11,21 +11,18 @@ import getVisibleProducts from '../../selectors/getVisibleProducts';
 import '../../components/style/Product.sass';
 
 class NewProduct extends Component {
-  componentWillMount() {
-    this.props.actions.allProducts();
-  };
-
   componentDidMount() {
     componentHandler.upgradeDom();
+    this.props.actions.allProducts();
   };
 
   handleClickSelect(e) {
     this.props.actions.setAdminFilterOptionProducts(e.target.id, e.target.checked);
   };
 
-  handleClickRemoveProduct(index) {
+  handleClickRemoveProduct(indexProduct, id) {
     if (confirm("Ви дійсно хочите видалити?")) {
-      this.props.actions.removeProduct(index);
+      this.props.actions.removeProduct(indexProduct, id);
       alert("Видалено!")
     } else {
       alert("Відмінено")
@@ -127,7 +124,7 @@ class NewProduct extends Component {
                  aria-hidden="true"/>
             </a>
             <a id="remove_product" onClick={() => {
-              this.handleClickRemoveProduct(index)
+              this.handleClickRemoveProduct(index, product.id)
             }}>
               <i className="fa fa-trash" aria-hidden="true"/>
             </a>
