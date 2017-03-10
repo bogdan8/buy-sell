@@ -1,9 +1,20 @@
-import {EDIT_CATEGORY, REMOVE_CATEGORY, GET_ALL_CATEGORIES} from '../actions/actionTypes';
+import {
+  ADD_CATEGORY,
+  EDIT_CATEGORY,
+  REMOVE_CATEGORY,
+  GET_ALL_CATEGORIES
+} from '../actions/actionTypes';
 
 var data = [];
 
 export default function categories(state = data, action) {
   switch (action.type) {
+    case ADD_CATEGORY:
+      console.log(action);
+      return [
+        ...state,
+        action.categories
+      ];
     case GET_ALL_CATEGORIES:
       return action.categories;
     case EDIT_CATEGORY:

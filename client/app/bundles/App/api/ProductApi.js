@@ -28,7 +28,7 @@ class ProductApi {
         .field('product[category_id]', paramsProduct.category_id)
         .attach('product[image]', paramsProduct.image);
     return req.then(response => {
-      return response.json();
+      return response;
     }, error => {
       return error;
     });

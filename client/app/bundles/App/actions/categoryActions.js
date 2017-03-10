@@ -2,8 +2,12 @@ import * as types from './actionTypes';
 import categoryApi from '../api/CategoryApi';
 
 export function addCategory(paramsCategory) {
-  return () => {
+  return (dispatch) => {
     return categoryApi.createCategory(paramsCategory).then(() => {
+      dispatch({
+        type: types.ADD_CATEGORY,
+        categories: paramsCategory
+      });
     }).catch(error => {
       throw(error);
     });

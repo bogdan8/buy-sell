@@ -2,8 +2,7 @@ import React, {Component}from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Grid, Cell} from 'react-mdl';
-
-import {Pagination, ProductList, CreateProduct} from '../components'
+import {Pagination, ProductList, CreateProduct, ProductsSelectInputCategories} from '../components'
 
 import * as productActions from '../actions/productActions';
 import * as categoryActions from '../actions/categoryActions';
@@ -11,30 +10,22 @@ import * as categoryActions from '../actions/categoryActions';
 import '../components/style/Product.sass';
 
 class Products extends Component {
-  constructor(props) {
-    super(props);
-  };
-
   componentDidMount() {
     componentHandler.upgradeDom();
-    this.props.actions.allApprovedProducts();
-  };
-
-  handleClickSelect(e) {
-    this.props.actions.currentCategory(e.target.innerHTML);
   };
 
   render() {
-    const {prepaidProducts, currentCategory, categories, filterProducts} = this.props;
+    const {prepaidProducts, currentCategory, filterProducts} = this.props;
 
-    let products = (currentCategory === 'Всі' ? this.props.products : filterProducts);
+    let products = ((!currentCategory.name || currentCategory.name === 'Всі' ) ? this.props.products : filterProducts);
     const with_prepaid = products.filter(product =>
-      prepaidProducts.includes(product.id) ? prepaidProducts.includes(product.id) : false
+        prepaidProducts.includes(product.id) ? prepaidProducts.includes(product.id) : false
     );
     const no_prepaid = products.filter(product =>
-      !prepaidProducts.includes(product.id)
+        !prepaidProducts.includes(product.id)
     );
     const all_product = with_prepaid.concat(no_prepaid);
+
     const mappedProducts = all_product.map((product, index) => {
       if (prepaidProducts.includes(product.id)) {
         var active = 'active-prepaid';
@@ -43,36 +34,36 @@ class Products extends Component {
       }
       let photoBlock = (product) => {
         return (
-          <div className="td-block-height-auto">
-            <p className="td-thead-title">Фото</p>
-            <div className="product-image">
-              <img src={`/${product.id}/original/${product.image_file_name}`}/>
+            <div className="td-block-height-auto">
+              <p className="td-thead-title">Фото</p>
+              <div className="product-image">
+                <img src={`/system/products/images/${product.id}/original/${product.image_file_name}`}/>
+              </div>
             </div>
-          </div>
         )
       };
       let descriptionBlock = (product) => {
         return (
-          <div className="td-block-height-auto">
-            <p className="td-thead-title">Оголошення</p>
-            <p>{product.text}</p>
-          </div>
+            <div className="td-block-height-auto">
+              <p className="td-thead-title">Оголошення</p>
+              <p>{product.text}</p>
+            </div>
         )
       };
       let contactBlock = (product) => {
         return (
-          <div>
-            <p className="td-thead-title">Контакти</p>
-            <p>{product.user_id}</p>
-          </div>
+            <div>
+              <p className="td-thead-title">Контакти</p>
+              <p>{product.user_id}</p>
+            </div>
         )
       };
       let priceBlock = (product) => {
         return (
-          <div>
-            <p className="td-thead-title">Ціна</p>
-            <p>{product.price}</p>
-          </div>
+            <div>
+              <p className="td-thead-title">Ціна</p>
+              <p>{product.price}</p>
+            </div>
         )
       };
       return {
@@ -84,36 +75,16 @@ class Products extends Component {
       }
     });
     return (
-      <Grid>
-        <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
-          <Grid>
-            <Cell col={12}>
-              <div className="body-header-title flex-center">
-                <div
-                  className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth select-input">
-                  <input className="mdl-textfield__input" type="text" id="list_category"
-                         value={currentCategory === '' ? 'Всі' : currentCategory}
-                         readOnly
-                         tabIndex="-1"
-                         name="list_category"
-                  />
-                  <label htmlFor="list_category" className="mdl-textfield__label">Виберіть рубрику</label>
-                  <ul id="select" htmlFor="list_category" className="mdl-menu mdl-js-menu full-width"
-                      onClick={this.handleClickSelect.bind(this)}>
-                    { categories.map((category, index) =>
-                      <li id="list_category_li" key={category.id} value={category.id}
-                          className="mdl-menu__item full-width">{category.name}</li>
-                    )}
-                  </ul>
-                </div>
-              </div>
-            </Cell>
-            <ProductList mappedProducts={mappedProducts}/>
-            <Pagination />
-            <CreateProduct />
-          </Grid>
-        </Cell>
-      </Grid>
+        <Grid>
+          <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
+            <Grid>
+              <ProductsSelectInputCategories />
+              <ProductList mappedProducts={mappedProducts}/>
+              <Pagination />
+              <CreateProduct />
+            </Grid>
+          </Cell>
+        </Grid>
     )
   }
 }
@@ -121,9 +92,8 @@ class Products extends Component {
 function mapStateToProps(state) {
   return {
     products: state.products.filter(product => product.approved),
-    categories: state.categories,
     currentCategory: state.currentCategory,
-    filterProducts: state.products.filter(product => /*product.category.includes(state.currentCategory) &&*/ product.approved),
+    filterProducts: state.products.filter(product => product.category_id.includes(state.currentCategory.id) && product.approved),
     prepaidProducts: state.prepaidProducts
   }
 }

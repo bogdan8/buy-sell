@@ -1,5 +1,6 @@
 export Main from '../containers/Main'
 export Menu from '../containers/Menu'
+export ProductsSelectInputCategories from '../containers/ProductsSelectInputCategories'
 export Admin from './Admin'
 export SignIn from '../containers/SignIn'
 export Register from './Register'

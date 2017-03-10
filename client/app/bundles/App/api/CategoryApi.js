@@ -14,7 +14,7 @@ class CategoryApi {
     let req = request.post('/category');
     req.field('category[name]', paramsCategory.name);
     return req.then(response => {
-      return response.json();
+      return response;
     }, error => {
       return error;
     });

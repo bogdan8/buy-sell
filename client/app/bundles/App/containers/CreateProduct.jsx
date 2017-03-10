@@ -17,6 +17,7 @@ class CreateProduct extends Component {
 
   handleClickSelectModal(e) {
     document.getElementById('select-category').value = e.target.innerHTML;
+    document.getElementById('select-category').setAttribute('data-id-value', e.target.getAttribute('data-id-value'));
   };
 
   handleClickShowModalWindow() {
@@ -32,14 +33,13 @@ class CreateProduct extends Component {
     e.preventDefault();
     let description = document.getElementById('description').value;
     let price = document.getElementById('price').value;
-    let category_val = document.getElementById('select-category').value;
-    let choseCategory = this.props.categories.filter(category => category.name === category_val);
+    let category_id = document.getElementById('select-category').getAttribute('data-id-value');
 
     let paramsProduct = {
       image: this.state.image,
       text: description,
       user_id: v4(),
-      category_id: choseCategory[0].id,
+      category_id: category_id,
       price: price
     };
 
@@ -94,7 +94,7 @@ class CreateProduct extends Component {
                           <ul id="selectModal" htmlFor="select-category" className="mdl-menu mdl-js-menu full-width"
                               onClick={this.handleClickSelectModal.bind(this)}>
                             { categories.filter(category => category.name != 'Всі').map((category, index) =>
-                                <li id="category_li" key={category.id} value={category.id}
+                                <li id="category_li" key={category.id} data-id-value={category.id}
                                     className="mdl-menu__item full-width">{category.name}</li>
                             )}
                           </ul>

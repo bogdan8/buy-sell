@@ -11,9 +11,12 @@ import getVisibleProducts from '../../selectors/getVisibleProducts';
 import '../../components/style/Product.sass';
 
 class NewProduct extends Component {
+  componentWillMount() {
+    this.props.actions.allProducts();
+  };
+
   componentDidMount() {
     componentHandler.upgradeDom();
-    this.props.actions.allProducts();
   };
 
   handleClickSelect(e) {
@@ -71,7 +74,7 @@ class NewProduct extends Component {
           <div className="td-block-height-auto">
             <p className="td-thead-title">Фото</p>
             <div className="product-image">
-              <img src={`/${product.id}/original/${product.image_file_name}`}/>
+              <img src={`/system/products/images/${product.id}/original/${product.image_file_name}`}/>
             </div>
           </div>
         )
