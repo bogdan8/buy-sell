@@ -20,6 +20,16 @@ class ProductApi {
     });
   }
 
+  static changeApproved(paramsProduct) {
+    let req = request.post(`/products/${paramsProduct.id}/approved`);
+    req.field('product[approved]', paramsProduct.approved);
+    return req.then(response => {
+      return response;
+    }, error => {
+      return error;
+    });
+  }
+
   static createProduct(paramsProduct) {
     let req = request.post('/products');
     req.field('product[text]', paramsProduct.text)

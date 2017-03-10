@@ -9,6 +9,10 @@ class ProductsController < ActionController::API
     Product.create(product_params)
   end
 
+  def approved
+    @product = Product.find(params[:id]).update(approved: params[:product][:approved])
+  end
+
   private
 
   def product_params

@@ -55,10 +55,16 @@ export function removeProduct(indexProduct) {
 }
 
 export function stateProduct(paramsProduct) {
-  return {
-    type: types.STATE_PRODUCT,
-    valueProduct: paramsProduct
-  }
+  return function (dispatch) {
+    return productApi.changeApproved(paramsProduct).then(response => {
+      dispatch({
+        type: types.STATE_PRODUCT,
+        valueProduct: paramsProduct
+      });
+    }).catch(error => {
+      throw(error);
+    });
+  };
 }
 
 export function setAdminFilterOptionProducts(name, isChecked) {
