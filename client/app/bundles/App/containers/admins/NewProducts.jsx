@@ -42,13 +42,13 @@ class NewProduct extends Component {
   }
 
   handleClickChangeState(id, boolean) {
-    if (confirm("Затвердити продукт?")) {
+    if (boolean ? confirm("Затвердити продукт?") : confirm("Не затвердити продукт?")) {
       let paramsProduct = {
         id: id,
         approved: boolean
       };
       this.props.actions.stateProduct(paramsProduct);
-      alert("Затвердити!")
+      boolean ? alert("Затверджений!") : alert("Не затверджений!")
     } else {
       alert("Відмінено")
     }
@@ -108,14 +108,14 @@ class NewProduct extends Component {
           <div>
             <p className="td-thead-title">Дія</p>
             <a id="is_approved" onClick={() => {
-              this.handleClickChangeState(product.id, true)
+              !product.approved ? this.handleClickChangeState(product.id, true) : ''
             }}>
               <i className={ product.approved ? "fa fa-thumbs-o-up active-i" : "fa fa-thumbs-o-up"}
                  aria-hidden="true"
               />
             </a>
             <a id="no_approved" onClick={() => {
-              this.handleClickChangeState(product.id, false)
+              product.approved ? this.handleClickChangeState(product.id, false) : ''
             }}>
               <i className={ product.approved == false ? "fa fa-thumbs-o-down active-i" : "fa fa-thumbs-o-down"}
                  aria-hidden="true"/>
