@@ -13,6 +13,10 @@ class CategoriesController < ActionController::API
     Category.find(params[:id]).destroy!
   end
 
+  def update
+    Category.find(params[:category][:id]).update(name: params[:category][:name])
+  end
+
   private
 
   def category_params

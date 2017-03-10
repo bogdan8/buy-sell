@@ -20,6 +20,16 @@ class CategoryApi {
     });
   }
 
+  static updateCategory(paramsCategory) {
+    let req = request.put(`/categories/${paramsCategory.id}.json`);
+    req.send({category: paramsCategory});
+    return req.then(response => {
+      return response;
+    }, error => {
+      return error;
+    });
+  }
+
   static destroyCategory(id) {
     let req = request.delete(`/categories/${id}.json`);
     return req.then(response => {

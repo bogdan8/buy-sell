@@ -28,10 +28,16 @@ export function allCategories() {
 }
 
 export function editCategory(paramsCategory) {
-  return {
-    type: types.EDIT_CATEGORY,
-    valueCategory: paramsCategory
-  }
+  return function (dispatch) {
+    return categoryApi.updateCategory(paramsCategory).then(() => {
+      dispatch({
+        type: types.EDIT_CATEGORY,
+        valueCategory: paramsCategory
+      });
+    }).catch(error => {
+      throw(error);
+    });
+  };
 }
 
 export function removeCategory(indexCategory, id) {
