@@ -12,7 +12,7 @@ class ProductsSelectInputCategories extends Component {
     componentHandler.upgradeDom();
   };
 
-  handleClickSelect(e) {
+  handleClickSelect(e) { // submit select with chose options
     let currentCategoryParams = {
       id: e.target.getAttribute('data-id-value'),
       name: e.target.innerHTML
@@ -23,33 +23,33 @@ class ProductsSelectInputCategories extends Component {
   render() {
     const {currentCategory, categories} = this.props;
     return (
-        <Cell col={12}>
-          <div className="body-header-title flex-center">
-            <div
-                className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth select-input">
-              <input className="mdl-textfield__input" type="text" id="list_category"
-                     value={currentCategory.name ? currentCategory.name : 'Всі'}
-                     readOnly
-                     tabIndex="-1"
-                     name="list_category"
-              />
-              <label htmlFor="list_category" className="mdl-textfield__label">Виберіть рубрику</label>
-              <ul id="select" htmlFor="list_category" className="mdl-menu mdl-js-menu full-width"
-                  onClick={this.handleClickSelect.bind(this)}>
-                <li id="list_category_li" key="0" data-id-value="0"
+      <Cell col={12}>
+        <div className="body-header-title flex-center">
+          <div
+            className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth select-input">
+            <input className="mdl-textfield__input" type="text" id="list_category"
+                   value={currentCategory.name ? currentCategory.name : 'Всі'}
+                   readOnly
+                   tabIndex="-1"
+                   name="list_category"
+            />
+            <label htmlFor="list_category" className="mdl-textfield__label">Виберіть рубрику</label>
+            <ul id="select" htmlFor="list_category" className="mdl-menu mdl-js-menu full-width"
+                onClick={this.handleClickSelect.bind(this)}>
+              <li id="list_category_li" key="0" data-id-value="0"
+                  className="mdl-menu__item full-width">
+                Всі
+              </li>
+              { categories.map((category, index) =>
+                <li id="list_category_li" key={index} data-id-value={category.id}
                     className="mdl-menu__item full-width">
-                  Всі
+                  {category.name}
                 </li>
-                { categories.map((category, index) =>
-                    <li id="list_category_li" key={index} data-id-value={category.id}
-                        className="mdl-menu__item full-width">
-                      {category.name}
-                    </li>
-                )}
-              </ul>
-            </div>
+              )}
+            </ul>
           </div>
-        </Cell>
+        </div>
+      </Cell>
     )
   }
 }

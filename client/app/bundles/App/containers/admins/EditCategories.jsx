@@ -6,24 +6,23 @@ import {Cell, Button, Textfield} from 'react-mdl';
 import * as categoryActions from '../../actions/categoryActions';
 
 class EditCategories extends Component {
-
-  handleClickHideModalWindow() {
+  handleClickHideModalWindow() { // hide modal window
     document.getElementById('modal-category-edit').style.display = "none";
   };
 
-  handleSubmitEdit(e) {
+  handleSubmitEdit(e) { // submit form edit category
     e.preventDefault();
-    var id = document.getElementById('category-id').value;
-    var name = document.getElementById('category-edit').value;
+    let id = document.getElementById('category-id').value;
+    let name = document.getElementById('category-edit').value;
 
-    var paramsCategory = {
+    let paramsCategory = {
       id: id,
       name: name
     };
 
     this.props.actions.editCategory(paramsCategory);
 
-    document.getElementById('modal-category-edit').style.display = "none";
+    document.getElementById('modal-category-edit').style.display = "none"; // hide modal window
 
     alert('Успішно відредаговано');
   };
@@ -57,8 +56,8 @@ class EditCategories extends Component {
                 </form>
                 <span className="modal__close modal-button-close"
                       onClick={this.handleClickHideModalWindow.bind(this)}>
-                          <i className="fa fa-times" aria-hidden="true"/>
-                        </span>
+                  <i className="fa fa-times" aria-hidden="true"/>
+                </span>
               </div>
             </div>
           </div>

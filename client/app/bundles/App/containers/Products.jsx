@@ -17,15 +17,23 @@ class Products extends Component {
   render() {
     const {prepaidProducts, currentCategory, filterProducts} = this.props;
 
+    /* get product with chose currnet category */
     let products = ((!currentCategory.name || currentCategory.name === 'Всі' ) ? this.props.products : filterProducts);
+
+    /* get prepaid products */
     const with_prepaid = products.filter(product =>
       (prepaidProducts.filter(prepaid => prepaid.product_id.includes(product.id)).length > 0) ? prepaidProducts.filter(prepaid => prepaid.product_id.includes(product.id)) : false
     );
+
+    /* get not prepaid products */
     const no_prepaid = products.filter(product =>
       (prepaidProducts.filter(prepaid => prepaid.product_id.includes(product.id)).length <= 0)
     );
+
+    /* concat all product, to products which were prepaid and which were not prepaid at the end */
     const all_product = with_prepaid.concat(no_prepaid);
 
+    /* map product for put in table */
     const mappedProducts = all_product.map((product, index) => {
       if (prepaidProducts.filter(prepaid => prepaid.product_id.includes(product.id)).length > 0) {
         var active = 'active-prepaid';
@@ -93,7 +101,7 @@ function mapStateToProps(state) {
   return {
     products: state.products.filter(product => product.approved),
     currentCategory: state.currentCategory,
-    filterProducts: state.products.filter(product => product.category_id.includes(state.currentCategory.id) && product.approved),
+    filterProducts: state.products.filter(product => product.category_id.includes(state.currentCategory.id) && product.approved), // filter product with chose category
     prepaidProducts: state.prepaidProducts
   }
 }

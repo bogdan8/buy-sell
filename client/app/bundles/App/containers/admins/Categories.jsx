@@ -13,12 +13,12 @@ class Categories extends Component {
   };
 
   handleClickShowModalWindow(id, name) {
-    document.getElementById('modal-category-edit').style.display = "block";
-    document.getElementById('category-id').value = id;
-    document.getElementById('category-edit').value = name;
+    document.getElementById('modal-category-edit').style.display = "block"; // show modal window
+    document.getElementById('category-id').value = id; // get category id from params and set in input
+    document.getElementById('category-edit').value = name;  // get category name from params and set in input
   };
 
-  handleClickRemoveCategory(indexCategory, id) {
+  handleClickRemoveCategory(indexCategory, id) { // remove category
     if (confirm("Ви дійсно хочите видалити?")) {
       this.props.actions.removeCategory(indexCategory, id);
       alert("Видалено!")
@@ -29,15 +29,15 @@ class Categories extends Component {
 
   render() {
     const {categories} = this.props;
-    const categoryAction = (category, index) => {
+    const categoryAction = (category, index) => { // generates block actions categories to insert it into the table
       return (
         <div>
-          <a id="edit_category_input" data-modal="#modal" onClick={() => {
+          <a id="edit_category_input" data-modal="#modal" onClick={() => { // edit category button
             this.handleClickShowModalWindow(category.id, category.name)
           }}>
             <i className="fa fa-pencil" aria-hidden="true"/>
           </a>
-          <a id="remove_category" onClick={() => {
+          <a id="remove_category" onClick={() => { // remove category button
             this.handleClickRemoveCategory(index, category.id)
           }}>
             <i className="fa fa-trash" aria-hidden="true"/>
@@ -45,7 +45,7 @@ class Categories extends Component {
         </div>
       )
     };
-    const mappedCategories = categories.map((category, index) => {
+    const mappedCategories = categories.map((category, index) => { // generates block show categories to insert it into the table
       let active = ((index % 2) ? "active-tr" : "");
       let nameBlock = (category) => {
         return (

@@ -1,6 +1,7 @@
 import * as types from './actionTypes';
 import categoryApi from '../api/CategoryApi';
 
+/* Create category */
 export function addCategory(paramsCategory) {
   return (dispatch) => {
     return categoryApi.createCategory(paramsCategory).then(() => {
@@ -14,6 +15,7 @@ export function addCategory(paramsCategory) {
   };
 }
 
+/* Get all categories */
 export function allCategories() {
   return function (dispatch) {
     return categoryApi.getAllCategories().then(response => {
@@ -27,6 +29,7 @@ export function allCategories() {
   };
 }
 
+/* Edit category */
 export function editCategory(paramsCategory) {
   return function (dispatch) {
     return categoryApi.updateCategory(paramsCategory).then(() => {
@@ -40,6 +43,7 @@ export function editCategory(paramsCategory) {
   };
 }
 
+/* Remove category */
 export function removeCategory(indexCategory, id) {
   return function (dispatch) {
     return categoryApi.destroyCategory(id).then(() => {
@@ -53,6 +57,7 @@ export function removeCategory(indexCategory, id) {
   };
 }
 
+/* Category is selected for filtering on the products page */
 export function currentCategory(currentCategoryParams) {
   return {
     type: types.CURRENT_CATEGORY,

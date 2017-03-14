@@ -1,6 +1,7 @@
 import * as types from './actionTypes';
 import productApi from '../api/ProductApi';
 
+/* Create product */
 export function addProduct(paramsProduct) {
   return (dispatch) => {
     return productApi.createProduct(paramsProduct).then(() => {
@@ -14,6 +15,7 @@ export function addProduct(paramsProduct) {
   };
 }
 
+/* Get all products where approved true */
 export function allApprovedProducts() {
   return function (dispatch) {
     return productApi.getApprovedProducts().then(response => {
@@ -27,6 +29,7 @@ export function allApprovedProducts() {
   };
 }
 
+/* Get all products */
 export function allProducts() {
   return function (dispatch) {
     return productApi.getAllProducts().then(response => {
@@ -40,6 +43,7 @@ export function allProducts() {
   };
 }
 
+/* Get all products where product is prepaid */
 export function allPrepaidProducts() {
   return function (dispatch) {
     return productApi.getPrepaidProducts().then(response => {
@@ -53,6 +57,7 @@ export function allPrepaidProducts() {
   };
 }
 
+/* Set product prepaid */
 export function payProduct(valuePrepaidProduct) {
   return function (dispatch) {
     return productApi.prepaidProduct(valuePrepaidProduct).then(response => {
@@ -66,6 +71,7 @@ export function payProduct(valuePrepaidProduct) {
   };
 }
 
+/* Remove product */
 export function removeProduct(indexProduct, id) {
   return function (dispatch) {
     return productApi.destroyProduct(id).then(() => {
@@ -79,6 +85,7 @@ export function removeProduct(indexProduct, id) {
   };
 }
 
+/* Set state approved product is true or false */
 export function stateProduct(paramsProduct) {
   return function (dispatch) {
     return productApi.changeApproved(paramsProduct).then(() => {
@@ -92,6 +99,7 @@ export function stateProduct(paramsProduct) {
   };
 }
 
+/* Set options selected by the administrator to filter the unapproved products */
 export function setAdminFilterOptionProducts(name, isChecked) {
   return {
     type: types.GET_ADMIN_FILTER_OPTIONS_PRODUCTS,

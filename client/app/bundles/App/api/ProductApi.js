@@ -1,6 +1,7 @@
 import request from 'superagent';
 
 class ProductApi {
+  /* Get all products */
   static getAllProducts() {
     let req = request.get('/products.json');
     return req.then(response => {
@@ -10,6 +11,7 @@ class ProductApi {
     });
   }
 
+  /* Get all products where product is prepaid */
   static getApprovedProducts() {
     let req = request.get('/products.json')
       .query('approved=true');
@@ -20,6 +22,7 @@ class ProductApi {
     });
   }
 
+  /* Create product */
   static createProduct(paramsProduct) {
     let req = request.post('/products.json');
     req.field('product[text]', paramsProduct.text)
@@ -34,6 +37,7 @@ class ProductApi {
     });
   }
 
+  /* Remove product */
   static destroyProduct(id) {
     let req = request.delete(`/products/${id}.json`);
     return req.then(response => {
@@ -43,6 +47,7 @@ class ProductApi {
     });
   }
 
+  /* Set state approved product is true or false */
   static changeApproved(paramsProduct) {
     let req = request.post(`/products/${paramsProduct.id}/approved.json`);
     req.field('product[approved]', paramsProduct.approved);
@@ -53,6 +58,7 @@ class ProductApi {
     });
   }
 
+  /* Set product prepaid */
   static prepaidProduct(valuePrepaidProduct) {
     let req = request.post(`/products/${valuePrepaidProduct.product_id}/prepaid.json`);
     req.field('product[prepaid_end_date]', valuePrepaidProduct.prepaid_end_date);
@@ -63,6 +69,7 @@ class ProductApi {
     });
   }
 
+  /* Get all products where product is prepaid */
   static getPrepaidProducts() {
     let req = request.get('/products/all_prepaid_product.json');
     return req.then(response => {

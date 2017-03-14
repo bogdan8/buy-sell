@@ -13,21 +13,21 @@ import '../../components/style/Product.sass';
 class NewProduct extends Component {
   constructor(props){
     super(props);
-    this.state = {
+    this.state = { // state initializes the productId to get a product id that is chosen for confirmation of payment window and move action
       productId: ''
     }
   }
 
   componentDidMount() {
     componentHandler.upgradeDom();
-    this.props.actions.allProducts();
+    this.props.actions.allProducts(); // get all products
   };
 
   handleClickSelect(e) {
-    this.props.actions.setAdminFilterOptionProducts(e.target.id, e.target.checked);
+    this.props.actions.setAdminFilterOptionProducts(e.target.id, e.target.checked); // get the value of the selected category to filter products
   };
 
-  handleClickRemoveProduct(indexProduct, id) {
+  handleClickRemoveProduct(indexProduct, id) { // remove product
     if (confirm("Ви дійсно хочите видалити?")) {
       this.props.actions.removeProduct(indexProduct, id);
       alert("Видалено!")
@@ -36,7 +36,7 @@ class NewProduct extends Component {
     }
   }
 
-  handleSubmit(e) {
+  handleSubmit(e) { // submit form prepaid product with end date
     e.preventDefault();
     let end_date = document.getElementById('prepaid_end_date').value;
     let valuePrepaidProduct = {
@@ -48,7 +48,7 @@ class NewProduct extends Component {
 
   }
 
-  handleClickChangeState(id, boolean) {
+  handleClickChangeState(id, boolean) { // options to approved product or unapproved
     if (boolean ? confirm("Затвердити продукт?") : confirm("Не затвердити продукт?")) {
       let paramsProduct = {
         id: id,
@@ -61,7 +61,7 @@ class NewProduct extends Component {
     }
   }
 
-  handleClickShowModalWindow(productId) {
+  handleClickShowModalWindow(productId) { // show modal window for set end date prepaid product
     this.setState({
       productId: productId
     });
@@ -75,13 +75,20 @@ class NewProduct extends Component {
 
   render() {
     const {products, prepaidProducts} = this.props;
+    /* filter product where product is prepaid */
     const with_prepaid = products.filter(product =>
       (prepaidProducts.filter(prepaid => prepaid.product_id.includes(product.id)).length > 0) ? prepaidProducts.filter(prepaid => prepaid.product_id.includes(product.id)) : false
     );
+
+    /* filter product where product not prepaid */
     const no_prepaid = products.filter(product =>
       (prepaidProducts.filter(prepaid => prepaid.product_id.includes(product.id)).length <= 0)
     );
+
+    /* concat all product, to products which were prepaid and which were not prepaid at the end */
     const all_product = with_prepaid.concat(no_prepaid);
+
+    /* map product for put in table */
     const mappedProducts = all_product.map((product, index) => {
       if (prepaidProducts.filter(prepaid => prepaid.product_id.includes(product.id)).length > 0) {
         var active = 'active-prepaid';
@@ -152,6 +159,7 @@ class NewProduct extends Component {
             }}>
               <i className="fa fa-trash" aria-hidden="true"/>
             </a>
+            {/* Modal window end date prepaid product */}
             <div id="modal-product" className="modal-block">
               <div className="modal modal__bg" role="dialog" aria-hidden="true">
                 <div className="modal__dialog">

@@ -7,24 +7,24 @@ import {Cell, Button, Textfield} from 'react-mdl';
 import * as categoryActions from '../../actions/categoryActions';
 
 class CreateCategories extends Component {
-  handleClickShowModalWindow() {
+  handleClickShowModalWindow() { // show modal window
     document.getElementById('modal-category').style.display = "block";
     document.getElementById("form_create_category").reset();
   };
 
-  handleClickHideModalWindow() {
+  handleClickHideModalWindow() { // hide modal window
     document.getElementById('modal-category').style.display = "none";
   };
 
-  handleSubmit(e) {
+  handleSubmit(e) { // submit form create category
     e.preventDefault();
-    var paramsCategory = {
+    let paramsCategory = {
       id: v4(),
       name: document.getElementById('category').value
     };
 
     this.props.actions.addCategory(paramsCategory);
-    document.getElementById('modal-category').style.display = "none";
+    document.getElementById('modal-category').style.display = "none"; // hide modal window
   };
 
   render() {
@@ -61,8 +61,8 @@ class CreateCategories extends Component {
                   </div>
                 </form>
                 <span className="modal__close modal-button-close" onClick={this.handleClickHideModalWindow}>
-                          <i className="fa fa-times" aria-hidden="true"/>
-                        </span>
+                  <i className="fa fa-times" aria-hidden="true"/>
+                </span>
               </div>
             </div>
           </div>

@@ -17,12 +17,12 @@ class User extends Component {
     }
   }
 
-  handleClickChangeRole(id, role) {
-    var paramsUser = {
+  handleClickChangeRole(id, role) { // change role in user (admin or user)
+    let paramsUser = {
       id: id,
       role: role
     };
-    if (confirm(`Зробити адміном? ${role}`)) {
+    if (confirm(`Зробити ${role}?`)) {
       this.props.actions.changeRole(paramsUser);
       alert(`Зроблено ${role}!`)
     } else {

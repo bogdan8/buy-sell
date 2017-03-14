@@ -1,6 +1,7 @@
 import request from 'superagent';
 
 class CategoryApi {
+  /* Get all categories */
   static getAllCategories() {
     let req = request.get('/categories.json');
     return req.then(response => {
@@ -10,6 +11,7 @@ class CategoryApi {
     });
   }
 
+  /* Create category with params name */
   static createCategory(paramsCategory) {
     let req = request.post('/categories.json');
     req.field('category[name]', paramsCategory.name);
@@ -20,6 +22,7 @@ class CategoryApi {
     });
   }
 
+  /* Update category */
   static updateCategory(paramsCategory) {
     let req = request.put(`/categories/${paramsCategory.id}.json`);
     req.send({category: paramsCategory});
@@ -30,6 +33,7 @@ class CategoryApi {
     });
   }
 
+  /* Remove category */
   static destroyCategory(id) {
     let req = request.delete(`/categories/${id}.json`);
     return req.then(response => {
