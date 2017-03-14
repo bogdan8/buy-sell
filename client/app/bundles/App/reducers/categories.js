@@ -1,30 +1,22 @@
-var data = [
-  {
-    id: 1,
-    name: 'Всі'
-  },
-  {
-    id: 2,
-    name: 'Кіно'
-  },
-  {
-    id: 3,
-    name: 'Музика'
-  },
-  {
-    id: 4,
-    name: 'Ігри'
-  }
-];
+import {
+  ADD_CATEGORY,
+  EDIT_CATEGORY,
+  REMOVE_CATEGORY,
+  GET_ALL_CATEGORIES
+} from '../actions/actionTypes';
+
+var data = [];
 
 export default function categories(state = data, action) {
   switch (action.type) {
-    case 'ADD_CATEGORY':
+    case ADD_CATEGORY:
       return [
         ...state,
-        action.valueCategory
+        action.categories
       ];
-    case 'EDIT_CATEGORY':
+    case GET_ALL_CATEGORIES:
+      return action.categories;
+    case EDIT_CATEGORY:
       return state.map((item) => {
         if (item.id != action.valueCategory.id) {
           return item;
@@ -34,7 +26,7 @@ export default function categories(state = data, action) {
           ...action.valueCategory
         };
       });
-    case 'REMOVE_CATEGORY':
+    case REMOVE_CATEGORY:
       return [
         ...state.slice(0, action.indexCategory),
         ...state.slice(action.indexCategory + 1)

@@ -1,9 +1,11 @@
+import {REMOVE_USER, CHANGE_ROLE_IN_USER} from '../actions/actionTypes';
+
 var data = [
   {
     id: 1,
     email: 'user@user.com',
     contacts: 'User Userov',
-    role: 'user'
+    role: 'admin'
   },
   {
     id: 2,
@@ -21,12 +23,12 @@ var data = [
 
 export default function users(state = data, action) {
   switch (action.type) {
-    case 'REMOVE_USER':
+    case REMOVE_USER:
       return [
         ...state.slice(0, action.indexUser),
         ...state.slice(action.indexUser + 1)
       ];
-    case 'CHANGE_ROLE_IN_USER':
+    case CHANGE_ROLE_IN_USER:
       return state.map((item) => {
         if (item.id != action.valueUser.id) {
           return item;

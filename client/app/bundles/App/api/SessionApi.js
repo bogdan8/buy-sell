@@ -1,17 +1,16 @@
+import request from 'superagent';
+
 class SessionApi {
   static login(credentials) {
-    const request = new Request('http://job:3000/user_token', {
-      method: 'POST',
-      headers: new Headers({
-        'Content-Type': 'application/json'
-      }),
-      body: JSON.stringify({auth: credentials})
-    });
-
-
-    return fetch(request).then(response => {
+    let req = request.post('/user_token');
+    req.type('application/json')
+        .send({
+          email: credentials.email,
+          password: credentials.password
+        });
+    return req.then(response => {
       return response.json();
-    }).catch(error => {
+    }, error => {
       return error;
     });
   }
