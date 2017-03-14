@@ -11,7 +11,7 @@ import getVisibleProducts from '../../selectors/getVisibleProducts';
 import '../../components/style/Product.sass';
 
 class NewProduct extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = { // state initializes the productId to get a product id that is chosen for confirmation of payment window and move action
       productId: ''
@@ -146,7 +146,7 @@ class NewProduct extends Component {
             </a>
             <a data-modal="#modal"
                id="prepaid_product" onClick={() => {
-              product.approved ? this.handleClickShowModalWindow(product.id) : ''
+              (product.approved && prepaidProducts.filter(prepaid => prepaid.product_id.includes(product.id)).length <= 0) ? this.handleClickShowModalWindow(product.id) : ''
             }}>
               <i
                 className={ (prepaidProducts.filter(prepaid => prepaid.product_id.includes(product.id)).length > 0) ? "fa fa-money active-i" : "fa fa-money" }
