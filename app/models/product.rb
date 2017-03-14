@@ -1,4 +1,6 @@
 class Product < ActiveRecord::Base
+  has_many :prepaid_products
+
   has_attached_file :image,
                     styles: {
                         thumb: '50x',

@@ -19,51 +19,51 @@ class Products extends Component {
 
     let products = ((!currentCategory.name || currentCategory.name === 'Всі' ) ? this.props.products : filterProducts);
     const with_prepaid = products.filter(product =>
-        prepaidProducts.includes(product.id) ? prepaidProducts.includes(product.id) : false
+      (prepaidProducts.filter(prepaid => prepaid.product_id.includes(product.id)).length > 0) ? prepaidProducts.filter(prepaid => prepaid.product_id.includes(product.id)) : false
     );
     const no_prepaid = products.filter(product =>
-        !prepaidProducts.includes(product.id)
+      (prepaidProducts.filter(prepaid => prepaid.product_id.includes(product.id)).length <= 0)
     );
     const all_product = with_prepaid.concat(no_prepaid);
 
     const mappedProducts = all_product.map((product, index) => {
-      if (prepaidProducts.includes(product.id)) {
+      if (prepaidProducts.filter(prepaid => prepaid.product_id.includes(product.id)).length > 0) {
         var active = 'active-prepaid';
       } else {
         var active = ((index % 2) ? "active-tr hover-tr" : "hover-tr");
       }
       let photoBlock = (product) => {
         return (
-            <div className="td-block-height-auto">
-              <p className="td-thead-title">Фото</p>
-              <div className="product-image">
-                <img src={`/system/products/images/${product.id}/original/${product.image_file_name}`}/>
-              </div>
+          <div className="td-block-height-auto">
+            <p className="td-thead-title">Фото</p>
+            <div className="product-image">
+              <img src={`/system/products/images/${product.id}/original/${product.image_file_name}`}/>
             </div>
+          </div>
         )
       };
       let descriptionBlock = (product) => {
         return (
-            <div className="td-block-height-auto">
-              <p className="td-thead-title">Оголошення</p>
-              <p>{product.text}</p>
-            </div>
+          <div className="td-block-height-auto">
+            <p className="td-thead-title">Оголошення</p>
+            <p>{product.text}</p>
+          </div>
         )
       };
       let contactBlock = (product) => {
         return (
-            <div>
-              <p className="td-thead-title">Контакти</p>
-              <p>{product.user_id}</p>
-            </div>
+          <div>
+            <p className="td-thead-title">Контакти</p>
+            <p>{product.user_id}</p>
+          </div>
         )
       };
       let priceBlock = (product) => {
         return (
-            <div>
-              <p className="td-thead-title">Ціна</p>
-              <p>{product.price}</p>
-            </div>
+          <div>
+            <p className="td-thead-title">Ціна</p>
+            <p>{product.price}</p>
+          </div>
         )
       };
       return {
@@ -75,16 +75,16 @@ class Products extends Component {
       }
     });
     return (
-        <Grid>
-          <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
-            <Grid>
-              <ProductsSelectInputCategories />
-              <ProductList mappedProducts={mappedProducts}/>
-              <Pagination />
-              <CreateProduct />
-            </Grid>
-          </Cell>
-        </Grid>
+      <Grid>
+        <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
+          <Grid>
+            <ProductsSelectInputCategories />
+            <ProductList mappedProducts={mappedProducts}/>
+            <Pagination />
+            <CreateProduct />
+          </Grid>
+        </Cell>
+      </Grid>
     )
   }
 }

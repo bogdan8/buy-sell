@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {Grid, Cell, Switch} from 'react-mdl';
+import {Grid, Cell, Switch, Button, Textfield} from 'react-mdl';
 
 import * as productActions from '../../actions/productActions';
 
@@ -11,6 +11,13 @@ import getVisibleProducts from '../../selectors/getVisibleProducts';
 import '../../components/style/Product.sass';
 
 class NewProduct extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      productId: ''
+    }
+  }
+
   componentDidMount() {
     componentHandler.upgradeDom();
     this.props.actions.allProducts();
@@ -29,13 +36,16 @@ class NewProduct extends Component {
     }
   }
 
-  handleClickPayProduct(index) {
-    if (confirm("Ви дійсно хочите підтвердити оплачений продукт?")) {
-      this.props.actions.payProduct(index);
-      alert("Підтверджено!")
-    } else {
-      alert("Відмінено")
-    }
+  handleSubmit(e) {
+    e.preventDefault();
+    let end_date = document.getElementById('prepaid_end_date').value;
+    let valuePrepaidProduct = {
+      product_id: this.state.productId,
+      prepaid_end_date: end_date
+    };
+    this.props.actions.payProduct(valuePrepaidProduct);
+    document.getElementById('modal-product').style.display = "none";
+
   }
 
   handleClickChangeState(id, boolean) {
@@ -51,17 +61,29 @@ class NewProduct extends Component {
     }
   }
 
+  handleClickShowModalWindow(productId) {
+    this.setState({
+      productId: productId
+    });
+    document.getElementById('modal-product').style.display = "block";
+    document.getElementById("form_prepaid_product").reset();
+  };
+
+  handleClickHideModalWindow() {
+    document.getElementById('modal-product').style.display = "none";
+  };
+
   render() {
     const {products, prepaidProducts} = this.props;
     const with_prepaid = products.filter(product =>
-      prepaidProducts.includes(product.id) ? prepaidProducts.includes(product.id) : false
+      (prepaidProducts.filter(prepaid => prepaid.product_id.includes(product.id)).length > 0) ? prepaidProducts.filter(prepaid => prepaid.product_id.includes(product.id)) : false
     );
     const no_prepaid = products.filter(product =>
-      !prepaidProducts.includes(product.id)
+      (prepaidProducts.filter(prepaid => prepaid.product_id.includes(product.id)).length <= 0)
     );
     const all_product = with_prepaid.concat(no_prepaid);
     const mappedProducts = all_product.map((product, index) => {
-      if (prepaidProducts.includes(product.id)) {
+      if (prepaidProducts.filter(prepaid => prepaid.product_id.includes(product.id)).length > 0) {
         var active = 'active-prepaid';
       } else {
         var active = ((index % 2) ? "active-tr hover-tr" : "hover-tr");
@@ -117,17 +139,53 @@ class NewProduct extends Component {
               <i className={ product.approved == false ? "fa fa-thumbs-o-down active-i" : "fa fa-thumbs-o-down"}
                  aria-hidden="true"/>
             </a>
-            <a id="prepaid_product" onClick={() => {
-              product.approved ? this.handleClickPayProduct(product.id) : ''
+            <a data-modal="#modal"
+               id="prepaid_product" onClick={() => {
+              product.approved ? this.handleClickShowModalWindow(product.id) : ''
             }}>
-              <i className={ prepaidProducts.includes(product.id) ? "fa fa-money active-i" : "fa fa-money" }
-                 aria-hidden="true"/>
+              <i
+                className={ (prepaidProducts.filter(prepaid => prepaid.product_id.includes(product.id)).length > 0) ? "fa fa-money active-i" : "fa fa-money" }
+                aria-hidden="true"/>
             </a>
             <a id="remove_product" onClick={() => {
               this.handleClickRemoveProduct(index, product.id)
             }}>
               <i className="fa fa-trash" aria-hidden="true"/>
             </a>
+            <div id="modal-product" className="modal-block">
+              <div className="modal modal__bg" role="dialog" aria-hidden="true">
+                <div className="modal__dialog">
+                  <div className="modal__content ">
+                    <h4>Дата оплачення продукту:</h4>
+                    <form id="form_prepaid_product" onSubmit={this.handleSubmit.bind(this)}
+                          className="auth-block-grid form-with-border">
+                      <Grid>
+                        <Cell col={12} tablet={12} phone={12}>
+                          <Textfield
+                            type="date"
+                            name="prepaid_end_date"
+                            label=""
+                            id="prepaid_end_date"
+                          />
+                        </Cell>
+                      </Grid>
+                      <Grid>
+                        <Cell col={12} className="flex-center">
+                          <Button raised ripple
+                                  type="submit"
+                          >
+                            <i className="fa fa-thumbs-o-up" aria-hidden="true"/> Підтвердити
+                          </Button>
+                        </Cell>
+                      </Grid>
+                    </form>
+                    <span className="modal__close modal-button-close" onClick={this.handleClickHideModalWindow}>
+                      <i className="fa fa-times" aria-hidden="true"/>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         )
       };

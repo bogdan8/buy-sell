@@ -40,11 +40,30 @@ export function allProducts() {
   };
 }
 
-export function payProduct(indexProduct) {
-  return {
-    type: types.PREPAID_PRODUCT,
-    idProduct: indexProduct
-  }
+export function allPrepaidProducts() {
+  return function (dispatch) {
+    return productApi.getPrepaidProducts().then(response => {
+      dispatch({
+        type: types.GET_ALL_PREPAID_PRODUCTS,
+        prepaidProducts: response.body
+      });
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
+export function payProduct(valuePrepaidProduct) {
+  return function (dispatch) {
+    return productApi.prepaidProduct(valuePrepaidProduct).then(response => {
+      dispatch({
+        type: types.PREPAID_PRODUCT,
+        valuePrepaidProduct: valuePrepaidProduct
+      });
+    }).catch(error => {
+      throw(error);
+    });
+  };
 }
 
 export function removeProduct(indexProduct, id) {

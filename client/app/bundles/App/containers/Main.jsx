@@ -14,6 +14,7 @@ class Main extends React.Component {
     super(props);
     this.props.actions.allApprovedProducts();
     this.props.actions.allCategories();
+    this.props.actions.allPrepaidProducts();
   };
 
   render() {

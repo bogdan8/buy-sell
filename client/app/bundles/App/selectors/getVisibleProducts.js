@@ -14,7 +14,7 @@ const getVisibleProducts = () => {
         return products.filter(product => (product &&
             (approved ? product.approved : product ) &&
             (deflected ? !product.approved : product) &&
-            (prepaid ? prepaidProducts.includes(product.id) : product))
+            (prepaid ? (prepaidProducts.filter(prepaid => prepaid.product_id.includes(product.id)).length > 0) : product))
         );
       }
   );
