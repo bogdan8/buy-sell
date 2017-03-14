@@ -6,6 +6,7 @@ import currentAdminFilterOptionProducts from './currentAdminFilterOptionProducts
 import currentCategory from './currentCategory';
 import users from './users';
 import session from './session';
+import notification from './notification';
 
 const rootReducer = combineReducers({
   products,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   currentAdminFilterOptionProducts,
   currentCategory,
   users,
-  session
+  session,
+  notification
 });
 
 export default rootReducer;

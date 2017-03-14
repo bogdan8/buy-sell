@@ -21,7 +21,6 @@ class Categories extends Component {
   handleClickRemoveCategory(indexCategory, id) { // remove category
     if (confirm("Ви дійсно хочите видалити?")) {
       this.props.actions.removeCategory(indexCategory, id);
-      alert("Видалено!")
     } else {
       alert("Відмінено")
     }

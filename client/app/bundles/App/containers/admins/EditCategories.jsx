@@ -23,8 +23,6 @@ class EditCategories extends Component {
     this.props.actions.editCategory(paramsCategory);
 
     document.getElementById('modal-category-edit').style.display = "none"; // hide modal window
-
-    alert('Успішно відредаговано');
   };
 
   render() {

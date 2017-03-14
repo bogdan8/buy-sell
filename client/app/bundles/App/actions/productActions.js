@@ -4,10 +4,16 @@ import productApi from '../api/ProductApi';
 /* Create product */
 export function addProduct(paramsProduct) {
   return (dispatch) => {
-    return productApi.createProduct(paramsProduct).then(() => {
+    return productApi.createProduct(paramsProduct).then(response => {
       dispatch({
         type: types.ADD_PRODUCT,
         products: paramsProduct
+      });
+      let alert = JSON.parse(response.text);
+      dispatch({
+        type: types.ADD_NOTIFICATION,
+        message: alert.message.text,
+        level: alert.message.type
       });
     }).catch(error => {
       throw(error);
@@ -65,6 +71,12 @@ export function payProduct(valuePrepaidProduct) {
         type: types.PREPAID_PRODUCT,
         valuePrepaidProduct: valuePrepaidProduct
       });
+      let alert = JSON.parse(response.text);
+      dispatch({
+        type: types.ADD_NOTIFICATION,
+        message: alert.message.text,
+        level: alert.message.type
+      });
     }).catch(error => {
       throw(error);
     });
@@ -74,10 +86,16 @@ export function payProduct(valuePrepaidProduct) {
 /* Remove product */
 export function removeProduct(indexProduct, id) {
   return function (dispatch) {
-    return productApi.destroyProduct(id).then(() => {
+    return productApi.destroyProduct(id).then(response => {
       dispatch({
         type: types.REMOVE_PRODUCT,
         indexProduct: indexProduct
+      });
+      let alert = JSON.parse(response.text);
+      dispatch({
+        type: types.ADD_NOTIFICATION,
+        message: alert.message.text,
+        level: alert.message.type
       });
     }).catch(error => {
       throw(error);
@@ -88,10 +106,16 @@ export function removeProduct(indexProduct, id) {
 /* Set state approved product is true or false */
 export function stateProduct(paramsProduct) {
   return function (dispatch) {
-    return productApi.changeApproved(paramsProduct).then(() => {
+    return productApi.changeApproved(paramsProduct).then(response => {
       dispatch({
         type: types.STATE_PRODUCT,
         valueProduct: paramsProduct
+      });
+      let alert = JSON.parse(response.text);
+      dispatch({
+        type: types.ADD_NOTIFICATION,
+        message: alert.message.text,
+        level: alert.message.type
       });
     }).catch(error => {
       throw(error);

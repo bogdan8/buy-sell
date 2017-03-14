@@ -31,20 +31,24 @@ class CreateProduct extends Component {
 
   handleSubmit(e) { // submit form create product
     e.preventDefault();
-    let description = document.getElementById('description').value;
-    let price = document.getElementById('price').value;
-    let category_id = document.getElementById('select-category').getAttribute('data-id-value');
+    if (document.getElementById('select-category').value != 'Рубрики:') {
+      let description = document.getElementById('description').value;
+      let price = document.getElementById('price').value;
+      let category_id = document.getElementById('select-category').getAttribute('data-id-value');
 
-    let paramsProduct = {
-      image: this.state.image,
-      text: description,
-      user_id: v4(),
-      category_id: category_id,
-      price: price
-    };
+      let paramsProduct = {
+        image: this.state.image,
+        text: description,
+        user_id: v4(),
+        category_id: category_id,
+        price: price
+      };
 
-    this.props.actions.addProduct(paramsProduct);
-    document.getElementById('modal-product').style.display = "none";
+      this.props.actions.addProduct(paramsProduct);
+      document.getElementById('modal-product').style.display = "none";
+    } else {
+      alert('Виберіть рубрику');
+    }
   };
 
   onDrop(images) { // select image from modal window and set image in state
@@ -87,7 +91,7 @@ class CreateProduct extends Component {
                       <div
                         className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth select-input">
                         <input className="mdl-textfield__input" type="text" id="select-category"
-                               value={'Всі'}
+                               value={'Рубрики:'}
                                readOnly
                                tabIndex="-1"/>
                         <label htmlFor="select-category" className="mdl-textfield__label">Виберіть рубрику</label>

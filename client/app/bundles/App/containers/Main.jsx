@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
-import {Menu} from '../components';
+import {Menu, Notification} from '../components';
 
 import '../components/style/Auth.sass';
 
@@ -19,10 +19,13 @@ class Main extends React.Component {
 
   render() {
     return (
+      <div>
         <div className="body">
           <Menu/>
           {this.props.children}
         </div>
+        <Notification/>
+      </div>
     );
   }
 }

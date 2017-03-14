@@ -30,7 +30,6 @@ class NewProduct extends Component {
   handleClickRemoveProduct(indexProduct, id) { // remove product
     if (confirm("Ви дійсно хочите видалити?")) {
       this.props.actions.removeProduct(indexProduct, id);
-      alert("Видалено!")
     } else {
       alert("Відмінено")
     }
@@ -55,7 +54,6 @@ class NewProduct extends Component {
         approved: boolean
       };
       this.props.actions.stateProduct(paramsProduct);
-      boolean ? alert("Затверджений!") : alert("Не затверджений!")
     } else {
       alert("Відмінено")
     }
