@@ -1,28 +1,14 @@
-import {REMOVE_USER, CHANGE_ROLE_IN_USER} from '../actions/actionTypes';
+import {ADD_USER, REMOVE_USER, CHANGE_ROLE_IN_USER} from '../actions/actionTypes';
 
-var data = [
-  {
-    id: 1,
-    email: 'user@user.com',
-    contacts: 'User Userov',
-    role: 'admin'
-  },
-  {
-    id: 2,
-    email: 'bobo@bobo.com',
-    contacts: 'Bob Bobo',
-    role: 'user'
-  },
-  {
-    id: 3,
-    email: 'test@test.com',
-    contacts: 'Test Test',
-    role: 'user'
-  }
-];
+var data = [];
 
 export default function users(state = data, action) {
   switch (action.type) {
+    case ADD_USER:
+      return [
+        ...state,
+        action.users
+      ];
     case REMOVE_USER:
       return [
         ...state.slice(0, action.indexUser),

@@ -26,19 +26,19 @@ const userRoutes = (
 );
 
 function Routes(props) {
-  if (props.user.role === 'admin') {
+  //if (props.user.role_id === 'admin') {
     return (
         <Router history={browserHistory}>
           {adminRoutes}
         </Router>
     )
-  } else {
+  /*} else {
     return (
         <Router history={browserHistory}>
           {userRoutes}
         </Router>
     )
-  }
+  }*/
 }
 export default connect(
     state => ({
