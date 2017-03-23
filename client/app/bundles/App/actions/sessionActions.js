@@ -15,7 +15,7 @@ export function logInUser(credentials) {
           level: 'error'
         });
       } else {
-        sessionStorage.setItem('jwt', response.json().jwt);
+        sessionStorage.setItem('jwt', response.jwt);
         dispatch(loginSuccess());
         dispatch({
           type: types.ADD_NOTIFICATION,
