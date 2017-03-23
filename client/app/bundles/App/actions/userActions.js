@@ -2,6 +2,14 @@ import * as types from './actionTypes';
 import userApi from '../api/UserApi';
 import { browserHistory } from 'react-router';
 
+export function message(message, level) {
+  return {
+    type: types.ADD_NOTIFICATION,
+    message: message,
+    level: level
+  }
+}
+
 /* Registration user */
 export function addUser(paramsUser) {
   return (dispatch) => {
@@ -11,11 +19,7 @@ export function addUser(paramsUser) {
         users: paramsUser
       });
       let alert = JSON.parse(response.text);
-      dispatch({
-        type: types.ADD_NOTIFICATION,
-        message: alert.message.text,
-        level: alert.message.type
-      });
+      dispatch(message(alert.message.text, alert.message.type));
       if (alert.message.type == 'success') {
         browserHistory.push('/sign_in');
       }
