@@ -19,12 +19,11 @@ export function logInUser(credentials) {
         dispatch(loginSuccess());
         dispatch({
           type: types.ADD_NOTIFICATION,
-          message: 'Ви успішно зайшли',
+          message: 'Ви успішно ввійшли',
           level: 'success'
         });
       }
     }).catch(error => {
-      console.log('error a');
       throw(error);
     });
   };
@@ -37,6 +36,8 @@ export function logOutUser() {
       message: 'Ви успішно вийшли',
       level: 'success'
     });
-    return {type: types.LOG_OUT}
+    dispatch({
+      type: types.LOG_OUT
+    });
   }
 }
