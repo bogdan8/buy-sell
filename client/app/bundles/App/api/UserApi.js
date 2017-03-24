@@ -1,6 +1,16 @@
 import request from 'superagent';
 
 class UserApi {
+  /* Get all users */
+  static getAllUsers() {
+    let req = request.get('/users.json').set('AUTHORIZATION', `Bearer ${sessionStorage.jwt}`);
+    return req.then(response => {
+      return response;
+    }, error => {
+      return error;
+    });
+  }
+
   /* Create user */
   static createUser(paramsUser) {
     let req = request.post('/users.json');

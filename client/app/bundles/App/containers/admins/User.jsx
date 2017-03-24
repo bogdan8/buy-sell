@@ -11,6 +11,9 @@ class User extends AuthorizedComponent {
   constructor(props) {
     super(props);
 
+    this.props.actions.allUsers();
+
+    // for check role is admin
     this.userRoles = [props.user.role];
     this.notAuthorizedPath = '/';
   }
@@ -43,6 +46,7 @@ class User extends AuthorizedComponent {
   }
 
   render() {
+    console.log(this.props.users);
     const {users} = this.props;
     const userAction = (user, index) => {
       return (

@@ -1,4 +1,11 @@
-class UsersController < ActionController::API
+class UsersController < ApplicationController
+  before_action :authenticate_user, except: :create
+
+  def index
+    @users = User.all
+    render json: @users
+  end
+
   def create
     user = User.new user_params
     message(user.save, 'Зареєстровано!', user.errors.full_messages.to_sentence)

@@ -1,4 +1,4 @@
-class ProductsController < ActionController::API
+class ProductsController < ApplicationController
   before_action :set_product, only: [:destroy, :approved, :prepaid]
   before_action :authenticate_user, except: [:index, :all_prepaid_product]
 

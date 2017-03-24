@@ -12,6 +12,7 @@ class Categories extends AuthorizedComponent {
   constructor(props) {
     super(props);
 
+    // for check role is admin
     this.userRoles = [props.user.role];
     this.notAuthorizedPath = '/';
   }

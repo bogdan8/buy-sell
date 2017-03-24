@@ -18,6 +18,7 @@ class NewProduct extends AuthorizedComponent {
       productId: ''
     };
 
+    // for check role is admin
     this.userRoles = [props.user.role];
     this.notAuthorizedPath = '/';
   }

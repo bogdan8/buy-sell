@@ -10,6 +10,20 @@ export function message(message, level) {
   }
 }
 
+/* Get all users */
+export function allUsers() {
+  return function (dispatch) {
+    return userApi.getAllUsers().then(response => {
+      dispatch({
+        type: types.GET_ALL_USERS,
+        users: response.body
+      });
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
 /* Registration user */
 export function addUser(paramsUser) {
   return (dispatch) => {
