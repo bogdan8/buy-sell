@@ -89,7 +89,7 @@ class Products extends Component {
             <ProductsSelectInputCategories />
             <ProductList mappedProducts={mappedProducts}/>
             <Pagination />
-            <CreateProduct />
+            {this.props.user.id != undefined ? <CreateProduct /> : '' }
           </Grid>
         </Cell>
       </Grid>
@@ -102,7 +102,8 @@ function mapStateToProps(state) {
     products: state.products.filter(product => product.approved),
     currentCategory: state.currentCategory,
     filterProducts: state.products.filter(product => product.category_id.includes(state.currentCategory.id) && product.approved), // filter product with chose category
-    prepaidProducts: state.prepaidProducts
+    prepaidProducts: state.prepaidProducts,
+    user: state.session
   }
 }
 
