@@ -1,12 +1,24 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import {AuthorizedComponent} from 'react-router-role-authorization';
 
 import * as userActions from '../../actions/userActions';
 
 import {UserList} from '../../components/admin';
 
-class User extends Component {
+class User extends AuthorizedComponent {
+  constructor(props) {
+    super(props);
+
+    this.userRoles = [props.user.role];
+    this.notAuthorizedPath = '/';
+  }
+
+  handleUnauthorizedRole(routeRoles, userRoles) {
+    const {router} = this.context;
+    router.push('/');
+  }
 
   handleClickRemoveUser(index) {
     if (confirm("Ви дійсно хочите видалити?")) {
@@ -87,7 +99,8 @@ class User extends Component {
 }
 function mapStateToProps(state) {
   return {
-    users: state.users
+    users: state.users,
+    user: state.session
   }
 }
 

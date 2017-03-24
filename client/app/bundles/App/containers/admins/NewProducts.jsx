@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import {AuthorizedComponent} from 'react-router-role-authorization';
 import {Grid, Cell, Switch, Button, Textfield} from 'react-mdl';
 
 import * as productActions from '../../actions/productActions';
@@ -10,12 +11,20 @@ import getVisibleProducts from '../../selectors/getVisibleProducts';
 
 import '../../components/style/Product.sass';
 
-class NewProduct extends Component {
+class NewProduct extends AuthorizedComponent {
   constructor(props) {
     super(props);
     this.state = { // state initializes the productId to get a product id that is chosen for confirmation of payment window and move action
       productId: ''
-    }
+    };
+
+    this.userRoles = [props.user.role];
+    this.notAuthorizedPath = '/';
+  }
+
+  handleUnauthorizedRole(routeRoles, userRoles) {
+    const {router} = this.context;
+    router.push('/');
   }
 
   componentDidMount() {
@@ -241,7 +250,8 @@ class NewProduct extends Component {
 function mapStateToProps(state) {
   return {
     products: getVisibleProducts(state),
-    prepaidProducts: state.prepaidProducts
+    prepaidProducts: state.prepaidProducts,
+    user: state.session
   }
 }
 
