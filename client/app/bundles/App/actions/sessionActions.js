@@ -19,7 +19,9 @@ export function logInUser(credentials) {
         sessionStorage.setItem('jwt', response_text.jwt);
         sessionStorage.setItem('id', response_text.id);
         sessionStorage.setItem('role', response_text.role);
-        dispatch({type: types.LOG_IN_SUCCESS});
+        dispatch({type: types.LOG_IN_SUCCESS,
+          user: {id: response_text.id, role: response_text.role}
+        });
         dispatch(message('Ви успішно ввійшли', 'success'));
       }
     }).catch(error => {
