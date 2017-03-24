@@ -20,14 +20,13 @@ function Menu(props) {
         >
           <i className="fa fa-user" aria-hidden="true"/>
         </FABButton>
-        {/* {props.user.role_id === 'admin' ? <AdminMenu /> : <UserMenu />}*/}
-        <AdminMenu />
+        {props.user.role === 'admin' ? <AdminMenu /> : <UserMenu />}
       </div>
     </div>
   );
 }
 export default connect(
   state => ({
-    user: state.users[0]
+    user: state.session
   })
 )(Menu);

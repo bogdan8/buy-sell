@@ -17,58 +17,39 @@ class AdminMenu extends Component {
     this.props.actions.logOutUser();
   }
 
-  checkIfUserSignIn() {
-    if (this.props.logged_in) {
-      return <MenuItem>
-        <Link onClick={this.logOut}>
-          Вийти
-        </Link>
-      </MenuItem>
-    } else {
-      return <div>
-        <MenuItem>
-          <Link to="/sign_in">
-            Ввійти
-          </Link>
-        </MenuItem>
-        <MenuItem>
-          <Link to="/register">
-            Зареєструватись
-          </Link>
-        </MenuItem>
-      </div>
-    }
-  }
-
   render() {
     return (
-        <Menu
-            align="right"
-            target="demo-menu-lower-right"
-            ripple
-        >
-          {this.checkIfUserSignIn()}
-          <MenuItem>
-            <Link to="/products">
-              Оголошення
-            </Link>
-          </MenuItem>
-          <MenuItem>
-            <Link to="/admin/user">
-              Таблиця користувачів
-            </Link>
-          </MenuItem>
-          <MenuItem>
-            <Link to="/admin/categories">
-              Таблиця рубрик
-            </Link>
-          </MenuItem>
-          <MenuItem>
-            <Link to="/admin/new_products">
-              Нові оголошення
-            </Link>
-          </MenuItem>
-        </Menu>
+      <Menu
+        align="right"
+        target="demo-menu-lower-right"
+        ripple
+      >
+        <MenuItem>
+          <Link onClick={this.logOut}>
+            Вийти
+          </Link>
+        </MenuItem>
+        <MenuItem>
+          <Link to="/products">
+            Оголошення
+          </Link>
+        </MenuItem>
+        <MenuItem>
+          <Link to="/admin/user">
+            Таблиця користувачів
+          </Link>
+        </MenuItem>
+        <MenuItem>
+          <Link to="/admin/categories">
+            Таблиця рубрик
+          </Link>
+        </MenuItem>
+        <MenuItem>
+          <Link to="/admin/new_products">
+            Нові оголошення
+          </Link>
+        </MenuItem>
+      </Menu>
     );
   }
 }
@@ -79,8 +60,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-function mapStateToProps(state) {
-  return {logged_in: state.session};
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(AdminMenu);
+export default connect(null, mapDispatchToProps)(AdminMenu);

@@ -1,14 +1,9 @@
-import {ADD_USER, REMOVE_USER, CHANGE_ROLE_IN_USER} from '../actions/actionTypes';
+import {REMOVE_USER, CHANGE_ROLE_IN_USER} from '../actions/actionTypes';
 
 var data = [];
 
 export default function users(state = data, action) {
   switch (action.type) {
-    case ADD_USER:
-      return [
-        ...state,
-        action.users
-      ];
     case REMOVE_USER:
       return [
         ...state.slice(0, action.indexUser),

@@ -1,4 +1,3 @@
-export const ADD_USER = 'ADD_USER';
 export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
 export const LOG_OUT = 'LOG_OUT';
 export const GET_ADMIN_FILTER_OPTIONS_PRODUCTS = 'GET_ADMIN_FILTER_OPTIONS_PRODUCTS';
