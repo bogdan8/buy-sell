@@ -1,5 +1,8 @@
 export default {
   products: [],
-  session: !!sessionStorage.jwt
+  session: {
+    id: sessionStorage.id,
+    role: sessionStorage.role
+  }
 }
 

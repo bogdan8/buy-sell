@@ -13,7 +13,7 @@ class CategoryApi {
 
   /* Create category with params name */
   static createCategory(paramsCategory) {
-    let req = request.post('/categories.json');
+    let req = request.post('/categories.json').set('AUTHORIZATION', `Bearer ${sessionStorage.jwt}`);
     req.field('category[name]', paramsCategory.name);
     return req.then(response => {
       return response;
@@ -24,7 +24,7 @@ class CategoryApi {
 
   /* Update category */
   static updateCategory(paramsCategory) {
-    let req = request.put(`/categories/${paramsCategory.id}.json`);
+    let req = request.put(`/categories/${paramsCategory.id}.json`).set('AUTHORIZATION', `Bearer ${sessionStorage.jwt}`);
     req.send({category: paramsCategory});
     return req.then(response => {
       return response;
@@ -35,7 +35,7 @@ class CategoryApi {
 
   /* Remove category */
   static destroyCategory(id) {
-    let req = request.delete(`/categories/${id}.json`);
+    let req = request.delete(`/categories/${id}.json`).set('AUTHORIZATION', `Bearer ${sessionStorage.jwt}`);
     return req.then(response => {
       return response;
     }, error => {

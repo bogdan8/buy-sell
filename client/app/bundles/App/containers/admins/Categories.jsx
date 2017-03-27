@@ -2,12 +2,26 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Grid, Cell} from 'react-mdl';
+import {AuthorizedComponent} from 'react-router-role-authorization';
 
 import * as categoryActions from '../../actions/categoryActions';
 
 import {CreateCategories, EditCategories, CategoriesList} from '../../components/admin';
 
-class Categories extends Component {
+class Categories extends AuthorizedComponent {
+  constructor(props) {
+    super(props);
+
+    // for check role is admin
+    this.userRoles = [props.user.role];
+    this.notAuthorizedPath = '/';
+  }
+
+  handleUnauthorizedRole(routeRoles, userRoles) {
+    const {router} = this.context;
+    router.push('/');
+  }
+
   componentDidMount() {
     componentHandler.upgradeDom();
   };
@@ -81,7 +95,8 @@ class Categories extends Component {
 
 function mapStateToProps(state) {
   return {
-    categories: state.categories
+    categories: state.categories,
+    user: state.session
   }
 }
 

@@ -1,6 +1,14 @@
 import * as types from './actionTypes';
 import categoryApi from '../api/CategoryApi';
 
+export function message(message, level) {
+  return {
+    type: types.ADD_NOTIFICATION,
+    message: message,
+    level: level
+  }
+}
+
 /* Create category */
 export function addCategory(paramsCategory) {
   return (dispatch) => {
@@ -10,11 +18,7 @@ export function addCategory(paramsCategory) {
         categories: paramsCategory
       });
       let alert = JSON.parse(response.text);
-      dispatch({
-        type: types.ADD_NOTIFICATION,
-        message: alert.message.text,
-        level: alert.message.type
-      });
+      dispatch(message(alert.message.text, alert.message.type));
     }).catch(error => {
       throw(error);
     });
@@ -44,11 +48,7 @@ export function editCategory(paramsCategory) {
         valueCategory: paramsCategory
       });
       let alert = JSON.parse(response.text);
-      dispatch({
-        type: types.ADD_NOTIFICATION,
-        message: alert.message.text,
-        level: alert.message.type
-      });
+      dispatch(message(alert.message.text, alert.message.type));
     }).catch(error => {
       throw(error);
     });
@@ -64,11 +64,7 @@ export function removeCategory(indexCategory, id) {
         indexCategory: indexCategory
       });
       let alert = JSON.parse(response.text);
-      dispatch({
-        type: types.ADD_NOTIFICATION,
-        message: alert.message.text,
-        level: alert.message.type
-      });
+      dispatch(message(alert.message.text, alert.message.type));
     }).catch(error => {
       throw(error);
     });

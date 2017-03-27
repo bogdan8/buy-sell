@@ -18,7 +18,7 @@ class UserMenu extends Component {
   }
 
   checkIfUserSignIn() {
-    if (this.props.logged_in) {
+    if (this.props.user.id != undefined) {
       return <MenuItem>
         <Link onClick={this.logOut}>
           Вийти
@@ -42,18 +42,18 @@ class UserMenu extends Component {
 
   render() {
     return (
-        <Menu
-            align="right"
-            target="demo-menu-lower-right"
-            ripple
-        >
-          {this.checkIfUserSignIn()}
-          <MenuItem>
-            <Link to="/products">
-              Оголошення
-            </Link>
-          </MenuItem>
-        </Menu>
+      <Menu
+        align="right"
+        target="demo-menu-lower-right"
+        ripple
+      >
+        {this.checkIfUserSignIn()}
+        <MenuItem>
+          <Link to="/products">
+            Оголошення
+          </Link>
+        </MenuItem>
+      </Menu>
     );
   }
 }
@@ -64,7 +64,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-  return {logged_in: state.session};
+  return {user: state.session};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserMenu);

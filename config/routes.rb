@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-
-  post 'user_token' => 'user_token#create'
   scope constraints: ->(req) { req.format == :json } do
+    post 'user_token' => 'user_token#create'
     resources :products do
       post :approved, on: :member
       post :prepaid, on: :member
@@ -9,8 +8,10 @@ Rails.application.routes.draw do
     end
 
     resources :categories
+    resources :users do
+      get :roles, on: :collection
+      post :change_role, on: :member
+    end
   end
   get '*path' => 'static#index', constraints: lambda { |req| req.format != 'json' }
-
-  resources :users;
 end

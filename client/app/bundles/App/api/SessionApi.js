@@ -2,14 +2,12 @@ import request from 'superagent';
 
 class SessionApi {
   static login(credentials) {
-    let req = request.post('/user_token');
-    req.type('application/json')
-        .send({
-          email: credentials.email,
-          password: credentials.password
-        });
+    let req = request.post('http://localhost:3000/user_token.json');
+    req.set('Content-Type', 'application/json');
+    req.send(JSON.stringify({auth: credentials}));
+
     return req.then(response => {
-      return response.json();
+      return response;
     }, error => {
       return error;
     });

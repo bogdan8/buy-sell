@@ -1,5 +1,6 @@
-class CategoriesController < ActionController::API
+class CategoriesController < ApplicationController
   before_action :set_category, only: [:update, :destroy]
+  before_action :authenticate_user, except: :index
 
   def index
     @categories = Category.all

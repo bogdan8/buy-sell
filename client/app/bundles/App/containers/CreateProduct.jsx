@@ -1,7 +1,6 @@
 import React, {Component}from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {v4} from 'node-uuid';
 import {Grid, Cell, Button, Textfield} from 'react-mdl';
 import Dropzone from 'react-dropzone';
 
@@ -39,7 +38,7 @@ class CreateProduct extends Component {
       let paramsProduct = {
         image: this.state.image,
         text: description,
-        user_id: v4(),
+        user_id: this.props.user.id,
         category_id: category_id,
         price: price
       };
@@ -145,7 +144,8 @@ class CreateProduct extends Component {
 
 function mapStateToProps(state) {
   return {
-    categories: state.categories
+    categories: state.categories,
+    user: state.session
   }
 }
 

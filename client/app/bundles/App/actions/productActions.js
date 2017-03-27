@@ -1,6 +1,14 @@
 import * as types from './actionTypes';
 import productApi from '../api/ProductApi';
 
+export function message(message, level) {
+  return {
+    type: types.ADD_NOTIFICATION,
+    message: message,
+    level: level
+  }
+}
+
 /* Create product */
 export function addProduct(paramsProduct) {
   return (dispatch) => {
@@ -10,11 +18,7 @@ export function addProduct(paramsProduct) {
         products: paramsProduct
       });
       let alert = JSON.parse(response.text);
-      dispatch({
-        type: types.ADD_NOTIFICATION,
-        message: alert.message.text,
-        level: alert.message.type
-      });
+      dispatch(message(alert.message.text, alert.message.type));
     }).catch(error => {
       throw(error);
     });
@@ -72,11 +76,7 @@ export function payProduct(valuePrepaidProduct) {
         valuePrepaidProduct: valuePrepaidProduct
       });
       let alert = JSON.parse(response.text);
-      dispatch({
-        type: types.ADD_NOTIFICATION,
-        message: alert.message.text,
-        level: alert.message.type
-      });
+      dispatch(message(alert.message.text, alert.message.type));
     }).catch(error => {
       throw(error);
     });
@@ -92,11 +92,7 @@ export function removeProduct(indexProduct, id) {
         indexProduct: indexProduct
       });
       let alert = JSON.parse(response.text);
-      dispatch({
-        type: types.ADD_NOTIFICATION,
-        message: alert.message.text,
-        level: alert.message.type
-      });
+      dispatch(message(alert.message.text, alert.message.type));
     }).catch(error => {
       throw(error);
     });
@@ -112,11 +108,7 @@ export function stateProduct(paramsProduct) {
         valueProduct: paramsProduct
       });
       let alert = JSON.parse(response.text);
-      dispatch({
-        type: types.ADD_NOTIFICATION,
-        message: alert.message.text,
-        level: alert.message.type
-      });
+      dispatch(message(alert.message.text, alert.message.type));
     }).catch(error => {
       throw(error);
     });
