@@ -11,6 +11,16 @@ class UsersController < ApplicationController
     message(user.save, 'Зареєстровано!', user.errors.full_messages.to_sentence)
   end
 
+  def roles
+    @roles = Role.all
+    render json: @roles
+  end
+
+  def change_role
+    user = User.find(params[:id])
+    message(user.update(role_id: params[:user][:role_id]), 'Роль змінено!', user.errors.full_messages.to_sentence)
+  end
+
   private
 
   def message(action, success, error)

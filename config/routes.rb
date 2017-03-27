@@ -8,7 +8,10 @@ Rails.application.routes.draw do
     end
 
     resources :categories
-    resources :users
+    resources :users do
+      get :roles, on: :collection
+      post :change_role, on: :member
+    end
   end
   get '*path' => 'static#index', constraints: lambda { |req| req.format != 'json' }
 end

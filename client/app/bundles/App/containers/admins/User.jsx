@@ -11,16 +11,23 @@ class User extends AuthorizedComponent {
   constructor(props) {
     super(props);
 
-    this.props.actions.allUsers();
-
     // for check role is admin
     this.userRoles = [props.user.role];
     this.notAuthorizedPath = '/';
   }
 
+  componentWillMount() {
+    this.props.actions.allRoles(); // get all user roles
+    this.props.actions.allUsers(); // get all users
+  }
+
   handleUnauthorizedRole(routeRoles, userRoles) {
     const {router} = this.context;
     router.push('/');
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return (JSON.stringify(nextProps.users) != JSON.stringify(this.props.users));
   }
 
   handleClickRemoveUser(index) {
@@ -32,35 +39,32 @@ class User extends AuthorizedComponent {
     }
   }
 
-  handleClickChangeRole(id, role) { // change role in user (admin or user)
+  handleClickChangeRole(id, role_id) { // change role in user (admin or user)
     let paramsUser = {
       id: id,
-      role: role
+      role_id: role_id
     };
-    if (confirm(`Зробити ${role}?`)) {
-      this.props.actions.changeRole(paramsUser);
-      alert(`Зроблено ${role}!`)
-    } else {
-      alert("Відмінено")
-    }
+    this.props.actions.changeRole(paramsUser);
   }
 
   render() {
-    console.log(this.props.users);
-    const {users} = this.props;
+    const {users, user_roles} = this.props;
     const userAction = (user, index) => {
+      const role_admin = user_roles.find(role => (role.role_name == 'admin' ));
+      const role_user = user_roles.find(role => (role.role_name == 'user' ));
       return (
         <div>
           <a id="to_admin" onClick={() => {
-            this.handleClickChangeRole(user.id, 'admin')
+            this.handleClickChangeRole(user.id, role_admin.id)
           }}>
-            <i className={ user.role === 'admin' ? "fa fa-user-secret active-i" : "fa fa-user-secret"}
-               aria-hidden="true"/>
+            <i
+              className={ role_admin.id === user.role_id ? "fa fa-user-secret active-i" : "fa fa-user-secret"}
+              aria-hidden="true"/>
           </a>
           <a id="to_user" onClick={() => {
-            this.handleClickChangeRole(user.id, 'user')
+            this.handleClickChangeRole(user.id, role_user.id)
           }}>
-            <i className={ user.role === 'user' ? "fa fa-user active-i" : "fa fa-user"}
+            <i className={ role_user.id === user.role_id ? "fa fa-user active-i" : "fa fa-user"}
                aria-hidden="true"/>
           </a>
           <a id="remove_user" onClick={() => {
@@ -85,7 +89,9 @@ class User extends AuthorizedComponent {
         return (
           <div>
             <p className="td-thead-title">Контактні дані</p>
-            <p>{user.contacts}</p>
+            <p>Ім'я: {user.username}</p>
+            <p>Телефон: {user.telephone}</p>
+            <p>Адрес: {user.location}</p>
           </div>
         )
       };
@@ -104,7 +110,8 @@ class User extends AuthorizedComponent {
 function mapStateToProps(state) {
   return {
     users: state.users,
-    user: state.session
+    user: state.session,
+    user_roles: state.user_roles
   }
 }
 

@@ -13,12 +13,12 @@ export default function users(state = data, action) {
       ];
     case CHANGE_ROLE_IN_USER:
       return state.map((item) => {
-        if (item.id != action.valueUser.id) {
+        if (item.id != action.paramsUser.id) {
           return item;
         }
         return {
           ...item,
-          ...action.valueUser
+          ...action.paramsUser
         };
       });
     default:

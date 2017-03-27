@@ -11,6 +11,27 @@ class UserApi {
     });
   }
 
+  /* Get all users */
+  static getAllRoles() {
+    let req = request.get('/users/roles.json').set('AUTHORIZATION', `Bearer ${sessionStorage.jwt}`);
+    return req.then(response => {
+      return response;
+    }, error => {
+      return error;
+    });
+  }
+
+  /* change user role */
+  static changeUserRole(paramsUser) {
+    let req = request.post(`/users/${paramsUser.id}/change_role.json`).set('AUTHORIZATION', `Bearer ${sessionStorage.jwt}`);
+    req.field('user[role_id]', paramsUser.role_id);
+    return req.then(response => {
+      return response;
+    }, error => {
+      return error;
+    });
+  }
+
   /* Create user */
   static createUser(paramsUser) {
     let req = request.post('/users.json');

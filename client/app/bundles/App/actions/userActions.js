@@ -24,14 +24,24 @@ export function allUsers() {
   };
 }
 
+/* Get all roles user */
+export function allRoles() {
+  return function (dispatch) {
+    return userApi.getAllRoles().then(response => {
+      dispatch({
+        type: types.GET_ALL_ROLES,
+        roles: response.body
+      });
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
 /* Registration user */
 export function addUser(paramsUser) {
   return (dispatch) => {
     return userApi.createUser(paramsUser).then(response => {
-      dispatch({
-        type: types.ADD_USER,
-        users: paramsUser
-      });
       let alert = JSON.parse(response.text);
       dispatch(message(alert.message.text, alert.message.type));
       if (alert.message.type == 'success') {
@@ -43,16 +53,24 @@ export function addUser(paramsUser) {
   };
 }
 
+export function changeRole(paramsUser) {
+  return (dispatch) => {
+    return userApi.changeUserRole(paramsUser).then(response => {
+      dispatch({
+        type: types.CHANGE_ROLE_IN_USER,
+        paramsUser: paramsUser
+      });
+      let alert = JSON.parse(response.text);
+      dispatch(message(alert.message.text, alert.message.type));
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
 export function removeUser(indexUser) {
   return {
     type: types.REMOVE_USER,
     indexUser: indexUser
-  }
-}
-
-export function changeRole(valueUser) {
-  return {
-    type: types.CHANGE_ROLE_IN_USER,
-    valueUser: valueUser
   }
 }
