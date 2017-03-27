@@ -68,9 +68,18 @@ export function changeRole(paramsUser) {
   };
 }
 
-export function removeUser(indexUser) {
-  return {
-    type: types.REMOVE_USER,
-    indexUser: indexUser
-  }
+/* Remove user */
+export function removeUser(indexUser, id) {
+  return function (dispatch) {
+    return userApi.destroyUser(id).then(response => {
+      dispatch({
+        type: types.REMOVE_USER,
+        indexUser: indexUser
+      });
+      let alert = JSON.parse(response.text);
+      dispatch(message(alert.message.text, alert.message.type));
+    }).catch(error => {
+      throw(error);
+    });
+  };
 }

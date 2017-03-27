@@ -30,12 +30,9 @@ class User extends AuthorizedComponent {
     return (JSON.stringify(nextProps.users) != JSON.stringify(this.props.users));
   }
 
-  handleClickRemoveUser(index) {
+  handleClickRemoveUser(index, user_id) {
     if (confirm("Ви дійсно хочите видалити?")) {
-      this.props.actions.removeUser(index);
-      alert("Видалено!")
-    } else {
-      alert("Відмінено")
+      this.props.actions.removeUser(index, user_id);
     }
   }
 
@@ -68,7 +65,7 @@ class User extends AuthorizedComponent {
                aria-hidden="true"/>
           </a>
           <a id="remove_user" onClick={() => {
-            this.handleClickRemoveUser(index)
+            this.handleClickRemoveUser(index, user.id)
           }}>
             <i className="fa fa-trash" aria-hidden="true"/>
           </a>

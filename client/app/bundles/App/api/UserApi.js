@@ -48,6 +48,16 @@ class UserApi {
       return error;
     });
   }
+
+  /* Remove user */
+  static destroyUser(id) {
+    let req = request.delete(`/users/${id}.json`).set('AUTHORIZATION', `Bearer ${sessionStorage.jwt}`);
+    return req.then(response => {
+      return response;
+    }, error => {
+      return error;
+    });
+  }
 }
 
 export default UserApi
