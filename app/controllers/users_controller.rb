@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:change_role, :destroy]
   def index
     @users = User.all
-    render json: @users
+    render json: @users.to_json(include: :role)
   end
 
   def create
