@@ -2,7 +2,7 @@ import request from 'superagent';
 
 class SessionApi {
   static login(credentials) {
-    let req = request.post('http://localhost:3000/user_token.json');
+    let req = request.post('/user_token.json');
     req.set('Content-Type', 'application/json');
     req.send(JSON.stringify({auth: credentials}));
 

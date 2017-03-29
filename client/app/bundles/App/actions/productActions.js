@@ -53,29 +53,15 @@ export function allProducts() {
   };
 }
 
-/* Get all products where product is prepaid */
-export function allPrepaidProducts() {
-  return function (dispatch) {
-    return productApi.getPrepaidProducts().then(response => {
-      dispatch({
-        type: types.GET_ALL_PREPAID_PRODUCTS,
-        prepaidProducts: response.body
-      });
-    }).catch(error => {
-      throw(error);
-    });
-  };
-}
-
 /* Set product prepaid */
 export function payProduct(valuePrepaidProduct) {
   return function (dispatch) {
     return productApi.prepaidProduct(valuePrepaidProduct).then(response => {
       dispatch({
         type: types.PREPAID_PRODUCT,
-        valuePrepaidProduct: valuePrepaidProduct
+        products: JSON.parse(response.body.products)
       });
-      let alert = JSON.parse(response.text);
+      let alert = response.body;
       dispatch(message(alert.message.text, alert.message.type));
     }).catch(error => {
       throw(error);

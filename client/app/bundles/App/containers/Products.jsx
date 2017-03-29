@@ -15,27 +15,22 @@ class Products extends Component {
   };
 
   render() {
-    const {prepaidProducts, currentCategory, filterProducts} = this.props;
-
+    const {currentCategory, filterProducts} = this.props;
     /* get product with chose currnet category */
     let products = ((!currentCategory.name || currentCategory.name === 'Всі' ) ? this.props.products : filterProducts);
 
     /* get prepaid products */
-    const with_prepaid = products.filter(product =>
-      (prepaidProducts.filter(prepaid => prepaid.product_id.includes(product.id)).length > 0) ? prepaidProducts.filter(prepaid => prepaid.product_id.includes(product.id)) : false
-    );
+    const with_prepaid = products.filter(product => product.prepaid_products.length > 0);
 
     /* get not prepaid products */
-    const no_prepaid = products.filter(product =>
-      (prepaidProducts.filter(prepaid => prepaid.product_id.includes(product.id)).length <= 0)
-    );
+    const no_prepaid = products.filter(product => product.prepaid_products.length <= 0);
 
     /* concat all product, to products which were prepaid and which were not prepaid at the end */
     const all_product = with_prepaid.concat(no_prepaid);
 
     /* map product for put in table */
     const mappedProducts = all_product.map((product, index) => {
-      if (prepaidProducts.filter(prepaid => prepaid.product_id.includes(product.id)).length > 0) {
+      if (product.prepaid_products.length > 0) {
         var active = 'active-prepaid';
       } else {
         var active = ((index % 2) ? "active-tr hover-tr" : "hover-tr");
@@ -60,9 +55,20 @@ class Products extends Component {
       };
       let contactBlock = (product) => {
         return (
-          <div>
+          <div className="product-user-information">
             <p className="td-thead-title">Контакти</p>
-            <p>{product.user_id}</p>
+            <p>
+              <i className="fa fa-user-circle" aria-hidden="true"/>
+              {product.user.username}
+            </p>
+            <p>
+              <i className="fa fa-envelope-open" aria-hidden="true"/>
+              {product.user.email}
+            </p>
+            <p>
+              <i className="fa fa-map-marker" aria-hidden="true"/>
+              {product.user.location}
+            </p>
           </div>
         )
       };
@@ -102,7 +108,6 @@ function mapStateToProps(state) {
     products: state.products.filter(product => product.approved),
     currentCategory: state.currentCategory,
     filterProducts: state.products.filter(product => product.category_id.includes(state.currentCategory.id) && product.approved), // filter product with chose category
-    prepaidProducts: state.prepaidProducts,
     user: state.session
   }
 }

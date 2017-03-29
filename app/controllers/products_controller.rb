@@ -1,10 +1,10 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:destroy, :approved, :prepaid]
-  before_action :authenticate_user, except: [:index, :all_prepaid_product]
+  before_action :authenticate_user, except: :index
 
   def index
     @products = params[:approved] ? Product.all.where(approved: params[:approved]) : Product.all
-    render json: @products
+    render json: @products.to_json(include: [:prepaid_products, :user])
   end
 
   def create
@@ -22,12 +22,11 @@ class ProductsController < ApplicationController
 
   def prepaid
     product = @product.prepaid_products.new(prepaid_end_date: params[:product][:prepaid_end_date])
-    message(product.save, 'Предоплачено!', product.errors.full_messages.to_sentence)
-  end
-
-  def all_prepaid_product
-    all_prepaid = PrepaidProduct.all
-    render json: all_prepaid
+    product.save ? msg = { type: 'success', text: 'Предоплачено!' } : msg = { type: 'error', text: product.errors.full_messages.to_sentence }
+    render json: {
+        message: msg,
+        products: Product.all.to_json(include: [:prepaid_products, :user])
+    }
   end
 
   private

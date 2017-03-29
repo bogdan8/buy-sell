@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   validates :email, uniqueness: true
+
   belongs_to :role
+  has_many :products
 
   has_secure_password
 
