@@ -1,13 +1,16 @@
 Rails.application.routes.draw do
   scope constraints: ->(req) { req.format == :json } do
     post 'user_token' => 'user_token#create'
-    resources :products do
+    concern :pagination do
+      get '/:page', action: 'pagination', on: :collection
+    end
+    resources :products, concerns: :pagination do
       post :approved, on: :member
       post :prepaid, on: :member
     end
 
-    resources :categories
-    resources :users do
+    resources :categories, concerns: :pagination
+    resources :users, concerns: :pagination do
       get :roles, on: :collection
       post :change_role, on: :member
     end

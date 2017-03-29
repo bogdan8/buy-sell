@@ -1,6 +1,7 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:update, :destroy]
-  before_action :authenticate_user, except: :index
+  before_action :authenticate_user, except: [:index, :pagination]
+  after_action only: [:pagination] { set_pagination_header(:categories) }
 
   def index
     @categories = Category.all
@@ -18,6 +19,11 @@ class CategoriesController < ApplicationController
 
   def destroy
     message(@category.destroy, 'Видалено!', @category.errors.full_messages.to_sentence)
+  end
+
+  def pagination
+    @categories = Category.page(params[:page]).per(1)
+    render json: @categories
   end
 
   private

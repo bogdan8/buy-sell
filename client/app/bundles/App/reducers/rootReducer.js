@@ -7,6 +7,7 @@ import users from './users';
 import user_roles from './user_roles';
 import session from './session';
 import notification from './notification';
+import pagination from './pagination';
 
 const rootReducer = combineReducers({
   products,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   users,
   session,
   notification,
-  user_roles
+  user_roles,
+  pagination
 });
 
 export default rootReducer;

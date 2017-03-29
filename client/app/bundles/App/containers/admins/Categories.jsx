@@ -7,6 +7,7 @@ import {AuthorizedComponent} from 'react-router-role-authorization';
 import * as categoryActions from '../../actions/categoryActions';
 
 import {CreateCategories, EditCategories, CategoriesList} from '../../components/admin';
+import {Pagination} from '../../components';
 
 class Categories extends AuthorizedComponent {
   constructor(props) {
@@ -84,6 +85,7 @@ class Categories extends AuthorizedComponent {
               </div>
             </Cell>
             <CategoriesList mappedCategories={mappedCategories}/>
+            <Pagination entity='categories'/>
             <EditCategories/>
             <CreateCategories />
           </Grid>
