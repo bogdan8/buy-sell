@@ -55,9 +55,20 @@ class Products extends Component {
       };
       let contactBlock = (product) => {
         return (
-          <div>
+          <div className="product-user-information">
             <p className="td-thead-title">Контакти</p>
-            <p>{product.user_id}</p>
+            <p>
+              <i className="fa fa-user-circle" aria-hidden="true"/>
+              {product.user.username}
+            </p>
+            <p>
+              <i className="fa fa-envelope-open" aria-hidden="true"/>
+              {product.user.email}
+            </p>
+            <p>
+              <i className="fa fa-map-marker" aria-hidden="true"/>
+              {product.user.location}
+            </p>
           </div>
         )
       };

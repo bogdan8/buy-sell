@@ -1,4 +1,6 @@
 class Product < ActiveRecord::Base
+
+  belongs_to :user
   has_many :prepaid_products
 
   has_attached_file :image,

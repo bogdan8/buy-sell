@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
 
   def index
     @products = params[:approved] ? Product.all.where(approved: params[:approved]) : Product.all
-    render json: @products.to_json(include: :prepaid_products)
+    render json: @products.to_json(include: [:prepaid_products, :user])
   end
 
   def create
@@ -25,7 +25,7 @@ class ProductsController < ApplicationController
     product.save ? msg = { type: 'success', text: 'Предоплачено!' } : msg = { type: 'error', text: product.errors.full_messages.to_sentence }
     render json: {
         message: msg,
-        products: Product.all.to_json(include: :prepaid_products)
+        products: Product.all.to_json(include: [:prepaid_products, :user])
     }
   end
 
