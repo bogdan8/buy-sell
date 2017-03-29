@@ -82,23 +82,19 @@ class NewProduct extends AuthorizedComponent {
   };
 
   render() {
-    const {products, prepaidProducts} = this.props;
-    /* filter product where product is prepaid */
-    const with_prepaid = products.filter(product =>
-      (prepaidProducts.filter(prepaid => prepaid.product_id.includes(product.id)).length > 0) ? prepaidProducts.filter(prepaid => prepaid.product_id.includes(product.id)) : false
-    );
+    const {products} = this.props;
+    /* filter product where product is prepaid_products */
+    const with_prepaid = products.filter(product => product.prepaid_products.length > 0);
 
-    /* filter product where product not prepaid */
-    const no_prepaid = products.filter(product =>
-      (prepaidProducts.filter(prepaid => prepaid.product_id.includes(product.id)).length <= 0)
-    );
+    /* filter product where product not prepaid_products */
+    const no_prepaid = products.filter(product => product.prepaid_products.length <= 0);
 
     /* concat all product, to products which were prepaid and which were not prepaid at the end */
     const all_product = with_prepaid.concat(no_prepaid);
 
     /* map product for put in table */
     const mappedProducts = all_product.map((product, index) => {
-      if (prepaidProducts.filter(prepaid => prepaid.product_id.includes(product.id)).length > 0) {
+      if (product.prepaid_products.length > 0) {
         var active = 'active-prepaid';
       } else {
         var active = ((index % 2) ? "active-tr hover-tr" : "hover-tr");
@@ -156,10 +152,10 @@ class NewProduct extends AuthorizedComponent {
             </a>
             <a data-modal="#modal"
                id="prepaid_product" onClick={() => {
-              (product.approved && prepaidProducts.filter(prepaid => prepaid.product_id.includes(product.id)).length <= 0) ? this.handleClickShowModalWindow(product.id) : ''
+              (product.approved && product.prepaid_products.length <= 0) ? this.handleClickShowModalWindow(product.id) : ''
             }}>
               <i
-                className={ (prepaidProducts.filter(prepaid => prepaid.product_id.includes(product.id)).length > 0) ? "fa fa-money active-i" : "fa fa-money" }
+                className={ (product.prepaid_products.length > 0) ? "fa fa-money active-i" : "fa fa-money" }
                 aria-hidden="true"/>
             </a>
             <a id="remove_product" onClick={() => {
@@ -210,7 +206,7 @@ class NewProduct extends AuthorizedComponent {
         description: descriptionBlock(product),
         contact: contactBlock(product),
         price: priceBlock(product),
-        action: actionBlock(product, prepaidProducts),
+        action: actionBlock(product),
         className: active,
       }
     });
@@ -251,7 +247,6 @@ class NewProduct extends AuthorizedComponent {
 function mapStateToProps(state) {
   return {
     products: getVisibleProducts(state),
-    prepaidProducts: state.prepaidProducts,
     user: state.session
   }
 }

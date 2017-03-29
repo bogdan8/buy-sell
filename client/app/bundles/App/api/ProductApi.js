@@ -68,16 +68,6 @@ class ProductApi {
       return error;
     });
   }
-
-  /* Get all products where product is prepaid */
-  static getPrepaidProducts() {
-    let req = request.get('/products/all_prepaid_product.json');
-    return req.then(response => {
-      return response;
-    }, error => {
-      return error;
-    });
-  }
 }
 
 export default ProductApi

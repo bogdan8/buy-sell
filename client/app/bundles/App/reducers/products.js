@@ -3,7 +3,8 @@ import {
   REMOVE_PRODUCT,
   STATE_PRODUCT,
   GET_APPROVED_PRODUCTS,
-  GET_ALL_PRODUCTS
+  GET_ALL_PRODUCTS,
+  PREPAID_PRODUCT
 } from '../actions/actionTypes';
 
 const data = [];
@@ -18,6 +19,8 @@ export default function products(state = data, action) {
     case GET_APPROVED_PRODUCTS:
       return action.products;
     case GET_ALL_PRODUCTS:
+      return action.products;
+    case PREPAID_PRODUCT:
       return action.products;
     case REMOVE_PRODUCT:
       return [
