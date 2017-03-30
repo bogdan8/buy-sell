@@ -4,11 +4,12 @@ import {bindActionCreators} from 'redux';
 import {Cell} from 'react-mdl';
 
 import * as categoryActions from '../actions/categoryActions';
+import * as paginationActions from '../actions/paginationActions';
 
 import '../components/style/Product.sass';
 
 class ProductsSelectInputCategories extends Component {
-  componentDidMount() {
+  componentWillMount() {
     componentHandler.upgradeDom();
   };
 
@@ -18,6 +19,7 @@ class ProductsSelectInputCategories extends Component {
       name: e.target.innerHTML
     };
     this.props.actions.currentCategory(currentCategoryParams);
+    this.props.actions.fetchPagination(this.props.entity, 1, `category_id=${currentCategoryParams.id}`);
   };
 
   render() {
@@ -63,7 +65,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(categoryActions, dispatch)
+    actions: bindActionCreators({...categoryActions, ...paginationActions}, dispatch)
   };
 }
 

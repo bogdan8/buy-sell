@@ -31,7 +31,7 @@ class ProductsController < ApplicationController
   end
 
   def pagination
-    @products = Product.all.where(approved: true).page(params[:page]).per(2)
+    @products = (params[:category_id] != '0') ? Product.all.where(approved: true, category_id: params[:category_id]).page(params[:page]).per(2) : Product.all.where(approved: true).page(params[:page]).per(2)
     render json: @products.to_json(include: [:prepaid_products, :user])
   end
 

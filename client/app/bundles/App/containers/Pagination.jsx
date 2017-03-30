@@ -7,12 +7,12 @@ import * as paginationActions from '../actions/paginationActions';
 
 class Pagination extends Component {
   componentWillMount() {
-    this.props.actions.fetchPagination(this.props.entity);
+    this.props.actions.fetchPagination(this.props.entity, 1, this.props.query);
   }
 
   render() {
-    const {pagination, entity} = this.props;
-    const windowSize = 3;
+    const {pagination, entity, query} = this.props;
+    const windowSize = 2;
 
     var pageWindow = [];
     var i = pagination.current_page - windowSize;
@@ -49,7 +49,7 @@ class Pagination extends Component {
       } else {
         var link = <li key={'page-' + page}
                        className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                       onClick={() => this.props.actions.fetchPagination(entity, page)}
+                       onClick={() => this.props.actions.fetchPagination(entity, page, query)}
         >
           <a href='#'>{page}</a>
         </li>
@@ -70,13 +70,13 @@ class Pagination extends Component {
         <ul className="pagination flex-center">
           <li
             className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-            onClick={() => this.props.actions.fetchPagination(entity, pagination.first)}
+            onClick={() => this.props.actions.fetchPagination(entity, pagination.first, query)}
           >
             <a href="#">Перша</a>
           </li>
           <li
             className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-            onClick={() => this.props.actions.fetchPagination(entity, pagination.prev)}
+            onClick={() => this.props.actions.fetchPagination(entity, pagination.prev, query)}
           >
             <a href="#">&lt;&lt;</a>
           </li>
@@ -85,13 +85,13 @@ class Pagination extends Component {
           {rightEllipsis}
           <li
             className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-            onClick={() => this.props.actions.fetchPagination(entity, pagination.next)}
+            onClick={() => this.props.actions.fetchPagination(entity, pagination.next, query)}
           >
             <a href="#">&gt;&gt;</a>
           </li>
           <li
             className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-            onClick={() => this.props.actions.fetchPagination(entity, pagination.last)}
+            onClick={() => this.props.actions.fetchPagination(entity, pagination.last, query)}
           >
             <a href="#">Остання</a>
           </li>

@@ -10,7 +10,7 @@ import * as categoryActions from '../actions/categoryActions';
 import '../components/style/Product.sass';
 
 class Products extends Component {
-  componentDidMount() {
+  componentWillMount() {
     componentHandler.upgradeDom();
     this.props.actions.allCategories();
   };
@@ -93,9 +93,10 @@ class Products extends Component {
       <Grid>
         <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
           <Grid>
-            <ProductsSelectInputCategories />
+            <ProductsSelectInputCategories entity='products'/>
             <ProductList mappedProducts={mappedProducts}/>
-            <Pagination entity='products' />
+            <Pagination entity='products'
+                        query={currentCategory.id ? `category_id=${currentCategory.id}` : `category_id=${0}`}/>
             {this.props.user.id != undefined ? <CreateProduct /> : '' }
           </Grid>
         </Cell>

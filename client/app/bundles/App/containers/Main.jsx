@@ -1,18 +1,11 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-
 import {Menu, Notification} from '../components';
 
 import '../components/style/Auth.sass';
 
-import * as productActions from '../actions/productActions';
-import * as categoryActions from '../actions/categoryActions';
-
-class Main extends React.Component {
+export default class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.props.actions.allApprovedProducts();
   };
 
   render() {
@@ -27,11 +20,3 @@ class Main extends React.Component {
     );
   }
 }
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators({...productActions, ...categoryActions}, dispatch)
-  };
-}
-
-export default connect(null, mapDispatchToProps)(Main);
