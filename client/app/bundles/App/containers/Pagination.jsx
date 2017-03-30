@@ -10,33 +10,61 @@ class Pagination extends Component {
     this.props.actions.fetchPagination(this.props.entity);
   }
 
-  links() {
-    var link = [];
-    for (let i = 1; i <= this.props.pagination.total_objects; i++) {
+  render() {
+    const {pagination, entity} = this.props;
+    const windowSize = 3;
 
-      if (this.props.pagination.current_page == i) {
-        var li = <li key={'page-' + i}
-                     className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect active">
-          <a href='#'>{i}</a>
+    var pageWindow = [];
+    var i = pagination.current_page - windowSize;
+
+    while (i < pagination.current_page) {
+      if (i >= 1) {
+        pageWindow.push(i);
+      }
+      i++;
+    }
+
+    pageWindow.push(pagination.current_page);
+
+    var i = pagination.current_page + 1;
+    while ((i <= (pagination.current_page + windowSize)) && (i <= pagination.total_pages)) {
+      pageWindow.push(i);
+      i++;
+    }
+
+    if (pagination.current_page > windowSize + 1) {
+      var leftEllipsis = <li className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">&hellip;</li>
+    } else {
+      var leftEllipsis = ''
+    }
+
+    var currentWindow = [];
+
+    pageWindow.map(function (page) {
+      if (pagination.current_page == page) {
+        var link = <li key={'page-' + page}
+                       className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect active">
+          <a href='#'>{page}</a>
         </li>;
       } else {
-        var li = <li key={'page-' + i}
-                     className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                     onClick={() => this.props.actions.fetchPagination(this.props.entity, i)}
+        var link = <li key={'page-' + page}
+                       className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                       onClick={() => this.props.actions.fetchPagination(entity, page)}
         >
-          <a href='#'>{i}</a>
+          <a href='#'>{page}</a>
         </li>
       }
 
-      link.push(
-        li
-      );
-    }
-    return link;
-  }
+      currentWindow.push(
+        link
+      )
+    }, this);
 
-  render() {
-    const {pagination, entity} = this.props;
+    if (pagination.current_page + windowSize < pagination.total_pages) {
+      var rightEllipsis = <li className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">&hellip;</li>
+    } else {
+      var rightEllipsis = ''
+    }
     return (
       <Cell col={12} className="flex-center">
         <ul className="pagination flex-center">
@@ -52,7 +80,9 @@ class Pagination extends Component {
           >
             <a href="#">&lt;&lt;</a>
           </li>
-          {this.links()}
+          {leftEllipsis}
+          {currentWindow}
+          {rightEllipsis}
           <li
             className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
             onClick={() => this.props.actions.fetchPagination(entity, pagination.next)}

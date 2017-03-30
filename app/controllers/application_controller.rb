@@ -3,7 +3,7 @@ class ApplicationController < ActionController::API
 
   protected
 
-  def set_pagination_header(name)
+  def set_pagination_header(name, per)
     scope = instance_variable_get("@#{name}")
 
     page = {}
@@ -16,6 +16,7 @@ class ApplicationController < ActionController::API
     params = {}
     params[:current_page] = scope.current_page
     params[:total_objects] = scope.total_count
+    params[:total_pages] = (scope.total_count.to_f / per).round
 
     headers['Pagination_params'] = params.to_json
   end

@@ -1,7 +1,7 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:update, :destroy]
   before_action :authenticate_user, except: [:index, :pagination]
-  after_action only: [:pagination] { set_pagination_header(:categories) }
+  after_action only: [:pagination] { set_pagination_header(:categories, 2) }
 
   def index
     @categories = Category.all
@@ -22,7 +22,7 @@ class CategoriesController < ApplicationController
   end
 
   def pagination
-    @categories = Category.page(params[:page]).per(1)
+    @categories = Category.page(params[:page]).per(2)
     render json: @categories
   end
 

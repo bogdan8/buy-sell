@@ -94,7 +94,6 @@ class Products extends Component {
           <Grid>
             <ProductsSelectInputCategories />
             <ProductList mappedProducts={mappedProducts}/>
-            <Pagination />
             {this.props.user.id != undefined ? <CreateProduct /> : '' }
           </Grid>
         </Cell>
