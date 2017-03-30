@@ -14,4 +14,12 @@ class Product < ActiveRecord::Base
                     path: ':rails_root/public/system/:class/:attachment/:id/:style/:filename'
 
   validates_attachment :image, content_type: { content_type: ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'] }
+
+  def self.with_pagination(param, per)
+    if param[:category_id] && param[:category_id] != '0'
+      self.where(approved: true, category_id: param[:category_id]).page(param[:page]).per(per)
+    else
+      self.where(approved: true).page(param[:page]).per(per)
+    end
+  end
 end

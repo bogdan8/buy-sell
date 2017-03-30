@@ -1,6 +1,6 @@
 import {createSelector} from 'reselect'
 
-const currentAdminFilterOptionProduct = (state) => state.currentAdminFilterOptionProducts;
+const currentAdminFilterOptionProduct = (state) => state.adminFilterOption;
 const products = (state) => state.products;
 
 const getVisibleProducts = () => {

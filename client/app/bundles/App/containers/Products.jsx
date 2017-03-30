@@ -2,7 +2,7 @@ import React, {Component}from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Grid, Cell} from 'react-mdl';
-import {Pagination, ProductList, CreateProduct, ProductsSelectInputCategories} from '../components'
+import {Pagination, ProductList, CreateProduct, ProductsSelectInputCategories} from '../components';
 
 import * as productActions from '../actions/productActions';
 import * as categoryActions from '../actions/categoryActions';
@@ -96,7 +96,7 @@ class Products extends Component {
             <ProductsSelectInputCategories entity='products'/>
             <ProductList mappedProducts={mappedProducts}/>
             <Pagination entity='products'
-                        query={currentCategory.id ? `category_id=${currentCategory.id}` : `category_id=${0}`}/>
+                        query={currentCategory.id ? `category_id=${currentCategory.id}` : ``}/>
             {this.props.user.id != undefined ? <CreateProduct /> : '' }
           </Grid>
         </Cell>
