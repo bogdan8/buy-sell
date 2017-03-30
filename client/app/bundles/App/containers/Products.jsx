@@ -12,11 +12,12 @@ import '../components/style/Product.sass';
 class Products extends Component {
   componentDidMount() {
     componentHandler.upgradeDom();
+    this.props.actions.allCategories();
   };
 
   render() {
     const {currentCategory, filterProducts} = this.props;
-    /* get product with chose currnet category */
+    /* get product with chose current category */
     let products = ((!currentCategory.name || currentCategory.name === 'Всі' ) ? this.props.products : filterProducts);
 
     /* get prepaid products */
@@ -94,6 +95,7 @@ class Products extends Component {
           <Grid>
             <ProductsSelectInputCategories />
             <ProductList mappedProducts={mappedProducts}/>
+            <Pagination entity='products' />
             {this.props.user.id != undefined ? <CreateProduct /> : '' }
           </Grid>
         </Cell>

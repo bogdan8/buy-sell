@@ -13,7 +13,6 @@ class Main extends React.Component {
   constructor(props) {
     super(props);
     this.props.actions.allApprovedProducts();
-    this.props.actions.allCategories();
   };
 
   render() {
