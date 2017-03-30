@@ -6,12 +6,12 @@ import {Grid, Cell, Switch, Button, Textfield} from 'react-mdl';
 
 import * as productActions from '../../actions/productActions';
 
-import {NewProductList} from '../../components/admin';
+import {AdminProductList} from '../../components/admin';
 import getVisibleProducts from '../../selectors/getVisibleProducts';
 
 import '../../components/style/Product.sass';
 
-class NewProduct extends AuthorizedComponent {
+class AdminProducts extends AuthorizedComponent {
   constructor(props) {
     super(props);
     this.state = { // state initializes the productId to get a product id that is chosen for confirmation of payment window and move action
@@ -246,7 +246,7 @@ class NewProduct extends AuthorizedComponent {
               </Cell>
             </Cell>
             <Cell col={12}>
-              <NewProductList mappedProducts={mappedProducts}/>
+              <AdminProductList mappedProducts={mappedProducts}/>
             </Cell>
           </Grid>
         </Cell>
@@ -268,4 +268,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewProduct);
+export default connect(mapStateToProps, mapDispatchToProps)(AdminProducts);
