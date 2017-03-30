@@ -1,7 +1,7 @@
 import * as types from './actionTypes';
 import paginationApi from '../api/PaginationApi';
 
-/* Get all categories */
+/* Get all with pagination */
 export function fetchPagination(entity, page) {
   return function (dispatch) {
     return paginationApi.all(entity, page).then(response => {
