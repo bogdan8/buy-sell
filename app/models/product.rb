@@ -22,4 +22,26 @@ class Product < ActiveRecord::Base
       self.where(approved: true).page(param[:page]).per(per)
     end
   end
+
+  def self.with_pagination_fo_admin(param, per)
+    if param[:approved] == 'true' && param[:deflected] == 'true' && param[:prepaid] == 'true'
+      self.joins(:prepaid_products).page(param[:page]).per(per)
+    elsif param[:approved] == 'true' && param[:prepaid] == 'true'
+      self.where(approved: true).joins(:prepaid_products).page(param[:page]).per(per)
+    elsif param[:approved] == 'true' && param[:deflected] == 'true'
+      # -------------------------
+      self.joins(:prepaid_products).page(param[:page]).per(per)
+      # -------------------------
+    elsif param[:deflected] == 'true' && param[:prepaid] == 'true'
+      self.where(approved: false).joins(:prepaid_products).page(param[:page]).per(per)
+    elsif param[:approved] == 'true'
+      self.where(approved: true).page(param[:page]).per(per)
+    elsif param[:deflected] == 'true'
+      self.where(approved: false).page(param[:page]).per(per)
+    elsif param[:prepaid] == 'true'
+      self.joins(:prepaid_products).page(param[:page]).per(per)
+    else
+      self.all.page(param[:page]).per(per)
+    end
+  end
 end

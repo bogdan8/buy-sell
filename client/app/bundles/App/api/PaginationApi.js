@@ -10,6 +10,16 @@ class PaginationApi {
       return error;
     });
   }
+
+  /* Get with Admin Pagination */
+  static allAdmPagination(page = 1, query = '') {
+    let req = request.get(`/products/pagination_admin/${page}.json?${query}`).set('AUTHORIZATION', `Bearer ${sessionStorage.jwt}`);
+    return req.then(response => {
+      return response;
+    }, error => {
+      return error;
+    });
+  }
 }
 
 export default PaginationApi

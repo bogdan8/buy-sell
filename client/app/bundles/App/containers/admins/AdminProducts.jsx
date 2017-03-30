@@ -5,9 +5,10 @@ import {AuthorizedComponent} from 'react-router-role-authorization';
 import {Grid, Cell, Switch, Button, Textfield} from 'react-mdl';
 
 import * as productActions from '../../actions/productActions';
+import * as paginationActions from '../../actions/paginationActions';
 
 import {AdminProductList} from '../../components/admin';
-import getVisibleProducts from '../../selectors/getVisibleProducts';
+import AdminProductsPagination from './AdminProductsPagination';
 
 import '../../components/style/Product.sass';
 
@@ -30,11 +31,16 @@ class AdminProducts extends AuthorizedComponent {
 
   componentDidMount() {
     componentHandler.upgradeDom();
-    this.props.actions.allProducts(); // get all products
   };
 
   handleClickSelect(e) {
     this.props.actions.setAdminFilterOptionProducts(e.target.id, e.target.checked); // get the value of the selected category to filter products
+
+    document.getElementById(e.target.id).value = e.target.checked;
+    let approved = document.getElementById('approved').value;
+    let deflected = document.getElementById('deflected').value;
+    let prepaid = document.getElementById('prepaid').value;
+    this.props.actions.fetchAdminPagination(1, `approved=${approved}&deflected=${deflected}&prepaid=${prepaid}`);
   };
 
   handleClickRemoveProduct(indexProduct, id) { // remove product
@@ -82,7 +88,7 @@ class AdminProducts extends AuthorizedComponent {
   };
 
   render() {
-    const {products} = this.props;
+    const {products, adminFilterOption} = this.props;
     /* filter product where product is prepaid_products */
     const with_prepaid = products.filter(product => product.prepaid_products.length > 0);
 
@@ -248,6 +254,9 @@ class AdminProducts extends AuthorizedComponent {
             <Cell col={12}>
               <AdminProductList mappedProducts={mappedProducts}/>
             </Cell>
+            <AdminProductsPagination
+              query={`approved=${adminFilterOption.approved}&deflected=${adminFilterOption.deflected}&prepaid=${adminFilterOption.prepaid}`}
+            />
           </Grid>
         </Cell>
       </Grid>
@@ -257,14 +266,15 @@ class AdminProducts extends AuthorizedComponent {
 
 function mapStateToProps(state) {
   return {
-    products: getVisibleProducts(state),
-    user: state.session
+    products: state.products,
+    user: state.session,
+    adminFilterOption: state.adminFilterOption
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(productActions, dispatch)
+    actions: bindActionCreators({...productActions, ...paginationActions}, dispatch)
   };
 }
 

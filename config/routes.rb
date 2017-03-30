@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     concern :pagination do
       get '/:page', action: 'pagination', on: :collection
     end
+
+    get 'products/pagination_admin/:page' => 'products#pagination_admin'
     resources :products, concerns: :pagination do
       post :approved, on: :member
       post :prepaid, on: :member
