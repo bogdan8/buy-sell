@@ -7,17 +7,10 @@ export function fetchPagination(entity, page) {
     return paginationApi.all(entity, page).then(response => {
       const pagination_links = JSON.parse(response.headers.pagination_links);
       const pagination_params = JSON.parse(response.headers.pagination_params);
-      if (entity == 'categories') {
         dispatch({
-          type: types.GET_ALL_CATEGORIES,
-          categories: response.body
+          type: types[`GET_ALL_${entity.toUpperCase()}`],
+          [entity]: response.body
         });
-      } else if (entity == 'users') {
-        dispatch({
-          type: types.GET_ALL_USERS,
-          users: response.body
-        });
-      }
       dispatch({
         type: types.PAGINATION,
         pagination: {...pagination_links, ...pagination_params}
