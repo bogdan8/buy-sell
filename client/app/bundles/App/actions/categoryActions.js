@@ -1,5 +1,6 @@
 import * as types from './actionTypes';
 import categoryApi from '../api/CategoryApi';
+import paginationApi from '../api/PaginationApi';
 
 export function message(message, level) {
   return {
@@ -10,10 +11,18 @@ export function message(message, level) {
 }
 
 /* Create category */
-export function addCategory(paramsCategory, per, category_length) {
+export function addCategory(paramsCategory, per, category_length, current_page) {
   return (dispatch) => {
     return categoryApi.createCategory(paramsCategory).then(response => {
       let alert = JSON.parse(response.text);
+      paginationApi.all('categories', current_page).then(response => {
+        const pagination_links = JSON.parse(response.headers.pagination_links);
+        const pagination_params = JSON.parse(response.headers.pagination_params);
+        dispatch({
+          type: types.PAGINATION,
+          pagination: {...pagination_links, ...pagination_params}
+        });
+      });
       if (per != category_length) {
         dispatch({
           type: types.ADD_CATEGORY,

@@ -5,7 +5,6 @@ import {v4} from 'node-uuid';
 import {Cell, Button, Textfield} from 'react-mdl';
 
 import * as categoryActions from '../../actions/categoryActions';
-import * as paginationActions from '../../actions/paginationActions';
 
 class CreateCategories extends Component {
   handleClickShowModalWindow() { // show modal window
@@ -23,8 +22,7 @@ class CreateCategories extends Component {
       id: v4(),
       name: document.getElementById('category').value
     };
-    this.props.actions.addCategory(paramsCategory, this.props.pagination.per, this.props.categories.length);
-    this.props.actions.fetchPagination('categories', this.props.pagination.current_page);
+    this.props.actions.addCategory(paramsCategory, this.props.pagination.per, this.props.categories.length, this.props.pagination.current_page);
     document.getElementById('modal-category').style.display = "none"; // hide modal window
   };
 
@@ -81,7 +79,7 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({...categoryActions, ...paginationActions}, dispatch)
+    actions: bindActionCreators(categoryActions, dispatch)
   };
 }
 
