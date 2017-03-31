@@ -3,6 +3,11 @@ class ApplicationController < ActionController::API
 
   protected
 
+  def is_admin
+    session[:return_to] ||= request.referer
+    redirect_to session.delete(:return_to) if current_user.role.role_name != 'admin'
+  end
+
   def set_pagination_header(name, per)
     scope = instance_variable_get("@#{name}")
 

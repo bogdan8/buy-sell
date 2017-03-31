@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:destroy, :approved, :prepaid]
   before_action :authenticate_user, except: [:index, :pagination]
+  before_action :is_admin, except: [:index, :create, :pagination]
   after_action only: [:pagination, :pagination_admin] { set_pagination_header(:products, 2) }
 
   def index

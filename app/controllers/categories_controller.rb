@@ -1,6 +1,7 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:update, :destroy]
   before_action :authenticate_user, except: [:index, :pagination]
+  before_action :is_admin, except: [:index, :pagination]
   after_action only: [:pagination] { set_pagination_header(:categories, 2) }
 
   def index
