@@ -19,6 +19,7 @@ class ApplicationController < ActionController::API
     headers['Pagination_links'] = page.to_json
 
     params = {}
+    params[:per] = per
     params[:current_page] = scope.current_page
     params[:total_objects] = scope.total_count
     params[:total_pages] = (scope.total_count.to_f / per).round
