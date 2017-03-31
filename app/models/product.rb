@@ -17,29 +17,29 @@ class Product < ActiveRecord::Base
 
   def self.with_pagination(param, per)
     if param[:category_id] && param[:category_id] != '0'
-      self.where(approved: true, category_id: param[:category_id]).page(param[:page]).per(per)
+      self.where(approved: true, category_id: param[:category_id]).order(updated_at: :desc).page(param[:page]).per(per)
     else
-      self.where(approved: true).page(param[:page]).per(per)
+      self.where(approved: true).order(updated_at: :desc).page(param[:page]).per(per)
     end
   end
 
   def self.with_pagination_fo_admin(param, per)
     if param[:approved] == 'true' && param[:deflected] == 'true' && param[:prepaid] == 'true'
-      self.all.page(param[:page]).per(per)
+      self.all.order(updated_at: :desc).page(param[:page]).per(per)
     elsif param[:approved] == 'true' && param[:prepaid] == 'true'
-      self.where(approved: true).joins(:prepaid_products).page(param[:page]).per(per)
+      self.where(approved: true).joins(:prepaid_products).order(updated_at: :desc).page(param[:page]).per(per)
     elsif param[:approved] == 'true' && param[:deflected] == 'true'
-      self.left_joins(:prepaid_products).where('prepaid_products.id is NULL').page(param[:page]).per(per)
+      self.left_joins(:prepaid_products).where('prepaid_products.id is NULL').order(updated_at: :desc).page(param[:page]).per(per)
     elsif param[:deflected] == 'true' && param[:prepaid] == 'true'
-      self.where(approved: false).joins(:prepaid_products).page(param[:page]).per(per)
+      self.where(approved: false).joins(:prepaid_products).order(updated_at: :desc).page(param[:page]).per(per)
     elsif param[:approved] == 'true'
-      self.where(approved: true).left_joins(:prepaid_products).where('prepaid_products.id is NULL').page(param[:page]).per(per)
+      self.where(approved: true).left_joins(:prepaid_products).where('prepaid_products.id is NULL').order(updated_at: :desc).page(param[:page]).per(per)
     elsif param[:deflected] == 'true'
-      self.where(approved: false).left_joins(:prepaid_products).where('prepaid_products.id is NULL').page(param[:page]).per(per)
+      self.where(approved: false).left_joins(:prepaid_products).where('prepaid_products.id is NULL').order(updated_at: :desc).page(param[:page]).per(per)
     elsif param[:prepaid] == 'true'
-      self.joins(:prepaid_products).page(param[:page]).per(per)
+      self.joins(:prepaid_products).page(param[:page]).order(updated_at: :desc).per(per)
     else
-      self.all.page(param[:page]).per(per)
+      self.all.order(updated_at: :desc).page(param[:page]).per(per)
     end
   end
 end

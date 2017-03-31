@@ -90,17 +90,17 @@ class AdminProducts extends AuthorizedComponent {
   render() {
     const {products, adminFilterOption} = this.props;
     /* filter product where product is prepaid_products */
-    const with_prepaid = products.filter(product => product.prepaid_products.length > 0);
+    const with_prepaid = products.filter(product => (product.prepaid_products != undefined) ? product.prepaid_products.length : '');
 
     /* filter product where product not prepaid_products */
-    const no_prepaid = products.filter(product => product.prepaid_products.length <= 0);
+    const no_prepaid = products.filter(product => (product.prepaid_products != undefined) ? !product.prepaid_products.length : '');
 
     /* concat all product, to products which were prepaid and which were not prepaid at the end */
     const all_product = with_prepaid.concat(no_prepaid);
 
     /* map product for put in table */
     const mappedProducts = all_product.map((product, index) => {
-      if (product.prepaid_products.length > 0) {
+      if (product.prepaid_products != undefined && product.prepaid_products.length) {
         var active = 'active-prepaid';
       } else {
         var active = ((index % 2) ? "active-tr hover-tr" : "hover-tr");

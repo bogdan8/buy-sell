@@ -14,6 +14,10 @@ export function addCategory(paramsCategory) {
   return (dispatch) => {
     return categoryApi.createCategory(paramsCategory).then(response => {
       let alert = JSON.parse(response.text);
+      dispatch({
+        type: types.ADD_CATEGORY,
+        categories: paramsCategory
+      });
       dispatch(message(alert.message.text, alert.message.type));
     }).catch(error => {
       throw(error);
