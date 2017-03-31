@@ -29,15 +29,13 @@ class Product < ActiveRecord::Base
     elsif param[:approved] == 'true' && param[:prepaid] == 'true'
       self.where(approved: true).joins(:prepaid_products).page(param[:page]).per(per)
     elsif param[:approved] == 'true' && param[:deflected] == 'true'
-      # -------------------------
-      self.joins(:prepaid_products).page(param[:page]).per(per)
-      # -------------------------
+      self.left_joins(:prepaid_products).where('prepaid_products.id is NULL').page(param[:page]).per(per)
     elsif param[:deflected] == 'true' && param[:prepaid] == 'true'
       self.where(approved: false).joins(:prepaid_products).page(param[:page]).per(per)
     elsif param[:approved] == 'true'
-      self.where(approved: true).page(param[:page]).per(per)
+      self.where(approved: true).left_joins(:prepaid_products).where('prepaid_products.id is NULL').page(param[:page]).per(per)
     elsif param[:deflected] == 'true'
-      self.where(approved: false).page(param[:page]).per(per)
+      self.where(approved: false).left_joins(:prepaid_products).where('prepaid_products.id is NULL').page(param[:page]).per(per)
     elsif param[:prepaid] == 'true'
       self.joins(:prepaid_products).page(param[:page]).per(per)
     else
