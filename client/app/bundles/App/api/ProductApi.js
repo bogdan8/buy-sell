@@ -11,17 +11,6 @@ class ProductApi {
     });
   }
 
-  /* Get all products where product is prepaid */
-  static getApprovedProducts() {
-    let req = request.get('/products.json')
-      .query('approved=true');
-    return req.then(response => {
-      return response;
-    }, error => {
-      return error;
-    });
-  }
-
   /* Create product */
   static createProduct(paramsProduct) {
     let req = request.post('/products.json').set('AUTHORIZATION', `Bearer ${sessionStorage.jwt}`);

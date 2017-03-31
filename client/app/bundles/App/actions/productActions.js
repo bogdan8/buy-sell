@@ -25,20 +25,6 @@ export function addProduct(paramsProduct) {
   };
 }
 
-/* Get all products where approved true */
-export function allApprovedProducts() {
-  return function (dispatch) {
-    return productApi.getApprovedProducts().then(response => {
-      dispatch({
-        type: types.GET_APPROVED_PRODUCTS,
-        products: response.body
-      });
-    }).catch(error => {
-      throw(error);
-    });
-  };
-}
-
 /* Get all products */
 export function allProducts() {
   return function (dispatch) {

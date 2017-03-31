@@ -13,10 +13,6 @@ export function message(message, level) {
 export function addCategory(paramsCategory) {
   return (dispatch) => {
     return categoryApi.createCategory(paramsCategory).then(response => {
-      dispatch({
-        type: types.ADD_CATEGORY,
-        categories: paramsCategory
-      });
       let alert = JSON.parse(response.text);
       dispatch(message(alert.message.text, alert.message.type));
     }).catch(error => {
