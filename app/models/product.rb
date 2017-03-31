@@ -25,7 +25,7 @@ class Product < ActiveRecord::Base
 
   def self.with_pagination_fo_admin(param, per)
     if param[:approved] == 'true' && param[:deflected] == 'true' && param[:prepaid] == 'true'
-      self.joins(:prepaid_products).page(param[:page]).per(per)
+      self.all.page(param[:page]).per(per)
     elsif param[:approved] == 'true' && param[:prepaid] == 'true'
       self.where(approved: true).joins(:prepaid_products).page(param[:page]).per(per)
     elsif param[:approved] == 'true' && param[:deflected] == 'true'

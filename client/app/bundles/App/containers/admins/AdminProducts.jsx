@@ -36,7 +36,7 @@ class AdminProducts extends AuthorizedComponent {
   handleClickSelect(e) {
     this.props.actions.setAdminFilterOptionProducts(e.target.id, e.target.checked); // get the value of the selected category to filter products
 
-    document.getElementById(e.target.id).value = e.target.checked;
+    document.getElementById(e.target.id).value = e.target.checked; // record selected in the value that you can get all selections
     let approved = document.getElementById('approved').value;
     let deflected = document.getElementById('deflected').value;
     let prepaid = document.getElementById('prepaid').value;
