@@ -11,7 +11,6 @@ import '../components/style/Product.sass';
 
 class Products extends Component {
   componentWillMount() {
-    componentHandler.upgradeDom();
     this.props.actions.allCategories();
   };
 

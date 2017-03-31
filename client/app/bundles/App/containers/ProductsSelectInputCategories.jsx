@@ -10,7 +10,10 @@ import '../components/style/Product.sass';
 
 class ProductsSelectInputCategories extends Component {
   componentWillMount() {
-    componentHandler.upgradeDom();
+    setInterval(function () {
+      componentHandler.upgradeDom();
+    }, 200);
+
   };
 
   handleClickSelect(e) { // submit select with chose options
