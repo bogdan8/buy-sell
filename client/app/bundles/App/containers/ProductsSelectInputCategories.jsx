@@ -22,7 +22,7 @@ class ProductsSelectInputCategories extends Component {
       name: e.target.innerHTML
     };
     this.props.actions.currentCategory(currentCategoryParams);
-    this.props.actions.fetchPagination(this.props.entity, 1, `category_id=${currentCategoryParams.id}`);
+    this.props.actions.fetchPagination('products', 1, `category_id=${currentCategoryParams.id}`);
   };
 
   render() {

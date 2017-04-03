@@ -2,7 +2,13 @@ import React, {Component}from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Grid, Cell} from 'react-mdl';
-import {Pagination, ProductList, CreateProduct, ProductsSelectInputCategories} from '../components';
+import {
+  Pagination,
+  ProductList,
+  CreateProduct,
+  ProductsSelectInputCategories,
+  ProductsSelectCountPagination
+} from '../components';
 
 import * as productActions from '../actions/productActions';
 import * as categoryActions from '../actions/categoryActions';
@@ -15,7 +21,7 @@ class Products extends Component {
   };
 
   render() {
-    const {currentCategory, filterProducts} = this.props;
+    const {currentCategory, filterProducts, pagination} = this.props;
     /* get product with chose current category */
     let products = ((!currentCategory.name || currentCategory.name === 'Всі' ) ? this.props.products : filterProducts);
 
@@ -92,10 +98,11 @@ class Products extends Component {
       <Grid>
         <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
           <Grid>
-            <ProductsSelectInputCategories entity='products'/>
+            <ProductsSelectInputCategories />
             <ProductList mappedProducts={mappedProducts}/>
+            <ProductsSelectCountPagination />
             <Pagination entity='products'
-                        query={currentCategory.id ? `category_id=${currentCategory.id}` : ``}/>
+                        query={currentCategory.id ? `category_id=${currentCategory.id}&per=${pagination.per}` : `per=${pagination.per}`}/>
             {this.props.user.id != undefined ? <CreateProduct /> : '' }
           </Grid>
         </Cell>
@@ -109,7 +116,8 @@ function mapStateToProps(state) {
     products: state.products.filter(product => product.approved),
     currentCategory: state.currentCategory,
     filterProducts: state.products.filter(product => product.category_id.includes(state.currentCategory.id) && product.approved), // filter product with chose category
-    user: state.session
+    user: state.session,
+    pagination: state.pagination
   }
 }
 

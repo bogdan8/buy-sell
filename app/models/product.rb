@@ -16,10 +16,10 @@ class Product < ActiveRecord::Base
   validates_attachment :image, content_type: { content_type: ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'] }
 
   def self.with_pagination(param, per)
-    if param[:category_id] && param[:category_id] != '0'
-      self.where(approved: true, category_id: param[:category_id]).order(updated_at: :desc).page(param[:page]).per(per)
+    if param[:category_id] && param[:category_id] != '0' && param[:category_id] != 'undefined'
+      self.where(approved: true, category_id: param[:category_id]).order(updated_at: :desc).page(param[:page]).per(param[:per] && param[:per] != 'undefined' ? param[:per].to_i : per)
     else
-      self.where(approved: true).order(updated_at: :desc).page(param[:page]).per(per)
+      self.where(approved: true).order(updated_at: :desc).page(param[:page]).per(param[:per] && param[:per] != 'undefined' ? param[:per].to_i : per)
     end
   end
 
