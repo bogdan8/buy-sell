@@ -22,7 +22,7 @@ class ApplicationController < ActionController::API
     params[:per] = headers['per'] ? headers['per'] : per
     params[:current_page] = scope.current_page
     params[:total_objects] = scope.total_count
-    params[:total_pages] = (scope.total_count.to_f / params[:per]).round
+    params[:total_pages] = scope.total_count % params[:per] != 0 ? scope.total_count / params[:per] + 1 : scope.total_count / params[:per]
 
     headers['Pagination_params'] = params.to_json
   end

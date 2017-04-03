@@ -17,9 +17,9 @@ class Product < ActiveRecord::Base
 
   def self.with_pagination(param, per)
     if param[:category_id] && param[:category_id] != '0' && param[:category_id] != 'undefined'
-      self.where(approved: true, category_id: param[:category_id]).order(updated_at: :desc).page(param[:page]).per(param[:per] && param[:per] != 'undefined' ? param[:per].to_i : per)
+      self.where(approved: true, category_id: param[:category_id]).left_joins(:prepaid_products).order('prepaid_products.id is not null desc').page(param[:page]).per(param[:per] && param[:per] != 'undefined' ? param[:per].to_i : per)
     else
-      self.where(approved: true).order(updated_at: :desc).page(param[:page]).per(param[:per] && param[:per] != 'undefined' ? param[:per].to_i : per)
+      self.where(approved: true).left_joins(:prepaid_products).order('prepaid_products.id is not null desc').page(param[:page]).per(param[:per] && param[:per] != 'undefined' ? param[:per].to_i : per)
     end
   end
 

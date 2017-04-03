@@ -33,7 +33,7 @@ class ProductsSelectCountPagination extends Component {
             <label htmlFor="list_count" className="mdl-textfield__label">Кількість оголошень на сторінці</label>
             <ul id="select" htmlFor="list_count" className="mdl-menu mdl-js-menu full-width"
                 onClick={this.handleClickSelect.bind(this)}>
-              { [1, 2, 3, 4, 5, 10, 15, 20, 25, 30].map((number) =>
+              { [5, 10, 15, 20, 25, 30, 50, 100].map((number) =>
                 <li id="list_count_li" key={number} value={number}
                     className="mdl-menu__item full-width">
                   {number}
