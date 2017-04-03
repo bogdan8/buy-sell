@@ -6,6 +6,7 @@ import {AuthorizedComponent} from 'react-router-role-authorization';
 import * as userActions from '../../actions/userActions';
 
 import {UserList} from '../../components/admin';
+import {Pagination} from '../../components';
 
 class User extends AuthorizedComponent {
   constructor(props) {
@@ -100,7 +101,10 @@ class User extends AuthorizedComponent {
       }
     });
     return (
-      <UserList mappedUsers={mappedUsers}/>
+      <div>
+        <UserList mappedUsers={mappedUsers}/>
+        <Pagination entity='users'/>
+      </div>
     );
   }
 }

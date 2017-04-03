@@ -1,5 +1,6 @@
 import * as types from './actionTypes';
 import categoryApi from '../api/CategoryApi';
+import paginationApi from '../api/PaginationApi';
 
 export function message(message, level) {
   return {
@@ -10,14 +11,24 @@ export function message(message, level) {
 }
 
 /* Create category */
-export function addCategory(paramsCategory) {
+export function addCategory(paramsCategory, per, category_length, current_page) {
   return (dispatch) => {
     return categoryApi.createCategory(paramsCategory).then(response => {
-      dispatch({
-        type: types.ADD_CATEGORY,
-        categories: paramsCategory
-      });
       let alert = JSON.parse(response.text);
+      paginationApi.all('categories', current_page).then(response => { // pagination call to get new pages
+        const pagination_links = JSON.parse(response.headers.pagination_links);
+        const pagination_params = JSON.parse(response.headers.pagination_params);
+        dispatch({
+          type: types.PAGINATION,
+          pagination: {...pagination_links, ...pagination_params}
+        });
+      });
+      if (per != category_length) { // check whether the number of categories at not more than in all categories
+        dispatch({
+          type: types.ADD_CATEGORY,
+          categories: paramsCategory
+        });
+      }
       dispatch(message(alert.message.text, alert.message.type));
     }).catch(error => {
       throw(error);
@@ -56,7 +67,7 @@ export function editCategory(paramsCategory) {
 }
 
 /* Remove category */
-export function removeCategory(indexCategory, id) {
+export function removeCategory(indexCategory, id, category_length, current_page) {
   return function (dispatch) {
     return categoryApi.destroyCategory(id).then(response => {
       dispatch({
@@ -65,6 +76,20 @@ export function removeCategory(indexCategory, id) {
       });
       let alert = JSON.parse(response.text);
       dispatch(message(alert.message.text, alert.message.type));
+      if (category_length == 1) { // checks or categories on page left
+        paginationApi.all('categories', current_page - 1).then(response => { // pagination call to get new pages
+          const pagination_links = JSON.parse(response.headers.pagination_links);
+          const pagination_params = JSON.parse(response.headers.pagination_params);
+          dispatch({
+            type: types.GET_ALL_CATEGORIES,
+            categories: response.body
+          });
+          dispatch({
+            type: types.PAGINATION,
+            pagination: {...pagination_links, ...pagination_params}
+          });
+        });
+      }
     }).catch(error => {
       throw(error);
     });

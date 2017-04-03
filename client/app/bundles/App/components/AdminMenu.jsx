@@ -45,7 +45,7 @@ class AdminMenu extends Component {
           </Link>
         </MenuItem>
         <MenuItem>
-          <Link to="/admin/new_products">
+          <Link to="/admin/products">
             Нові оголошення
           </Link>
         </MenuItem>

@@ -2,7 +2,13 @@ import React, {Component}from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Grid, Cell} from 'react-mdl';
-import {Pagination, ProductList, CreateProduct, ProductsSelectInputCategories} from '../components'
+import {
+  Pagination,
+  ProductList,
+  CreateProduct,
+  ProductsSelectInputCategories,
+  ProductsSelectCountPagination
+} from '../components';
 
 import * as productActions from '../actions/productActions';
 import * as categoryActions from '../actions/categoryActions';
@@ -10,26 +16,14 @@ import * as categoryActions from '../actions/categoryActions';
 import '../components/style/Product.sass';
 
 class Products extends Component {
-  componentDidMount() {
-    componentHandler.upgradeDom();
+  componentWillMount() {
+    this.props.actions.allCategories();
   };
 
   render() {
-    const {currentCategory, filterProducts} = this.props;
-    /* get product with chose currnet category */
-    let products = ((!currentCategory.name || currentCategory.name === 'Всі' ) ? this.props.products : filterProducts);
-
-    /* get prepaid products */
-    const with_prepaid = products.filter(product => product.prepaid_products.length > 0);
-
-    /* get not prepaid products */
-    const no_prepaid = products.filter(product => product.prepaid_products.length <= 0);
-
-    /* concat all product, to products which were prepaid and which were not prepaid at the end */
-    const all_product = with_prepaid.concat(no_prepaid);
-
-    /* map product for put in table */
-    const mappedProducts = all_product.map((product, index) => {
+    const {currentCategory, pagination, products} = this.props;
+    /* get product with chose current category */
+    const mappedProducts = products.map((product, index) => {
       if (product.prepaid_products.length > 0) {
         var active = 'active-prepaid';
       } else {
@@ -93,8 +87,11 @@ class Products extends Component {
         <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
           <Grid>
             <ProductsSelectInputCategories />
+            <ProductsSelectCountPagination grid_col={6}/>
             <ProductList mappedProducts={mappedProducts}/>
-            <Pagination />
+            <ProductsSelectCountPagination grid_col={12}/>
+            <Pagination entity='products'
+                        query={currentCategory.id ? `category_id=${currentCategory.id}&per=${pagination.per}` : `per=${pagination.per}`}/>
             {this.props.user.id != undefined ? <CreateProduct /> : '' }
           </Grid>
         </Cell>
@@ -107,8 +104,8 @@ function mapStateToProps(state) {
   return {
     products: state.products.filter(product => product.approved),
     currentCategory: state.currentCategory,
-    filterProducts: state.products.filter(product => product.category_id.includes(state.currentCategory.id) && product.approved), // filter product with chose category
-    user: state.session
+    user: state.session,
+    pagination: state.pagination
   }
 }
 

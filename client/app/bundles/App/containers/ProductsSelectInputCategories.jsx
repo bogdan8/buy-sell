@@ -4,12 +4,16 @@ import {bindActionCreators} from 'redux';
 import {Cell} from 'react-mdl';
 
 import * as categoryActions from '../actions/categoryActions';
+import * as paginationActions from '../actions/paginationActions';
 
 import '../components/style/Product.sass';
 
 class ProductsSelectInputCategories extends Component {
-  componentDidMount() {
-    componentHandler.upgradeDom();
+  componentWillMount() {
+    setInterval(function () {
+      componentHandler.upgradeDom();
+    }, 200);
+
   };
 
   handleClickSelect(e) { // submit select with chose options
@@ -18,12 +22,13 @@ class ProductsSelectInputCategories extends Component {
       name: e.target.innerHTML
     };
     this.props.actions.currentCategory(currentCategoryParams);
+    this.props.actions.fetchPagination('products', 1, `category_id=${currentCategoryParams.id}`);
   };
 
   render() {
     const {currentCategory, categories} = this.props;
     return (
-      <Cell col={12}>
+      <Cell col={6}>
         <div className="body-header-title flex-center">
           <div
             className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth select-input">
@@ -63,7 +68,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(categoryActions, dispatch)
+    actions: bindActionCreators({...categoryActions, ...paginationActions}, dispatch)
   };
 }
 

@@ -5,13 +5,14 @@ import {AuthorizedComponent} from 'react-router-role-authorization';
 import {Grid, Cell, Switch, Button, Textfield} from 'react-mdl';
 
 import * as productActions from '../../actions/productActions';
+import * as paginationActions from '../../actions/paginationActions';
 
-import {NewProductList} from '../../components/admin';
-import getVisibleProducts from '../../selectors/getVisibleProducts';
+import {AdminProductList} from '../../components/admin';
+import AdminProductsPagination from './AdminProductsPagination';
 
 import '../../components/style/Product.sass';
 
-class NewProduct extends AuthorizedComponent {
+class AdminProducts extends AuthorizedComponent {
   constructor(props) {
     super(props);
     this.state = { // state initializes the productId to get a product id that is chosen for confirmation of payment window and move action
@@ -30,11 +31,16 @@ class NewProduct extends AuthorizedComponent {
 
   componentDidMount() {
     componentHandler.upgradeDom();
-    this.props.actions.allProducts(); // get all products
   };
 
   handleClickSelect(e) {
     this.props.actions.setAdminFilterOptionProducts(e.target.id, e.target.checked); // get the value of the selected category to filter products
+
+    document.getElementById(e.target.id).value = e.target.checked; // record selected in the value that you can get all selections
+    let approved = document.getElementById('approved').value;
+    let deflected = document.getElementById('deflected').value;
+    let prepaid = document.getElementById('prepaid').value;
+    this.props.actions.fetchAdminPagination(1, `approved=${approved}&deflected=${deflected}&prepaid=${prepaid}`);
   };
 
   handleClickRemoveProduct(indexProduct, id) { // remove product
@@ -82,19 +88,19 @@ class NewProduct extends AuthorizedComponent {
   };
 
   render() {
-    const {products} = this.props;
+    const {products, adminFilterOption} = this.props;
     /* filter product where product is prepaid_products */
-    const with_prepaid = products.filter(product => product.prepaid_products.length > 0);
+    const with_prepaid = products.filter(product => (product.prepaid_products != undefined) ? product.prepaid_products.length : '');
 
     /* filter product where product not prepaid_products */
-    const no_prepaid = products.filter(product => product.prepaid_products.length <= 0);
+    const no_prepaid = products.filter(product => (product.prepaid_products != undefined) ? !product.prepaid_products.length : '');
 
     /* concat all product, to products which were prepaid and which were not prepaid at the end */
     const all_product = with_prepaid.concat(no_prepaid);
 
     /* map product for put in table */
     const mappedProducts = all_product.map((product, index) => {
-      if (product.prepaid_products.length > 0) {
+      if (product.prepaid_products != undefined && product.prepaid_products.length) {
         var active = 'active-prepaid';
       } else {
         var active = ((index % 2) ? "active-tr hover-tr" : "hover-tr");
@@ -246,8 +252,11 @@ class NewProduct extends AuthorizedComponent {
               </Cell>
             </Cell>
             <Cell col={12}>
-              <NewProductList mappedProducts={mappedProducts}/>
+              <AdminProductList mappedProducts={mappedProducts}/>
             </Cell>
+            <AdminProductsPagination
+              query={`approved=${adminFilterOption.approved}&deflected=${adminFilterOption.deflected}&prepaid=${adminFilterOption.prepaid}`}
+            />
           </Grid>
         </Cell>
       </Grid>
@@ -257,15 +266,16 @@ class NewProduct extends AuthorizedComponent {
 
 function mapStateToProps(state) {
   return {
-    products: getVisibleProducts(state),
-    user: state.session
+    products: state.products,
+    user: state.session,
+    adminFilterOption: state.adminFilterOption
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(productActions, dispatch)
+    actions: bindActionCreators({...productActions, ...paginationActions}, dispatch)
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewProduct);
+export default connect(mapStateToProps, mapDispatchToProps)(AdminProducts);

@@ -2,7 +2,7 @@ import React from 'react'
 import {Router, Route, hashHistory, browserHistory} from 'react-router';
 
 import {Main, SignIn, Register, Products} from '../components';
-import {User, Categories, NewProducts} from '../components/admin';
+import {User, Categories, AdminProducts} from '../components/admin';
 
 export default function Routes() {
   return (
@@ -13,7 +13,7 @@ export default function Routes() {
         <Route path="/products" component={ Products }/>
         <Route authorize={'admin'} path="/admin/user" component={ User }/>
         <Route authorize={'admin'} path="/admin/categories" component={ Categories }/>
-        <Route authorize={'admin'} path="/admin/new_products" component={ NewProducts }/>
+        <Route authorize={'admin'} path="/admin/products" component={ AdminProducts }/>
       </Route>
     </Router>
   )

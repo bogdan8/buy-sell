@@ -7,6 +7,7 @@ import {AuthorizedComponent} from 'react-router-role-authorization';
 import * as categoryActions from '../../actions/categoryActions';
 
 import {CreateCategories, EditCategories, CategoriesList} from '../../components/admin';
+import {Pagination} from '../../components';
 
 class Categories extends AuthorizedComponent {
   constructor(props) {
@@ -34,7 +35,7 @@ class Categories extends AuthorizedComponent {
 
   handleClickRemoveCategory(indexCategory, id) { // remove category
     if (confirm("Ви дійсно хочите видалити?")) {
-      this.props.actions.removeCategory(indexCategory, id);
+      this.props.actions.removeCategory(indexCategory, id, this.props.categories.length, this.props.pagination.current_page);
     } else {
       alert("Відмінено")
     }
@@ -84,6 +85,7 @@ class Categories extends AuthorizedComponent {
               </div>
             </Cell>
             <CategoriesList mappedCategories={mappedCategories}/>
+            <Pagination entity='categories'/>
             <EditCategories/>
             <CreateCategories />
           </Grid>
@@ -95,6 +97,7 @@ class Categories extends AuthorizedComponent {
 
 function mapStateToProps(state) {
   return {
+    pagination: state.pagination,
     categories: state.categories,
     user: state.session
   }

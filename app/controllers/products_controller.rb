@@ -1,6 +1,8 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:destroy, :approved, :prepaid]
-  before_action :authenticate_user, except: :index
+  before_action :authenticate_user, except: [:index, :pagination]
+  before_action :is_admin, except: [:index, :create, :pagination]
+  after_action only: [:pagination, :pagination_admin] { set_pagination_header(:products, 15) }
 
   def index
     @products = params[:approved] ? Product.all.where(approved: params[:approved]) : Product.all
@@ -27,6 +29,17 @@ class ProductsController < ApplicationController
         message: msg,
         products: Product.all.to_json(include: [:prepaid_products, :user])
     }
+  end
+
+  def pagination
+    headers['per'] = (params[:per] && params[:per] != 'undefined' ? params[:per].to_i : 15)
+    @products = Product.with_pagination(params, 15)
+    render json: @products.to_json(include: [:prepaid_products, :user])
+  end
+
+  def pagination_admin
+    @products = Product.with_pagination_fo_admin(params, 15)
+    render json: @products.to_json(include: [:prepaid_products, :user])
   end
 
   private

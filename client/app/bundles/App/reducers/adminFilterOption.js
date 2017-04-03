@@ -6,7 +6,7 @@ var data = {
   prepaid: false
 };
 
-export default function currentAdminFilterOptionProducts(state = data, action) {
+export default function adminFilterOption(state = data, action) {
   switch (action.type) {
     case GET_ADMIN_FILTER_OPTIONS_PRODUCTS:
       return {
