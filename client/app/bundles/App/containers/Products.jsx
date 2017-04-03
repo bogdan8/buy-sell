@@ -87,8 +87,9 @@ class Products extends Component {
         <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
           <Grid>
             <ProductsSelectInputCategories />
+            <ProductsSelectCountPagination grid_col={6}/>
             <ProductList mappedProducts={mappedProducts}/>
-            <ProductsSelectCountPagination />
+            <ProductsSelectCountPagination grid_col={12}/>
             <Pagination entity='products'
                         query={currentCategory.id ? `category_id=${currentCategory.id}&per=${pagination.per}` : `per=${pagination.per}`}/>
             {this.props.user.id != undefined ? <CreateProduct /> : '' }

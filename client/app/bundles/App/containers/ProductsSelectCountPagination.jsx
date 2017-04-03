@@ -20,7 +20,7 @@ class ProductsSelectCountPagination extends Component {
 
   render() {
     return (
-      <Cell col={12}>
+      <Cell col={this.props.grid_col}>
         <div className="body-header-title flex-center">
           <div
             className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth select-input">

@@ -28,7 +28,7 @@ class ProductsSelectInputCategories extends Component {
   render() {
     const {currentCategory, categories} = this.props;
     return (
-      <Cell col={12}>
+      <Cell col={6}>
         <div className="body-header-title flex-center">
           <div
             className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth select-input">
