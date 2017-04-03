@@ -5,7 +5,7 @@ import {Link} from 'react-router';
 import {Grid, Cell, Button, Textfield} from 'react-mdl';
 import Dropzone from 'react-dropzone';
 
-import './style/Auth.sass';
+import '../components/style/Auth.sass';
 
 import * as userActions from '../actions/userActions';
 

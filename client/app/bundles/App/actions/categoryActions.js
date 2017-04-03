@@ -15,7 +15,7 @@ export function addCategory(paramsCategory, per, category_length, current_page) 
   return (dispatch) => {
     return categoryApi.createCategory(paramsCategory).then(response => {
       let alert = JSON.parse(response.text);
-      paginationApi.all('categories', current_page).then(response => {
+      paginationApi.all('categories', current_page).then(response => { // pagination call to get new pages
         const pagination_links = JSON.parse(response.headers.pagination_links);
         const pagination_params = JSON.parse(response.headers.pagination_params);
         dispatch({
@@ -23,7 +23,7 @@ export function addCategory(paramsCategory, per, category_length, current_page) 
           pagination: {...pagination_links, ...pagination_params}
         });
       });
-      if (per != category_length) {
+      if (per != category_length) { // check whether the number of categories at not more than in all categories
         dispatch({
           type: types.ADD_CATEGORY,
           categories: paramsCategory
@@ -76,8 +76,8 @@ export function removeCategory(indexCategory, id, category_length, current_page)
       });
       let alert = JSON.parse(response.text);
       dispatch(message(alert.message.text, alert.message.type));
-      if (category_length == 1) {
-        paginationApi.all('categories', current_page - 1).then(response => {
+      if (category_length == 1) { // checks or categories on page left
+        paginationApi.all('categories', current_page - 1).then(response => { // pagination call to get new pages
           const pagination_links = JSON.parse(response.headers.pagination_links);
           const pagination_params = JSON.parse(response.headers.pagination_params);
           dispatch({
