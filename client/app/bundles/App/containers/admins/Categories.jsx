@@ -35,7 +35,7 @@ class Categories extends AuthorizedComponent {
 
   handleClickRemoveCategory(indexCategory, id) { // remove category
     if (confirm("Ви дійсно хочите видалити?")) {
-      this.props.actions.removeCategory(indexCategory, id);
+      this.props.actions.removeCategory(indexCategory, id, this.props.categories.length, this.props.pagination.current_page);
     } else {
       alert("Відмінено")
     }
@@ -97,6 +97,7 @@ class Categories extends AuthorizedComponent {
 
 function mapStateToProps(state) {
   return {
+    pagination: state.pagination,
     categories: state.categories,
     user: state.session
   }
