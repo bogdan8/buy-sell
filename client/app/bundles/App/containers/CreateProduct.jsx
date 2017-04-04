@@ -105,19 +105,21 @@ class CreateProduct extends Component {
                       </div>
                       <Textfield
                         name="description"
-                        label="Текст оголошення"
+                        label="Текст оголошення *"
                         floatingLabel
                         id="description"
                         rows={5}
-                        required
+                        pattern=".{10,}"
+                        title="10 символів мінімум"
                       />
                       <Textfield
                         type="number"
                         name="price"
-                        label="Вартість"
+                        label="Вартість *"
                         floatingLabel
                         id="price"
-                        required
+                        pattern=".{1,}"
+                        title="1 символів мінімум"
                       />
                     </Cell>
                   </Grid>
