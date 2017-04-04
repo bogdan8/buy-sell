@@ -23,7 +23,7 @@ export default function UserList(props) {
                 scope="col"
                 data-tablesaw-priority="1"
                 data-tablesaw-sortable-col
-                width="45%"
+                width="35%"
                 className="table-thead"
               >
                 Електронна Адреса
@@ -34,7 +34,7 @@ export default function UserList(props) {
                 scope="col"
                 data-tablesaw-priority="2"
                 data-tablesaw-sortable-col
-                width="40%"
+                width="50%"
                 className="table-thead"
               >
                 Контактні дані

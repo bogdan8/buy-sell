@@ -52,17 +52,54 @@ class Products extends Component {
           <div className="product-user-information">
             <p className="td-thead-title">Контакти</p>
             <p>
-              <i className="fa fa-user-circle" aria-hidden="true"/>
-              {product.user.username}
+              <i className="fa fa-phone" aria-hidden="true"/>
+              {product.user.telephone}
             </p>
             <p>
-              <i className="fa fa-envelope-open" aria-hidden="true"/>
-              {product.user.email}
+              <a href="#" data-modal="#modal"
+                 onClick={() => document.getElementById(`modal-user-${product.id}`).style.display = "block"}>
+                <i className="fa fa-address-card" aria-hidden="true"/>
+                Детальніше:
+              </a>
             </p>
-            <p>
-              <i className="fa fa-map-marker" aria-hidden="true"/>
-              {product.user.location}
-            </p>
+            <div id={`modal-user-${product.id}`} className="modal-block">
+              <div className="modal modal__bg" role="dialog" aria-hidden="true">
+                <div className="modal__dialog">
+                  <div className="modal__content">
+                    <h4>Інформація про користувача:</h4>
+                    <Grid className="product-user-modal">
+                      <Cell col={6}>
+                        <img width={150} height={150}
+                             src={`/system/users/avatars/${product.user.id}/original/${product.user.avatar_file_name}`}/>
+                      </Cell>
+                      <Cell col={6} className="product-user-modal-information">
+                        <p>
+                          <i className="fa fa-user-circle" aria-hidden="true"/>
+                          {product.user.username}
+                        </p>
+                        <p>
+                          <i className="fa fa-phone" aria-hidden="true"/>
+                          {product.user.telephone}
+                        </p>
+                        <p>
+                          <i className="fa fa-envelope-open" aria-hidden="true"/>
+                          {product.user.email}
+                        </p>
+                        <p>
+                          <i className="fa fa-map-marker" aria-hidden="true"/>
+
+                          {product.user.location}
+                        </p>
+                      </Cell>
+                    </Grid>
+                    <span className="modal__close modal-button-close"
+                          onClick={() => document.getElementById(`modal-user-${product.id}`).style.display = "none"}>
+                      <i className="fa fa-times" aria-hidden="true"/>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         )
       };

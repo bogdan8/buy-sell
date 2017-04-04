@@ -14,7 +14,7 @@ class ProductsSelectCountPagination extends Component {
   };
 
   handleClickSelect(e) { // submit select with chose options
-    document.getElementById('list_count').value = e.target.value;
+    document.getElementById(`list_count_${this.props.grid_col}`).value = e.target.value;
     this.props.actions.fetchPagination('products', 1, `category_id=${this.props.currentCategory.id}&per=${e.target.value}`);
   };
 
@@ -24,14 +24,15 @@ class ProductsSelectCountPagination extends Component {
         <div className="body-header-title flex-center">
           <div
             className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth select-input">
-            <input className="mdl-textfield__input" type="text" id="list_count"
+            <input className="mdl-textfield__input" type="text" id={`list_count_${this.props.grid_col}`}
                    value={'15'}
                    readOnly
                    tabIndex="-1"
                    name="list_count"
             />
-            <label htmlFor="list_count" className="mdl-textfield__label">Кількість оголошень на сторінці</label>
-            <ul id="select" htmlFor="list_count" className="mdl-menu mdl-js-menu full-width"
+            <label htmlFor={`list_count_${this.props.grid_col}`} className="mdl-textfield__label">Кількість оголошень на
+              сторінці</label>
+            <ul id="select" htmlFor={`list_count_${this.props.grid_col}`} className="mdl-menu mdl-js-menu full-width"
                 onClick={this.handleClickSelect.bind(this)}>
               { [5, 10, 15, 20, 25, 30, 50, 100].map((number) =>
                 <li id="list_count_li" key={number} value={number}
