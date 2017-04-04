@@ -87,9 +87,18 @@ class User extends AuthorizedComponent {
         return (
           <div>
             <p className="td-thead-title">Контактні дані</p>
-            <p>Ім'я: {user.username}</p>
-            <p>Телефон: {user.telephone}</p>
-            <p>Адрес: {user.location}</p>
+            <div className="user-information">
+              <div>
+                <img width={150} height={150}
+                     src={`/system/users/avatars/${user.id}/original/${user.avatar_file_name}`}/>
+              </div>
+              <div>
+                <p>Email: {user.email}</p>
+                <p>Ім'я: {user.username}</p>
+                <p>Телефон: {user.telephone}</p>
+                <p>Адрес: {user.location}</p>
+              </div>
+            </div>
           </div>
         )
       };

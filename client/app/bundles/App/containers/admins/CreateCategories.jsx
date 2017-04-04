@@ -46,10 +46,12 @@ class CreateCategories extends Component {
                   <Textfield
                     type="text"
                     name="category"
-                    label="Назва нової рубрики:"
+                    label="Назва нової рубрики *"
                     floatingLabel
                     id="category"
+                    pattern=".{3,}"
                     required
+                    title="3 символів мінімум"
                   />
                   <div className="flex-center">
                     <Button raised ripple

@@ -50,12 +50,11 @@ class SignIn extends React.Component {
                     <Textfield
                         type="email"
                         name="email"
-                        label="Електрона Почта"
+                        label="Електрона Почта *"
                         floatingLabel
                         id="email"
                         value={this.state.credentials.email}
                         onChange={this.onChange}
-                        required
                     />
                     <Textfield
                         type="password"
@@ -65,7 +64,8 @@ class SignIn extends React.Component {
                         id="password"
                         value={this.state.credentials.password}
                         onChange={this.onChange}
-                        required
+                        pattern=".{6,}"
+                        title="6 символів мінімум *"
                     />
                     <div className="flex-center">
                       <Button raised ripple

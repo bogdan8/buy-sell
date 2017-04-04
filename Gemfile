@@ -8,7 +8,6 @@ gem 'sqlite3'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 gem 'pg'
-gem 'react_on_rails', '~>6'
 # gem 'thin'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'

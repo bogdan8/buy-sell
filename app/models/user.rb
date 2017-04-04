@@ -1,10 +1,12 @@
 class User < ActiveRecord::Base
-  validates :email, uniqueness: true
-
   belongs_to :role
   has_many :products
 
   has_secure_password
+
+  validates :password, length: { minimum: 6}, on: :create
+  validates :email, uniqueness: true
+  validates :email, presence: true
 
   has_attached_file :avatar,
                     styles: {

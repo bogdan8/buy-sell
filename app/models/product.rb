@@ -3,6 +3,9 @@ class Product < ActiveRecord::Base
   belongs_to :user
   has_many :prepaid_products
 
+  validates :text, presence: true
+  validates :text, length: { minimum: 10}
+
   has_attached_file :image,
                     styles: {
                         thumb: '50x',

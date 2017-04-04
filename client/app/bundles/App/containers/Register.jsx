@@ -90,26 +90,27 @@ class Register extends React.Component {
                   <Textfield
                     type="email"
                     name="email"
-                    label="Електронна адреса"
+                    label="Електронна адреса *"
                     floatingLabel
                     id="email"
-                    required
                   />
                   <Textfield
                     type="password"
                     name="password"
-                    label="Пароль"
+                    label="Пароль *"
                     floatingLabel
                     id="password"
-                    required
+                    pattern=".{6,}"
+                    title="6 символів мінімум"
                   />
                   <Textfield
                     type="password"
                     name="repeat_password"
-                    label="Повторіть пароль"
+                    label="Повторіть пароль *"
                     floatingLabel
                     id="repeat_password"
-                    required
+                    pattern=".{6,}"
+                    title="6 символів мінімум"
                   />
                   <Textfield
                     type="number"
