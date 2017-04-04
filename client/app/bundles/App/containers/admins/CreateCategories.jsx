@@ -49,9 +49,9 @@ class CreateCategories extends Component {
                     label="Назва нової рубрики *"
                     floatingLabel
                     id="category"
-                    pattern=".{6,}"
+                    pattern=".{3,}"
                     required
-                    title="6 символів мінімум"
+                    title="3 символів мінімум"
                   />
                   <div className="flex-center">
                     <Button raised ripple
