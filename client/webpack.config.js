@@ -9,15 +9,17 @@ const devBuild = process.env.NODE_ENV !== 'production';
 const nodeEnv = devBuild ? 'development' : 'production';
 
 const config = {
-  entry: [
-    'es5-shim/es5-shim',
-    'es5-shim/es5-sham',
-    'babel-polyfill',
-    './app/bundles/App/startup/registration.jsx'
-  ],
+  entry: {
+    library: [
+      'es5-shim/es5-shim',
+      'es5-shim/es5-sham',
+      'babel-polyfill'
+    ],
+    app: './app/bundles/App/startup/registration.jsx'
+  },
 
   output: {
-    filename: 'webpack-bundle.js',
+    filename: "[name].js",
     path: '../app/assets/webpack',
   },
 
@@ -41,10 +43,6 @@ const config = {
         test: require.resolve('react'),
         loader: 'imports?shim=es5-shim/es5-shim&sham=es5-shim/es5-sham',
       }, {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader!autoprefixer-loader',
-        exclude: [/node_modules/, /public/]
-      }, {
         test: /\.sass/,
         loader: "style-loader!css-loader!autoprefixer-loader!sass",
         exclude: [/node_modules/, /public/]
@@ -65,7 +63,7 @@ if (devBuild) {
   module.exports.devtool = 'eval-source-map';
 } else {
   config.plugins.push(
-      new webpack.optimize.DedupePlugin()
+    new webpack.optimize.DedupePlugin()
   );
   console.log('Webpack production build for Rails'); // eslint-disable-line no-console
 }
