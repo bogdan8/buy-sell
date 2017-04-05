@@ -13,8 +13,6 @@ import {
 import * as productActions from '../actions/productActions';
 import * as categoryActions from '../actions/categoryActions';
 
-import '../components/style/Product.sass';
-
 class Products extends Component {
   componentWillMount() {
     this.props.actions.allCategories();

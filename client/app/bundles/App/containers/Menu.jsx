@@ -4,8 +4,6 @@ import {FABButton} from 'react-mdl';
 
 import {AdminMenu, UserMenu} from '../components';
 
-import '../components/style/Header.sass'
-
 function Menu(props) {
   return (
     <div>
