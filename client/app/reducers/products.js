@@ -6,9 +6,7 @@ import {
   PREPAID_PRODUCT
 } from '../actions/actionTypes';
 
-const data = [];
-
-export default function products(state = data, action) {
+export default function products(state = [], action) {
   switch (action.type) {
     case ADD_PRODUCT:
       return [

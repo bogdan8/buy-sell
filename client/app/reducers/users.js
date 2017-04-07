@@ -1,8 +1,6 @@
 import {GET_ALL_USERS, REMOVE_USER, CHANGE_ROLE_IN_USER} from '../actions/actionTypes';
 
-var data = [];
-
-export default function users(state = data, action) {
+export default function users(state = [], action) {
   switch (action.type) {
     case GET_ALL_USERS:
       return action.users;
