@@ -15,7 +15,7 @@ const config = {
       'es5-shim/es5-sham',
       'babel-polyfill'
     ],
-    app: './app/bundles/App/startup/registration.jsx'
+    app: './app/startup/registration.jsx'
   },
 
   output: {
