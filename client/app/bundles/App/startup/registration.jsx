@@ -1,7 +1,8 @@
-import ReactOnRails from 'react-on-rails';
+import ReactDOM from 'react-dom';
+import React from 'react';
 import App from '../components/App';
 
-// This is how react_on_rails can see the HelloWorld in the browser.
-ReactOnRails.register({
-  App
-});
+ReactDOM.render(
+  <App/>,
+  document.getElementById('app')
+);
