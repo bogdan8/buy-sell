@@ -1,8 +1,6 @@
 import {CURRENT_CATEGORY} from '../actions/actionTypes';
 
-const data = {};
-
-export default function currentCategory(state = data, action) {
+export default function currentCategory(state = {}, action) {
   switch (action.type) {
     case CURRENT_CATEGORY:
       return action.currentCategory;

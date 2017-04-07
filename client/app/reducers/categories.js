@@ -5,9 +5,7 @@ import {
   GET_ALL_CATEGORIES
 } from '../actions/actionTypes';
 
-var data = [];
-
-export default function categories(state = data, action) {
+export default function categories(state = [], action) {
   switch (action.type) {
     case ADD_CATEGORY:
       return [

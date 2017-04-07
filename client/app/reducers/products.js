@@ -6,9 +6,7 @@ import {
   PREPAID_PRODUCT
 } from '../actions/actionTypes';
 
-const data = [];
-
-export default function products(state = data, action) {
+export default function products(state = [], action) {
   switch (action.type) {
     case ADD_PRODUCT:
       return [
@@ -20,10 +18,7 @@ export default function products(state = data, action) {
     case PREPAID_PRODUCT:
       return action.products;
     case REMOVE_PRODUCT:
-      return [
-        ...state.slice(0, action.indexProduct),
-        ...state.slice(action.indexProduct + 1)
-      ];
+      return state.filter(product => product.id !== action.paramsProduct.id);
     case STATE_PRODUCT:
       return state.map((item) => {
         if (item.id != action.valueProduct.id) {

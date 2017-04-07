@@ -4,6 +4,7 @@
 
 const webpack = require('webpack');
 const path = require('path');
+const CompressionPlugin = require("compression-webpack-plugin");
 
 const devBuild = process.env.NODE_ENV !== 'production';
 const nodeEnv = devBuild ? 'development' : 'production';
@@ -15,7 +16,7 @@ const config = {
       'es5-shim/es5-sham',
       'babel-polyfill'
     ],
-    app: './app/bundles/App/startup/registration.jsx'
+    app: './app/startup/registration.jsx'
   },
 
   output: {
@@ -36,6 +37,13 @@ const config = {
         NODE_ENV: JSON.stringify(nodeEnv),
       },
     }),
+    new CompressionPlugin({
+      asset: "[path].gz[query]",
+      algorithm: "gzip",
+      test: /\.(js|html)$/,
+      threshold: 10240,
+      minRatio: 0.8
+    })
   ],
   module: {
     loaders: [

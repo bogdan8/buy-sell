@@ -32,7 +32,31 @@ class Products extends Component {
           <div className="td-block-height-auto">
             <p className="td-thead-title">Фото</p>
             <div className="product-image">
-              <img src={`/system/products/images/${product.id}/original/${product.image_file_name}`}/>
+              {product.image_file_name ?
+                <img
+                  data-modal="#modal"
+                  onClick={() => document.getElementById(`modal-image-${product.id}`).style.display = "block"}
+                  src={`/system/products/images/${product.id}/medium/${product.image_file_name}`}/>
+                :
+                <img src='/missing/missing.png'/>
+              }
+            </div>
+            <div id={`modal-image-${product.id}`} className="modal-block">
+              <div className="modal modal__bg" role="dialog" aria-hidden="true">
+                <div className="modal__dialog">
+                  <div className="modal__content">
+                    <Grid className="product-image-modal">
+                      <Cell col={12}>
+                        <img src={`/system/products/images/${product.id}/original/${product.image_file_name}`}/>
+                      </Cell>
+                    </Grid>
+                    <span className="modal__close modal-button-close"
+                          onClick={() => document.getElementById(`modal-image-${product.id}`).style.display = "none"}>
+                      <i className="fa fa-times" aria-hidden="true"/>
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         )
@@ -67,8 +91,12 @@ class Products extends Component {
                     <h4>Інформація про користувача:</h4>
                     <Grid className="product-user-modal">
                       <Cell col={6}>
-                        <img width={150} height={150}
-                             src={`/system/users/avatars/${product.user.id}/original/${product.user.avatar_file_name}`}/>
+                        {product.user.avatar_file_name ?
+                          <img width={150} height={150}
+                               src={`/system/users/avatars/${product.user.id}/original/${product.user.avatar_file_name}`}/>
+                          :
+                          <img width={150} height={150} src='/missing/missing.png'/>
+                        }
                       </Cell>
                       <Cell col={6} className="product-user-modal-information">
                         <p>

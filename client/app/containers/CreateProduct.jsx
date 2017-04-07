@@ -46,6 +46,9 @@ class CreateProduct extends Component {
       this.props.actions.addProduct(paramsProduct);
       document.getElementById('modal-product').style.display = "none";
       document.getElementById("upload-img").innerHTML = '';
+      this.setState({
+        image: ''
+      });
     } else {
       alert('Виберіть рубрику');
     }

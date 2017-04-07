@@ -61,7 +61,10 @@ export function removeProduct(indexProduct, id) {
     return productApi.destroyProduct(id).then(response => {
       dispatch({
         type: types.REMOVE_PRODUCT,
-        indexProduct: indexProduct
+        paramsProduct: {
+          index: indexProduct,
+          id: id
+        }
       });
       let alert = JSON.parse(response.text);
       dispatch(message(alert.message.text, alert.message.type));

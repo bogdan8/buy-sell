@@ -14,7 +14,8 @@ class Product < ActiveRecord::Base
                         large: '720x'
                     },
                     url: '/system/:class/:attachment/:id/:style/:filename',
-                    path: ':rails_root/public/system/:class/:attachment/:id/:style/:filename'
+                    path: ':rails_root/public/system/:class/:attachment/:id/:style/:filename',
+                    default_url: '/missing/missing.png'
 
   validates_attachment :image, content_type: { content_type: ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'] }
 
