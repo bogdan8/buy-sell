@@ -15,3 +15,11 @@ set :ssh_options, { forward_agent: true, user: 'bobo', keys: %w(~/.ssh/id_rsa.pu
 set :puma_init_active_record, true
 
 set :enable_ssl, false
+
+task :webpack do
+  on roles(:app) do
+    execute "cd #{release_path}/client && npm i && webpack"
+  end
+end
+
+before 'deploy:assets:precompile', 'webpack'
