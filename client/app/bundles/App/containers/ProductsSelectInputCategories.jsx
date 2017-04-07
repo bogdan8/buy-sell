@@ -6,8 +6,6 @@ import {Cell} from 'react-mdl';
 import * as categoryActions from '../actions/categoryActions';
 import * as paginationActions from '../actions/paginationActions';
 
-import '../components/style/Product.sass';
-
 class ProductsSelectInputCategories extends Component {
   componentWillMount() {
     setInterval(function () {

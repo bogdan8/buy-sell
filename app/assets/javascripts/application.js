@@ -1,1 +1,1 @@
-//= require webpack-bundle 
+//= require app

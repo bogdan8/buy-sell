@@ -10,7 +10,7 @@ import * as paginationActions from '../../actions/paginationActions';
 import {AdminProductList} from '../../components/admin';
 import AdminProductsPagination from './AdminProductsPagination';
 
-import '../../components/style/Product.sass';
+import '../../style/Product.sass';
 
 class AdminProducts extends AuthorizedComponent {
   constructor(props) {
