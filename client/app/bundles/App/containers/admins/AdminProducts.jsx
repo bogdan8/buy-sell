@@ -110,10 +110,14 @@ class AdminProducts extends AuthorizedComponent {
           <div className="td-block-height-auto">
             <p className="td-thead-title">Фото</p>
             <div className="product-image">
-              <img
-                data-modal="#modal"
-                onClick={() => document.getElementById(`modal-image-${product.id}`).style.display = "block"}
-                src={`/system/products/images/${product.id}/medium/${product.image_file_name}`}/>
+              {product.image_file_name ?
+                <img
+                  data-modal="#modal"
+                  onClick={() => document.getElementById(`modal-image-${product.id}`).style.display = "block"}
+                  src={`/system/products/images/${product.id}/medium/${product.image_file_name}`}/>
+                :
+                <img src='/missing/missing.png'/>
+              }
             </div>
             <div id={`modal-image-${product.id}`} className="modal-block">
               <div className="modal modal__bg" role="dialog" aria-hidden="true">
