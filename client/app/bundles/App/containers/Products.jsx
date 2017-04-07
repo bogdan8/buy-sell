@@ -32,7 +32,27 @@ class Products extends Component {
           <div className="td-block-height-auto">
             <p className="td-thead-title">Фото</p>
             <div className="product-image">
-              <img src={`/system/products/images/${product.id}/original/${product.image_file_name}`}/>
+              <img
+                data-modal="#modal"
+                onClick={() => document.getElementById(`modal-image-${product.id}`).style.display = "block"}
+                src={`/system/products/images/${product.id}/medium/${product.image_file_name}`}/>
+            </div>
+            <div id={`modal-image-${product.id}`} className="modal-block">
+              <div className="modal modal__bg" role="dialog" aria-hidden="true">
+                <div className="modal__dialog">
+                  <div className="modal__content">
+                    <Grid className="product-image-modal">
+                      <Cell col={12}>
+                        <img src={`/system/products/images/${product.id}/original/${product.image_file_name}`}/>
+                      </Cell>
+                    </Grid>
+                    <span className="modal__close modal-button-close"
+                          onClick={() => document.getElementById(`modal-image-${product.id}`).style.display = "none"}>
+                      <i className="fa fa-times" aria-hidden="true"/>
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         )
