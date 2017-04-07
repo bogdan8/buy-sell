@@ -35,7 +35,7 @@
     "node-uuid": "^1.4.7",
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
-    "react-dropzone": "^3.11.0",
+    "react-dropzone": "^3.12.2",
     "react-mdl": "^1.9.0",
     "react-notification-system": "^0.2.12",
     "react-redux": "^5.0.2",
