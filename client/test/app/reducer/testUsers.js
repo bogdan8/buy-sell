@@ -33,7 +33,7 @@ describe('User Reducer', () => {
       let role = 'admin';
       let paramsUser = {
         type: 'CHANGE_ROLE_IN_USER',
-        valueUser: {
+        paramsUser: {
           id: id,
           role: role,
         }
