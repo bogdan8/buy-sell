@@ -1,10 +1,12 @@
 import React from 'react'
+import {connect} from 'react-redux';
 import {Router, Route, hashHistory, browserHistory} from 'react-router';
 
 import {Main, SignIn, Register, Products} from '../components';
 import {User, Categories, AdminProducts} from '../components/admin';
 
-export default function Routes() {
+function Routes(props) {
+  console.log(props);
   return (
     <Router history={browserHistory}>
       <Route path="/" component={ Main }>
@@ -18,3 +20,9 @@ export default function Routes() {
     </Router>
   )
 }
+
+export default connect(
+  state => ({
+    user: state.session
+  })
+)(Menu);
