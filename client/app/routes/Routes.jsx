@@ -6,7 +6,6 @@ import {Main, SignIn, Register, Products} from '../components';
 import {User, Categories, AdminProducts} from '../components/admin';
 
 function Routes(props) {
-  console.log(props);
   return (
     <Router history={browserHistory}>
       <Route path="/" component={ Main }>
@@ -25,4 +24,4 @@ export default connect(
   state => ({
     user: state.session
   })
-)(Menu);
+)(Routes);
