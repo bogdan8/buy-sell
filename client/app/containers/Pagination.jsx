@@ -68,33 +68,39 @@ class Pagination extends Component {
     return (
       <Cell col={12} className="flex-center">
         <ul className="pagination flex-center">
-          <li
-            className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-            onClick={() => this.props.actions.fetchPagination(entity, pagination.first, query)}
-          >
-            <a href="#">Перша</a>
-          </li>
-          <li
-            className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-            onClick={() => this.props.actions.fetchPagination(entity, pagination.prev, query)}
-          >
-            <a href="#">&lt;&lt;</a>
-          </li>
-          {leftEllipsis}
-          {currentWindow}
-          {rightEllipsis}
-          <li
-            className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-            onClick={() => this.props.actions.fetchPagination(entity, (pagination.next != undefined && pagination.total_pages != 0)? pagination.next : pagination.current_page, query)}
-          >
-            <a href="#">&gt;&gt;</a>
-          </li>
-          <li
-            className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-            onClick={() => this.props.actions.fetchPagination(entity, pagination.last != undefined ? pagination.last : pagination.current_page, query)}
-          >
-            <a href="#">Остання</a>
-          </li>
+          <div>
+            <li
+              className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+              onClick={() => this.props.actions.fetchPagination(entity, pagination.first, query)}
+            >
+              <a href="#">Перша</a>
+            </li>
+            <li
+              className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+              onClick={() => this.props.actions.fetchPagination(entity, pagination.prev, query)}
+            >
+              <a href="#">&lt;&lt;</a>
+            </li>
+          </div>
+          <div>
+            {leftEllipsis}
+            {currentWindow}
+            {rightEllipsis}
+          </div>
+          <div>
+            <li
+              className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+              onClick={() => this.props.actions.fetchPagination(entity, (pagination.next != undefined && pagination.total_pages != 0) ? pagination.next : pagination.current_page, query)}
+            >
+              <a href="#">&gt;&gt;</a>
+            </li>
+            <li
+              className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+              onClick={() => this.props.actions.fetchPagination(entity, pagination.last != undefined ? pagination.last : pagination.current_page, query)}
+            >
+              <a href="#">Остання</a>
+            </li>
+          </div>
         </ul>
       </Cell>
     )
