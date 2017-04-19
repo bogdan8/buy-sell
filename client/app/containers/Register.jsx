@@ -113,7 +113,8 @@ class Register extends React.Component {
                   <Textfield
                     type="number"
                     name="telephone"
-                    label="Номер Телефону"
+                    label="Номер Телефону *"
+                    pattern=".{1,}"
                     floatingLabel
                     id="telephone"
                   />
