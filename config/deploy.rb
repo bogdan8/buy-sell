@@ -12,3 +12,14 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log',
                                                'tmp/sockets')
 
 set :linked_files, fetch(:linked_files, []).push('config/database.yml', '.env')
+
+namespace :whenever do
+  desc 'Update whenever'
+  task :update do
+    on roles(:app) do
+      execute 'whenever --update-crontab'
+    end
+  end
+end
+
+after 'deploy:finished', 'whenever:update'
