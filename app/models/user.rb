@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6}, on: :create
   validates :email, uniqueness: true
   validates :email, presence: true
+  validates :telephone, presence: true
 
   has_attached_file :avatar,
                     styles: {
