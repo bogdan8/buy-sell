@@ -9,7 +9,7 @@ function Menu(props) {
     <div>
       <div className="header flex-center">
         <div className="header-title">
-          <p>Фіртка</p>
+          <a href="/">Фіртка</a>
         </div>
       </div>
       <div className="header-nav">
