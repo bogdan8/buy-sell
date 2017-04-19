@@ -85,7 +85,7 @@ class AdminProductsPagination extends Component {
           {rightEllipsis}
           <li
             className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-            onClick={() => this.props.actions.fetchAdminPagination(pagination.next != undefined ? pagination.next : pagination.current_page, query)}
+            onClick={() => this.props.actions.fetchAdminPagination((pagination.next != undefined && pagination.total_pages != 0) ? pagination.next : pagination.current_page, query)}
           >
             <a href="#">&gt;&gt;</a>
           </li>
