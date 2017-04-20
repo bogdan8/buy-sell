@@ -176,7 +176,7 @@ class AdminProducts extends AuthorizedComponent {
         return (
           <div>
             <p className="td-thead-title">Ціна</p>
-            <p>{product.price}</p>
+            <p>{product.price}.грн</p>
           </div>
         )
       };

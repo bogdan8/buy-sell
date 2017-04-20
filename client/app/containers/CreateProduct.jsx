@@ -118,7 +118,7 @@ class CreateProduct extends Component {
                       <Textfield
                         type="number"
                         name="price"
-                        label="Вартість *"
+                        label="Вартість(грн) *"
                         floatingLabel
                         id="price"
                         step="0.01"
