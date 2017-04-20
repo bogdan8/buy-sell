@@ -20,8 +20,14 @@ export function logInUser(credentials) {
         sessionStorage.setItem('jwt', response_text.jwt);
         sessionStorage.setItem('id', response_text.id);
         sessionStorage.setItem('role', response_text.role);
-        dispatch({type: types.LOG_IN_SUCCESS,
-          user: {id: response_text.id, role: response_text.role}
+        sessionStorage.setItem('avatar', response_text.avatar);
+        dispatch({
+          type: types.LOG_IN_SUCCESS,
+          user: {
+            id: response_text.id,
+            role: response_text.role,
+            avatar: response_text.avatar
+          }
         });
         dispatch(message('Ви успішно ввійшли', 'success'));
         browserHistory.push('/products');
@@ -36,6 +42,7 @@ export function logOutUser() {
     sessionStorage.removeItem('jwt');
     sessionStorage.removeItem('id');
     sessionStorage.removeItem('role');
+    sessionStorage.removeItem('avatar');
     dispatch({type: types.LOG_OUT});
     dispatch(message('Ви успішно вийшли', 'success'));
     browserHistory.push('/products');

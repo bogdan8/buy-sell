@@ -50,7 +50,7 @@ class SignIn extends React.Component {
                     <Textfield
                         type="email"
                         name="email"
-                        label="Електрона Почта *"
+                        label="Електронна пошта *"
                         floatingLabel
                         id="email"
                         value={this.state.credentials.email}

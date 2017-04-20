@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:destroy, :approved, :prepaid]
+  before_action :set_product, only: [:destroy, :approved, :prepaid, :unpaid]
   before_action :authenticate_user, except: [:index, :pagination]
   before_action :is_admin, except: [:index, :create, :pagination]
   after_action only: [:pagination, :pagination_admin] { set_pagination_header(:products, 15) }
@@ -11,7 +11,7 @@ class ProductsController < ApplicationController
 
   def create
     product = Product.new product_params
-    message(product.save, 'Створено!', product.errors.full_messages.to_sentence)
+    message(product.save, 'Очікуйте підтвердження адміністратором сайту!', product.errors.full_messages.to_sentence)
   end
 
   def destroy
@@ -25,6 +25,15 @@ class ProductsController < ApplicationController
   def prepaid
     product = @product.prepaid_products.new(prepaid_end_date: params[:product][:prepaid_end_date])
     product.save ? msg = { type: 'success', text: 'Предоплачено!' } : msg = { type: 'error', text: product.errors.full_messages.to_sentence }
+    render json: {
+        message: msg,
+        products: Product.all.to_json(include: [:prepaid_products, :user])
+    }
+  end
+
+  def unpaid
+    product = PrepaidProduct.where(product_id: @product.id).first.delete
+    product.save ? msg = { type: 'success', text: 'Відхилено предоплату!' } : msg = { type: 'error', text: product.errors.full_messages.to_sentence }
     render json: {
         message: msg,
         products: Product.all.to_json(include: [:prepaid_products, :user])

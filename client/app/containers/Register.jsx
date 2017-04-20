@@ -88,7 +88,7 @@ class Register extends React.Component {
                   <Textfield
                     type="email"
                     name="email"
-                    label="Електронна адреса *"
+                    label="Електронна пошта *"
                     floatingLabel
                     id="email"
                   />

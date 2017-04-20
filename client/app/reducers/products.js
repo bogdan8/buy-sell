@@ -3,7 +3,8 @@ import {
   REMOVE_PRODUCT,
   STATE_PRODUCT,
   GET_ALL_PRODUCTS,
-  PREPAID_PRODUCT
+  PREPAID_PRODUCT,
+  UNPAID_PRODUCT
 } from '../actions/actionTypes';
 
 export default function products(state = [], action) {
@@ -16,6 +17,8 @@ export default function products(state = [], action) {
     case GET_ALL_PRODUCTS:
       return action.products;
     case PREPAID_PRODUCT:
+      return action.products;
+    case UNPAID_PRODUCT:
       return action.products;
     case REMOVE_PRODUCT:
       return state.filter(product => product.id !== action.paramsProduct.id);

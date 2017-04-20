@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :products, concerns: :pagination do
       post :approved, on: :member
       post :prepaid, on: :member
+      post :unpaid, on: :member
     end
 
     resources :categories, concerns: :pagination

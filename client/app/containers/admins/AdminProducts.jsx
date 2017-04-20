@@ -73,6 +73,14 @@ class AdminProducts extends AuthorizedComponent {
     }
   }
 
+  handleClickUnpaidProduct(productId) {
+    if (confirm("Ви дійсно хочите відмінити предоплату?")) {
+      this.props.actions.unpaidProduct(productId);
+    } else {
+      alert("Відмінено")
+    }
+  }
+
   handleClickShowModalWindow(productId) { // show modal window for set end date prepaid product
     this.setState({
       productId: productId
@@ -168,7 +176,7 @@ class AdminProducts extends AuthorizedComponent {
         return (
           <div>
             <p className="td-thead-title">Ціна</p>
-            <p>{product.price}</p>
+            <p>{product.price}.грн</p>
           </div>
         )
       };
@@ -191,7 +199,7 @@ class AdminProducts extends AuthorizedComponent {
             </a>
             <a data-modal="#modal"
                id="prepaid_product" onClick={() => {
-              (product.approved && product.prepaid_products.length <= 0) ? this.handleClickShowModalWindow(product.id) : ''
+              (product.approved && product.prepaid_products.length <= 0) ? this.handleClickShowModalWindow(product.id) : this.handleClickUnpaidProduct(product.id)
             }}>
               <i
                 className={ (product.prepaid_products.length > 0) ? "fa fa-money active-i" : "fa fa-money" }

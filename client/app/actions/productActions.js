@@ -55,6 +55,22 @@ export function payProduct(valuePrepaidProduct) {
   };
 }
 
+/* Set product unpaid */
+export function unpaidProduct(productId) {
+  return function (dispatch) {
+    return productApi.unpayProduct(productId).then(response => {
+      dispatch({
+        type: types.UNPAID_PRODUCT,
+        products: JSON.parse(response.body.products)
+      });
+      let alert = response.body;
+      dispatch(message(alert.message.text, alert.message.type));
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
 /* Remove product */
 export function removeProduct(indexProduct, id) {
   return function (dispatch) {

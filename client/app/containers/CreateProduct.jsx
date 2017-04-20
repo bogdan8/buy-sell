@@ -62,9 +62,9 @@ class CreateProduct extends Component {
   }
 
   render() {
-    const {categories} = this.props;
+    const {categories, grid_col} = this.props;
     return (
-      <Cell col={12} className="flex-center">
+      <Cell col={grid_col} className="flex-center">
         <Button raised ripple
                 id="add-product"
                 data-modal="#modal"
@@ -118,9 +118,10 @@ class CreateProduct extends Component {
                       <Textfield
                         type="number"
                         name="price"
-                        label="Вартість *"
+                        label="Вартість(грн) *"
                         floatingLabel
                         id="price"
+                        step="0.01"
                         pattern=".{1,}"
                         title="1 символів мінімум"
                       />

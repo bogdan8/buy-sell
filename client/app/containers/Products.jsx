@@ -19,7 +19,7 @@ class Products extends Component {
   };
 
   render() {
-    const {currentCategory, pagination, products} = this.props;
+    const {currentCategory, pagination, products, user} = this.props;
     /* get product with chose current category */
     const mappedProducts = products.map((product, index) => {
       if (product.prepaid_products.length > 0) {
@@ -133,7 +133,7 @@ class Products extends Component {
         return (
           <div>
             <p className="td-thead-title">Ціна</p>
-            <p>{product.price}</p>
+            <p>{product.price}.грн</p>
           </div>
         )
       };
@@ -149,13 +149,18 @@ class Products extends Component {
       <Grid>
         <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
           <Grid>
-            <ProductsSelectInputCategories />
-            <ProductsSelectCountPagination grid_col={6} position="top"/>
+            <ProductsSelectInputCategories grid_col={user.id != undefined ? 4 : 6}/>
+            {user.id != undefined ? <CreateProduct grid_col={4}/> : '' }
+            <ProductsSelectCountPagination grid_col={user.id != undefined ? 4 : 6} position="top"/>
             <ProductList mappedProducts={mappedProducts}/>
-            <ProductsSelectCountPagination grid_col={12} position="bottom"/>
+          </Grid>
+          <Grid>
+            {user.id != undefined ? <CreateProduct grid_col={6}/> : '' }
+            <ProductsSelectCountPagination grid_col={user.id != undefined ? 6 : 12} position="bottom"/>
+          </Grid>
+          <Grid>
             <Pagination entity='products'
                         query={currentCategory.id ? `category_id=${currentCategory.id}&per=${pagination.per}` : `per=${pagination.per}`}/>
-            {this.props.user.id != undefined ? <CreateProduct /> : '' }
           </Grid>
         </Cell>
       </Grid>

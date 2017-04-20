@@ -16,8 +16,11 @@ function Menu(props) {
         <FABButton ripple
                    id="demo-menu-lower-right"
         >
-          <i className="fa fa-user" aria-hidden="true"/>
+          {props.user.avatar != undefined ? <img width={70} height={70}
+                                                 src={`/system/users/avatars/${props.user.id}/small/${props.user.avatar}`}/> :
+            <i className="fa fa-user" aria-hidden="true"/> }
         </FABButton>
+
         {props.user.role === 'admin' ? <AdminMenu /> : <UserMenu />}
       </div>
     </div>

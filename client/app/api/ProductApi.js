@@ -57,6 +57,16 @@ class ProductApi {
       return error;
     });
   }
+
+  /* Set product unpaid */
+  static unpayProduct(productId) {
+    let req = request.post(`/products/${productId}/unpaid.json`).set('AUTHORIZATION', `Bearer ${sessionStorage.jwt}`);
+    return req.then(response => {
+      return response;
+    }, error => {
+      return error;
+    });
+  }
 }
 
 export default ProductApi
