@@ -121,6 +121,7 @@ class CreateProduct extends Component {
                         label="Вартість *"
                         floatingLabel
                         id="price"
+                        step="0.01"
                         pattern=".{1,}"
                         title="1 символів мінімум"
                       />

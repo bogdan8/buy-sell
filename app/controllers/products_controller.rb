@@ -11,7 +11,7 @@ class ProductsController < ApplicationController
 
   def create
     product = Product.new product_params
-    message(product.save, 'Створено!', product.errors.full_messages.to_sentence)
+    message(product.save, 'Очікуйте підтвердження адміністратором сайту!', product.errors.full_messages.to_sentence)
   end
 
   def destroy
