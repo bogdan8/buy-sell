@@ -62,9 +62,9 @@ class CreateProduct extends Component {
   }
 
   render() {
-    const {categories} = this.props;
+    const {categories, grid_col} = this.props;
     return (
-      <Cell col={12} className="flex-center">
+      <Cell col={grid_col} className="flex-center">
         <Button raised ripple
                 id="add-product"
                 data-modal="#modal"
