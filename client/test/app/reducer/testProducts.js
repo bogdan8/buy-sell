@@ -1,5 +1,5 @@
 import deepFreeze from 'deep-freeze';
-import products from  '../../../app/bundles/App/reducers/products.js';
+import products from  '../../../app/reducers/products.js';
 import expect from 'expect';
 
 const data = [
@@ -46,10 +46,12 @@ describe('Product Reducer', () => {
     });
   });
   describe('#Remove Product', () => {
-    it('return new hash with remove one{ product', () => {
+    it('return new hash with remove one product', () => {
       let paramsProduct = {
+        paramsProduct: {
+          id: data.length - 1
+        },
         type: 'REMOVE_PRODUCT',
-        indexProduct: data.length - 1,
       };
       const removeProduct = products(data, paramsProduct);
       expect(

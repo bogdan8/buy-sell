@@ -1,5 +1,5 @@
 import deepFreeze from 'deep-freeze';
-import users from  '../../../app/bundles/App/reducers/users.js';
+import users from  '../../../app/reducers/users.js';
 import expect from 'expect';
 
 var data = [

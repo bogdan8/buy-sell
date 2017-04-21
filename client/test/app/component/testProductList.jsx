@@ -6,7 +6,7 @@ const doc = jsdom.jsdom('<!doctype html><html><body></body></html>');
 global.document = doc;
 global.window = doc.defaultView;
 
-import ProductList from '../../../app/bundles/App/components/ProductList';
+import ProductList from '../../../app/components/ProductList';
 
 describe('<ProductList />', () => {
   it('allows us to set props', () => {
