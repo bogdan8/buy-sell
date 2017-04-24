@@ -15,15 +15,21 @@ gem 'whenever', :require => false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'faker'
+  gem 'rails-controller-testing'
+  gem 'shoulda-matchers', '~> 3.1'
+  gem 'simplecov', require: false
   gem 'pry-byebug', platform: :mri
   gem 'rspec-rails'
-  gem 'capybara'
   gem 'factory_girl_rails'
   gem 'poltergeist'
   gem 'phantomjs', :require => 'phantomjs/poltergeist'
 end
 
 group :development do
+  gem 'selenium-webdriver'
   gem 'capistrano',         require: false
   gem 'capistrano-rvm',     require: false
   gem 'capistrano-rails',   require: false
