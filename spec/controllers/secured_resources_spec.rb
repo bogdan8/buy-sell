@@ -1,9 +1,13 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe UserTokenController, type: :controller do
-  it "responds successfully" do
-    @user = FactoryGirl.create(:user)
-    post :create, { params: { auth: { email: @user.email , password: @user.password } }, format: :json }
+RSpec.describe UserTokenController, type: :controller do
+  before(:each) do
+    role = FactoryGirl.create(:admin_role)
+    @user = FactoryGirl.create(:user, role_id: role.id)
+  end
+
+  it 'responds successfully' do
+    post :create, { params: { auth: { email: @user.email, password: @user.password } }, format: :json }
 
     assert_response :success
   end

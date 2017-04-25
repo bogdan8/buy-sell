@@ -1,5 +1,5 @@
 import deepFreeze from 'deep-freeze';
-import categories from  '../../../app/bundles/App/reducers/categories.js';
+import categories from  '../../../app/reducers/categories.js';
 import expect from 'expect';
 
 var data = [

@@ -1,5 +1,5 @@
 import deepFreeze from 'deep-freeze';
-import currentCategory from  '../../../app/bundles/App/reducers/currentCategory.js';
+import currentCategory from  '../../../app/reducers/currentCategory.js';
 import expect from 'expect';
 
 var data = [
