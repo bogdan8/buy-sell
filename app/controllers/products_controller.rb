@@ -4,10 +4,7 @@ class ProductsController < ApplicationController
   before_action :is_admin, except: [:index, :create, :pagination]
   after_action only: [:pagination, :pagination_admin] { set_pagination_header(:products, 15) }
 
-  def index
-    @products = params[:approved] ? Product.all.where(approved: params[:approved]) : Product.all
-    render json: @products.to_json(include: [:prepaid_products, :user])
-  end
+  def index; end
 
   def create
     product = Product.new product_params
