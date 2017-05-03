@@ -10,7 +10,7 @@ rails_env = 'production'
 environment rails_env
 
 # Set up socket location
-bind 'unix:///home/bodya/fshop/shared/tmp/sockets/fshop-puma.sock'
+bind 'unix:///home/bodya/fshop/shared/tmp/sockets/puma.sock'
 # Logging
 stdout_redirect 'log/puma.error.log', 'log/puma.access.log', true
 

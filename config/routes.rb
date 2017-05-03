@@ -19,4 +19,5 @@ Rails.application.routes.draw do
     end
   end
   get '*path' => 'static#index', constraints: lambda { |req| req.format != 'json' }
+  root 'static#index'
 end

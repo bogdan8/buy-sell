@@ -4,6 +4,7 @@ set :user, 'bodya'
 
 role :app, %w{bodya@ustk.in.ua}
 role :web, %w{bodya@ustk.in.ua}
+role :db, %w{bodya@ustk.in.ua}
 
 server 'ustk.in.ua', user: fetch(:user), roles: %w{app, web}, primary: true
 
@@ -16,11 +17,3 @@ set :ssh_options, { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_
 set :puma_init_active_record, true
 
 set :enable_ssl, false
-
-task :webpack do
-  on roles(:app) do
-    execute "cd #{release_path}/client && npm i && webpack"
-  end
-end
-
-before 'deploy:assets:precompile', 'webpack'
