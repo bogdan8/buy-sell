@@ -19,4 +19,13 @@ task :webpack do
   end
 end
 
+task :seed do
+  on roles(:app) do
+    within release_path do
+      execute :rake, "db:seed RAILS_ENV=production"
+    end
+  end
+end
+
 before 'deploy:assets:precompile', 'webpack'
+after 'deploy:migrating', 'seed'

@@ -7,6 +7,6 @@ end
 unless User.first
   admin = Role.where(role_name: 'admin').first
   user = Role.where(role_name: 'user').first
-  User.create!(email: 'admin@admin.com', password: '123456789', role_id: admin.id)
-  User.create!(email: 'user@user.com', password: '123456789', role_id: user.id)
+  User.create!(email: 'admin@admin.com', password: '123456789', username: 'admin', telephone: 12345678, role_id: admin.id)
+  User.create!(email: 'user@user.com', password: '123456789', username: 'user', telephone: 12345678, role_id: user.id)
 end
