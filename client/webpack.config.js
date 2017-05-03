@@ -5,6 +5,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const CompressionPlugin = require("compression-webpack-plugin");
+const AssetsPlugin = require('assets-webpack-plugin');
 
 const devBuild = process.env.NODE_ENV !== 'production';
 const nodeEnv = devBuild ? 'development' : 'production';
@@ -20,8 +21,8 @@ const config = {
   },
 
   output: {
-    filename: "[name].js",
-    path: '../app/assets/webpack',
+    filename: "[name]-[chunkhash].js",
+    path: '../public/assets',
   },
 
   resolve: {
@@ -43,6 +44,10 @@ const config = {
       test: /\.(js|html)$/,
       threshold: 10240,
       minRatio: 0.8
+    }),
+    new AssetsPlugin({
+      filename: 'assets.json',
+      path: '../public/assets'
     })
   ],
   module: {
