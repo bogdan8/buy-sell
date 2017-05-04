@@ -11,8 +11,5 @@
 <div id="app">
   <div id=''></div>
 </div>
-<% file = File.read('public/assets/assets.json') %>
-<% data_json = JSON.parse(file) %>
-<script type="text/javascript" src="/assets/<%= data_json['app']['js'] %> "></script>
 </body>
 </html>
