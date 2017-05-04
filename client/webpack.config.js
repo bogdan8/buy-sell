@@ -50,7 +50,8 @@ const config = {
       filename: '../index.html',
       template: 'index.ejs',
       chunks: ['app']
-    })
+    }),
+    new webpack.optimize.UglifyJsPlugin()
   ],
   module: {
     loaders: [
