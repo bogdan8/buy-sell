@@ -1,6 +1,25 @@
 uk:
   activerecord:
+    attributes:
+      product:
+        image: Зображення
+        text: Опис
+        price: Ціна
+      category:
+        name: I'мя
+      user:
+        telephone: Телефон
+        password: Пароль
+        email: Email
+        username: Ім'я користувача
+        avatar: Зображення
+        location: Місце знаходження
     errors:
+      models:
+        product:
+          attributes:
+            image:
+              spoofed_media_type: недійсний тип
       messages:
         record_invalid: 'Виникли помилки: %{errors}'
         restrict_dependent_destroy:
