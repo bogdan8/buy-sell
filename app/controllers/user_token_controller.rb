@@ -6,7 +6,8 @@ class UserTokenController < Knock::AuthTokenController
         jwt: auth_token.token,
         id: user.id,
         role: user.role.role_name,
-        avatar: user.avatar_file_name
+        avatar: user.avatar_file_name,
+        username: user.username
     }, status: :created
   end
 end

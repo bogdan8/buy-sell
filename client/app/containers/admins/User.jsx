@@ -89,7 +89,7 @@ class User extends AuthorizedComponent {
             <p className="td-thead-title">Контактні дані</p>
             <div className="user-information">
               <div>
-                {user.avatar_file_name ?
+                {user.avatar_file_name && user.avatar_file_name != '' ?
                   <img width={150} height={150}
                        src={`/system/users/avatars/${user.id}/original/${user.avatar_file_name}`}/>
                   :

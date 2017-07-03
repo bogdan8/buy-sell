@@ -1,5 +1,5 @@
 set :stage, :production
-set :branch, 'master'
+set :branch, 'staging'
 set :user, 'bodya'
 
 role :app, %w{bodya@ustk.in.ua}

@@ -5,6 +5,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const CompressionPlugin = require("compression-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const devBuild = process.env.NODE_ENV !== 'production';
 const nodeEnv = devBuild ? 'development' : 'production';
@@ -20,8 +21,9 @@ const config = {
   },
 
   output: {
-    filename: "[name].js",
-    path: '../app/assets/webpack',
+    filename: "[name].[chunkhash].js",
+    path: '../public/assets',
+    publicPath: '/assets/'
   },
 
   resolve: {
@@ -43,7 +45,13 @@ const config = {
       test: /\.(js|html)$/,
       threshold: 10240,
       minRatio: 0.8
-    })
+    }),
+    new HtmlWebpackPlugin({
+      filename: '../index.html',
+      template: 'index.ejs',
+      chunks: ['app']
+    }),
+    new webpack.optimize.UglifyJsPlugin()
   ],
   module: {
     loaders: [
