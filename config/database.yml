@@ -6,10 +6,12 @@
 #
 default: &default
   adapter: postgresql
-  encoding: unicode
+  encoding: utf8
   pool: 50
-  username: fshop
-  password: 123456
+  port: 5432
+  username: postgres
+  password: 12365478aA
+  host: localhost
 
 development:
   <<: *default
