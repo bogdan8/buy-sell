@@ -27,5 +27,3 @@ test:
 production:
   <<: *default
   database: fshop_prod
-  username: <%= ENV['DATABASE_USERNAME'] %>
-  password: <%= ENV['DATABASE_PASSWORD'] %>
