@@ -9,6 +9,7 @@ import '../style/App.sass';
 import '../style/Auth.sass';
 import '../style/Header.sass'
 import '../style/Product.sass';
+import '../style/Footer.sass';
 
 import 'react-mdl/extra/material.js';
 
