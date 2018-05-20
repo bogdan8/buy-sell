@@ -1,5 +1,6 @@
 export Main from '../containers/Main'
 export Menu from '../containers/Menu'
+export Footer from '../containers/Footer'
 export Notification from '../containers/Notification'
 export ProductsSelectInputCategories from '../containers/ProductsSelectInputCategories'
 export ProductsSelectCountPagination from '../containers/ProductsSelectCountPagination'
