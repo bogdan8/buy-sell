@@ -8,7 +8,7 @@ require 'rspec/rails'
 require 'support/database_cleaner'
 require 'support/session_helper'
 require 'shoulda/matchers'
-require 'support/factory_girl'
+require 'support/factory_bot'
 require 'paperclip/matchers'
 #require 'selenium-webdriver'
 
