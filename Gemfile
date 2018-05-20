@@ -23,7 +23,7 @@ group :development, :test do
   gem 'simplecov', require: false
   gem 'pry-byebug', platform: :mri
   gem 'rspec-rails'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'poltergeist'
   gem 'phantomjs', :require => 'phantomjs/poltergeist'
 end

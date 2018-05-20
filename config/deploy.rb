@@ -1,8 +1,8 @@
 lock '3.10.2'
 
-set :repo_url, 'git@github.com:bogdan8/fshop.git'
-set :application, 'fshop'
-set :user, 'fshop'
+set :repo_url, 'git@github.com:bogdan8/buy-sell.git'
+set :application, 'buy-sell'
+set :user, 'ubuntu'
 set :rvm_ruby_version, '2.4.0'
 set :rvm_path, '/usr/local/rvm'
 
@@ -25,6 +25,9 @@ namespace :puma do
   before :start, :make_dirs
 end
 
+namespace :deploy do
+  end
+
 namespace :logs do
 	desc "tail rails logs" 
 	task :tail_rails do
@@ -38,11 +41,11 @@ namespace :deploy do
 	desc 'Initial Deploy'
 	task :initial do
 		on roles(:app) do
-			before 'deploy:restart', 'puma:start'
-				invoke 'deploy'
-			end
-		end
-
+      before 'deploy:restart', 'puma:start'
+      invoke 'deploy'
+    end
+  end
+  
 	after  :finishing,    :compile_assets
 	after  :finishing,    :cleanup
 end
