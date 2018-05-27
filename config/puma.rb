@@ -10,13 +10,13 @@ rails_env = 'production'
 environment rails_env
 
 # Set up socket location
-bind 'unix:///home/ubuntu/shared/tmp/sockets/puma.sock'
+bind 'unix:///home/ubuntu/shared/tmp/sockets/buy-sell-puma.sock'
 # Logging
-stdout_redirect 'log/puma.error.log', 'log/puma.access.log', true
+stdout_redirect 'log/buy-sell-puma.error.log', 'log/buy-sell-puma.access.log', true
 
 # Set master PID and state locations
-pidfile '/home/ubuntu/shared/tmp/pids/puma.pid'
-state_path '/home/ubuntu/shared/tmp/pids/puma.state'
+pidfile '/home/ubuntu/shared/tmp/pids/buy-sell-puma.pid'
+state_path '/home/ubuntu/shared/tmp/pids/buy-sell-puma.state'
 activate_control_app
 
 on_worker_boot do

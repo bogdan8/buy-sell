@@ -1,14 +1,13 @@
 set :stage, :production
 set :branch, 'master'
-set :user, 'ubuntu'
+set :user, 'buy-sell'
 
-role :app, %w{ec2-18-217-57-117.us-east-2.compute.amazonaws.com}
-role :web, %w{ec2-18-217-57-117.us-east-2.compute.amazonaws.com}
-role :db, %w{ec2-18-217-57-117.us-east-2.compute.amazonaws.com}
+role :app, %w{buy-sell@192.168.0.102}
+role :web, %w{buy-sell@192.168.0.102}
+role :db, %w{buy-sell@192.168.0.102}
 
-server 'ec2-18-217-57-117.us-east-2.compute.amazonaws.com', user: fetch(:user), roles: %w{app, web}, primary: true
-ssh_options = {keys: ["#{ENV['HOME']}/.ssh/amazon.pem"], forward_agent: true }
-
+server 'buy-sell@192.168.0.102', user: fetch(:user), roles: %w{app, web}, primary: true
+#ssh_options = {keys: ["#{ENV['HOME']}/.ssh/amazon.pem"], forward_agent: true }
 
 set :deploy_to, "/home/#{fetch(:user)}"
 
