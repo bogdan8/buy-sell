@@ -25,7 +25,7 @@ class AdminMenu extends Component {
         ripple
       >
         <MenuItem>
-          <Link onClick={this.logOut}>
+          <Link to="/" onClick={this.logOut}>
             Вийти
           </Link>
         </MenuItem>

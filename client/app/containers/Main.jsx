@@ -1,5 +1,6 @@
 import React from 'react';
-import {Menu, Notification, Footer} from '../components';
+import { Menu, Notification, Footer } from '../components';
+import history from '../history'
 import routes from '../routes'
 
 export default class Main extends React.Component {
@@ -10,4 +11,6 @@ export default class Main extends React.Component {
   componentWillMount() {
     history.push('/products');
   };
+
+  render() {}
 }

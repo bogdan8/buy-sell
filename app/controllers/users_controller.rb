@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:change_role, :destroy]
   before_action :authenticate_user, except: [:create, :pagination]
   before_action :is_admin, except: [:create, :pagination]
-  after_filter only: [:pagination] { set_pagination_header(:users, 15) }
+  after_action only: [:pagination] { set_pagination_header(:users, 15) }
 
   def index
     @users = User.all

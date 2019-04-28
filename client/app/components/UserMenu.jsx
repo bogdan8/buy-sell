@@ -20,7 +20,7 @@ class UserMenu extends Component {
   checkIfUserSignIn() {
     if (this.props.user.id != undefined) {
       return <MenuItem>
-        <Link onClick={this.logOut}>
+        <Link to="/" onClick={this.logOut}>
           Вийти
         </Link>
       </MenuItem>

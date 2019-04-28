@@ -14,7 +14,7 @@ class Categories extends Component {
 
     // for check role is admin
     this.userRoles = [props.user.role];
-    this.notAuthorizedPath = '/';
+    //this.notAuthorizedPath = '/';
   }
 
   //handleUnauthorizedRole(routeRoles, userRoles) {

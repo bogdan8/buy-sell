@@ -1,8 +1,8 @@
 import React from 'react'
 import { hydrate } from 'react-dom'
-import App from '../components/App.jsx'
+import App from './app/components/App.jsx'
 import { Provider } from 'react-redux'
-import configureStore, { history } from '../../configureStore'
+import configureStore, { history } from './configureStore'
 
 const store = configureStore()
 
