@@ -1,6 +1,6 @@
 import React from 'react';
-import {browserHistory} from 'react-router';
 import {Menu, Notification, Footer} from '../components';
+import routes from '../routes'
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -8,19 +8,6 @@ export default class Main extends React.Component {
   };
 
   componentWillMount() {
-    browserHistory.push('/products');
+    history.push('/products');
   };
-
-  render() {
-    return (
-      <div>
-        <div className="body">
-          <Menu/>
-          {this.props.children}
-        </div>
-        <Footer/>
-        <Notification/>
-      </div>
-    );
-  }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import {Grid, Cell, Button, Textfield} from 'react-mdl';
 import Dropzone from 'react-dropzone';
 

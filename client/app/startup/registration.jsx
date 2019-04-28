@@ -1,8 +1,14 @@
-import ReactDOM from 'react-dom';
-import React from 'react';
-import App from '../components/App';
+import React from 'react'
+import { hydrate } from 'react-dom'
+import App from '../components/App.jsx'
+import { Provider } from 'react-redux'
+import configureStore, { history } from '../../configureStore'
 
-ReactDOM.render(
-  <App/>,
-  document.getElementById('app')
-);
+const store = configureStore()
+
+hydrate(
+  <Provider store={ store }>
+    <App history={ history } />
+  </Provider>,
+  document.querySelector('#app')
+)

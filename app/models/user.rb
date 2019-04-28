@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                  :uuid             not null, primary key
+#  telephone           :string
+#  role_id             :uuid
+#  password_digest     :string
+#  email               :string
+#  username            :string
+#  avatar_file_name    :string
+#  avatar_content_type :string
+#  avatar_file_size    :integer
+#  avatar_updated_at   :datetime
+#  location            :text
+#
+
 class User < ActiveRecord::Base
   belongs_to :role
   has_many :products

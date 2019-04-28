@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: products
+#
+#  id                 :uuid             not null, primary key
+#  text               :string
+#  price              :string
+#  user_id            :uuid
+#  category_id        :uuid
+#  image_file_name    :string
+#  image_content_type :string
+#  image_file_size    :integer
+#  image_updated_at   :datetime
+#  approved           :boolean          default(FALSE)
+#  created_at         :datetime
+#  updated_at         :datetime
+#
+
 class Product < ActiveRecord::Base
 
   belongs_to :user
