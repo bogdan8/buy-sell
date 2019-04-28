@@ -1,6 +1,6 @@
-import deepFreeze from 'deep-freeze';
-import products from  '../../../app/reducers/products.js';
-import expect from 'expect';
+import deepFreeze from 'deep-freeze'
+import products from  '../../../app/reducers/products.js'
+import expect from 'expect'
 
 const data = [
   {
@@ -25,9 +25,9 @@ const data = [
     category: 'Ігри',
     price: '4568$'
   }
-];
+]
 
-deepFreeze(data);
+deepFreeze(data)
 
 describe('Product Reducer', () => {
   describe('#Add Product', () => {
@@ -38,13 +38,13 @@ describe('Product Reducer', () => {
           id: data.length + 1,
           name: 'Новий продукт'
         }
-      };
-      const newProduct = products(data, paramsProduct);
+      }
+      const newProduct = products(data, paramsProduct)
       expect(
           newProduct.length
-      ).toBeGreaterThan(data.length);
-    });
-  });
+      ).toBeGreaterThan(data.length)
+    })
+  })
   describe('#Remove Product', () => {
     it('return new hash with remove one product', () => {
       let paramsProduct = {
@@ -52,12 +52,12 @@ describe('Product Reducer', () => {
           id: data.length - 1
         },
         type: 'REMOVE_PRODUCT',
-      };
-      const removeProduct = products(data, paramsProduct);
+      }
+      const removeProduct = products(data, paramsProduct)
       expect(
           removeProduct.length
-      ).toBeLessThan(data.length);
-    });
-  });
-});
+      ).toBeLessThan(data.length)
+    })
+  })
+})
 

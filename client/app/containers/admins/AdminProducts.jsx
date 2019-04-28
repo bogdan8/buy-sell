@@ -1,62 +1,62 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {Grid, Cell, Switch, Button, Textfield} from 'react-mdl';
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {Grid, Cell, Switch, Button, Textfield} from 'react-mdl'
 
-import * as productActions from '../../actions/productActions';
-import * as paginationActions from '../../actions/paginationActions';
+import * as productActions from '../../actions/productActions'
+import * as paginationActions from '../../actions/paginationActions'
 
-import {AdminProductList} from '../../components/admin';
-import AdminProductsPagination from './AdminProductsPagination.jsx';
+import {AdminProductList} from '../../components/admin'
+import AdminProductsPagination from './AdminProductsPagination.jsx'
 
 class AdminProducts extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = { // state initializes the productId to get a product id that is chosen for confirmation of payment window and move action
       productId: ''
-    };
+    }
 
     // for check role is admin
-    this.userRoles = [props.user.role];
-    this.notAuthorizedPath = '/';
+    this.userRoles = [props.user.role]
+    this.notAuthorizedPath = '/'
   }
 
   //handleUnauthorizedRole(routeRoles, userRoles) {
-  //  const {router} = this.context;
-  //  router.push('/');
+  //  const {router} = this.context
+  //  router.push('/')
   //}
 
   componentDidMount() {
-    componentHandler.upgradeDom();
-  };
+    componentHandler.upgradeDom()
+  }
 
   handleClickSelect(e) {
-    this.props.actions.setAdminFilterOptionProducts(e.target.id, e.target.checked); // get the value of the selected category to filter products
+    this.props.actions.setAdminFilterOptionProducts(e.target.id, e.target.checked) // get the value of the selected category to filter products
 
-    document.getElementById(e.target.id).value = e.target.checked; // record selected in the value that you can get all selections
-    let approved = document.getElementById('approved').value;
-    let deflected = document.getElementById('deflected').value;
-    let prepaid = document.getElementById('prepaid').value;
-    this.props.actions.fetchAdminPagination(1, `approved=${approved}&deflected=${deflected}&prepaid=${prepaid}`);
-  };
+    document.getElementById(e.target.id).value = e.target.checked // record selected in the value that you can get all selections
+    let approved = document.getElementById('approved').value
+    let deflected = document.getElementById('deflected').value
+    let prepaid = document.getElementById('prepaid').value
+    this.props.actions.fetchAdminPagination(1, `approved=${approved}&deflected=${deflected}&prepaid=${prepaid}`)
+  }
 
   handleClickRemoveProduct(indexProduct, id) { // remove product
     if (confirm("Ви дійсно хочите видалити?")) {
-      this.props.actions.removeProduct(indexProduct, id);
+      this.props.actions.removeProduct(indexProduct, id)
     } else {
       alert("Відмінено")
     }
   }
 
   handleSubmit(e) { // submit form prepaid product with end date
-    e.preventDefault();
-    let end_date = document.getElementById('prepaid_end_date').value;
+    e.preventDefault()
+    let end_date = document.getElementById('prepaid_end_date').value
     let valuePrepaidProduct = {
       product_id: this.state.productId,
       prepaid_end_date: end_date
-    };
-    this.props.actions.payProduct(valuePrepaidProduct);
-    document.getElementById('modal-product').style.display = "none";
+    }
+    this.props.actions.payProduct(valuePrepaidProduct)
+    document.getElementById('modal-product').style.display = "none"
 
   }
 
@@ -65,8 +65,8 @@ class AdminProducts extends Component {
       let paramsProduct = {
         id: id,
         approved: boolean
-      };
-      this.props.actions.stateProduct(paramsProduct);
+      }
+      this.props.actions.stateProduct(paramsProduct)
     } else {
       alert("Відмінено")
     }
@@ -74,7 +74,7 @@ class AdminProducts extends Component {
 
   handleClickUnpaidProduct(productId) {
     if (confirm("Ви дійсно хочите відмінити предоплату?")) {
-      this.props.actions.unpaidProduct(productId);
+      this.props.actions.unpaidProduct(productId)
     } else {
       alert("Відмінено")
     }
@@ -83,32 +83,32 @@ class AdminProducts extends Component {
   handleClickShowModalWindow(productId) { // show modal window for set end date prepaid product
     this.setState({
       productId: productId
-    });
-    document.getElementById('modal-product').style.display = "block";
-    document.getElementById("form_prepaid_product").reset();
-  };
+    })
+    document.getElementById('modal-product').style.display = "block"
+    document.getElementById("form_prepaid_product").reset()
+  }
 
   handleClickHideModalWindow() {
-    document.getElementById('modal-product').style.display = "none";
-  };
+    document.getElementById('modal-product').style.display = "none"
+  }
 
   render() {
-    const {products, adminFilterOption} = this.props;
+    const {products, adminFilterOption} = this.props
     /* filter product where product is prepaid_products */
-    const with_prepaid = products.filter(product => (product.prepaid_products != undefined) ? product.prepaid_products.length : '');
+    const with_prepaid = products.filter(product => (product.prepaid_products != undefined) ? product.prepaid_products.length : '')
 
     /* filter product where product not prepaid_products */
-    const no_prepaid = products.filter(product => (product.prepaid_products != undefined) ? !product.prepaid_products.length : '');
+    const no_prepaid = products.filter(product => (product.prepaid_products != undefined) ? !product.prepaid_products.length : '')
 
     /* concat all product, to products which were prepaid and which were not prepaid at the end */
-    const all_product = with_prepaid.concat(no_prepaid);
+    const all_product = with_prepaid.concat(no_prepaid)
 
     /* map product for put in table */
     const mappedProducts = all_product.map((product, index) => {
       if (product.prepaid_products != undefined && product.prepaid_products.length) {
-        var active = 'active-prepaid';
+        var active = 'active-prepaid'
       } else {
-        var active = ((index % 2) ? "active-tr hover-tr" : "hover-tr");
+        var active = ((index % 2) ? "active-tr hover-tr" : "hover-tr")
       }
       let photoBlock = (product) => {
         return (
@@ -143,7 +143,7 @@ class AdminProducts extends Component {
             </div>
           </div>
         )
-      };
+      }
       let descriptionBlock = (product) => {
         return (
           <div className="td-block-height-auto">
@@ -151,7 +151,7 @@ class AdminProducts extends Component {
             <p>{product.text}</p>
           </div>
         )
-      };
+      }
       let contactBlock = (product) => {
         return (
           <div className="product-user-information">
@@ -170,7 +170,7 @@ class AdminProducts extends Component {
             </p>
           </div>
         )
-      };
+      }
       let priceBlock = (product) => {
         return (
           <div>
@@ -178,7 +178,7 @@ class AdminProducts extends Component {
             <p>{product.price}.грн</p>
           </div>
         )
-      };
+      }
       let actionBlock = (product) => {
         return (
           <div>
@@ -246,7 +246,7 @@ class AdminProducts extends Component {
             </div>
           </div>
         )
-      };
+      }
       return {
         photo: photoBlock(product),
         description: descriptionBlock(product),
@@ -255,7 +255,7 @@ class AdminProducts extends Component {
         action: actionBlock(product),
         className: active,
       }
-    });
+    })
     return (
       <Grid>
         <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
@@ -304,7 +304,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({...productActions, ...paginationActions}, dispatch)
-  };
+  }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminProducts);
+export default connect(mapStateToProps, mapDispatchToProps)(AdminProducts)

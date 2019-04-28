@@ -1,29 +1,29 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {Cell, Button, Textfield} from 'react-mdl';
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {Cell, Button, Textfield} from 'react-mdl'
 
-import * as categoryActions from '../../actions/categoryActions';
+import * as categoryActions from '../../actions/categoryActions'
 
 class EditCategories extends Component {
   handleClickHideModalWindow() { // hide modal window
-    document.getElementById('modal-category-edit').style.display = "none";
-  };
+    document.getElementById('modal-category-edit').style.display = "none"
+  }
 
   handleSubmitEdit(e) { // submit form edit category
-    e.preventDefault();
-    let id = document.getElementById('category-id').value;
-    let name = document.getElementById('category-edit').value;
+    e.preventDefault()
+    let id = document.getElementById('category-id').value
+    let name = document.getElementById('category-edit').value
 
     let paramsCategory = {
       id: id,
       name: name
-    };
+    }
 
-    this.props.actions.editCategory(paramsCategory);
+    this.props.actions.editCategory(paramsCategory)
 
-    document.getElementById('modal-category-edit').style.display = "none"; // hide modal window
-  };
+    document.getElementById('modal-category-edit').style.display = "none" // hide modal window
+  }
 
   render() {
     return (
@@ -69,7 +69,7 @@ class EditCategories extends Component {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(categoryActions, dispatch)
-  };
+  }
 }
 
-export default connect(null, mapDispatchToProps)(EditCategories);
+export default connect(null, mapDispatchToProps)(EditCategories)

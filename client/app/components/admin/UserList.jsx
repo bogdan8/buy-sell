@@ -1,5 +1,5 @@
-import React from 'react';
-import {Grid, Cell, DataTable, TableHeader} from 'react-mdl';
+import React from 'react'
+import {Grid, Cell, DataTable, TableHeader} from 'react-mdl'
 
 export default function UserList(props) {
   return (
@@ -55,5 +55,5 @@ export default function UserList(props) {
         </Grid>
       </Cell>
     </Grid>
-  );
+  )
 }

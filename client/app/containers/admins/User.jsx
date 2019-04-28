@@ -1,38 +1,39 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 
-import * as userActions from '../../actions/userActions';
+import * as userActions from '../../actions/userActions'
 
-import {UserList} from '../../components/admin';
-import {Pagination} from '../../components';
+import {UserList} from '../../components/admin'
+import {Pagination} from '../../components'
 
 class User extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     // for check role is admin
-    this.userRoles = [props.user.role];
-    this.notAuthorizedPath = '/';
+    this.userRoles = [props.user.role]
+    this.notAuthorizedPath = '/'
   }
 
   componentWillMount() {
-    this.props.actions.allRoles(); // get all user roles
-    this.props.actions.allUsers(); // get all users
+    this.props.actions.allRoles() // get all user roles
+    this.props.actions.allUsers() // get all users
+    console.log(this.props)
   }
 
   //handleUnauthorizedRole(routeRoles, userRoles) {
-  //  const {router} = this.context;
-  //  router.push('/');
+  //  const {router} = this.context
+  //  router.push('/')
   //}
 
   shouldComponentUpdate(nextProps, nextState) {
-    return (JSON.stringify(nextProps.users) != JSON.stringify(this.props.users));
+    return (JSON.stringify(nextProps.users) != JSON.stringify(this.props.users))
   }
 
   handleClickRemoveUser(index, user_id) {
     if (confirm("Ви дійсно хочите видалити?")) {
-      this.props.actions.removeUser(index, user_id);
+      this.props.actions.removeUser(index, user_id)
     }
   }
 
@@ -40,15 +41,15 @@ class User extends Component {
     let paramsUser = {
       id: id,
       role_id: role_id
-    };
-    this.props.actions.changeRole(paramsUser);
+    }
+    this.props.actions.changeRole(paramsUser)
   }
 
   render() {
-    const {users, user_roles} = this.props;
+    const {users, user_roles} = this.props
     const userAction = (user, index) => {
-      const role_admin = user_roles.find(role => (role.role_name == 'admin' ));
-      const role_user = user_roles.find(role => (role.role_name == 'user' ));
+      const role_admin = user_roles.find(role => (role.role_name == 'admin' ))
+      const role_user = user_roles.find(role => (role.role_name == 'user' ))
       return (
         <div>
           <a id="to_admin" onClick={() => {
@@ -71,9 +72,9 @@ class User extends Component {
           </a>
         </div>
       )
-    };
+    }
     const mappedUsers = users.map((user, index) => {
-      let active = ((index % 2) ? "active-tr" : "");
+      let active = ((index % 2) ? "active-tr" : "")
       let emailBlock = (user) => {
         return (
           <div>
@@ -81,7 +82,7 @@ class User extends Component {
             <p>{user.email}</p>
           </div>
         )
-      };
+      }
       let contactBlock = (user) => {
         return (
           <div>
@@ -104,20 +105,20 @@ class User extends Component {
             </div>
           </div>
         )
-      };
+      }
       return {
         email: emailBlock(user),
         contact: contactBlock(user),
         action: userAction(user, index),
         className: active,
       }
-    });
+    })
     return (
       <div>
         <UserList mappedUsers={mappedUsers}/>
         <Pagination entity='users'/>
       </div>
-    );
+    )
   }
 }
 function mapStateToProps(state) {
@@ -131,7 +132,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(userActions, dispatch)
-  };
+  }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(User);
+export default connect(mapStateToProps, mapDispatchToProps)(User)

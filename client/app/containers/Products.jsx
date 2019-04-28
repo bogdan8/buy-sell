@@ -1,31 +1,31 @@
-import React, {Component}from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {Grid, Cell} from 'react-mdl';
+import React, {Component}from 'react'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {Grid, Cell} from 'react-mdl'
 import {
   Pagination,
   ProductList,
   CreateProduct,
   ProductsSelectInputCategories,
   ProductsSelectCountPagination
-} from '../components';
+} from '../components'
 
-import * as productActions from '../actions/productActions';
-import * as categoryActions from '../actions/categoryActions';
+import * as productActions from '../actions/productActions'
+import * as categoryActions from '../actions/categoryActions'
 
 class Products extends Component {
   componentWillMount() {
-    this.props.actions.allCategories();
-  };
+    this.props.actions.allCategories()
+  }
 
   render() {
-    const {currentCategory, pagination, products, user} = this.props;
+    const {currentCategory, pagination, products, user} = this.props
     /* get product with chose current category */
     const mappedProducts = products.map((product, index) => {
       if (product.prepaid_products.length > 0) {
-        var active = 'active-prepaid';
+        var active = 'active-prepaid'
       } else {
-        var active = ((index % 2) ? "active-tr hover-tr" : "hover-tr");
+        var active = ((index % 2) ? "active-tr hover-tr" : "hover-tr")
       }
       let photoBlock = (product) => {
         return (
@@ -60,7 +60,7 @@ class Products extends Component {
             </div>
           </div>
         )
-      };
+      }
       let descriptionBlock = (product) => {
         return (
           <div className="td-block-height-auto">
@@ -68,7 +68,7 @@ class Products extends Component {
             <p>{product.text}</p>
           </div>
         )
-      };
+      }
       let contactBlock = (product) => {
         return (
           <div className="product-user-information">
@@ -128,7 +128,7 @@ class Products extends Component {
             </div>
           </div>
         )
-      };
+      }
       let priceBlock = (product) => {
         return (
           <div>
@@ -136,7 +136,7 @@ class Products extends Component {
             <p>{product.price}.грн</p>
           </div>
         )
-      };
+      }
       return {
         photo: photoBlock(product),
         description: descriptionBlock(product),
@@ -144,7 +144,7 @@ class Products extends Component {
         price: priceBlock(product),
         className: active,
       }
-    });
+    })
     return (
       <Grid>
         <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
@@ -180,7 +180,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({...productActions, ...categoryActions}, dispatch)
-  };
+  }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Products);
+export default connect(mapStateToProps, mapDispatchToProps)(Products)

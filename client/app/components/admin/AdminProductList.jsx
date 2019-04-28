@@ -1,5 +1,5 @@
-import React from 'react';
-import {DataTable, TableHeader} from 'react-mdl';
+import React from 'react'
+import {DataTable, TableHeader} from 'react-mdl'
 
 export default function AdminProductList(props) {
   return (
@@ -64,5 +64,5 @@ export default function AdminProductList(props) {
         Дії
       </TableHeader>
     </DataTable>
-  );
+  )
 }

@@ -1,17 +1,17 @@
-import request from 'superagent';
+import request from 'superagent'
 
 class SessionApi {
   static login(credentials) {
-    let req = request.post('/user_token.json');
-    req.set('Content-Type', 'application/json');
-    req.send(JSON.stringify({auth: credentials}));
+    let req = request.post('/user_token.json')
+    req.set('Content-Type', 'application/json')
+    req.send(JSON.stringify({auth: credentials}))
 
     return req.then(response => {
-      return response;
+      return response
     }, error => {
-      return error;
-    });
+      return error
+    })
   }
 }
 
-export default SessionApi;
+export default SessionApi

@@ -1,12 +1,12 @@
-import expect from 'expect';
-import React from 'react';
-import { shallow, mount } from 'enzyme';
-import jsdom from 'jsdom';
-const doc = jsdom.jsdom('<!doctype html><html><body></body></html>');
-global.document = doc;
-global.window = doc.defaultView;
+import expect from 'expect'
+import React from 'react'
+import { shallow, mount } from 'enzyme'
+import jsdom from 'jsdom'
+const doc = jsdom.jsdom('<!doctype html><html><body></body></html>')
+global.document = doc
+global.window = doc.defaultView
 
-import ProductList from '../../../app/components/ProductList';
+import ProductList from '../../../app/components/ProductList'
 
 describe('<ProductList />', () => {
   it('allows us to set props', () => {
@@ -33,8 +33,8 @@ describe('<ProductList />', () => {
         category: 'Ігри',
         price: '4568$'
       }
-    ];
-    const wrapper = mount(<ProductList products={data} />);
-    expect(wrapper.props().products).toBe(data);
-  });
-});
+    ]
+    const wrapper = mount(<ProductList products={data} />)
+    expect(wrapper.props().products).toBe(data)
+  })
+})

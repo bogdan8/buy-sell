@@ -1,6 +1,6 @@
-import deepFreeze from 'deep-freeze';
-import categories from  '../../../app/reducers/categories.js';
-import expect from 'expect';
+import deepFreeze from 'deep-freeze'
+import categories from  '../../../app/reducers/categories.js'
+import expect from 'expect'
 
 var data = [
   {
@@ -19,9 +19,9 @@ var data = [
     id: 4,
     name: 'Ігри'
   }
-];
+]
 
-deepFreeze(data);
+deepFreeze(data)
 
 describe('Category Reducer', () => {
   describe('#Add Category', () => {
@@ -32,40 +32,40 @@ describe('Category Reducer', () => {
           id: data.length + 1,
           name: 'Нова категорія'
         }
-      };
-      const newCategory = categories(data, paramsCategory);
+      }
+      const newCategory = categories(data, paramsCategory)
       expect(
           newCategory.length
-      ).toBeGreaterThan(data.length);
-    });
-  });
+      ).toBeGreaterThan(data.length)
+    })
+  })
   describe('#Edit Category', () => {
     it('return new hash with edit name in category', () => {
-      let id = 1;
-      let name = 'Нове значення';
+      let id = 1
+      let name = 'Нове значення'
       let paramsCategory = {
         type: 'EDIT_CATEGORY',
         valueCategory: {
           id: id,
           name: name,
         }
-      };
-      const editCategory = categories(data, paramsCategory);
+      }
+      const editCategory = categories(data, paramsCategory)
       expect(
           editCategory[0].name
-      ).toBe(name);
-    });
-  });
+      ).toBe(name)
+    })
+  })
   describe('#Remove Category', () => {
     it('return new hash with remove one category', () => {
       let paramsCategory = {
         type: 'REMOVE_CATEGORY',
         indexCategory: data.length - 1,
-      };
-      const removeCategory = categories(data, paramsCategory);
+      }
+      const removeCategory = categories(data, paramsCategory)
       expect(
           data.length
-      ).toBeGreaterThan(removeCategory.length);
-    });
-  });
-});
+      ).toBeGreaterThan(removeCategory.length)
+    })
+  })
+})

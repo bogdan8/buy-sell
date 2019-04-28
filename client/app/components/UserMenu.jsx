@@ -1,20 +1,20 @@
-import React, {Component, PropTypes} from 'react';
-import {Link} from 'react-router-dom';
-import {Menu, MenuItem} from 'react-mdl';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import React, {Component, PropTypes} from 'react'
+import {Link} from 'react-router-dom'
+import {Menu, MenuItem} from 'react-mdl'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 
-import * as sessionActions from '../actions/sessionActions';
+import * as sessionActions from '../actions/sessionActions'
 
 class UserMenu extends Component {
   constructor(props) {
-    super();
-    this.logOut = this.logOut.bind(this);
+    super()
+    this.logOut = this.logOut.bind(this)
   }
 
   logOut(event) {
-    event.preventDefault();
-    this.props.actions.logOutUser();
+    event.preventDefault()
+    this.props.actions.logOutUser()
   }
 
   checkIfUserSignIn() {
@@ -54,17 +54,17 @@ class UserMenu extends Component {
           </Link>
         </MenuItem>
       </Menu>
-    );
+    )
   }
 }
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(sessionActions, dispatch)
-  };
+  }
 }
 
 function mapStateToProps(state) {
-  return {user: state.session};
+  return {user: state.session}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserMenu);
+export default connect(mapStateToProps, mapDispatchToProps)(UserMenu)

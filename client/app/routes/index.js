@@ -1,11 +1,11 @@
 import React from 'react'
-import { connect } from 'react-redux';
-//import { Router, Route, hashHistory, browserHistory } from 'react-router';
+import { connect } from 'react-redux'
+//import { Router, Route, hashHistory, browserHistory } from 'react-router'
 //import { Route, Switch } from 'react-router'
 import { Switch, Route } from 'react-router-dom'
-import { Main, SignIn, Register, Products } from '../components';
-import { User, Categories, AdminProducts } from '../components/admin';
-import {Menu, Notification, Footer} from '../components';
+import { Main, SignIn, Register, Products } from '../components'
+import { User, Categories, AdminProducts } from '../components/admin'
+import {Menu, Notification, Footer} from '../components'
 
 const routes = (
   <div>

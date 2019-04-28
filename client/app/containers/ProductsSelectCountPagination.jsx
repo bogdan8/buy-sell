@@ -1,23 +1,23 @@
-import React, {Component}from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {Cell} from 'react-mdl';
+import React, {Component}from 'react'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {Cell} from 'react-mdl'
 
-import * as paginationActions from '../actions/paginationActions';
+import * as paginationActions from '../actions/paginationActions'
 
 class ProductsSelectCountPagination extends Component {
   componentWillMount() {
     setInterval(function () {
-      componentHandler.upgradeDom();
-    }, 200);
+      componentHandler.upgradeDom()
+    }, 200)
 
-  };
+  }
 
   handleClickSelect(e) { // submit select with chose options
-    document.getElementById(`list_count_top`).value = e.target.value;
-    document.getElementById(`list_count_bottom`).value = e.target.value;
-    this.props.actions.fetchPagination('products', 1, `category_id=${this.props.currentCategory.id}&per=${e.target.value}`);
-  };
+    document.getElementById(`list_count_top`).value = e.target.value
+    document.getElementById(`list_count_bottom`).value = e.target.value
+    this.props.actions.fetchPagination('products', 1, `category_id=${this.props.currentCategory.id}&per=${e.target.value}`)
+  }
 
   render() {
     return (
@@ -58,7 +58,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(paginationActions, dispatch)
-  };
+  }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductsSelectCountPagination);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsSelectCountPagination)

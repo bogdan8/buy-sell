@@ -1,31 +1,31 @@
-import React, {Component}from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {Cell, Button, Textfield} from 'react-mdl';
+import React, {Component}from 'react'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {Cell, Button, Textfield} from 'react-mdl'
 
-import * as categoryActions from '../../actions/categoryActions';
+import * as categoryActions from '../../actions/categoryActions'
 
-const v4 = require('uuid/v4');
+const v4 = require('uuid/v4')
 
 class CreateCategories extends Component {
   handleClickShowModalWindow() { // show modal window
-    document.getElementById('modal-category').style.display = "block";
-    document.getElementById("form_create_category").reset();
-  };
+    document.getElementById('modal-category').style.display = "block"
+    document.getElementById("form_create_category").reset()
+  }
 
   handleClickHideModalWindow() { // hide modal window
-    document.getElementById('modal-category').style.display = "none";
-  };
+    document.getElementById('modal-category').style.display = "none"
+  }
 
   handleSubmit(e) { // submit form create category
-    e.preventDefault();
+    e.preventDefault()
     let paramsCategory = {
       id: v4(),
       name: document.getElementById('category').value
-    };
-    this.props.actions.addCategory(paramsCategory, this.props.pagination.per, this.props.categories.length, this.props.pagination.current_page);
-    document.getElementById('modal-category').style.display = "none"; // hide modal window
-  };
+    }
+    this.props.actions.addCategory(paramsCategory, this.props.pagination.per, this.props.categories.length, this.props.pagination.current_page)
+    document.getElementById('modal-category').style.display = "none" // hide modal window
+  }
 
   render() {
     return (
@@ -83,7 +83,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(categoryActions, dispatch)
-  };
+  }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateCategories);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateCategories)

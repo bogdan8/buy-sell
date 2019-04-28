@@ -1,47 +1,47 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {Grid, Cell} from 'react-mdl';
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {Grid, Cell} from 'react-mdl'
 
-import * as categoryActions from '../../actions/categoryActions';
+import * as categoryActions from '../../actions/categoryActions'
 
-import {CreateCategories, EditCategories, CategoriesList} from '../../components/admin';
-import {Pagination} from '../../components';
+import {CreateCategories, EditCategories, CategoriesList} from '../../components/admin'
+import {Pagination} from '../../components'
 
 class Categories extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     // for check role is admin
-    this.userRoles = [props.user.role];
-    //this.notAuthorizedPath = '/';
+    this.userRoles = [props.user.role]
+    //this.notAuthorizedPath = '/'
   }
 
   //handleUnauthorizedRole(routeRoles, userRoles) {
-  //  const {router} = this.context;
-  //  router.push('/');
+  //  const {router} = this.context
+  //  router.push('/')
   //}
 
   componentDidMount() {
-    componentHandler.upgradeDom();
-  };
+    componentHandler.upgradeDom()
+  }
 
   handleClickShowModalWindow(id, name) {
-    document.getElementById('modal-category-edit').style.display = "block"; // show modal window
-    document.getElementById('category-id').value = id; // get category id from params and set in input
-    document.getElementById('category-edit').value = name;  // get category name from params and set in input
-  };
+    document.getElementById('modal-category-edit').style.display = "block" // show modal window
+    document.getElementById('category-id').value = id // get category id from params and set in input
+    document.getElementById('category-edit').value = name  // get category name from params and set in input
+  }
 
   handleClickRemoveCategory(indexCategory, id) { // remove category
     if (confirm("Ви дійсно хочите видалити?")) {
-      this.props.actions.removeCategory(indexCategory, id, this.props.categories.length, this.props.pagination.current_page);
+      this.props.actions.removeCategory(indexCategory, id, this.props.categories.length, this.props.pagination.current_page)
     } else {
       alert("Відмінено")
     }
   }
 
   render() {
-    const {categories} = this.props;
+    const {categories} = this.props
     const categoryAction = (category, index) => { // generates block actions categories to insert it into the table
       return (
         <div>
@@ -57,9 +57,9 @@ class Categories extends Component {
           </a>
         </div>
       )
-    };
+    }
     const mappedCategories = categories.map((category, index) => { // generates block show categories to insert it into the table
-      let active = ((index % 2) ? "active-tr" : "");
+      let active = ((index % 2) ? "active-tr" : "")
       let nameBlock = (category) => {
         return (
           <div>
@@ -67,13 +67,13 @@ class Categories extends Component {
             <p id="name_category">{category.name}</p>
           </div>
         )
-      };
+      }
       return {
         name: nameBlock(category),
         action: categoryAction(category, index),
         className: active,
       }
-    });
+    })
     return (
       <Grid>
         <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
@@ -105,7 +105,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(categoryActions, dispatch)
-  };
+  }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Categories);
+export default connect(mapStateToProps, mapDispatchToProps)(Categories)

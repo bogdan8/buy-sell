@@ -1,10 +1,10 @@
-import {GET_ADMIN_FILTER_OPTIONS_PRODUCTS} from '../actions/actionTypes';
+import {GET_ADMIN_FILTER_OPTIONS_PRODUCTS} from '../actions/actionTypes'
 
 var data = {
   approved: false,
   deflected: false,
   prepaid: false
-};
+}
 
 export default function adminFilterOption(state = data, action) {
   switch (action.type) {
@@ -12,8 +12,8 @@ export default function adminFilterOption(state = data, action) {
       return {
         ...state,
         [action.filterOption.name]: action.filterOption.isChecked
-      };
+      }
     default:
-      return state;
+      return state
   }
 }

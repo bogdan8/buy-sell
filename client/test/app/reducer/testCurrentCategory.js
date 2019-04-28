@@ -1,6 +1,6 @@
-import deepFreeze from 'deep-freeze';
-import currentCategory from  '../../../app/reducers/currentCategory.js';
-import expect from 'expect';
+import deepFreeze from 'deep-freeze'
+import currentCategory from  '../../../app/reducers/currentCategory.js'
+import expect from 'expect'
 
 var data = [
   {
@@ -19,22 +19,22 @@ var data = [
     id: 4,
     name: 'Ігри'
   }
-];
+]
 
-deepFreeze(data);
+deepFreeze(data)
 
 describe('currentCategory Reducer', () => {
   describe('#get Category in product', () => {
     it('return current category', () => {
-      let name = 'Ігри';
+      let name = 'Ігри'
       let paramsCategory = {
         type: 'CURRENT_CATEGORY',
         currentCategory: name
-      };
-      const _currentCategory = currentCategory(data, paramsCategory);
+      }
+      const _currentCategory = currentCategory(data, paramsCategory)
       expect(
           _currentCategory
-      ).toBe(name);
-    });
-  });
-});
+      ).toBe(name)
+    })
+  })
+})

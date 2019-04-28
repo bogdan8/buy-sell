@@ -1,39 +1,39 @@
-import React, {Component}from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {Grid, Cell, Button, Textfield} from 'react-mdl';
-import Dropzone from 'react-dropzone';
+import React, {Component}from 'react'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {Grid, Cell, Button, Textfield} from 'react-mdl'
+import Dropzone from 'react-dropzone'
 
-import * as productActions from '../actions/productActions';
+import * as productActions from '../actions/productActions'
 
 class CreateProduct extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = { // state initializes the image to get a image that is chosen for create product window
       image: new Image()
-    };
-  };
+    }
+  }
 
   handleClickSelectModal(e) { // select chose category and insert data-id-value for create product
-    document.getElementById('select-category').value = e.target.innerHTML;
-    document.getElementById('select-category').setAttribute('data-id-value', e.target.getAttribute('data-id-value'));
-  };
+    document.getElementById('select-category').value = e.target.innerHTML
+    document.getElementById('select-category').setAttribute('data-id-value', e.target.getAttribute('data-id-value'))
+  }
 
   handleClickShowModalWindow() {
-    document.getElementById('modal-product').style.display = "block";
-    document.getElementById("form_create_product").reset();
-  };
+    document.getElementById('modal-product').style.display = "block"
+    document.getElementById("form_create_product").reset()
+  }
 
   handleClickHideModalWindow() {
-    document.getElementById('modal-product').style.display = "none";
-  };
+    document.getElementById('modal-product').style.display = "none"
+  }
 
   handleSubmit(e) { // submit form create product
-    e.preventDefault();
+    e.preventDefault()
     if (document.getElementById('select-category').value != 'Рубрики:') {
-      let description = document.getElementById('description').value;
-      let price = document.getElementById('price').value;
-      let category_id = document.getElementById('select-category').getAttribute('data-id-value');
+      let description = document.getElementById('description').value
+      let price = document.getElementById('price').value
+      let category_id = document.getElementById('select-category').getAttribute('data-id-value')
 
       let paramsProduct = {
         image: this.state.image,
@@ -41,28 +41,28 @@ class CreateProduct extends Component {
         user_id: this.props.user.id,
         category_id: category_id,
         price: price
-      };
+      }
 
-      this.props.actions.addProduct(paramsProduct);
-      document.getElementById('modal-product').style.display = "none";
-      document.getElementById("upload-img").innerHTML = '';
+      this.props.actions.addProduct(paramsProduct)
+      document.getElementById('modal-product').style.display = "none"
+      document.getElementById("upload-img").innerHTML = ''
       this.setState({
         image: ''
-      });
+      })
     } else {
-      alert('Виберіть рубрику');
+      alert('Виберіть рубрику')
     }
-  };
+  }
 
   onDrop(images) { // select image from modal window and set image in state
     this.setState({
       image: images[0]
-    });
+    })
     document.getElementById("upload-img").innerHTML = `<img height="100%" width="100%" src=${URL.createObjectURL(images[0])} />`
   }
 
   render() {
-    const {categories, grid_col} = this.props;
+    const {categories, grid_col} = this.props
     return (
       <Cell col={grid_col} className="flex-center">
         <Button raised ripple
@@ -164,7 +164,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(productActions, dispatch)
-  };
+  }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateProduct);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateProduct)

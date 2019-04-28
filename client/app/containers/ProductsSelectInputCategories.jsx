@@ -1,30 +1,30 @@
-import React, {Component}from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {Cell} from 'react-mdl';
+import React, {Component}from 'react'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {Cell} from 'react-mdl'
 
-import * as categoryActions from '../actions/categoryActions';
-import * as paginationActions from '../actions/paginationActions';
+import * as categoryActions from '../actions/categoryActions'
+import * as paginationActions from '../actions/paginationActions'
 
 class ProductsSelectInputCategories extends Component {
   componentWillMount() {
     setInterval(function () {
-      componentHandler.upgradeDom();
-    }, 200);
+      componentHandler.upgradeDom()
+    }, 200)
 
-  };
+  }
 
   handleClickSelect(e) { // submit select with chose options
     let currentCategoryParams = {
       id: e.target.getAttribute('data-id-value'),
       name: e.target.innerHTML
-    };
-    this.props.actions.currentCategory(currentCategoryParams);
-    this.props.actions.fetchPagination('products', 1, `category_id=${currentCategoryParams.id}`);
-  };
+    }
+    this.props.actions.currentCategory(currentCategoryParams)
+    this.props.actions.fetchPagination('products', 1, `category_id=${currentCategoryParams.id}`)
+  }
 
   render() {
-    const {currentCategory, categories, grid_col} = this.props;
+    const {currentCategory, categories, grid_col} = this.props
     return (
       <Cell col={grid_col}>
         <div className="body-header-title flex-center">
@@ -67,7 +67,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({...categoryActions, ...paginationActions}, dispatch)
-  };
+  }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductsSelectInputCategories);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsSelectInputCategories)

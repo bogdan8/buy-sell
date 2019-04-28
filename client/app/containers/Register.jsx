@@ -1,32 +1,32 @@
-import React, { useCallback } from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {Link} from 'react-router-dom';
-import {Grid, Cell, Button, Textfield} from 'react-mdl';
+import React, { useCallback } from 'react'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {Link} from 'react-router-dom'
+import {Grid, Cell, Button, Textfield} from 'react-mdl'
 import Dropzone from 'react-dropzone'
 
-import * as userActions from '../actions/userActions';
+import * as userActions from '../actions/userActions'
 
 class Register extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = { // state initializes the image to get a image that is chosen for create product window
       image: new Image()
-    };
-  };
+    }
+  }
 
   componentDidMount() {
-    componentHandler.upgradeDom();
+    componentHandler.upgradeDom()
   }
 
   handleSubmit(e) { // submit form registration user
-    e.preventDefault();
-    let username = document.getElementById('username').value;
-    let email = document.getElementById('email').value;
-    let password = document.getElementById('password').value;
-    let repeat_password = document.getElementById('repeat_password').value;
-    let telephone = document.getElementById('telephone').value;
-    let location = document.getElementById('location').value;
+    e.preventDefault()
+    let username = document.getElementById('username').value
+    let email = document.getElementById('email').value
+    let password = document.getElementById('password').value
+    let repeat_password = document.getElementById('repeat_password').value
+    let telephone = document.getElementById('telephone').value
+    let location = document.getElementById('location').value
     if (password === repeat_password) {
       let paramsUser = {
         avatar: this.state.image,
@@ -36,17 +36,17 @@ class Register extends React.Component {
         repeat_password: repeat_password,
         telephone: telephone,
         location: location
-      };
-      this.props.actions.addUser(paramsUser);
+      }
+      this.props.actions.addUser(paramsUser)
     } else {
-      alert('Ви ввели неоднакові паролі');
+      alert('Ви ввели неоднакові паролі')
     }
-  };
+  }
 
   onDrop(images) { // select image from modal window and set image in state
     this.setState({
       image: images[0]
-    });
+    })
     document.getElementById("upload-img").innerHTML = `<img height="100%" width="100%" src=${URL.createObjectURL(images[0])} />`
   }
 
@@ -152,7 +152,7 @@ class Register extends React.Component {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(userActions, dispatch)
-  };
+  }
 }
 
-export default connect(null, mapDispatchToProps)(Register);
+export default connect(null, mapDispatchToProps)(Register)

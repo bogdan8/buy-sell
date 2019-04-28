@@ -1,6 +1,6 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import {FABButton} from 'react-mdl';
+import React from 'react'
+import {connect} from 'react-redux'
+import {FABButton} from 'react-mdl'
 
 function Footer(props) {
   return (
@@ -13,4 +13,4 @@ function Footer(props) {
     </div>
   )
 }
-export default Footer;
+export default Footer

@@ -1,5 +1,5 @@
-import * as types from './actionTypes';
-import productApi from '../api/ProductApi';
+import * as types from './actionTypes'
+import productApi from '../api/ProductApi'
 
 export function message(message, level) {
   return {
@@ -16,13 +16,13 @@ export function addProduct(paramsProduct) {
       dispatch({
         type: types.ADD_PRODUCT,
         products: paramsProduct
-      });
-      let alert = JSON.parse(response.text);
-      dispatch(message(alert.message.text, alert.message.type));
+      })
+      let alert = JSON.parse(response.text)
+      dispatch(message(alert.message.text, alert.message.type))
     }).catch(error => {
-      throw(error);
-    });
-  };
+      throw(error)
+    })
+  }
 }
 
 /* Get all products */
@@ -32,11 +32,11 @@ export function allProducts() {
       dispatch({
         type: types.GET_ALL_PRODUCTS,
         products: response.body
-      });
+      })
     }).catch(error => {
-      throw(error);
-    });
-  };
+      throw(error)
+    })
+  }
 }
 
 /* Set product prepaid */
@@ -46,13 +46,13 @@ export function payProduct(valuePrepaidProduct) {
       dispatch({
         type: types.PREPAID_PRODUCT,
         products: JSON.parse(response.body.products)
-      });
-      let alert = response.body;
-      dispatch(message(alert.message.text, alert.message.type));
+      })
+      let alert = response.body
+      dispatch(message(alert.message.text, alert.message.type))
     }).catch(error => {
-      throw(error);
-    });
-  };
+      throw(error)
+    })
+  }
 }
 
 /* Set product unpaid */
@@ -62,13 +62,13 @@ export function unpaidProduct(productId) {
       dispatch({
         type: types.UNPAID_PRODUCT,
         products: JSON.parse(response.body.products)
-      });
-      let alert = response.body;
-      dispatch(message(alert.message.text, alert.message.type));
+      })
+      let alert = response.body
+      dispatch(message(alert.message.text, alert.message.type))
     }).catch(error => {
-      throw(error);
-    });
-  };
+      throw(error)
+    })
+  }
 }
 
 /* Remove product */
@@ -81,13 +81,13 @@ export function removeProduct(indexProduct, id) {
           index: indexProduct,
           id: id
         }
-      });
-      let alert = JSON.parse(response.text);
-      dispatch(message(alert.message.text, alert.message.type));
+      })
+      let alert = JSON.parse(response.text)
+      dispatch(message(alert.message.text, alert.message.type))
     }).catch(error => {
-      throw(error);
-    });
-  };
+      throw(error)
+    })
+  }
 }
 
 /* Set state approved product is true or false */
@@ -97,13 +97,13 @@ export function stateProduct(paramsProduct) {
       dispatch({
         type: types.STATE_PRODUCT,
         valueProduct: paramsProduct
-      });
-      let alert = JSON.parse(response.text);
-      dispatch(message(alert.message.text, alert.message.type));
+      })
+      let alert = JSON.parse(response.text)
+      dispatch(message(alert.message.text, alert.message.type))
     }).catch(error => {
-      throw(error);
-    });
-  };
+      throw(error)
+    })
+  }
 }
 
 /* Set options selected by the administrator to filter the unapproved products */

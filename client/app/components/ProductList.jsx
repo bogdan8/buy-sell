@@ -1,5 +1,5 @@
-import React from 'react';
-import {Cell, DataTable, TableHeader} from 'react-mdl';
+import React from 'react'
+import {Cell, DataTable, TableHeader} from 'react-mdl'
 
 export default function ProductList(props) {
   return (

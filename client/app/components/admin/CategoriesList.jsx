@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {DataTable, TableHeader} from 'react-mdl';
+import React, {Component} from 'react'
+import {DataTable, TableHeader} from 'react-mdl'
 
 export default function CategoriesList(props) {
   return (
@@ -31,5 +31,5 @@ export default function CategoriesList(props) {
         Дії
       </TableHeader>
     </DataTable>
-  );
+  )
 }

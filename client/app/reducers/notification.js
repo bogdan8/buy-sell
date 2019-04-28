@@ -1,6 +1,6 @@
 import {
   ADD_NOTIFICATION
-} from '../actions/actionTypes';
+} from '../actions/actionTypes'
 
 export default function notification(state = {}, action) {
   switch (action.type) {
@@ -9,9 +9,9 @@ export default function notification(state = {}, action) {
         message: action.message,
         level: action.level,
         position: 'bc'
-      });
+      })
 
     default:
-      return state;
+      return state
   }
 }

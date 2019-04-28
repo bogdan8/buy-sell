@@ -1,6 +1,6 @@
-import * as types from './actionTypes';
-import userApi from '../api/UserApi';
-import history from '../history';
+import * as types from './actionTypes'
+import userApi from '../api/UserApi'
+import history from '../history'
 
 
 export function message(message, level) {
@@ -18,11 +18,11 @@ export function allUsers() {
       dispatch({
         type: types.GET_ALL_USERS,
         users: response.body
-      });
+      })
     }).catch(error => {
-      throw(error);
-    });
-  };
+      throw(error)
+    })
+  }
 }
 
 /* Get all roles user */
@@ -32,26 +32,26 @@ export function allRoles() {
       dispatch({
         type: types.GET_ALL_ROLES,
         roles: response.body
-      });
+      })
     }).catch(error => {
-      throw(error);
-    });
-  };
+      throw(error)
+    })
+  }
 }
 
 /* Registration user */
 export function addUser(paramsUser) {
   return (dispatch) => {
     return userApi.createUser(paramsUser).then(response => {
-      let alert = JSON.parse(response.text);
-      dispatch(message(alert.message.text, alert.message.type));
+      let alert = JSON.parse(response.text)
+      dispatch(message(alert.message.text, alert.message.type))
       if (alert.message.type == 'success') {
-        history.push('/sign_in');
+        history.push('/sign_in')
       }
     }).catch(error => {
-      throw(error);
-    });
-  };
+      throw(error)
+    })
+  }
 }
 
 export function changeRole(paramsUser) {
@@ -60,13 +60,13 @@ export function changeRole(paramsUser) {
       dispatch({
         type: types.CHANGE_ROLE_IN_USER,
         paramsUser: paramsUser
-      });
-      let alert = JSON.parse(response.text);
-      dispatch(message(alert.message.text, alert.message.type));
+      })
+      let alert = JSON.parse(response.text)
+      dispatch(message(alert.message.text, alert.message.type))
     }).catch(error => {
-      throw(error);
-    });
-  };
+      throw(error)
+    })
+  }
 }
 
 /* Remove user */
@@ -76,11 +76,11 @@ export function removeUser(indexUser, id) {
       dispatch({
         type: types.REMOVE_USER,
         indexUser: indexUser
-      });
-      let alert = JSON.parse(response.text);
-      dispatch(message(alert.message.text, alert.message.type));
+      })
+      let alert = JSON.parse(response.text)
+      dispatch(message(alert.message.text, alert.message.type))
     }).catch(error => {
-      throw(error);
-    });
-  };
+      throw(error)
+    })
+  }
 }
