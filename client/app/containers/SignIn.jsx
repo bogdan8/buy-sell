@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {Grid, Cell, Button, Textfield} from 'react-mdl';
@@ -32,55 +32,55 @@ class SignIn extends React.Component {
 
   render() {
     return (
-        <Grid>
-          <Cell col={6} offsetDesktop={3} tablet={12} phone={12}>
-            <div className="body-auth">
-              <Grid>
-                <Cell col={12}>
-                  <div className="auth-link">
-                    <p>Ввійти</p>
-                    <p>|</p>
-                    <Link to="/register">Зареєструватись</Link>
+      <Grid>
+        <Cell col={6} offsetDesktop={3} tablet={12} phone={12}>
+          <div className="body-auth">
+            <Grid>
+              <Cell col={12}>
+                <div className="auth-link">
+                  <p>Ввійти</p>
+                  <p>|</p>
+                  <Link to="/register">Зареєструватись</Link>
+                </div>
+              </Cell>
+            </Grid>
+            <Grid className="auth-block-grid">
+              <Cell col={12}>
+                <form action="#" className="form-sign-in form-with-border">
+                  <Textfield
+                    type="email"
+                    name="email"
+                    label="Електронна пошта *"
+                    floatingLabel
+                    id="email"
+                    value={this.state.credentials.email}
+                    onChange={this.onChange}
+                  />
+                  <Textfield
+                    type="password"
+                    name="password"
+                    label="Пароль"
+                    floatingLabel
+                    id="password"
+                    value={this.state.credentials.password}
+                    onChange={this.onChange}
+                    pattern=".{6,}"
+                    title="6 символів мінімум *"
+                  />
+                  <div className="flex-center">
+                    <Button raised ripple
+                            type="submit"
+                            onClick={this.onSave}
+                    >
+                      Ввійти
+                    </Button>
                   </div>
-                </Cell>
-              </Grid>
-              <Grid className="auth-block-grid">
-                <Cell col={12}>
-                  <form action="#" className="form-sign-in form-with-border">
-                    <Textfield
-                        type="email"
-                        name="email"
-                        label="Електронна пошта *"
-                        floatingLabel
-                        id="email"
-                        value={this.state.credentials.email}
-                        onChange={this.onChange}
-                    />
-                    <Textfield
-                        type="password"
-                        name="password"
-                        label="Пароль"
-                        floatingLabel
-                        id="password"
-                        value={this.state.credentials.password}
-                        onChange={this.onChange}
-                        pattern=".{6,}"
-                        title="6 символів мінімум *"
-                    />
-                    <div className="flex-center">
-                      <Button raised ripple
-                              type="submit"
-                              onClick={this.onSave}
-                      >
-                        Ввійти
-                      </Button>
-                    </div>
-                  </form>
-                </Cell>
-              </Grid>
-            </div>
-          </Cell>
-        </Grid>
+                </form>
+              </Cell>
+            </Grid>
+          </div>
+        </Cell>
+      </Grid>
     )
   }
 }

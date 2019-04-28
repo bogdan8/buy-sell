@@ -1,6 +1,7 @@
 import * as types from './actionTypes';
 import userApi from '../api/UserApi';
-import { browserHistory } from 'react-router';
+import history from '../history';
+
 
 export function message(message, level) {
   return {
@@ -45,7 +46,7 @@ export function addUser(paramsUser) {
       let alert = JSON.parse(response.text);
       dispatch(message(alert.message.text, alert.message.type));
       if (alert.message.type == 'success') {
-        browserHistory.push('/sign_in');
+        history.push('/sign_in');
       }
     }).catch(error => {
       throw(error);

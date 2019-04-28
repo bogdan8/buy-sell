@@ -1,16 +1,15 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {AuthorizedComponent} from 'react-router-role-authorization';
 import {Grid, Cell, Switch, Button, Textfield} from 'react-mdl';
 
 import * as productActions from '../../actions/productActions';
 import * as paginationActions from '../../actions/paginationActions';
 
 import {AdminProductList} from '../../components/admin';
-import AdminProductsPagination from './AdminProductsPagination';
+import AdminProductsPagination from './AdminProductsPagination.jsx';
 
-class AdminProducts extends AuthorizedComponent {
+class AdminProducts extends Component {
   constructor(props) {
     super(props);
     this.state = { // state initializes the productId to get a product id that is chosen for confirmation of payment window and move action
@@ -22,10 +21,10 @@ class AdminProducts extends AuthorizedComponent {
     this.notAuthorizedPath = '/';
   }
 
-  handleUnauthorizedRole(routeRoles, userRoles) {
-    const {router} = this.context;
-    router.push('/');
-  }
+  //handleUnauthorizedRole(routeRoles, userRoles) {
+  //  const {router} = this.context;
+  //  router.push('/');
+  //}
 
   componentDidMount() {
     componentHandler.upgradeDom();

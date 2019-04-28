@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import {Grid, Cell, Button, Textfield} from 'react-mdl';
-import Dropzone from 'react-dropzone';
+import Dropzone from 'react-dropzone'
 
 import * as userActions from '../actions/userActions';
 
@@ -47,7 +47,7 @@ class Register extends React.Component {
     this.setState({
       image: images[0]
     });
-    document.getElementById("upload-img").innerHTML = `<img height="100%" width="100%" src=${images[0].preview} />`
+    document.getElementById("upload-img").innerHTML = `<img height="100%" width="100%" src=${URL.createObjectURL(images[0])} />`
   }
 
   render() {
@@ -69,12 +69,17 @@ class Register extends React.Component {
               <Grid>
                 <Cell col={5} offsetDesktop={1} tablet={4} phone={6}>
                   <div className="form-image">
-                    <Dropzone multiple={false}
-                              className="fileContainer"
-                              onDrop={this.onDrop.bind(this)}>
-                      <div id="upload-img" className="upload-img"></div>
-                      <i className="fa fa-download" aria-hidden="true"/>
-                    </Dropzone>
+                    <Dropzone onDrop={this.onDrop.bind(this)}>
+											{({getRootProps, getInputProps}) => (
+												<section>
+													<div {...getRootProps()}>
+														<input {...getInputProps()} />
+														<div id="upload-img" className="upload-img"></div>
+														<i className="fa fa-download" aria-hidden="true"/>
+ 													</div>
+												</section>
+											)}
+										</Dropzone>
                   </div>
                 </Cell>
                 <Cell col={6} tablet={4} phone={6} className="form-with-border">

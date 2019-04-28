@@ -1,6 +1,7 @@
 import * as types from './actionTypes';
 import sessionApi from '../api/SessionApi';
-import {browserHistory} from 'react-router';
+import history from '../history';
+
 
 export function message(message, level) {
   return {
@@ -30,7 +31,7 @@ export function logInUser(credentials) {
           }
         });
         dispatch(message('Ви успішно ввійшли', 'success'));
-        browserHistory.push('/products');
+        history.push('/products');
       }
     }).catch(error => {
       throw(error);
@@ -45,6 +46,6 @@ export function logOutUser() {
     sessionStorage.removeItem('avatar');
     dispatch({type: types.LOG_OUT});
     dispatch(message('Ви успішно вийшли', 'success'));
-    browserHistory.push('/products');
+    history.push('/products');
   }
 }

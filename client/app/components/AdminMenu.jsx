@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {Link} from 'react-router';
+import { Link } from 'react-router-dom';
 import {Menu, MenuItem} from 'react-mdl';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -25,7 +25,7 @@ class AdminMenu extends Component {
         ripple
       >
         <MenuItem>
-          <Link onClick={this.logOut}>
+          <Link to="/" onClick={this.logOut}>
             Вийти
           </Link>
         </MenuItem>

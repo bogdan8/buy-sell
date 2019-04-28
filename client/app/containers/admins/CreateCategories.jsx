@@ -1,10 +1,11 @@
 import React, {Component}from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {v4} from 'node-uuid';
 import {Cell, Button, Textfield} from 'react-mdl';
 
 import * as categoryActions from '../../actions/categoryActions';
+
+const v4 = require('uuid/v4');
 
 class CreateCategories extends Component {
   handleClickShowModalWindow() { // show modal window

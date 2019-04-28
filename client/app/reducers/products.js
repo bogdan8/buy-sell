@@ -5,9 +5,10 @@ import {
   GET_ALL_PRODUCTS,
   PREPAID_PRODUCT,
   UNPAID_PRODUCT
-} from '../actions/actionTypes';
+} from '../actions/actionTypes.js';
 
 export default function products(state = [], action) {
+  console.log(action.type)
   switch (action.type) {
     case ADD_PRODUCT:
       return [

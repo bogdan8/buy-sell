@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import {Menu, MenuItem} from 'react-mdl';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -20,7 +20,7 @@ class UserMenu extends Component {
   checkIfUserSignIn() {
     if (this.props.user.id != undefined) {
       return <MenuItem>
-        <Link onClick={this.logOut}>
+        <Link to="/" onClick={this.logOut}>
           Вийти
         </Link>
       </MenuItem>

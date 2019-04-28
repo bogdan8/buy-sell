@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {AuthorizedComponent} from 'react-router-role-authorization';
 
 import * as userActions from '../../actions/userActions';
 
 import {UserList} from '../../components/admin';
 import {Pagination} from '../../components';
 
-class User extends AuthorizedComponent {
+class User extends Component {
   constructor(props) {
     super(props);
 
@@ -22,10 +21,10 @@ class User extends AuthorizedComponent {
     this.props.actions.allUsers(); // get all users
   }
 
-  handleUnauthorizedRole(routeRoles, userRoles) {
-    const {router} = this.context;
-    router.push('/');
-  }
+  //handleUnauthorizedRole(routeRoles, userRoles) {
+  //  const {router} = this.context;
+  //  router.push('/');
+  //}
 
   shouldComponentUpdate(nextProps, nextState) {
     return (JSON.stringify(nextProps.users) != JSON.stringify(this.props.users));

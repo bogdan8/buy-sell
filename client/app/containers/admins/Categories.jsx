@@ -2,26 +2,25 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Grid, Cell} from 'react-mdl';
-import {AuthorizedComponent} from 'react-router-role-authorization';
 
 import * as categoryActions from '../../actions/categoryActions';
 
 import {CreateCategories, EditCategories, CategoriesList} from '../../components/admin';
 import {Pagination} from '../../components';
 
-class Categories extends AuthorizedComponent {
+class Categories extends Component {
   constructor(props) {
     super(props);
 
     // for check role is admin
     this.userRoles = [props.user.role];
-    this.notAuthorizedPath = '/';
+    //this.notAuthorizedPath = '/';
   }
 
-  handleUnauthorizedRole(routeRoles, userRoles) {
-    const {router} = this.context;
-    router.push('/');
-  }
+  //handleUnauthorizedRole(routeRoles, userRoles) {
+  //  const {router} = this.context;
+  //  router.push('/');
+  //}
 
   componentDidMount() {
     componentHandler.upgradeDom();
