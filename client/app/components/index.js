@@ -1,4 +1,3 @@
-export Main from '../containers/Main.jsx'
 export Menu from '../containers/Menu.jsx'
 export Footer from '../containers/Footer.jsx'
 export Notification from '../containers/Notification.jsx'
