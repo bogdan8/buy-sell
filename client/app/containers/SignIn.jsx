@@ -53,7 +53,7 @@ class SignIn extends React.Component {
                     label="Електронна пошта *"
                     floatingLabel
                     id="email"
-                    value={this.state.credentials.email}
+                    defaultValue={this.state.credentials.email}
                     onChange={this.onChange}
                   />
                   <Textfield
@@ -62,7 +62,7 @@ class SignIn extends React.Component {
                     label="Пароль"
                     floatingLabel
                     id="password"
-                    value={this.state.credentials.password}
+                    defaultValue={this.state.credentials.password}
                     onChange={this.onChange}
                     pattern=".{6,}"
                     title="6 символів мінімум *"

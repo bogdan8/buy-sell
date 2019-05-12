@@ -16,9 +16,9 @@ const routes = (
         <Route path="/sign_in" component={ SignIn }/>
         <Route path="/register" component={ Register }/>
         <Route path="/products" component={ Products }/>
-        <Route path="/admin/user" component={ User }/>
-        <Route path="/admin/categories" component={ Categories }/>
-        <Route path="/admin/products" component={ AdminProducts }/>
+        <Route path="/admin_users" component={ User }/>
+        <Route path="/admin_categories" component={ Categories }/>
+        <Route path="/admin_products" component={ AdminProducts }/>
       </Switch>
     </div>
     <Footer/>

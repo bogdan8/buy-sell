@@ -34,7 +34,7 @@ class EditCategories extends Component {
               <div className="modal__content">
                 <h4>Редагувати рубрику:</h4>
                 <form id="form_category_edit" onSubmit={this.handleSubmitEdit.bind(this)}>
-                  <input type="text" hidden="hidden" value='' id="category-id"/>
+                  <input type="text" hidden="hidden" defaultValue='' id="category-id"/>
                   <Textfield
                     type="text"
                     name="category-edit"

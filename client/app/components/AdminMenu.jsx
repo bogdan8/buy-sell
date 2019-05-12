@@ -35,17 +35,17 @@ class AdminMenu extends Component {
           </Link>
         </MenuItem>
         <MenuItem>
-          <Link to="/admin/user">
+          <Link to="/admin_users">
             Таблиця користувачів
           </Link>
         </MenuItem>
         <MenuItem>
-          <Link to="/admin/categories">
+          <Link to="/admin_categories">
             Таблиця рубрик
           </Link>
         </MenuItem>
         <MenuItem>
-          <Link to="/admin/products">
+          <Link to="/admin_products">
             Нові оголошення
           </Link>
         </MenuItem>

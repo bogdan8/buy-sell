@@ -31,7 +31,7 @@ class ProductsSelectInputCategories extends Component {
           <div
             className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth select-input">
             <input className="mdl-textfield__input" type="text" id="list_category"
-                   value={currentCategory.name ? currentCategory.name : 'Всі'}
+                   defaultValue={currentCategory.name ? currentCategory.name : 'Всі'}
                    readOnly
                    tabIndex="-1"
                    name="list_category"

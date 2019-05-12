@@ -99,7 +99,7 @@ class CreateProduct extends Component {
                       <div
                         className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth select-input">
                         <input className="mdl-textfield__input" type="text" id="select-category"
-                               value={'Рубрики:'}
+                               defaultValue={'Рубрики:'}
                                readOnly
                                tabIndex="-1"/>
                         <label htmlFor="select-category" className="mdl-textfield__label">Виберіть рубрику</label>

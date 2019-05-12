@@ -19,13 +19,12 @@ class User extends Component {
   componentWillMount() {
     this.props.actions.allRoles() // get all user roles
     this.props.actions.allUsers() // get all users
-    console.log(this.props)
   }
 
-  //handleUnauthorizedRole(routeRoles, userRoles) {
-  //  const {router} = this.context
-  //  router.push('/')
-  //}
+  handleUnauthorizedRole(routeRoles, userRoles) {
+    const {router} = this.context
+    router.push('/')
+  }
 
   shouldComponentUpdate(nextProps, nextState) {
     return (JSON.stringify(nextProps.users) != JSON.stringify(this.props.users))
@@ -50,6 +49,7 @@ class User extends Component {
     const userAction = (user, index) => {
       const role_admin = user_roles.find(role => (role.role_name == 'admin' ))
       const role_user = user_roles.find(role => (role.role_name == 'user' ))
+
       return (
         <div>
           <a id="to_admin" onClick={() => {
