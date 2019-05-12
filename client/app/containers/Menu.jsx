@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import {connect} from 'react-redux'
 import {FABButton} from 'react-mdl'
 
@@ -9,7 +10,9 @@ function Menu(props) {
     <div>
       <div className="header flex-center">
         <div className="header-title">
-          <a href="/">Купи продай</a>
+          <Link to="/">
+            Купи продай
+          </Link>
         </div>
       </div>
       <div className="header-nav">

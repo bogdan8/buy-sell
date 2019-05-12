@@ -10,20 +10,11 @@ import {Pagination} from '../../components'
 class User extends Component {
   constructor(props) {
     super(props)
-
-    // for check role is admin
-    this.userRoles = [props.user.role]
-    this.notAuthorizedPath = '/'
   }
 
   componentWillMount() {
     this.props.actions.allRoles() // get all user roles
     this.props.actions.allUsers() // get all users
-  }
-
-  handleUnauthorizedRole(routeRoles, userRoles) {
-    const {router} = this.context
-    router.push('/')
   }
 
   shouldComponentUpdate(nextProps, nextState) {

@@ -31,7 +31,6 @@ export function logInUser(credentials) {
           }
         })
         dispatch(message('Ви успішно ввійшли', 'success'))
-        history.push('/products')
       }
     }).catch(error => {
       throw(error)

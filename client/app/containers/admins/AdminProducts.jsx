@@ -15,16 +15,7 @@ class AdminProducts extends Component {
     this.state = { // state initializes the productId to get a product id that is chosen for confirmation of payment window and move action
       productId: ''
     }
-
-    // for check role is admin
-    this.userRoles = [props.user.role]
-    //this.notAuthorizedPath = '/'
   }
-
-  //handleUnauthorizedRole(routeRoles, userRoles) {
-  //  const {router} = this.context
-  //  router.push('/')
-  //}
 
   componentDidMount() {
     componentHandler.upgradeDom()

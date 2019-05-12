@@ -11,16 +11,7 @@ import {Pagination} from '../../components'
 class Categories extends Component {
   constructor(props) {
     super(props)
-
-    // for check role is admin
-    this.userRoles = [props.user.role]
-    //this.notAuthorizedPath = '/'
   }
-
-  //handleUnauthorizedRole(routeRoles, userRoles) {
-  //  const {router} = this.context
-  //  router.push('/')
-  //}
 
   componentDidMount() {
     componentHandler.upgradeDom()

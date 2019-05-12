@@ -9,6 +9,7 @@ export default class Main extends React.Component {
   }
 
   componentWillMount() {
+    console.log('I am here')
     history.push('/products')
   }
 

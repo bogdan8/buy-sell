@@ -5,7 +5,6 @@ import {addNotification} from '../actions/notificationActions'
 import NotificationSystem from 'react-notification-system'
 
 class NotificationContainer extends Component {
-
   constructor(props) {
     super(props)
   }
